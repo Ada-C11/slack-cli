@@ -13,6 +13,7 @@ class User < Recipient
   end
 
   def details
+    return "#{name} (#{real_name}) slack id: #{slack_id}"
   end
 
   def self.list
