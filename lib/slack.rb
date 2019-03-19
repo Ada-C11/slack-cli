@@ -5,17 +5,17 @@ require "httparty"
 Dotenv.load
 
 class Channel
-  BASE_URL = "https://slack.com/api/channels.list"
-  key = ENV["SLACK_API_TOKEN"]
+  # BASE_URL = "https://slack.com/api/channels.list"
+  # key = ENV["SLACK_API_TOKEN"]
 
-  query_parameters = { 'token': key }
+  # query_parameters = { 'token': key }
 
-  response = HTTParty.get(BASE_URL, query: query_parameters)
+  # response = HTTParty.get(BASE_URL, query: query_parameters)
 
-  puts "Here are a list of your channels for this Workspace:"
-  response["channels"].each do |channel|
-    puts channel["name"]
-  end
+  # puts "Here are a list of your channels for this Workspace:"
+  # response["channels"].each do |channel|
+  #   puts channel["name"]
+  # end
 end
 
 def main
