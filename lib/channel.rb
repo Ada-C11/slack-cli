@@ -33,4 +33,21 @@ class Channel
     end
     return channel_list
   end
+
+  def select_channel(identifier)
+    query = {
+      token: ENV["SLACK_API_TOKEN"],
+    }
+
+    response = HTTParty.get(BASE_URL, query: query)
+    selected_channel = ""
+    response["channels"].each do |channel|
+      if channel["id"] == identifier
+        selected_channel = identifier
+      elsif channel["name"] == identifier
+        selected_channel = identifier
+      end
+    end
+    return selected_channel
+  end
 end

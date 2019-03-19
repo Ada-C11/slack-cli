@@ -19,11 +19,21 @@ def main
       puts Channel.list_channels
       puts ask_again
       response = gets.chomp
-    elsif response == 'select user'
-      # get instance of user
-    elsif response == 'select channel'
-      # get instance of channel
-    elsif response == 'details'
+    elsif response == "select user"
+      puts "What is the user id or Slack name?"
+      identifier = gets.chomp
+      user = User.new
+      selected_user = user.select_user(identifier)
+      puts ask_again
+      response = gets.chomp
+    elsif response == "select channel"
+      puts "What is the user id or Slack name?"
+      identifier = gets.chomp
+      channel = Channel.new
+      selected_channel = channel.select_user(identifier)
+      puts ask_again
+      response = gets.chomp
+    elsif response == "details"
       # get details for selected
     end
   end

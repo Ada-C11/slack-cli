@@ -17,3 +17,20 @@ describe "self.list" do
     #fill this in later?
   end
 end
+
+describe "select_channel" do
+  it "selects a channel as the current recipient when user inputs channel ID" do
+    channel = Channel.new
+    VCR.use_cassette("select_channel") do
+      response = channel.select_channel("CH2SKTKPC")
+      expect(response).must_equal "CH2SKTKPC"
+    end
+  end
+  it "selects a channel as the current recipient when user inputs channel name" do
+    channel = Channel.new
+    VCR.use_cassette("select_channel") do
+      response = channel.select_channel("general")
+      expect(response).must_equal "general"
+    end
+  end
+end
