@@ -1,0 +1,3 @@
+class Channel
+  #code
+end
