@@ -22,17 +22,13 @@ describe SlackCLI::User do
 
   describe "self.list" do
     it "returns an array of users" do
-      # VCR.use_cassette("users find") do
-      #   url = "http://slack.com/api/users.list"
-      #   params = {"token": ENV["SLACK_API_TOKEN"]}
+      VCR.use_cassette("users find") do
+        users_array = SlackCLI::User.list
 
-      #   response = SlackCLI::User.get(url, params)
-
-      users_array = SlackCLI::User.list
-
-      expect(users_array).must_be_kind_of array
-      expect(users_array.first).must_be_kind_of SlackCLI::User
-      expect(users_array.length).wont_equal 0
+        expect(users_array).must_be_kind_of Array
+        expect(users_array.first).must_be_kind_of SlackCLI::User
+        expect(users_array.length).wont_equal 0
+      end
     end
   end
 end
