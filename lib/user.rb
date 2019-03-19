@@ -18,6 +18,19 @@ class User < Recipient
   def self.list
     raw_data = self.get("user")
     puts raw_data
+    user_list = []
+    members = raw_data["members"]
+    members.each do |member|
+      slack_id = member["id"]
+      name = member["name"]
+      real_name = member["real_name"]
+      status_text = member["status_text"]
+      status_emoji = member["status_emoji"]
+
+      user = User.new(slack_id, name, real_name, status_text, status_emoji)
+      user_list << user
+    end
+    return user_list
   end
 end
 
