@@ -2,22 +2,11 @@ require "dotenv"
 require "httparty"
 Dotenv.load
 require "ap"
-require "pry"
 
-#def main
-#puts "Welcome to the Ada Slack CLI!"
+def main
+  puts "Welcome to the Ada Slack CLI!"
 
-BASE_URL = "https://slack.com/api/channels.list"
-query = {
-  token: ENV["SLACK_API_TOKEN"],
-}
-channel_info = HTTParty.get(BASE_URL, query: query)
-channel_list = channel_info["channels"]
-channel_names = channel_list.map do |channel|
-  channel["name"]
+  puts "Thank you for using the Ada Slack CLI"
 end
-ap channel_names
-#puts "Thank you for using the Ada Slack CLI"
-#end
 
-#main if __FILE__ == $PROGRAM_NAME
+main if __FILE__ == $PROGRAM_NAME
