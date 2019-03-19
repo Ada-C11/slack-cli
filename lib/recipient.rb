@@ -9,24 +9,24 @@ module Slack
   class SlackApiError < StandardError; end
 
   class Recipient
+    attr_reader :slack_id, :name
+
+    def initialize(slack_id, name)
+      @slack_id = slack_id
+      @name = name
+    end
+
     def self.get(url, query:)
       response = HTTParty.get(url, query: query)
       if response["ok"] == false
         raise SlackApiError.new("Invalid request, error #{response.code}: #{response.message}")
       end
+
       return response
+    end
+
+    def self.list
+      raise notImplementedError, "implement in child class"
     end
   end
 end
-
-# query_params = {
-#   token: "abcdef",
-# }
-
-# query_params2 = {
-#   token: KEY,
-# }
-
-# response1 = Slack::Recipient.get(url: "https://slack.com/api/channels.list", query: query_params2)
-# response2 = Slack::Recipient.get(url: "https://slack.com/api/channels.list", query: query_params)
-# binding.pry
