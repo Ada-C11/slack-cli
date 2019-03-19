@@ -6,5 +6,10 @@ module SlackCLI
       @id = id
       @name = name
     end
+
+    def self.get_response(url, param)
+      query = {token: param}
+      response = HTTParty.get(url, query: query)
+    end
   end
 end
