@@ -1,5 +1,8 @@
 
 class Recipient
+  BASE_URL = "https://slack.com/api/chat.postMessage"
+  TOKEN = ENV["SLACK_TOKEN"]
+
   def initialize(slack_id, name)
     @slack_id = slack_id
     @name = name

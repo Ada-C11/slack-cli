@@ -1,5 +1,8 @@
 
 class Channel < Recipient
+  BASE_URL = "https://slack.com/api/channels.list"
+  TOKEN = ENV["SLACK_TOKEN"]
+
   def initialize(slack_id, name, topic, member_count)
     super
     @topic = topic
