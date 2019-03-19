@@ -1,3 +1,5 @@
+require 'httparty'
+
 module SlackCLI
   class Recipient
     attr_reader :slack_id, :name
@@ -5,6 +7,10 @@ module SlackCLI
     def initialize(slack_id, name)
       @slack_id = slack_id
       @name = name
+    end
+
+    def self.get(url, params)
+      return HTTParty.get(url, query: params)
     end
   end
 end

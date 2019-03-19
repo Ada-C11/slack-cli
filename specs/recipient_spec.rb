@@ -21,10 +21,10 @@ describe SlackCLI::Recipient do
   describe "self.get" do
     it "gets a response" do
       VCR.use_cassette("recipient find") do
-        url = "slack.com/api/users.list"
+        url = "http://slack.com/api/users.list"
         params = {"token": ENV["SLACK_API_TOKEN"]}
 
-        response = self.get(url, params)
+        response = SlackCLI::Recipient.get(url, params)
         expect(response).wont_be_nil
         expect(response).must_be_kind_of HTTParty::Response
         expect(response.code).wont_equal 401
