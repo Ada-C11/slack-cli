@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require_relative "channel"
 require_relative "user"
+require_relative "workspace"
 
 require "httparty"
 require "dotenv"

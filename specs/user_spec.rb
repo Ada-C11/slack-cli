@@ -9,6 +9,7 @@ describe "User class" do
     }
   }
   it "initializes a user class" do
+    
     new_user = SlackCLI::User.new(user_data[:username],
                                   user_data[:real_name],
                                   user_data[:slack_id])
@@ -17,6 +18,7 @@ describe "User class" do
   end
 
   it "has working reader methods" do
+    
     new_user = SlackCLI::User.new(user_data[:username],
                                   user_data[:real_name],
                                   user_data[:slack_id])
@@ -27,6 +29,7 @@ describe "User class" do
   end
 
   it "can display information about itself as a string" do
+    
     new_user = SlackCLI::User.new(user_data[:username],
                                   user_data[:real_name],
                                   user_data[:slack_id])
