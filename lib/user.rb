@@ -34,5 +34,5 @@ class User < Recipient
   end
 end
 
-binding.pry
-self.list
+# binding.pry
+# self.list
