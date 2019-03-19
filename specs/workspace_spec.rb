@@ -1,10 +1,10 @@
 require_relative "test_helper"
 
-describe SlackCLI::Workspace do
+describe "SlackCLI::Workspace" do
   describe "constructor" do
     before do
       VCR.use_cassette("workspace") do
-        @workspace = Workspace.new
+        @workspace = SlackCLI::Workspace.new
       end
     end
 
