@@ -1,5 +1,5 @@
 require_relative "test_helper"
-
+require "pry"
 describe "recipient class" do
   describe "initialize" do
     it "creates an instance of Recipient" do
@@ -22,6 +22,16 @@ describe "recipient class" do
         response = Recipient.get(BASE_URL, params)
         expect(response["channels"]).wont_be_nil
         expect(response["channels"].map { |channel| channel["name"] }).must_equal ["general", "api-project", "random"]
+      end
+    end
+
+    it "gives a list of two names" do
+      VCR.use_cassette("find channels") do
+        BASE_URL = "https://slack.com/api/users.list"
+        params = {token: ENV["SLACK_API_TOKEN"]}
+        response = Recipient.get(BASE_URL, params)
+        Binding.pry
+        expect(response["name"]).wont_be_nil
       end
     end
   end
