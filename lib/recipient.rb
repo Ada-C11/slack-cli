@@ -12,5 +12,9 @@ module SlackCLI
     def self.get(url, params)
       return HTTParty.get(url, query: params)
     end
+
+    def self.list
+      raise NotImplementedError, 'Implement me in a child class!'
+    end
   end
 end
