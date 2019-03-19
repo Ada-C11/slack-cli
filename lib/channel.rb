@@ -15,8 +15,12 @@ module SlackCLI
       @members = members
     end
 
-    def member_count
-      return members.length
+    def display_details
+      info_string = "\nSlack ID : #{id}" +
+                    "\nChannel name : #{channel_name}" +
+                    "\nTopic : #{topic}" +
+                    "\nMember count: #{members}"
+      return info_string
     end
 
     def self.get_from_api
@@ -30,7 +34,7 @@ module SlackCLI
           slack_id = channel["id"]
           channel_name = channel["name"]
           topic = channel["topic"]["value"]
-          members = channel["members"]
+          members = channel["members"].length
           new(slack_id, channel_name, topic, members)
         end
         return channels

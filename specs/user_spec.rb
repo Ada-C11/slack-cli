@@ -33,9 +33,10 @@ describe "User class" do
     new_user = SlackCLI::User.new(user_data[:username],
                                   user_data[:real_name],
                                   user_data[:slack_id])
-    pretty_printed_string = "\nUsername : #{user_data[:username]}" +
-                            "\nReal name : #{user_data[:real_name]}" +
-                            "\nSlack ID : #{user_data[:slack_id]}"
+    pretty_printed_string = "\nSlack ID : #{user_data[:slack_id]}" +
+                            "\nUsername : #{user_data[:username]}" +
+                            "\nReal name : #{user_data[:real_name]}"
+
     expect(new_user.display_details).must_equal pretty_printed_string
   end
 
