@@ -5,9 +5,7 @@ describe "Channel" do
     {
       id: "CH2P2QWMR",
       channel_name: "everyone",
-      topic: { "value" => "Company-wide announcements and work-based matters",
-               "creator" => "UH36TMYKF",
-               "last_set" => 1552952569 },
+      topic: "Company-wide announcements and work-based matters",
       members: 2,
     }
   }
@@ -36,6 +34,21 @@ describe "Channel" do
     expect(new_channel.channel_name).must_equal channel_data[:channel_name]
     expect(new_channel.topic).must_equal channel_data[:topic]
     expect(new_channel.members).must_equal channel_data[:members]
+  end
+
+  it "can display information about itself as a string" do
+    new_channel = SlackCLI::Channel.new(
+      channel_data[:id],
+      channel_data[:channel_name],
+      channel_data[:topic],
+      channel_data[:members]
+    )
+    pretty_printed_string = "\nSlack ID : #{channel_data[:id]}" +
+                            "\nChannel name : #{channel_data[:channel_name]}" +
+                            "\nTopic : #{channel_data[:topic]}" +
+                            "\nMember count: #{channel_data[:members]}"
+
+    expect(new_channel.display_details).must_equal pretty_printed_string
   end
 
   it "loads array of channels from Slack's API" do
