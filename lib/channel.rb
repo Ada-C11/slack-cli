@@ -1,5 +1,8 @@
 # require_relative "recipient"
 require "pry"
+require "httparty"
+require "dotenv"
+Dotenv.load
 
 class Channel
   attr_reader :topic, :member_count
