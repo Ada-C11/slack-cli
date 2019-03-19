@@ -41,7 +41,7 @@ describe "Channel" do
 
   it "loads array of channels from Slack's API" do
     VCR.use_cassette("list_channels") do
-      channels = SlackCLI::User.get_from_api
+      channels = SlackCLI::Channel.get_from_api
       expect(channels).must_be_instance_of Array
       channels.each do |channel|
         expect(channel).must_be_instance_of SlackCLI::Channel
