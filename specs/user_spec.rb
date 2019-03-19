@@ -9,7 +9,7 @@ describe SlackCLI::User do
       @record = SlackCLI::User.new(slack_id: @slack_id, name: @name, real_name: @real_name)
     end
 
-    it "is an instance of Recipient" do
+    it "is an instance of User" do
       expect(@record).must_be_kind_of SlackCLI::User
     end
 
@@ -19,5 +19,4 @@ describe SlackCLI::User do
       expect(@record.real_name).must_equal @real_name
     end
   end
-
 end

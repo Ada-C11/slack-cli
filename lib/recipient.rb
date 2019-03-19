@@ -1,10 +1,10 @@
-require 'httparty'
+require "httparty"
 
 module SlackCLI
   class Recipient
     attr_reader :slack_id, :name
 
-    def initialize(slack_id: slack_id, name: name)
+    def initialize(slack_id:, name:)
       @slack_id = slack_id
       @name = name
     end
@@ -14,7 +14,7 @@ module SlackCLI
     end
 
     def self.list
-      raise NotImplementedError, 'Implement me in a child class!'
+      raise NotImplementedError, "Implement me in a child class!"
     end
   end
 end
