@@ -1,14 +1,15 @@
 #!/usr/bin/env ruby
-require 'HTTParty'
-require 'dotenv'
-require 'awesome_print'
+require "HTTParty"
+require "dotenv"
+require "awesome_print"
 Dotenv.load
 
-url = 'https://slack.com/api/conversations.list'
+url = "https://slack.com/api/conversations.list"
 key = ENV["SLACK_API_KEY"]
+p key
 
 query_params = {
-  "token": key,
+  token: key,
 }
 response = HTTParty.get(url, query: query_params)
 
