@@ -7,8 +7,8 @@ Dotenv.load
 class Recipient
   # constants
   MSG_URL = "https://slack.com/api/chat.postMessage"
-  USER_URL = "https://slack.com/api/users.list"
-  CHANNEL_URL = "https://slack.com/api/channels.list"
+  USER_URL = "https://slack.com/api/users.list" # Move to User
+  CHANNEL_URL = "https://slack.com/api/channels.list" #move to Channel
 
   attr_reader :send_message, :name, :slack_id
 
