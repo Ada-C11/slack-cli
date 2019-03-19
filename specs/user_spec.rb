@@ -1,12 +1,15 @@
-require_relative 'test_helper'
+require_relative "test_helper"
 
+describe "user" do
+  describe "self.list" do
+    it "Returns an array of hashes" do
+      VCR.use_cassette("self.list") do
+        user_list = SlackBot::User.list
 
-describe "workplace" do
-    describe "self.list" do
-        # VCR.use_cassette("self.list") do
-        #     response = SlackBot::Recipient.list
-
-        #     expect(response)
-        # end
+        expect(user_list).must_be_kind_of Array
+        expect(user_list.first).must_be_kind_of Hash
+        expect(user_list.first).must_be_kind_of Hash
+      end
     end
+  end
 end

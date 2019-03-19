@@ -1,13 +1,15 @@
-require 'simplecov'
+require "simplecov"
 SimpleCov.start
 
-require 'minitest'
-require 'minitest/autorun'
-require 'minitest/reporters'
-require 'minitest/skip_dsl'
-require 'vcr'
-require 'webmock/minitest'
-require 'dotenv'
+require "minitest"
+require "minitest/autorun"
+require "minitest/reporters"
+require "minitest/skip_dsl"
+require "HTTParty"
+require "vcr"
+require "webmock/minitest"
+require "dotenv"
+require "pry"
 Dotenv.load
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
@@ -17,7 +19,7 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.default_cassette_options = {
     :record => :new_episodes,
-    :match_requests_on => [:method, :uri, :body]
+    :match_requests_on => [:method, :uri, :body],
   }
 
   config.filter_sensitive_data("<SLACK_TOKEN>") do

@@ -1,20 +1,19 @@
 #!/usr/bin/env ruby
 
-require 'HTTParty'
-require 'dotenv'
+require "HTTParty"
+require "dotenv"
 Dotenv.load
 
-# url = 'https://slack.com/api/channels.list?'
-# token = ENV['TOKEN']
+url = "https://slack.com/api/channels.list?"
+token = ENV["TOKEN"]
 
-# query_parameters = {
-#   token: token
-# }
+query_parameters = {
+  token: token,
+}
 
-# response = HTTParty.get(url, query: query_parameters)
+response = HTTParty.get(url, query: query_parameters)
 
-# puts response
-
+puts response
 
 # def main
 #   puts "Welcome to the Ada Slack CLI!"
