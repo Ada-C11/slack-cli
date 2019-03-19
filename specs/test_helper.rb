@@ -1,11 +1,13 @@
 require "simplecov"
 SimpleCov.start
 
+require "httparty"
 require "minitest"
 require "minitest/autorun"
 require "minitest/reporters"
 require "minitest/skip_dsl"
 require "vcr"
+require "pry"
 require "dotenv"
 Dotenv.load
 
