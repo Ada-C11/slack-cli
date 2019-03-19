@@ -49,6 +49,7 @@ class User
       list << member_info
     end
 
+    # list is an array of arrays
     return list
   end
 end
