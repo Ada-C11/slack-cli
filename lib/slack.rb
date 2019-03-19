@@ -1,11 +1,27 @@
 #!/usr/bin/env ruby
 
-def main
-  puts "Welcome to the Ada Slack CLI!"
+require 'HTTParty'
+require 'dotenv'
+Dotenv.load
 
-  # TODO project
+# url = 'https://slack.com/api/channels.list?'
+# token = ENV['TOKEN']
 
-  puts "Thank you for using the Ada Slack CLI"
-end
+# query_parameters = {
+#   token: token
+# }
 
-main if __FILE__ == $PROGRAM_NAME
+# response = HTTParty.get(url, query: query_parameters)
+
+# puts response
+
+
+# def main
+#   puts "Welcome to the Ada Slack CLI!"
+
+#   # TODO project
+
+#   puts "Thank you for using the Ada Slack CLI"
+# end
+
+# main if __FILE__ == $PROGRAM_NAME
