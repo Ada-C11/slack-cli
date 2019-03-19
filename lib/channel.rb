@@ -21,15 +21,15 @@ module Slack
         token: TOKEN,
       }
       channel_info = HTTParty.get(BASE_URL, query: query)
-      channel_list = channel_info["channels"]
-      @channel_names = channel_list.map do |channel|
-        channel["name"]
+      if channel_info.code != 200
+        raise ArgumentError, "The error code is #{channel_info.code} and the reason is: #{channel_info.message}"
+      else
+        channel_list = channel_info["channels"]
+        @channel_names = channel_list.map do |channel|
+          channel["name"]
+        end
+        return @channel_names
       end
-      return @channel_names
     end
   end
 end
-
-# channel = Channel.new
-# channel.list
-# puts channel.channel_names
