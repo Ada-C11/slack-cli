@@ -11,8 +11,6 @@ query_params = {token: ENV["SLACK_API_TOKEN"]}
 
 response = HTTParty.get(BASE_URL, query: query_params)
 
-p response
-
 # def main
 #   puts "Welcome to the Ada Slack CLI!"
 
