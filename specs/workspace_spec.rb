@@ -2,6 +2,7 @@ require_relative "test_helper"
 
 describe "Workspace object" do
   it "will initialize a new workspace object" do
+    skip
     VCR.use_cassette("workspace") do
       new_workspace = SlackCLI::Workspace.new(
         users: SlackCLI::User.get_from_api,

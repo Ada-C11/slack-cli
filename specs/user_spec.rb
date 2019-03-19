@@ -9,7 +9,6 @@ describe "User class" do
     }
   }
   it "initializes a user class" do
-    skip
     new_user = SlackCLI::User.new(user_data[:username],
                                   user_data[:real_name],
                                   user_data[:slack_id])
@@ -18,7 +17,6 @@ describe "User class" do
   end
 
   it "has working reader methods" do
-    skip
     new_user = SlackCLI::User.new(user_data[:username],
                                   user_data[:real_name],
                                   user_data[:slack_id])
@@ -29,7 +27,6 @@ describe "User class" do
   end
 
   it "can display information about itself as a string" do
-    skip
     new_user = SlackCLI::User.new(user_data[:username],
                                   user_data[:real_name],
                                   user_data[:slack_id])
@@ -41,7 +38,6 @@ describe "User class" do
   end
 
   it "loads array of users from Slack's API" do
-    skip
     VCR.use_cassette("list users") do
       users = SlackCLI::User.get_from_api
       expect(users).must_be_instance_of Array
