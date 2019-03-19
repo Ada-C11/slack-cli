@@ -26,10 +26,12 @@ describe "Recipient Class" do
 
   describe "self.get method" do
     it "returns url and parameters as a concatenated string" do
-      url = USER_URL
-      param = ENV["SLACK_API_TOKEN"]
-      request_url = @test.self.get(url, param)
-      expect(request_url).must_be_kind_of Hash
+      VCR.use_cassette("get_response") do
+        user = USER_URL
+        param = ENV["SLACK_API_TOKEN"]
+        request_url = SlackCLI::Recipient.get_response(user, param)
+        expect(request_url).must_be_kind_of HTTParty::Response
+      end
     end
   end
 end
