@@ -1,11 +1,25 @@
 #!/usr/bin/env ruby
 
-def main
-  puts "Welcome to the Ada Slack CLI!"
+class Slack
+  def initialize
+  end
 
-  # TODO project
+  def main
+    puts "Welcome to the Ada Slack CLI!"
+
+    def select_channel
+    end
+
+    def select_user
+    end
+
+    def show_details
+    end
+
+    def send_message
+    end
 
   puts "Thank you for using the Ada Slack CLI"
-end
+  end
 
-main if __FILE__ == $PROGRAM_NAME
+  main if __FILE__ == $PROGRAM_NAME
