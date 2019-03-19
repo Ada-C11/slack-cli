@@ -1,6 +1,7 @@
 require_relative "recipient"
 require_relative "user"
 require_relative "channel"
+require "pry"
 
 require "dotenv"
 require "httparty"
@@ -9,7 +10,13 @@ require "ap"
 
 def main
   puts "Welcome to the Ada Slack CLI!"
-
+  puts "Choose from the following options:\n1. List users\n2. List Channels\n3. Quit"
+  choice = gets.chomp
+  if choice == 1
+    channel = Slack::Channel.new
+    channel.list
+    return channel.channel_names
+  end
   puts "Thank you for using the Ada Slack CLI"
 end
 
