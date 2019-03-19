@@ -1,31 +1,32 @@
-# #!/usr/bin/env ruby
-
-# def main
-#   puts "Welcome to the Ada Slack CLI!"
-
-#   # TODO project
-
-#   puts "Thank you for using the Ada Slack CLI"
-# end
-
-# main if __FILE__ == $PROGRAM_NAME
+#!/usr/bin/env ruby
 
 require "dotenv"
 require "httparty"
-
-# Tell dotenv to look for the .env file
 Dotenv.load
 
-url = "https://slack.com/api/channels.list"
+def main
+  puts "Welcome to the Ada Slack CLI!"
 
-query = {
-  token: ENV["KEY"],
-}
+  puts "to be filled in here"
 
-response = HTTParty.get(url, query: query)
+  url = "https://slack.com/api/channels.list"
 
-if response.code != 200
-  raise ArgumentError, "Request is unsuccessful"
-else
-  puts "#{response}"
+  query = {
+    token: ENV["KEY"],
+  }
+
+  response = HTTParty.get(url, query: query)
+
+  if response.code != 200
+    raise ArgumentError, "Request is unsuccessful"
+  elsif list_channel = response["channels"].map do |channel|
+    channel["name"]
+  end
+  end
+
+  puts list_channel
+
+  puts "Thank you for using the Ada Slack CLI"
 end
+
+main if __FILE__ == $PROGRAM_NAME
