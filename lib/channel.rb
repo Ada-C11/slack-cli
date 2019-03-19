@@ -1,3 +1,5 @@
-class Channel
-  #code
+module SlackCLI
+  class Channel
+    #code
+  end
 end

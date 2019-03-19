@@ -1,5 +1,5 @@
 module SlackCLI
-  class Recipient
+  class Workspace
     #code
   end
 end
