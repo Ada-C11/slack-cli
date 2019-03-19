@@ -3,14 +3,13 @@ SimpleCov.start
 
 require_relative "test_helper"
 require_relative "../lib/recipient.rb"
+require_relative "../lib/slack_main.rb"
+
 
 describe "Recipient class" do
   before do
     VCR.use_cassette("recipient_get") do
-      BASE_URL = "https://slack.com/api/users.list"
-      @query_params = { token: ENV["SLACK_API_TOKEN"] }
-
-      @response = HTTParty.get(BASE_URL, query: @query_params)
+      @response = get_recipient("user")
     end
   end
 

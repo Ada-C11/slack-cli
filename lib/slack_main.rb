@@ -6,10 +6,18 @@ require "httparty"
 
 Dotenv.load
 
-BASE_URL = "https://slack.com/api/users.list"
-query_params = { token: ENV["SLACK_API_TOKEN"] }
+USER_URL = "https://slack.com/api/users.list"
+CHANNEL_URL = "https://slack.com/api/channels.list"
 
-response = HTTParty.get(BASE_URL, query: query_params)
+def get_recipient(type)
+  query_params = { token: ENV["SLACK_API_TOKEN"] }
+  if type == 'user'
+    return HTTParty.get(USER_URL, query: query_params)
+  elsif type == 'channels'
+    return HTTParty.get(CHANNEL_URL, query: query_params)
+  end
+end
+
 
 # def main
 #   puts "Welcome to the Ada Slack CLI!"
