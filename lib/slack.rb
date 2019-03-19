@@ -30,7 +30,7 @@ def main
       puts "That wasn't one of the options!"
     end
     puts "What would you like to do?"
-    input == gets.chomp.downcase
+    input = gets.chomp.downcase
   end
   # TODO project
 
