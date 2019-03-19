@@ -2,6 +2,8 @@ require "pry"
 require "httparty"
 
 class Recipient
+  BASE_URL = "https://slack.com/api/"
+
   attr_reader :slack_id, :name
 
   def initialize(slack_id:, name:)
@@ -11,7 +13,15 @@ class Recipient
     @name = name
   end
 
-  def self.get(url, params)
+  private
+
+  def self.get(endpoint, params = {})
+    url = BASE_URL + endpoint
+    params[:token] = ENV["SLACK_API_TOKEN"]
     response = HTTParty.get(url, query: params)
+  end
+
+  def self.list
+    raise NotImplementedError, "Implement me in a child class!"
   end
 end
