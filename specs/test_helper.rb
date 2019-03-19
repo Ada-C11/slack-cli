@@ -6,6 +6,7 @@ require "dotenv"
 Dotenv.load
 
 require_relative "../lib/slack.rb"
+require_relative "../lib/channel.rb"
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
