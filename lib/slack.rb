@@ -6,6 +6,7 @@ Dotenv.load
 BASE_URL = "https://slack.com/api/channels.list"
 query_params = {token: ENV["SLACK_API_TOKEN"]}
 response = HTTParty.get(BASE_URL, query: query_params)
+p response
 # Binding.pry
 
 p response["channels"].map { |channel| channel["name"] }
