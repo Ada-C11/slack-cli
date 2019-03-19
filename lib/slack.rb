@@ -3,7 +3,7 @@
 def main
   puts "Welcome to the Ada Slack CLI!"
 
-  # TODO project
+  #   # TODO project
 
   puts "Thank you for using the Ada Slack CLI"
 end
