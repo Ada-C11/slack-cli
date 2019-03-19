@@ -1,4 +1,6 @@
 
+require "httparty"
+
 class User < Recipient
   BASE_URL = "https://slack.com/api/users.list"
   TOKEN = ENV["SLACK_TOKEN"]

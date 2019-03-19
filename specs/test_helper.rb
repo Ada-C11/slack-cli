@@ -8,6 +8,12 @@ require "webmock/minitest"
 require "minitest/skip_dsl"
 require "vcr"
 
+require "channel"
+require "user"
+require "recipient"
+require "slack"
+require "httparty"
+
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 VCR.configure do |config|
