@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-require 'dotenv'
-require 'pry'
-require 'httparty'
+require "dotenv"
+require "pry"
+require "httparty"
 
 Dotenv.load
 
-BASE_URL = 'https://slack.com/api/channels.list'
-query_params = {token: ENV["SLACK_API_TOKEN"]}
+BASE_URL = "https://slack.com/api/users.list"
+query_params = { token: ENV["SLACK_API_TOKEN"] }
 
 response = HTTParty.get(BASE_URL, query: query_params)
 
