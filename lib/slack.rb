@@ -13,6 +13,7 @@ query_parameters = {
 
 response = HTTParty.get(BASE_URL, query: query_parameters)
 if (response.code == 200)
+  binding.pry
   response["channels"].each do |channel|
     puts channel["name"]
   end
