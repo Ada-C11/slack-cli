@@ -28,6 +28,8 @@ end
 
 require_relative "../lib/user"
 require_relative "../lib/channel"
+require_relative "../lib/workspace"
+require_relative "../lib/recipient"
 
 # What would you like to test
 # test for 200 status and message - different

@@ -1,5 +1,5 @@
 require "httparty"
-require "env"
+require "dotenv"
 Dotenv.load
 
 class Recipient
@@ -14,6 +14,11 @@ class Recipient
   end
 
   def self.get(url, params)
+    # SLACK_TOKEN = ENV["SLACK_TOKEN"]
+    # param = {
+    #   token: SLACK_TOKEN,
+    # }
+    # response = HTTParty.get(url, query: param)
   end
 
   private
