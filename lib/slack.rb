@@ -13,13 +13,13 @@ Dotenv.load
 def main
   users = SlackCLI::User.get_from_api
   channels = SlackCLI::Channel.get_from_api
-  new_workspace = SlackCLI::Workspace.new(users: users, channels: channels)
+  workspace = SlackCLI::Workspace.new(users: users, channels: channels)
   puts "Welcome to the Ada Slack CLI!"
   puts "What would you like to do?"
   puts "Options: \nlist users \nlist channels \nquit"
-  input == gets.chomp.downcase
+  input = gets.chomp.downcase
   until (input == "quit")
-    case "input"
+    case input
     when "list users"
       puts workspace.display_users
     when "list channels"
@@ -29,6 +29,8 @@ def main
     else
       puts "That wasn't one of the options!"
     end
+    puts "What would you like to do?"
+    input == gets.chomp.downcase
   end
   # TODO project
 
