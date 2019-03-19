@@ -34,4 +34,9 @@ class Recipient
       return response
     end
   end
+
+  def self.get(url, params)
+    response = HTTParty.get(url, query: params)
+    return response
+  end
 end
