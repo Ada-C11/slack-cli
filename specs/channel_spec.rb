@@ -7,7 +7,7 @@ describe SlackCLI::Channel do
       @name = "Catssss"
       @topic = "It's about cats, duh"
       @member_count = "2,000,000"
-      @record = SlackCLI::User.new(slack_id: @slack_id, name: @name, topic: @topic, member_count: member_count)
+      @record = SlackCLI::Channel.new(slack_id: @slack_id, name: @name, topic: @topic, member_count: @member_count)
     end
 
     it "is an instance of Channel" do
