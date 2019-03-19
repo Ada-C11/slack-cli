@@ -1,9 +1,11 @@
-require_relative 'test_helper'
+require_relative "test_helper"
 
-describe "workplace" do
-    describe "self.list" do
-    #     expect {
-    #         SlackBot::Recipient.list
-    #     }.must_raise NotImplementedError
+describe "Recipient" do
+  describe "self.list" do
+    it "Raises NotImplementedError if called directly on recipient" do
+      expect {
+        SlackBot::Recipient.list
+      }.must_raise NotImplementedError
     end
+  end
 end
