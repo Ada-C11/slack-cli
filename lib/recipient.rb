@@ -9,6 +9,7 @@ module Slack
 
     # Implemented
     def send_message(message)
+
     end
 
     def self.get(url, params)
@@ -20,9 +21,12 @@ module Slack
     # abstract
 
     def details
+
     end
 
     def self.list
+      result = get.()
+
     end
   end
 end
