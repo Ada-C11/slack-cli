@@ -10,16 +10,14 @@ describe "Channel" do
     }
   }
   it "instantiate a channel object" do
-    VCR.use_cassette("slack_channels") do
-      new_channel = SlackCLI::Channel.new(
-        channel_data[:id],
-        channel_data[:channel_name],
-        channel_data[:topic],
-        channel_data[:members]
-      )
+    new_channel = SlackCLI::Channel.new(
+      channel_data[:id],
+      channel_data[:channel_name],
+      channel_data[:topic],
+      channel_data[:members]
+    )
 
-      expect(new_channel).must_be_instance_of SlackCLI::Channel
-    end
+    expect(new_channel).must_be_instance_of SlackCLI::Channel
   end
 
   it "has working reader methods" do
