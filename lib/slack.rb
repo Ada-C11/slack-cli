@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
+class SlackAPI
+
+
+  class SlackAPIError < StandardError; end
+
+end
+
 def main
   puts "Welcome to the Ada Slack CLI!"
 
