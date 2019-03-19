@@ -26,6 +26,8 @@ VCR.configure do |config|
   end
 end
 
+require_relative "../lib/user"
+
 # What would you like to test
 # test for 200 status and message - different
 # length of members
