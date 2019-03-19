@@ -6,8 +6,15 @@ require "minitest/autorun"
 require "minitest/reporters"
 require "minitest/skip_dsl"
 require "vcr"
+require "httparty"
+require "dotenv"
+
+Dotenv.load
 
 require_relative "../lib/recipient.rb"
+require_relative "../lib/channel.rb"
+# require_relative "../lib/user.rb"
+# require_relative "../lib/message.rb"
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
