@@ -6,10 +6,10 @@ Dotenv.load
 module SlackCLI
   class Channel
     BASE_URL = "https://slack.com/api/channels.list"
-    attr_reader :slack_id, :channel_name, :topic, :members
+    attr_reader :id, :channel_name, :topic, :members
 
     def initialize(id, channel_name, topic, members)
-      @slack_id = id
+      @id = id
       @channel_name = channel_name
       @topic = topic
       @members = members
@@ -30,7 +30,7 @@ module SlackCLI
           slack_id = channel["id"]
           channel_name = channel["name"]
           topic = channel["topic"]["value"]
-          member_count = channel["members"]
+          members = channel["members"]
           new(slack_id, channel_name, topic, members)
         end
         return channels
