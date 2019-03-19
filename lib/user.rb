@@ -22,7 +22,6 @@ class User < Recipient
       raise SlackApiError, "Improper request: #{raw_data.message}"
     end
 
-    puts raw_data
     user_list = []
     members = raw_data["members"]
     members.each do |member|
