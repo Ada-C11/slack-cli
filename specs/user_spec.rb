@@ -17,5 +17,15 @@ describe "User" do
       expect(user.status_text).must_equal "Good to go"
       expect(user.status_emoji).must_equal ":)"
     end
+
+    # it "can find a location" do
+    #   VCR.use_cassette("users_found") do
+    #     response = get_location(location)
+
+    #     expect(response["Seattle"]).wont_be_nil
+    #     expect(response["Seattle"][:lon]).must_equal "-122.3300624"
+    #     expect(response["Seattle"][:lat]).must_equal "47.6038321"
+    #   end
+    # end
   end
 end

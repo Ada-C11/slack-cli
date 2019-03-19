@@ -14,7 +14,6 @@ module Slack
     #temp
     def self.list
       list = []
-      Dotenv.load
 
       url = "https://slack.com/api/users.list"
 
