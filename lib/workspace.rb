@@ -21,9 +21,15 @@ class Workspace
   def show_details
   end
 
-  def print_user_details
-    users.each do |user|
-      puts user.details
+  def print_details(recipients)
+    if recipients == "users"
+      users.each do |user|
+        puts user.details
+      end
+    elsif recipients == "channels"
+      channels.each do |channel|
+        puts channel.details
+      end
     end
   end
 
