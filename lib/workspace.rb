@@ -1,3 +1,7 @@
+require "httparty"
+require "env"
+Dotenv.load
+
 class Workspace
   attr_reader :user, :channel
   attr_accessor :selected

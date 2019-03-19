@@ -1,3 +1,7 @@
+require "httparty"
+require "env"
+Dotenv.load
+
 class Recipient
   attr_reader :slack_id, :name
 
