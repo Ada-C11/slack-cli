@@ -24,7 +24,7 @@ query = {
 
 response = HTTParty.get(url, query: query)
 
-if response.message != 200
+if response.code != 200
   raise ArgumentError, "Request is unsuccessful"
 else
   puts "#{response}"
