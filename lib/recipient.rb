@@ -13,7 +13,7 @@ class Recipient
   USER_URL = "https://slack.com/api/users.list" # Move to User
   CHANNEL_URL = "https://slack.com/api/channels.list" #move to Channel
 
-  attr_reader :send_message, :name, :slack_id
+  attr_reader :send_message, :name, :slack_id, :error_helper
 
   def initialize
     @slack_id = slack_id
@@ -28,15 +28,20 @@ class Recipient
     }
     response = HTTParty.post(MSG_URL, query: query_params)
 
+    error_helper(response)
+  end
+
+  def self.get(url, params)
+    response = HTTParty.get(url, query: params)
+
+    error_helper(response)
+  end
+
+  def self.error_helper(response)
     if response["ok"] != true
       raise SlackError, "#{response["error"]}"
     else
       return response
     end
-  end
-
-  def self.get(url, params)
-    response = HTTParty.get(url, query: params)
-    return response
   end
 end
