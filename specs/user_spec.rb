@@ -13,3 +13,14 @@ describe "self.list" do
     end
   end
 end
+
+describe "select_user" do
+  it "selects a user as the current recipient" do
+    user = User.new
+    VCR.use_cassette("select_user") do
+      response = user.select_user("UH3UT3SJK")
+
+      expect(response).must_equal "UH3UT3SJK"
+    end
+  end
+end

@@ -34,6 +34,25 @@ class User
     end
     return user_list
   end
-end
+
+  def select_user(identifier)
+    query = {
+      token: ENV["SLACK_API_TOKEN"],
+    }
+
+    response = HTTParty.get(BASE_URL, query: query)
+    selected_user = ""
+    response["members"].each do |member|
+      if member["id"] == identifier
+        selected_user = identifier
+      elsif member["name"] == identifier
+        selected_user = identifier
+      end
+    end
+    return selected_user
+  end
+
+
+end # end of class
 
 # end
