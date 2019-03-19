@@ -1,5 +1,6 @@
 require "dotenv"
 require "httparty"
+require "awesome_print"
 
 Dotenv.load
 
@@ -12,7 +13,7 @@ query_parameters = {
 response = HTTParty.get(url, query: query_parameters)
 
 if response.code == 200
-  puts response
+  ap response.parsed_response
 else
-  puts "#{response.code} #{response.message}"
+  ap "#{response.code} #{response.message}"
 end
