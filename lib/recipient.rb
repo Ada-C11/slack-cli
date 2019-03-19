@@ -17,7 +17,7 @@ class Recipient
     @name = name
   end
 
-  def self.send_message(name, message)
+  def self.send_message(name:, message:)
     # using HTTParty.post(MSG_URL, message, slack_id)
     query_params = {
       token: ENV["SLACK_TOKEN"],
@@ -38,4 +38,4 @@ end
 
 # test = Recipient.send_message("everyone", "this is a string!")
 
-# puts test
+# puts test.code

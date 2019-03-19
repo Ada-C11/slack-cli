@@ -8,8 +8,8 @@ describe "Recipient" do
     it "can post a message on the everyone slack channel" do
       VCR.use_cassette("message_post") do
         name = "everyone"
-        text = "Hey there"
-        pigeon = Recipient.send_message(name, text)
+        text = "Hey there%21"
+        pigeon = Recipient.send_message(name: name, message: text)
 
         expect(pigeon["ok"]).must_equal true
       end
