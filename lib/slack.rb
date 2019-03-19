@@ -10,11 +10,10 @@ require "pry"
 
 Dotenv.load
 
-users = SlackCLI::User.get_from_api
-channels = SlackCLI::Channel.get_from_api
-new_workspace = SlackCLI::Workspace.new(users: users, channels: channels)
-
 def main
+  users = SlackCLI::User.get_from_api
+  channels = SlackCLI::Channel.get_from_api
+  new_workspace = SlackCLI::Workspace.new(users: users, channels: channels)
   puts "Welcome to the Ada Slack CLI!"
   puts "What would you like to do?"
   puts "Options: \nlist users \nlist channels \nquit"
