@@ -11,6 +11,9 @@ require "pry"
 Dotenv.load
 
 def main
+  users = SlackCLI::User.get_from_api
+  channels = SlackCLI::Channel.get_from_api
+  new_workspace = SlackCLI::Workspace.new(users: users, channels: channels)
   puts "Welcome to the Ada Slack CLI!"
   puts "What would you like to do?"
   puts "Options: \nlist users \nlist channels \nquit"
@@ -18,9 +21,9 @@ def main
   until (input == "quit")
     case "input"
     when "list users"
-      puts SlackCLI::Workspace.display_users
+      puts workspace.display_users
     when "list channels"
-      puts SlackCLI::Workspace.display_channels
+      puts workspace.display_channels
     when "quit"
       break
     else
