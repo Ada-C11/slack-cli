@@ -24,8 +24,8 @@ describe "Recipient Class" do
     end
   end
 
-  describe "self.get method" do
-    it "returns url and parameters as a concatenated string" do
+  describe "self.get_response method" do
+    it "creates it imports data as HTTParty class" do
       VCR.use_cassette("get_response") do
         user = USER_URL
         param = ENV["SLACK_API_TOKEN"]
@@ -34,4 +34,12 @@ describe "Recipient Class" do
       end
     end
   end
+
+  # describe "self.list method" do
+  #   before do
+  #     VCR.use_cassette
+  #   end
+
+  #   it "returns a list of recipients as an array"
+  # end
 end
