@@ -21,4 +21,16 @@ describe SlackCLI::Channel do
       expect(@record.member_count).must_equal @member_count
     end
   end
+
+  describe "self.list" do
+    it "returns an array of channels" do
+      VCR.use_cassette("channels find") do
+        channels_array = SlackCLI::Channel.list
+
+        expect(channels_array).must_be_kind_of Array
+        expect(channels_array.first).must_be_kind_of SlackCLI::Channel
+        expect(channels_array.length).wont_equal 0
+      end
+    end
+  end
 end
