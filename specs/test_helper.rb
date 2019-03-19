@@ -27,6 +27,7 @@ VCR.configure do |config|
 end
 
 require_relative "../lib/user"
+require_relative "../lib/channel"
 
 # What would you like to test
 # test for 200 status and message - different
