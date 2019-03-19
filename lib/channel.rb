@@ -4,9 +4,10 @@ require "dotenv"
 Dotenv.load
 
 class Channel
+  # attr_accessor :list_channels, :channel_list
 
   # def initialize
-
+  #   @channel_list = {}
   # end
 
   BASE_URL = "https://slack.com/api/channels.list"
@@ -17,8 +18,10 @@ class Channel
     query = {
       token: ENV["SLACK_API_TOKEN"],
     }
-    channel_list = {}
+
     response = HTTParty.get(BASE_URL, query: query)
+
+    channel_list = {}
 
     if response.code != 200
       raise ArgumentError, "There was an error. The code is #{response.error}."
@@ -31,10 +34,3 @@ class Channel
     return channel_list
   end
 end
-  
-
-  # code snips to save:
-  # puts channel["topic"]["value"] # gets topic
-  # puts channel["members"].length # gets # of members
-  # puts channel["id"] # gets slack id for channel
-
