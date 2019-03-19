@@ -11,9 +11,8 @@ query = {
 response = HTTParty.get(BASE_URL, query: query)
 
 response["channels"].each do |channel|
-  puts channel["name"]
+  print channel["name"]
 end
-
 # code snips to save:
 # puts channel["topic"]["value"] # gets topic
 # puts channel["members"].length # gets # of members
