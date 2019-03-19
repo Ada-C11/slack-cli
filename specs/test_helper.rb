@@ -7,6 +7,8 @@ require "minitest/reporters"
 require "minitest/skip_dsl"
 require "vcr"
 
+require_relative "../lib/recipient.rb"
+
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 # VCR.configure do |config|
