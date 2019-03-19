@@ -12,6 +12,7 @@ module Slack
     end
 
     def self.get(url, params)
+      return HTTParty.get(url, query: params)
     end
 
     private

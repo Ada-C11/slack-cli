@@ -5,20 +5,17 @@ require_relative "test_helper"
 require_relative "../lib/recipient.rb"
 require_relative "../lib/slack_main.rb"
 
-
 describe "Recipient class" do
   before do
     VCR.use_cassette("recipient_get") do
-      @response = get_recipient("user")
+      query_params = { token: ENV["SLACK_API_TOKEN"] }
+      @response = Slack::Recipient.get("https://slack.com/api/users.list", query_params)
     end
   end
 
-  it "creates an instance of Recipient" do
-    slack_id = @response["members"][1]["id"]
-    name = @response["members"][1]["name"]
-
-    recipient = Slack::Recipient.new(slack_id: slack_id, name: name)
-
-    expect(recipient).must_be_kind_of Slack::Recipient
+  it "can retrieve a list of users" do
+    expect(@response).must_be_kind_of HTTParty::Response
+    expect(@response["members"]).must_be_kind_of Array
+    expect(@response["members"].length).must_be_kind_of Integer
   end
 end
