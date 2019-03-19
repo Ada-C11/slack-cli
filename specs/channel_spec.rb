@@ -8,7 +8,8 @@ describe "Channel class" do
 
         expect(response["channels"]).wont_be_nil
         expect(response["channels"].first["name"]).must_equal "random"
+        expect(response["channels"].first["members"].count).must_equal 2
       end
-    end 
+    end
   end
 end
