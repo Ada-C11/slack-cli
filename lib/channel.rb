@@ -1,4 +1,7 @@
 require "httparty"
+require_relative "recipient"
+require "dotenv"
+Dotenv.load
 
 class Channel < Recipient
   BASE_URL = "https://slack.com/api/channels.list"
@@ -6,7 +9,7 @@ class Channel < Recipient
 
   class SlackAPIError < StandardError; end
 
-  def initialize(slack_id, name, topic, member_count)
+  def initialize
     super
     @topic = topic
     @member_count = member_count
@@ -15,23 +18,24 @@ class Channel < Recipient
   def details
   end
 
-  def get_channels(workspace)
-    query_params = {
-      workspace: workspace,
-      token: TOKEN,
-      format: json,
-    }
-    response = HTTParty.get(BASE_URL, query: query)
-
-    if response.code != 200 || response == nil
-      raise SlackAPIError, "API call failed with code #{response.code} and reason '#{response["reason"]}"
-    end
-
-    channel = response["response"].map do |channel|
-      self.new(channel["id"], channel["name"], channel["topic"], channel["members"])
-    end
-  end
-
   def self.list
+    query_params = {
+      token: TOKEN,
+    }
+    response = HTTParty.get(BASE_URL, query: query_params)
+    # responses = response["response"]
+
+    # if response.code != 200 || response == nil
+    #   raise SlackAPIError
+    # end
+
+    # responses.each do |pass|
+    #   puts "#{pass["topic"].to_s}"
+    #   puts "#{pass["members"].to_a}"
+    # end
   end
 end
+
+puts Channel.list
+
+# , "API call failed with code #{response.code} and reason '#{response["reason"]}"

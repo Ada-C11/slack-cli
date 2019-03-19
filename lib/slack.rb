@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'httparty'
+require "httparty"
 
 class Slack
   def initialize
@@ -7,7 +7,7 @@ class Slack
 
   def main
     puts "Welcome to the Ada Slack CLI!"
-    
+
     # puts "Slack CLI Menu\n"
     # puts "1. List Users\n"
     # puts "2. List Channels\n"
@@ -40,7 +40,8 @@ class Slack
     def send_message
     end
 
-  puts "Thank you for using the Ada Slack CLI"
+    puts "Thank you for using the Ada Slack CLI"
   end
 
   main if __FILE__ == $PROGRAM_NAME
+end

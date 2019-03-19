@@ -1,11 +1,12 @@
 
 require "httparty"
+require_relative "recipient"
 
 class User < Recipient
   BASE_URL = "https://slack.com/api/users.list"
   TOKEN = ENV["SLACK_TOKEN"]
 
-  def initialize(slack_id, name, real_name, status_text, status_emoji)
+  def initialize(slack_id, name)
     super
     @real_name = real_name
     @status_text = status_text
