@@ -27,13 +27,20 @@ module Slack
       response = HTTParty.get(CHANNEL_URL, query: query_parameters)
       ENV["SLACK_API_TOKEN"]
 
+      slack_channels = {}
       if (response.code == 200)
-        response["channels"].map do |channel|
-          channel["name"]
-        end # each
+        # response["channels"].map do |channel|
+        #   channel["name"]
+        # end # each
+        passes = response["channels"].map do |channel|
+          slack_channels[channel] = { "name" => channel["name"],
+                                     "members" => channel["members"],
+                                     "topic" => channel["topic"] }
+        end
       else
         puts "Error #{response.code} : #{response["message"]}"
       end # else
+      return passes
     end # self.list
 
     ap self.list
