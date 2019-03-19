@@ -3,7 +3,7 @@ require "pry"
 require_relative "recipient"
 
 class Channel < Recipient
-  attr_reader :topic, :member_count 
+  attr_reader :topic, :member_count
 
   def initialize(slack_id, name, topic, member_count)
     super(slack_id, name)
@@ -12,12 +12,14 @@ class Channel < Recipient
   end
 
   def details
-  
   end
 
-  def self.list 
+  def self.list
     raw_data = self.get("channel")
-    puts raw_data
+
+    unless raw_data.code == 200
+      raise SlackApiError, "Improper request: #{raw_data.message}"
+    end
     channel_list = []
     channels = raw_data["channels"]
     channels.each do |channel|

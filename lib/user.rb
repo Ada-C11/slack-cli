@@ -17,6 +17,11 @@ class User < Recipient
 
   def self.list
     raw_data = self.get("user")
+
+    unless raw_data.code == 200
+      raise SlackApiError, "Improper request: #{raw_data.message}"
+    end
+
     puts raw_data
     user_list = []
     members = raw_data["members"]
