@@ -12,7 +12,6 @@ require "channel"
 require "user"
 require "recipient"
 require "slack"
-require "httparty"
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
