@@ -17,4 +17,18 @@ describe SlackCLI::Recipient do
       expect(@record.name).must_equal @name
     end
   end
+
+  describe "self.get" do
+    it "gets a response" do
+      VCR.use_cassette("recipient find") do
+        url = "slack.com/api/users.list"
+        params = {"token": ENV["SLACK_API_TOKEN"]}
+
+        response = self.get(url, params)
+        expect(response).wont_be_nil
+        expect(response).must_be_kind_of HTTParty::Response
+        expect(response.code).wont_equal 401
+      end
+    end
+  end
 end
