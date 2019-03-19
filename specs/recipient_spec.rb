@@ -5,7 +5,7 @@ describe SlackCLI::Recipient do
     before do
       @slack_id = "CH2SKTDBN"
       @name = "random"
-      @record = SlackCLI::Recipient.new(@slack_id, @name)
+      @record = SlackCLI::Recipient.new(slack_id: @slack_id, name: @name)
     end
 
     it "is an instance of Recipient" do
