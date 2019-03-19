@@ -24,6 +24,9 @@ def main
       identifier = gets.chomp
       user = User.new
       selected_user = user.select_user(identifier)
+      if selected_user == ""
+        puts "There is no user with that identifier"
+      end
       puts ask_again
       response = gets.chomp
     elsif response == "select channel"
@@ -31,10 +34,13 @@ def main
       identifier = gets.chomp
       channel = Channel.new
       selected_channel = channel.select_user(identifier)
+      if selected_channel == ""
+        puts "There is no channel with that identifier"
+      end
       puts ask_again
       response = gets.chomp
     elsif response == "details"
-      # get details for selected
+      # selected_user or selected_channel is parameter for get details method, loop through api response and return hash with details
     end
   end
 end
