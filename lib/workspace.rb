@@ -8,6 +8,8 @@ class Workspace
     @selected = selected
   end
 
+  class SlackApiError < StandardError; end
+
   def select_channel
   end
 
