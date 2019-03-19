@@ -1,6 +1,9 @@
 require 'HTTParty'
 require 'pry'
 
+require 'dotenv'
+Dotenv.load
+
 class Recipient
   # constants
   MSG_URL = "https://slack.com/api/chat.postMessage"
