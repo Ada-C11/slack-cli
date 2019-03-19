@@ -14,11 +14,18 @@ def main
   puts "quit"
 
   user_selection = gets.chomp
-
-  if user_selection == "list users"
-    return User.list
-  elsif user_selection == "list channels"
-    return Channel.list
+  until user_selection == "quit"
+    case user_selection
+    when "list users"
+      User.list
+    when "list channels"
+      Channel.list
+    end
+    puts "\nWhat would you like to do next?"
+    puts "list users"
+    puts "list channels"
+    puts "quit"
+    user_selection = gets.chomp
   end
 
   puts "Thank you for using the Ada Slack CLI"
