@@ -14,8 +14,8 @@ VCR.configure do |config|
   config.hook_into :webmock
 end
 
-#require_relative lib files
 require_relative "../lib/recipient.rb"
 require_relative "../lib/user.rb"
 require_relative "../lib/channel.rb"
 require_relative "../lib/slack.rb"
+require_relative "../lib/workspace.rb"
