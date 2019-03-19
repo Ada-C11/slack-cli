@@ -6,17 +6,21 @@ Dotenv.load
 module SlackCLI
   class Channel
     BASE_URL = "https://slack.com/api/channels.list"
-    attr_reader :slack_id, :channel_name, :topic, :members
+    attr_reader :id, :channel_name, :topic, :members
 
     def initialize(id, channel_name, topic, members)
-      @slack_id = id
+      @id = id
       @channel_name = channel_name
       @topic = topic
       @members = members
     end
 
-    def member_count
-      return members.length
+    def display_details
+      info_string = "\nSlack ID : #{id}" +
+                    "\nChannel name : #{channel_name}" +
+                    "\nTopic : #{topic}" +
+                    "\nMember count: #{members}"
+      return info_string
     end
 
     def self.get_from_api
@@ -30,7 +34,7 @@ module SlackCLI
           slack_id = channel["id"]
           channel_name = channel["name"]
           topic = channel["topic"]["value"]
-          member_count = channel["members"]
+          members = channel["members"].length
           new(slack_id, channel_name, topic, members)
         end
         return channels
