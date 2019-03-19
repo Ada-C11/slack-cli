@@ -48,8 +48,11 @@ def main
   puts
   puts "What would you like to do? >"
   puts "a. list users"
-  puts "b. list channels"
-  puts "c. quit"
+  puts "b. select user"
+  puts "c. list channels"
+  puts "d. select channel"
+  puts "e. details for selected user and channel"
+  puts "f. quit"
   @response = gets.chomp.downcase.delete(".,")
 end
 
@@ -62,9 +65,15 @@ while (continue)
     puts "\nAll the users in the Slack workspace: \n\n"
     list_users
   elsif @response == "b"
+    # method call
+  elsif @response == "c"
     puts "\nAll the channels in the Slack workspace: \n\n"
     list_channels
-  elsif @response == "c"
+  elsif @response == "d"
+    # method call
+  elsif @response == "e"
+    # method call
+  elsif @response == "f"
     puts "\nOkay, good-bye! Thank you for using the Ada Slack CLI \n\n"
     continue = false
   else
