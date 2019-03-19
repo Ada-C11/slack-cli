@@ -1,7 +1,7 @@
-require 'HTTParty'
-require 'pry'
+require "HTTParty"
+require "pry"
 
-require 'dotenv'
+require "dotenv"
 Dotenv.load
 
 class Recipient
@@ -13,9 +13,9 @@ class Recipient
   attr_reader :send_message, :name, :slack_id
 
   def initialize
-    @slack_id = slack_id 
+    @slack_id = slack_id
     @name = name
-  end 
+  end
 
   def self.send_message(name, message)
     # using HTTParty.post(MSG_URL, message, slack_id)
@@ -26,15 +26,16 @@ class Recipient
     }
     # send a message to a recipient that matches provided slack_id
     response = HTTParty.post(MSG_URL, query: query_params)
-    
-    binding.pry
     # return response message/code
-    if response["ok"]
-      return "#{response.code}: Message sent!"
-    else 
-      return "#{response.code}: Message failed :("
-    end
+    # if response["ok"]
+    #   return response
+    # else
+    #    "#{response}: Message failed :("
+    # end
+    return response
   end
 end
 
-Recipient.send_message("everyone", "this is a string!")
+# test = Recipient.send_message("everyone", "this is a string!")
+
+# puts test
