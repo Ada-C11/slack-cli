@@ -28,7 +28,7 @@ describe "Recipient" do
   end
 
   describe "self.get method" do 
-    it "returns an HTTP response object" do 
+    it "successfully returns users list HTTP response object" do 
       VCR.use_cassette("get_response") do 
         url = "https://slack.com/api/users.list"
         params = {
@@ -37,6 +37,18 @@ describe "Recipient" do
         party_people = Recipient.get(url, params)
 
         expect(party_people["ok"]).must_equal true
+      end
+    end
+
+    it "raises SlackError for bad parameters" do
+      VCR.use_cassette("get_response") do 
+        url = "https://slack.com/api/users.list"
+        params = {
+          token: "thisisbadtoken",
+        }
+        party_people = Recipient.get(url, params)
+
+        expect(party_people["ok"]).must_equal false
       end
     end
   end
