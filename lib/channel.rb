@@ -9,4 +9,13 @@ class Channel < Recipient
     @topic
     @member_count
   end
+  
+  def self.get(url, params)
+    
+  end
+  
+  def self.list
+    
+  end
+  
 end

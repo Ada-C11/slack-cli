@@ -2,15 +2,21 @@
 require 'httparty'
 require 'dotenv'
 
+require_relative 'recipient.rb'
+require_relative 'user.rb'
+require_relative 'channel.rb'
+require_relative 'workspace.rb'
+
+
 Dotenv.load
 
 def main
   url = "https://slack.com/api/channels.list"
   user_url = "https://slack.com/api/users.list"
   
-  key = ENV["TOKEN"]
+  KEY = ENV["TOKEN"]
     query = {
-      token: key,
+      token: KEY,
     }
 
   channel_response = HTTParty.get(url, query: query)
@@ -24,11 +30,21 @@ def main
   end
   
   
-  
+######## MESSAGE TO USER #########  
   puts "Welcome to the Ada Slack CLI!"
   puts "There are #{channel_count} channels in this workspace."
   puts "There are #{user_count} users in this workspace."
-  puts "Thank you for using the Ada Slack CLI"
+  puts "Choose your next adventure from the following options: \n
+        1. list users \n
+        2. list channels \n
+        3. quit"
+        
+        user_selection = gets.chomp.downcase
+    case user_selection
+    when "1" || "list users" || "users"
+      
+    end
+  puts "Thank you for using the Ada Slack CLI"  
 end
 
 
