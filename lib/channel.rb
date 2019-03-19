@@ -1,8 +1,7 @@
-require_relative 'recipient'
+require_relative "recipient"
 
 module Slack
-  class Channels < Recipient
-
+  class Channel < Recipient
     def initialize(topic:, member_count:)
       @topic = topic
       @member_count = member_count
@@ -16,7 +15,6 @@ module Slack
     def self.list
       # list of all channels
     end
-
   end
 end
 
