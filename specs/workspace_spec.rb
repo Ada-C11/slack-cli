@@ -10,6 +10,7 @@ describe "Workspace object" do
       expect(new_workspace).must_be_instance_of SlackCLI::Workspace
     end
   end
+
   it "will return an array of user info strings" do
     VCR.use_cassette("workspace") do
       new_workspace = SlackCLI::Workspace.new(
@@ -21,17 +22,17 @@ describe "Workspace object" do
         expect(user).must_be_instance_of String
       end
     end
+  end
 
-    it "will return an array of channel info strings" do
-      VCR.use_cassette("workspace") do
-        new_workspace = SlackCLI::Workspace.new(
-          users: SlackCLI::User.get_from_api,
-          channels: SlackCLI::Channel.get_from_api,
-        )
-        expect(new_workspace.display_channels).must_be_instance_of Array
-        new_workspace.display_channels.each do |channel|
-          expect(channel).must_be_instance_of String
-        end
+  it "will return an array of channel info strings" do
+    VCR.use_cassette("workspace") do
+      new_workspace = SlackCLI::Workspace.new(
+        users: SlackCLI::User.get_from_api,
+        channels: SlackCLI::Channel.get_from_api,
+      )
+      expect(new_workspace.display_channels).must_be_instance_of Array
+      new_workspace.display_channels.each do |channel|
+        expect(channel).must_be_instance_of String
       end
     end
   end
