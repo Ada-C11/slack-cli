@@ -3,6 +3,7 @@ require "minitest/reporters"
 require "vcr"
 require "webmock/minitest"
 require "dotenv"
+
 Dotenv.load
 
 require_relative "../lib/slack.rb"
@@ -21,4 +22,3 @@ VCR.configure do |config|
     ENV["OAUTH_ACCESS_TOKEN"]
   end
 end
-
