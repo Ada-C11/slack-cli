@@ -1,5 +1,4 @@
 require_relative "test_helper"
-# slack id is correctly extracted
 
 describe "Recipient" do
   describe "self.get method" do
@@ -16,8 +15,8 @@ describe "Recipient" do
       end
     end
 
-    it "will raise an exception if the search fails" do
-      VCR.use_cassette("more_data") do
+    it "will raise an exception with incorrect token" do
+      VCR.use_cassette("get_data") do
         query_params = {
           token: "U R A TOKEN",
         }
@@ -25,6 +24,34 @@ describe "Recipient" do
           Slack::Recipient.get(@url, query: query_params)
         }.must_raise Slack::SlackApiError
       end
+    end
+
+    it "will raise an exception with invalid url" do
+      VCR.use_cassette("get_data") do
+        query_params = {
+          token: KEY,
+        }
+        expect {
+          Slack::Recipient.get("abcdefg", query: query_params)
+        }.must_raise Addressable::URI::InvalidURIError
+      end
+    end
+  end
+
+  describe "self.list" do
+    it "returns a notImplementedError" do
+      expect {
+        Slack::Recipient.list
+      }.must_raise NotImplementedError
+    end
+  end
+
+  describe "details" do
+    it "returns a notImplementedError" do
+      recipient = Slack::Recipient.new(slack_id: 123, name: "hi")
+      expect {
+        recipient.details
+      }.must_raise NotImplementedError
     end
   end
 end
