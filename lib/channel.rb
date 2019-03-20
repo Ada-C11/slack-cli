@@ -10,13 +10,9 @@ class Channel < Recipient
   end
 
   def self.list
-    query_params = {
-      token: TOKEN,
-    }
-    
-    channels_json = Channel.get(query: query_params)
+    channels_json = Channel.get
 
-   list_of_channels = channels_json["channels"].select { |channel| channel["name"] }
+    list_of_channels = channels_json["channels"].select { |channel| channel["name"] }
     return list_of_channels
   end
 
@@ -29,5 +25,5 @@ class Channel < Recipient
   end
 end
 
-test = HTTParty.get("https://slack.com/api/channels.list?token=xoxp-581967218119-580781269267-579777948256-23a22653dd928edbcbe9830d05729d53")
+test = Channel.get
 binding.pry
