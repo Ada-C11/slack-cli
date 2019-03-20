@@ -1,7 +1,6 @@
 require_relative "test_helper"
 
 describe SlackCLI::User do
-
   describe "constructor" do
     before do
       @slack_id = "CH2SKTDBN"
@@ -50,7 +49,7 @@ describe SlackCLI::User do
       end
 
       it "returns the correct information" do
-        expect(@detail).must_equal "Slack ID: #{@slack_id}, username: #{@name}, real name: #{@eal_name}"
+        expect(@detail).must_equal "Slack ID: #{@slack_id}, username: #{@name}, real name: #{@real_name}"
       end
     end
   end

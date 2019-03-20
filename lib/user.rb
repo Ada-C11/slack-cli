@@ -1,5 +1,5 @@
 require_relative "recipient"
-require 'dotenv'
+require "dotenv"
 Dotenv.load
 
 module SlackCLI
@@ -13,9 +13,9 @@ module SlackCLI
     end
 
     def self.list
-      url =	"https://slack.com/api/users.list"
+      url = "https://slack.com/api/users.list"
       data = {
-        "token": ENV["SLACK_API_TOKEN"]
+        "token": ENV["SLACK_API_TOKEN"],
       }
       response = self.get(url, data)
       users = []
@@ -27,6 +27,10 @@ module SlackCLI
         users << user
       end
       return users
+    end
+
+    def details
+      return "Slack ID: #{slack_id}, username: #{name}, real name: #{real_name}"
     end
   end
 end
