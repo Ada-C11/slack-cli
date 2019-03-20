@@ -23,6 +23,8 @@ def main
     # # loop d
     # break if selection == "6"
     # until user_input == false
+
+    #TODO: add command list every time teh loop repreats
     case selection
     when "1"
       puts "Here is the list of users:"
