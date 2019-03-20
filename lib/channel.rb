@@ -14,15 +14,21 @@ module Slack
 
       response_from_get = HTTParty.get(url, query: params)
 
-      return response_from_get
+      if response_from_get["ok"] == false
+        raise ArgumentError, "Request is unsuccessful"
+      else
+        return response_from_get
+      end
     end
 
     def self.list_all
-      if Channel.get.code != 200
-        raise ArgumentError, "Request is unsuccessful"
-      else all_channels = Channel.get["channels"].map do |channel|
-        channel["name"]
-      end       end
+      all_channels = Channel.get["channels"].map do |channel|
+        channel["id"]
+        # channel["name"]
+        # channel["members"]
+        # channel["topic"]
+      end
+      return all_channels
     end
   end
 end

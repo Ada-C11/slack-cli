@@ -25,6 +25,7 @@ describe "list_all method" do
 
       expect(list_response.length).must_equal 3
       expect(list_response).must_include "general"
+      expect(list_response).wont_include "test_channel"
     end
   end
 end
