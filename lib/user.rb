@@ -2,9 +2,18 @@
 
 module SlackBot
   class SlackApiError < StandardError; end
+
   class User < Recipient
     USER_PATH_URL = "users.list?"
     TOKEN = ENV["TOKEN"]
+    attr_reader :real_name, :name, :id
+
+    def initialize(real_name:, name:, id:)
+      @real_name = real_name
+      @name = name
+      @id = id
+    end
+
     def self.list
       query_parameters = { token: TOKEN }
       response = HTTParty.get("#{BASE_URL}#{USER_PATH_URL}", query: query_parameters)
