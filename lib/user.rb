@@ -12,9 +12,11 @@ class User
   
 
   
-  def initialize
-    super(slack_id, name)
-    @real_name
+  def initialize(username:, real_name:, slack_id:)
+    # super(slack_id, name)
+    @username = username
+    @real_name = real_name
+    @slack_id = slack_id   
   end
   
   def self.get(url, params)
@@ -24,11 +26,19 @@ class User
       raise SlackApiError, "API call failed with reason #{response["error"]}"
     end
     
-    return response
+    users = response["members"].map do |member|
+      username = member["name"]
+      real_name = member["real_name"]
+      slack_id = member["id"]
+      
+      self.new(username: username, real_name: real_name, slack_id: slack_id)
+    end
+    return users
   end
   
   def self.list   
-    return @response["members"].each { |member| puts member["name"] }
+    # return @response["members"].each { |member| puts member["name"] }
+    
   end
 
 end

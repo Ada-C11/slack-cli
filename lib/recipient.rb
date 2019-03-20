@@ -3,11 +3,11 @@ require 'dotenv'
 
 class Recipient
 
-attr_reader :slack_id, :name
+attr_reader :slack_id, :username
 
-def initialize(slack_id:, name:)
+def initialize(slack_id:, username:)
   @slack_id = slack_id
-  @name = name
+  @username = username
 end
 
 def send_message(message)
