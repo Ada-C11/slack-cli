@@ -2,7 +2,7 @@ require_relative "recipient"
 
 module SlackCli
   class Channel < SlackCli::Recipient
-    attr_reader :topic, :member_count
+    attr_reader :topic, :member_count, :list_channels
     LIST_URL = "https://slack.com/api/channels.list"
     MSG_URL = ""
 
@@ -26,6 +26,13 @@ module SlackCli
       return channels
     end
 
+    def self.list_channels
+      list.each do |channel|
+        puts "Channel name: #{channel.name} ID: #{channel.slack_id} topic: #{channel.topic}, Member count:#{channel.member_count}"
+      end
+      return nil
+    end
+
     def details
       return "Channel name: #{name} \nID: #{slack_id} \ntopic: #{topic}, \nMember count:#{member_count}\n"
     end
@@ -41,4 +48,3 @@ end
 # }
 # response = HTTParty.post(self::MSG_URL, query: query_params)
 #end
-
