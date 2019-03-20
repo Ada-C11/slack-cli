@@ -25,7 +25,8 @@ def list_options
   puts "Enter 'quit' to quit"
 end
 
-def create_table
+def create_table(array)
+  tp array
 end
 
 def main
@@ -38,9 +39,11 @@ def main
     choice = get_user_input(options)
     case choice
     when "list users"
-      puts "#{workspace.users}"
+      #puts "#{workspace.users}"
+      puts create_table(workspace.users)
     when "list channels"
-      puts "#{workspace.channels}"
+      #puts "#{workspace.channels}"
+      puts create_table(workspace.channels)
     when "quit"
       puts "Goodbye!"
       exit

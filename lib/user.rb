@@ -7,6 +7,7 @@ module SlackBot
     def self.list
       query_parameters = { token: TOKEN }
       response = HTTParty.get(USER_LIST_URL, query: query_parameters)
+      # Check_Error_Status(response)
 
       users_array = response["members"].map do |user|
         {
