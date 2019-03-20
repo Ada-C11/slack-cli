@@ -9,17 +9,21 @@ class Workspace
   def initialize
     @users = User.list
     @channels = Channel.list
-    # @selected = selected
+    @selected = nil
   end
 
-  def select_channel
+  def select_channel(user_input)
+    selected = channels.select do |channel|
+      channel.name == user_input || channel.slack_id == user_input
+    end
+    return selected.first
   end
 
   def select_user(user_input)
-    selected_user = users.select do |user|
+    selected = users.select do |user|
       user.name == user_input || user.slack_id == user_input
     end
-    return selected_user.first
+    return selected.first
   end
 
   def show_details
