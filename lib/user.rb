@@ -19,9 +19,10 @@ module SlackApi
 
     def self.list(users_list)
       puts "Here are a list of your users for this Workspace:"
-      users_list.each do |user|
-        puts "\nUsername: #{user["name"]}, Slack ID: #{user["id"]}, Real name: #{user["real_name"]}!"
+      list_of_users = users_list.map do |user|
+        "\nUsername: #{user["name"]}, Slack ID: #{user["id"]}, Real name: #{user["real_name"]}!"
       end
+      return list_of_users
     end
   end
 end

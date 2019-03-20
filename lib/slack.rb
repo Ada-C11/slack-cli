@@ -3,6 +3,7 @@
 # require "httparty"
 require_relative "user"
 require_relative "channel"
+require_relative "workspace"
 
 Dotenv.load
 
@@ -14,19 +15,41 @@ def main
   puts "What would you like to do?:"
   puts "list users"
   puts "list channels"
+  puts "select user"
+  puts "select channel"
+  puts "details"
   puts "quit"
 
   user_selection = gets.chomp
   until user_selection == "quit"
     case user_selection
     when "list users"
-      SlackApi::User.list(users_list)
+      puts SlackApi::User.list(users_list)
     when "list channels"
-      SlackApi::Channel.list(channels_list)
+      puts SlackApi::Channel.list(channels_list)
+    when "select user"
+      print "Enter user's name or user's ID: "
+      user_input = gets.chomp
+
+      if SlackApi::Workspace.select_user(user_input) != true
+        puts "That user does not exist"
+      end
+    when "select channel"
+      print "Enter channel's name or channel's ID: "
+      user_input = gets.chomp
+
+      if SlackApi::Workspace.select_channel(user_input) != true
+        puts "That channel does not exist"
+      end
+    when "details"
     end
+
     puts "\nWhat would you like to do next?"
     puts "list users"
     puts "list channels"
+    puts "select user"
+    puts "select channel"
+    puts "details"
     puts "quit"
     user_selection = gets.chomp
   end
