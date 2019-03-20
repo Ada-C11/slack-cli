@@ -2,11 +2,25 @@ describe "User child class" do
   describe "initialize" do
   end
 
-  describe "user self.list method" do 
+  describe "user self.get method" do 
     it "successfully returns an HTTParty response object" do
       VCR.use_cassette("user_response") do 
-        expect(User.list["ok"]).must_equal true
+        expect(User.get["ok"]).must_equal true
       end
+    end
+  end
+  describe "user self.list method" do 
+    it "creates a list of all user objects" do
+      VCR.use_cassette("user_response") do 
+        user_list = User.list
+
+        expect(user_list).must_be_kind_of Array
+        expect(user_list.first).must_be_instance_of User 
+        expect(user_list.last).must_be_instance_of User
+      end
+    end
+
+    it "returns nil for a user that doesn't exist" do 
     end
   end
 
@@ -19,22 +33,11 @@ describe "User child class" do
     end
   end
 
-  describe "user self.details method" do
-    it "returns an array of hashes" do
-      VCR.use_cassette("user_response") do
-        expect(User.details).must_be_kind_of Array  
-        User.details.each do |user|
-          user.must_be_kind_of Hash
-        end
-      end
-    end
-
-    it "returns the correct details" do
-      VCR.use_cassette("user_response") do
-        expect(User.details.last[:real_name]).must_equal "Hana Clements"
-        expect(User.details.last[:status_text]).must_equal ":heart:"
-        expect(User.details.last[:status_emoji]).must_equal ":green_heart:"
-      end
-    end
-  end
+  # describe "user self.details method" do
+  #   it "returns a string" do
+  #     VCR.use_cassette("user_response") do
+  #       expect(User.details).must_be_kind_of String  
+  #     end
+  #   end
+  # end
 end
