@@ -16,7 +16,6 @@ class Channel < Recipient
     response = Channel.get
 
     channels = response["channels"].map do |channel|
-      # binding.pry
       slack_id = channel["id"]
       name = channel["name"]
       topic = channel["topic"]["value"]

@@ -1,4 +1,4 @@
-require "HTTParty"
+require "httparty"
 require "pry"
 
 require "dotenv"
@@ -37,15 +37,7 @@ class Recipient
     }
     response = HTTParty.get(self::LIST_URL, query: query_params)
     return response
-    # error_helper(response)
-  end
-
-  def self.error_helper(response)
-    if response["ok"] != true
-      raise SlackError, "#{response["error"]}"
-    else
-      return response
-    end
+    error_helper(response)
   end
 
   #private
@@ -55,5 +47,13 @@ class Recipient
 
   def self.list
     raise NotImplementedError
+  end
+
+  def self.error_helper(response)
+    if response["ok"] != true
+      raise SlackError, "#{response["error"]}"
+    else
+      return response
+    end
   end
 end
