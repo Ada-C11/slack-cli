@@ -33,10 +33,10 @@ module SlackCli
     end
 
     def self.list_users
-      user_list = list.map do |user|
-        user.name
+      list.each do |user|
+        puts "#{user.real_name} Slack ID: #{user.slack_id}"
       end
-      return user_list
+      return nil
     end
 
     def self.details
@@ -49,3 +49,5 @@ module SlackCli
     end
   end
 end
+
+binding.pry
