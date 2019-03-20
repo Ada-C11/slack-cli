@@ -19,7 +19,7 @@ describe "User Class" do
 
         expect {
           Slack::User.get(url, query)
-        }.must_raise ArgumentError
+        }.must_raise Slack::Recipient::ResponseError
       end
     end
 
