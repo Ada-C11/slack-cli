@@ -12,9 +12,10 @@ def main
   puts "Welcome to the Ada Slack CLI!"
   puts "Choose from the following options:\n1. List users\n2. List Channels\n3. Quit"
   choice = gets.chomp
-  if choice == "2"
-    channel = Slack::Channel.new
-    puts channel.list
+  if choice == "1"
+    puts User.list
+  elsif choice == "2"
+    puts Channel.list
   end
   puts "Thank you for using the Ada Slack CLI"
 end
