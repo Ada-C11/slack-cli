@@ -44,4 +44,12 @@ class Recipient
       return response
     end
   end
+
+  def details
+    raise NotImplementedError
+  end
+
+  def self.list
+    raise NotImplementedError
+  end
 end
