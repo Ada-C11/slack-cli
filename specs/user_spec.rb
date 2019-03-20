@@ -23,6 +23,10 @@ describe "User class" do
     it "returns a String" do
       expect(user.details).must_be_instance_of String
     end
-  end
 
+    it "Checks details return the accurate String: " do
+      string_format = "Name: #{user.name}, \nReal Name: #{user.real_name}, \nID: #{user.id}"
+      expect(user.details).must_equal string_format
+    end
+  end
 end

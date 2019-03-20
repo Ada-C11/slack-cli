@@ -6,5 +6,9 @@ module Slack
       super(id: id, name: name)
       @real_name = real_name
     end
+
+    def details
+      return ""
+    end
   end
 end
