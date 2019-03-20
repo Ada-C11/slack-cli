@@ -20,8 +20,8 @@ class User
   
   def self.get(url, params)
     response = HTTParty.get(url, query: params)
-    # || response["message"] != "ok"
-    if response.code != 200 
+
+    if response.code != 200 || response["message"] != "ok"
       raise SlackApiError, "API call failed with code #{response.code} and reason #{response["reason"]}"
     end
     
