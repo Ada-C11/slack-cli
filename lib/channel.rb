@@ -41,6 +41,6 @@ module Slack
     end # self.list
 
     # ap self.channel_api_data
-    ap self.list_channels
+    # ap self.list_channels
   end # class
 end # module

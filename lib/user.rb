@@ -37,6 +37,6 @@ module Slack
       end # else
     end
 
-    ap self.list_users
+    # ap self.list_users
   end # class
 end # module
