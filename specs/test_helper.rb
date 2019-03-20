@@ -14,6 +14,7 @@ Dotenv.load
 require_relative "../lib/recipient.rb"
 require_relative "../lib/user.rb"
 require_relative "../lib/channel"
+require_relative "../lib/apiwrapper"
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
