@@ -15,8 +15,8 @@ class Channel < Recipient
     @member_count = member_count
   end
 
-#   def details
-#   end
+  #   def details
+  #   end
 
   def self.list
     query_params = {

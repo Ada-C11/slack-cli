@@ -7,7 +7,7 @@ require "httparty"
 
 #   def main
 #     puts "Welcome to the Ada Slack CLI!"
-    
+
 #     puts "Slack CLI Menu\n"
 #     puts "1. List Users\n"
 #     puts "2. List Channels\n"
