@@ -11,5 +11,9 @@ module SlackBot
             raise SlackApiError, "#{reponse.code} Error: #{response.message}"
         end
     end
+
+    def details
+        raise NotImplementedError
+    end
   end
 end

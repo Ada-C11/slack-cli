@@ -22,13 +22,19 @@ module SlackBot
       end
 
       users_array = response["members"].map do |user|
-        {
-          real_name: user["real_name"],
-          name: user["name"],
-          id: user["id"],
-        }
+        SlackBot::User.new(real_name: user["real name"], name: user["name"], id: user["id"])
       end
+
+
       return users_array
+    end
+
+    def details
+        {
+        real_name: = @real_name, 
+        name: = @user, 
+        id: = @user   
+        }
     end
   end
 end
