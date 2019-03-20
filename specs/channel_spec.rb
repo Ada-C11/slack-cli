@@ -27,8 +27,8 @@ describe "Channel" do
   end
 
   describe "details" do
-    channels = channel_list
     it "lists details for an instance of channel" do
+      channels = channel_list
       channel_deets = channels[1].details
 
       expect(channel_deets).must_equal channels[1].details

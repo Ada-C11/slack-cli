@@ -22,7 +22,7 @@ describe "Recipient" do
 
         expect {
           SlackCli::Recipient.send_message(name: name, message: text)
-        }.must_raise SlackError
+        }.must_raise SlackCli::SlackError
       end
     end
   end
