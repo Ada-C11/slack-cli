@@ -25,6 +25,9 @@ describe "Channel" do
         expect(channels.last).must_be_instance_of Channel
       end
     end
+
+    it "returns nil for a channel that doesn't exist" do
+    end
   end
 
   describe "details" do
@@ -35,6 +38,9 @@ describe "Channel" do
 
         expect(channel_deets).must_equal channels[1].details
       end
+    end
+
+    it "returns nil for a channel that doesn't exist" do
     end
   end
 end
