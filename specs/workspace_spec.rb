@@ -39,5 +39,25 @@ describe "Workspace class" do
         expect(workspace.select_channel("CH2RY8RQT")).must_be_kind_of Channel
       end
     end
+
+    it "returns channel details from show_details" do
+      VCR.use_cassette("slack_workspace") do
+        workspace = Workspace.new
+        workspace.select_channel("random")
+        expect(workspace.show_details).must_be_kind_of String
+        workspace.select_channel("CH2RY8RQT")
+        expect(workspace.show_details).must_be_kind_of String
+      end
+    end
+
+    it "returns user details from show_details" do
+      VCR.use_cassette("slack_workspace") do
+        workspace = Workspace.new
+        workspace.select_user("slackbot")
+        expect(workspace.show_details).must_be_kind_of String
+        workspace.select_user("USLACKBOT")
+        expect(workspace.show_details).must_be_kind_of String
+      end
+    end
   end
 end

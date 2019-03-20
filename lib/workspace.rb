@@ -4,7 +4,7 @@ require_relative "user"
 require_relative "channel"
 
 class Workspace
-  attr_reader :users, :channels
+  attr_reader :users, :channels, :selected
 
   def initialize
     @users = User.list
@@ -16,17 +16,18 @@ class Workspace
     selected = channels.select do |channel|
       channel.name == user_input || channel.slack_id == user_input
     end
-    return selected.first
+    @selected = selected.first
   end
 
   def select_user(user_input)
     selected = users.select do |user|
       user.name == user_input || user.slack_id == user_input
     end
-    return selected.first
+    @selected = selected.first
   end
 
   def show_details
+    return @selected.details
   end
 
   def print_details(recipients)
