@@ -31,7 +31,7 @@ module SlackCLI
         end
         return channels
       else
-        puts "Error #{response.code} : #{response["message"]}"
+        raise SlackApiError, "Error #{response.code} : #{response["message"]}"
       end
     end
   end

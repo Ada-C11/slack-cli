@@ -8,6 +8,7 @@ Dotenv.load
 module SlackCLI
   class User
     BASE_URL = "https://slack.com/api/users.list"
+    TOKEN = ENV["OAUTH_ACCESS_TOKEN"]
     attr_reader :username, :real_name, :slack_id
 
     def initialize(username, real_name, slack_id)
@@ -18,7 +19,7 @@ module SlackCLI
 
     def self.get_from_api
       query_parameters = {
-        token: ENV["OAUTH_ACCESS_TOKEN"],
+        token: TOKEN,
       }
 
       response = HTTParty.get(BASE_URL, query: query_parameters)
