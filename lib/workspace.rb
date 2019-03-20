@@ -16,12 +16,8 @@ def main
   loop do
     puts "\n\t\t\.:Menu:.
    |1|::List Channels
-   |2|::Channel Details
-   |3|::List Users
-   |4|::User Details
-   |5|::Select Channel
-   |6|::Select User
-   |7|::Quit"
+   |2|::List Users
+   |3|::Quit"
 
     answer = gets.chomp.to_i
 
