@@ -4,7 +4,7 @@ describe "Channel class" do
   let(:channel) {
     Slack::Channel.new(id: "CBD", name: "general", topic: "stuff", member_count: "4")
   }
-  
+
   describe "Channel#initialize" do
     it "returns an instance of Channel and a kind of Recipient" do
       expect(channel).must_be_instance_of Slack::Channel
@@ -27,6 +27,11 @@ describe "Channel class" do
   describe "Channel#details" do
     it "returns a String" do
       expect(channel.details).must_be_instance_of String
+    end
+
+    it "Checks details return the accurate String" do
+      string_format = "Name: #{channel.name}, \nID: #{channel.id}, \nTopic: #{channel.topic}, \nMember Count: #{channel.member_count}"
+      expect(channel.details).must_equal string_format
     end
   end
 end
