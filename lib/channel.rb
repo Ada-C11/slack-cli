@@ -2,10 +2,10 @@ module Slack
   class Channel < Recipient
     attr_reader :slack_id, :name
 
-    def initialize(slack_id, name)
+    def initialize(slack_id, name, num_members, topic)
       super(slack_id, name)
-      # @members = members
-      # @topic = topic
+      @num_members = num_members
+      @topic = topic
     end
 
     def self.get
@@ -25,7 +25,7 @@ module Slack
 
     def self.list_all
       all_channels = Channel.get["channels"].map do |channel|
-        "Channel #{channel["id"]} name is: #{channel["name"]}. Number of members: #{channel["num_members"]}. Topic of the channel: #{channel["topic"]["value"]}."
+        self.new(channel["id"], channel["name"], channel["num_members"], channel["topic"]["value"])
       end
       return all_channels
     end

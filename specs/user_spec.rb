@@ -18,12 +18,12 @@ describe "get method" do
   end
 end
 
-# unsure what this test should result in. also, not sure calling the correct test
-# describe "list_all method" do
-#   it "gives a list of all user information from the API" do
-#     VCR.use_cassette("user_find") do
-#       list_response = Slack::User.list_all
-#       expect(list_response.first).must_equal "USLACKBOT"
-#     end
-#   end
-# end
+describe "list_all method" do
+  it "gives a list of all user information from the API" do
+    VCR.use_cassette("user_find") do
+      list_response = Slack::User.list_all
+      puts list_response
+      expect(list_response.length).must_equal 3
+    end
+  end
+end

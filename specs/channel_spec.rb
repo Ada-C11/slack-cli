@@ -3,7 +3,7 @@ require "pry"
 
 describe "Channel class" do
   it "Creates an instance of the Channel class" do
-    new_channel = Slack::Channel.new("id", "name")
+    new_channel = Slack::Channel.new("id", "name", 3, "topic")
     expect(new_channel).must_be_instance_of Slack::Channel
   end
 end

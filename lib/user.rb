@@ -20,7 +20,7 @@ module Slack
 
     def self.list_all
       users = User.get["members"].map do |user|
-        self.new(user["id"], user["real_name"], user["profile"]["real_name"])
+        self.new(user["name"], user["profile"]["real_name"], user["id"])
       end
       return users
     end
