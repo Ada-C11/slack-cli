@@ -14,7 +14,6 @@ def main
   url = "https://slack.com/api/channels.list"
   user_url = "https://slack.com/api/users.list"
   
-  KEY = ENV["TOKEN"]
     query = {
       token: KEY,
     }
