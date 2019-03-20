@@ -32,9 +32,8 @@ def main
     puts "What would you like to do?"
     input = gets.chomp.downcase
   end
-  # TODO project
 
   puts "Thank you for using the Ada Slack CLI"
 end
 
-main if __FILE__ == $PROGRAM_NAME
+  main if __FILE__ == $PROGRAM_NAME
