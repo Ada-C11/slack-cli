@@ -20,5 +20,15 @@ describe "user" do
         expect(user_list.first[:name]).must_equal "slackbot"
         end
     end
+    # it "will raise an error when given an invalid token" do
+    #     VCR.use_cassette("self.list") do
+    #       exception = expect {
+    #        SlackBot::User.list()
+    #       }.must_raise SlackApi::SlackApiError
+    
+    #       expect(exception.message).must_equal 'channel_not_found'
+    #     end
+    #   end
+
   end
 end

@@ -25,10 +25,6 @@ def list_options
   puts "Enter 'quit' to quit"
 end
 
-def create_table(array)
-  tp array
-end
-
 def main
   puts "Welcome to the Ada Slack CLI!"
   workspace = SlackBot::Workspace.new
@@ -39,11 +35,9 @@ def main
     choice = get_user_input(options)
     case choice
     when "list users"
-      #puts "#{workspace.users}"
-      puts create_table(workspace.users)
+      tp workspace.users
     when "list channels"
-      #puts "#{workspace.channels}"
-      puts create_table(workspace.channels)
+      tp workspace.channels
     when "quit"
       puts "Goodbye!"
       exit
