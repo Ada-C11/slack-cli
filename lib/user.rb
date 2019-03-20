@@ -1,15 +1,13 @@
 require 'httparty'
 require 'pry'
 require_relative 'recipient.rb'
+require_relative 'slack_api_error.rb'
 
-class SlackApiError < StandardError; end
 class User 
 
 # < Recipient
   BASE_URL = "https://slack.com/api/"
-  KEY = ENV["TOKEN"]
-
-  
+  KEY = ENV["TOKEN"]  
   attr_reader :real_name
   
 
