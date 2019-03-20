@@ -18,7 +18,7 @@ class Recipient
   def self.get(endpoint, params = {})
     url = BASE_URL + endpoint
     params[:token] = ENV["SLACK_API_TOKEN"]
-    response = HTTParty.get(url, query: params)
+    HTTParty.get(url, query: params)
   end
 
   def self.list

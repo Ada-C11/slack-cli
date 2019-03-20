@@ -17,7 +17,6 @@ describe "recipient class" do
   describe "can connect to API" do
     it "can connect" do
       VCR.use_cassette("find channels") do
-        endpoint = "channels.list"
         response = Recipient.get("channels.list")
         expect(response["channels"]).wont_be_nil
         expect(response["channels"].map { |channel| channel["name"] }).must_equal ["general", "api-project", "random"]
@@ -38,7 +37,6 @@ describe "recipient class" do
         endpoint = "users.list"
         response = Recipient.get(endpoint)
         expect(response["members"][0]["profile"]["status_text"].length).must_equal 0
-        p response["members"].select { |member| member["real_name"] == "Maria Wissler" }[0]["profile"]["status_text"]
         expect(response["members"].select { |member| member["real_name"] == "Maria Wissler" }[0]["profile"]["status_text"]).must_equal "Working remotely from Kauai"
       end
     end
