@@ -16,4 +16,14 @@ describe "Recipient class" do
       expect(r.id).must_equal "abc"
     end
   end
+
+  # Check details raising NotImplemented Error when being called
+
+  describe "details method" do
+    it "raises an error when being invoked by an instance of Recipient" do
+      expect {
+        r.details 
+      }.must_raise NotImplementedError
+    end
+  end
 end
