@@ -11,7 +11,7 @@ module Slack
   class Recipient
     attr_reader :slack_id, :name
 
-    def initialize(slack_id, name)
+    def initialize(slack_id:, name:)
       @slack_id = slack_id
       @name = name
     end
@@ -25,8 +25,14 @@ module Slack
       return response
     end
 
+    # private
+
     def self.list
-      raise notImplementedError, "implement in child class"
+      raise NotImplementedError, "implement in child class"
+    end
+
+    def details
+      raise NotImplementedError, "implement in child class"
     end
   end
 end
