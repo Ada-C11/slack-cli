@@ -40,6 +40,9 @@ def main
     puts "Please choose one of the following options:
     - list users
     - list channels
+    - select user
+    - select channel
+    - details
     - quit
     Enter your choice now:"
   end
@@ -52,9 +55,20 @@ def main
       puts SlackCli::User.list_users
     when "list channels"
       puts SlackCli::Channel.list_channels
+    when "select user"
+      puts "what user would you like to select?"
+      selected_user = gets.chomp
+      sought_user = SlackCli::Workspace.select_user(selected_user)
+    when "select channel"
+      selected_channel = gets.chomp
+      sought_channel = SlackCli::Workspace.select_channel(selected_channel)
+    when "details"
+      # think about logic
     when "quit"
       puts "Thanks for checking out TatiHana! Bye bye..."
       exit
+    else
+      # add something here
     end
     options
     choice = gets.chomp
