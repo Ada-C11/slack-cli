@@ -9,7 +9,9 @@ module Slack
     end
 
     def self.get_json(url:, query_params:)
-      return {}
+      response = HTTParty.get(url, query: query_params)
+      
+      return response
     end
   end
 end
