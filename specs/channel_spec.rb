@@ -24,9 +24,6 @@ describe "Channel" do
         expect(channel).must_be_instance_of SlackCli::Channel
       end
     end
-
-    it "returns nil for a channel that doesn't exist" do
-    end
   end
 
   describe "details" do

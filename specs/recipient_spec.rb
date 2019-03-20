@@ -9,7 +9,7 @@ describe "Recipient" do
       VCR.use_cassette("message_post") do
         name = "everyone"
         text = "hello world"
-        pigeon = Recipient.send_message(name: name, message: text)
+        pigeon = SlackCli::Recipient.send_message(name: name, message: text)
 
         expect(pigeon["ok"]).must_equal true
       end
@@ -21,7 +21,7 @@ describe "Recipient" do
         text = "this should not send"
 
         expect {
-          Recipient.send_message(name: name, message: text)
+          SlackCli::Recipient.send_message(name: name, message: text)
         }.must_raise SlackError
       end
     end
