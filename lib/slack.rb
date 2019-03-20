@@ -9,16 +9,26 @@ require "ap"
 
 def main
   puts "Welcome to the Ada Slack CLI!"
-  puts "Choose from the following options:\n1. List users\n2. List Channels\n3. Quit"
-  choice = gets.chomp
-  until choice == "3"
-    if choice == "1"
+  puts "Choose from the following options:\n1. List users\n2. List Channels\n3. Select User\n4. Select Channel\n5. Details\n6. Quit"
+  choice = gets.chomp.upcase
+  until choice == "QUIT"
+    if choice == "LIST USERS"
+      puts "\n"
       puts User.list
-    elsif choice == "2"
+    elsif choice == "LIST CHANNELS"
+      puts "\n"
       puts Channel.list
+    elsif choice == "SELECT USER"
+      puts "Please enter a username or Slack ID:"
+      user_input = gets.chomp.upcase
+    elsif choice == "SELECT CHANNEL"
+      puts "Please enter channel name or Slack ID:"
+      channel_input = gets.chomp.upcase
+    elsif choice == "DETAILS"
+      #call detail method
     end
-    puts "\nChoose from the following options:\n1. List users\n2. List Channels\n3. Quit"
-    choice = gets.chomp
+    puts "Choose from the following options:\n1. List users\n2. List Channels\n3. Select User\n4. Select Channel\n5. Details\n6. Quit"
+    choice = gets.chomp.upcase
   end
   puts "Thank you for using the Ada Slack CLI"
 end

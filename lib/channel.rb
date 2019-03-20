@@ -1,7 +1,3 @@
-require "dotenv"
-require "httparty"
-Dotenv.load
-require "pry"
 require "httparty"
 require "dotenv"
 Dotenv.load
