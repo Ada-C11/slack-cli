@@ -15,7 +15,20 @@ describe "Channel Initialize" do
 
   describe "list channels method" do
     it "can list all of the channels" do
-      VCR.use_cassette("")
-    end
+      VCR.use_cassette("list_channels") do
+        expect(Slack::Channel.channel_list).wont_be_nil
+        expect(Slack::Channel.channel_list).must_be_kind_of Array
+        expect(Slack::Channel.channel_list.length).must_equal 2
+      end # VCR
+    end # it
+
+    it "can tell how many members are in channels" do
+      VCR.use_cassette("list_channels") do
+        slack_channels = @new_channel
+        expect(slack_channels.channel_list["channels"]["members"]).must_be_kind_of Array
+
+        # expect(Slack::Channel.channel_list["members"].length).must_equal 2
+      end # VCR
+    end # it
   end
 end # outer describe
