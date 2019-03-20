@@ -15,21 +15,23 @@ class User
     @user_names = []
   end
 
-  # self.get method to assign User object a @real_name
-
-  def self.list
+  def self.get
     query = {
       token: TOKEN,
     }
     user_info = HTTParty.get(BASE_URL, query: query)
     if user_info["ok"] == false
       raise ArgumentError, "The error code is #{user_info.code} and the reason is: #{user_info.message}"
-    else
-      user_list = user_info["members"]
-      @user_names = user_list.map do |user|
-        user["name"]
-      end
-      return @user_names
     end
+    return user_info
+  end
+
+  def self.list
+    user_info = User.get
+    user_list = user_info["members"]
+    @user_names = user_list.map do |user|
+      user["name"]
+    end
+    return @user_names
   end
 end
