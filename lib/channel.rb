@@ -11,6 +11,7 @@ module SlackAPI
 
   BASE_URL = "https://slack.com/api/channels.list"
   TOKEN = ENV['TOKEN']
+  @@channels = []
 
     def initialize(slack_id:, name:, topic:, member_count:)
       # super(slack_id, name)
@@ -25,7 +26,11 @@ module SlackAPI
     end
 
     def self.list
-      channels = []
+      tp @@channels
+      return @@channels
+    end
+
+    def self.load
       query_parameters = {
         token: TOKEN,
       }
@@ -37,9 +42,9 @@ module SlackAPI
         name = channel['name']
         new_channel = Channel.new(topic: topic, member_count: member_count, slack_id: slack_id, name: name)
         puts new_channel
-        channels << new_channel
+        @@channels << new_channel
       end
-      return channels
+      return @@channels
     end
   end
 end
