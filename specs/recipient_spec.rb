@@ -1,5 +1,5 @@
 require 'minitest'
-require_relative 'spec_helper.rb'
+require_relative 'test_helper.rb'
 
 describe "Recipient" do
   before do
