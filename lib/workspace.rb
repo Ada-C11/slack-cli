@@ -17,7 +17,7 @@ module Slack
         if user.name == value
           @selected = user
           return user
-        elsif user.id == value
+        elsif user.slack_id == value
           @selected = user
           return user
         end
@@ -25,9 +25,17 @@ module Slack
       return nil
     end
 
-    def select_channel()
-      # out of list of channels, find the one that matches vlaue
-      # set the one that matches value to @selected
+    def select_channel(value)
+      @channels.each do |channel|
+        if channel.name == value
+          @selected = channel
+          return channel
+        elsif channel.slack_id == value
+          @selected = channel
+          return channel
+        end
+      end
+      return nil
     end
 
     def show_details

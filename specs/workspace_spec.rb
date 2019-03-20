@@ -36,4 +36,72 @@ describe "Workspace class" do
       end
     end
   end
+
+  describe "select user method" do
+    before do
+      VCR.use_cassette("initialize workspace") do
+        query_params = {
+          token: KEY,
+        }
+        @workspace = Slack::Workspace.new
+      end
+    end
+
+    it "will select a user based on user's name" do
+      name = "evelynnkaplan"
+      selected_user = @workspace.select_user(name)
+
+      expect(selected_user).must_be_kind_of Slack::User
+      expect(selected_user.name).must_equal name
+    end
+
+    it "will select a user based on user's id" do
+      id = "UH0J2E2D6"
+      selected_user = @workspace.select_user(id)
+
+      expect(selected_user).must_be_kind_of Slack::User
+      expect(selected_user.slack_id).must_equal id
+    end
+
+    it "returns nil if no user is found" do
+      id = "cat"
+      selected_user = @workspace.select_user(id)
+
+      expect(selected_user).must_be_nil
+    end
+  end
+
+  describe "select channel method" do
+    before do
+      VCR.use_cassette("initialize workspace") do
+        query_params = {
+          token: KEY,
+        }
+        @workspace = Slack::Workspace.new
+      end
+    end
+
+    it "will select a channel based on channel's name" do
+      name = "random"
+      selected_channel = @workspace.select_channel(name)
+
+      expect(selected_channel).must_be_kind_of Slack::Channel
+      expect(selected_channel.name).must_equal name
+    end
+
+    it "will select a channel based on channel's id" do
+      id = "CH4DKF32S"
+      selected_channel = @workspace.select_channel(id)
+
+      expect(selected_channel).must_be_kind_of Slack::Channel
+      expect(selected_channel.slack_id).must_equal id
+    end
+
+    it "returns nil if no channel is found" do
+      id = "dog"
+      selected_channel = @workspace.select_channel(id)
+
+      expect(selected_channel).must_be_nil
+    end
+  end
 end
