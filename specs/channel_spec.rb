@@ -15,6 +15,7 @@ describe "Channel" do
         VCR.use_cassette("channel_list") do
           response = SlackAPI::Channel.list
           expect(response).must_be_kind_of Array
+          expect(response.length).must_equal 3
           expect(response[0]).must_be_kind_of SlackAPI::Channel
           expect(response[0].name).must_equal "everyone"
           expect(response[0].slack_id).must_equal "CH2SBU69Y"

@@ -1,8 +1,8 @@
 require 'dotenv'
 require 'httparty'
 require 'pry'
+require 'table_print'
 Dotenv.load
-
 
 module SlackAPI
   class Channel
