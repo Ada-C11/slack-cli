@@ -9,7 +9,7 @@ class Channel < Recipient
 
   class SlackAPIError < StandardError; end
 
-  def initialize
+  def initialize(slack_id, name, topic, member_count)
     super
     @topic = topic
     @member_count = member_count
@@ -19,23 +19,24 @@ class Channel < Recipient
   end
 
   def self.list
-    query_params = {
-      token: TOKEN,
-    }
-    response = HTTParty.get(BASE_URL, query: query_params)
-    # responses = response["response"]
+    raw_data = self.get("channel")
 
-    # if response.code != 200 || response == nil
-    #   raise SlackAPIError
-    # end
+    unless raw_data.code == 200
+      raise SlackApiError, "Improper request: #{raw_data.message}"
+    end
+    channel_list = []
+    channels = raw_data["channels"]
+    channels.each do |channel|
+      slack_id = channel["id"]
+      name = channel["name"]
+      topic = channel["topic"]["value"]
+      member_count = channel["members"].count
 
-    # responses.each do |pass|
-    #   puts "#{pass["topic"].to_s}"
-    #   puts "#{pass["members"].to_a}"
-    # end
+      new_channel = Channel.new(slack_id, name, topic, member_count)
+      channel_list << new_channel
+    end
+    return channel_list
   end
 end
 
-# puts Channel.list
-
-# , "API call failed with code #{response.code} and reason '#{response["reason"]}"
+puts Channel.list

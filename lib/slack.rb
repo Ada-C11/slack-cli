@@ -28,7 +28,7 @@ require "httparty"
 #       end
 #     end
 
-#     def select_channel
+#     def select_channel.
 #     end
 
 #     def select_user

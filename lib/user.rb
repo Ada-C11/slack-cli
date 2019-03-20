@@ -16,6 +16,7 @@ class User < Recipient
     @status_emoji = status_emoji
   end
 
+  # This list should include the channel's name, topic, member count, and Slack ID.
   def self.list
     puts TOKEN
     query_params = {
@@ -27,6 +28,7 @@ class User < Recipient
     unless response.code == 200
       raise SearchError, "Cannot find #{search_term}"
     end
+
     # response.each do |response|
     #   puts "id: #{response.first["members"][0]}"
     # end
