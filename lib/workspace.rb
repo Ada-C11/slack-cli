@@ -13,16 +13,26 @@ class Workspace
 
   class SlackApiError < StandardError; end
 
-  def select_channel(channel)
+  def select_channel(selected)
     #Channel.list
     #using param, find specific channel
     # returns an instance of channel
+    Channel.list.each do |instance|
+      if selected == instance[0]
+        return instance
+      end
+    end
   end
 
-  def select_user(user)
+  def select_user(selected)
     #User.list
     #using param, find specific user
     # returns an instance of user
+    User.list.each do |instance|
+      if selected == instance[0]
+        return instance
+      end
+    end
   end
 
   # seperate methods for Channel and User

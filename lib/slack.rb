@@ -39,13 +39,19 @@ def main
     when "3"
       chose_user = gets.chomp
       workspace = Workspace.new
-      puts workspace.show_details_user(chose_user)
+      details = workspace.select_user(chose_user)
+      puts details
       puts "What would you like to do next? "
       selection = gets.chomp
     when "4"
       chose_channel = gets.chomp
       workspace = Workspace.new
-      puts workspace.show_details_channel(chose_channel)
+      details = workspace.select_channel(chose_channel)
+      puts details
+      puts "What would you like to do next? "
+      selection = gets.chomp
+    when "details"
+      puts workspace.show_details_channel(details)
       puts "What would you like to do next? "
       selection = gets.chomp
     when "5"
