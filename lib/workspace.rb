@@ -32,14 +32,17 @@ class Workspace
 
   def print_details(recipients)
     if recipients == "users"
+      return_array = []
       users.each do |user|
-        return user.details
+        return_array << user.details
       end
     elsif recipients == "channels"
+      return_array = []
       channels.each do |channel|
-        return channel.details
+        return_array << channel.details
       end
     end
+    return return_array
   end
 
   def send_message
