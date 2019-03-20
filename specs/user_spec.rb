@@ -18,14 +18,16 @@ describe "User" do
       expect(user.status_emoji).must_equal ":)"
     end
 
-    # it "can find a location" do
-    #   VCR.use_cassette("users_found") do
-    #     response = get_location(location)
+    describe "List" do
+      it "can list itself" do
+        VCR.use_cassette("users_found") do
+          Slack::User.list
 
-    #     expect(response["Seattle"]).wont_be_nil
-    #     expect(response["Seattle"][:lon]).must_equal "-122.3300624"
-    #     expect(response["Seattle"][:lat]).must_equal "47.6038321"
-    #   end
-    # end
+          # expect(list.first["Seattle"]).wont_be_nil
+          # expect(response["Seattle"][:lon]).must_equal "-122.3300624"
+          # expect(response["Seattle"][:lat]).must_equal "47.6038321"
+        end
+      end
+    end
   end
 end

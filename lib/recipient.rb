@@ -12,7 +12,15 @@ module Slack
     end
 
     def self.get(url, params)
-      # Implement here.
+      response = HTTParty.get(url, query: params)
+
+      if response.code == 200
+        return response
+      else
+        raise ArgumentError, "Error: #{response.code} #{response.message}" # change this to a better error response
+      end
+
+      return response.parsed_response
     end
 
     def self.list
