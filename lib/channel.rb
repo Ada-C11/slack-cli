@@ -2,6 +2,7 @@ require_relative "recipient"
 require "pry"
 require "dotenv"
 require "httparty"
+require "table_print"
 
 Dotenv.load
 
