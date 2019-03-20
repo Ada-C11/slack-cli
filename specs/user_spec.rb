@@ -6,19 +6,19 @@ describe "User" do
   end
 
   it "is an instance of user" do
-    VCR.use_casette "initialize" do
+    VCR.use_casette("initialize") do
       expect(@user).must_be_kind_of User
     end
   end
 
   it "returns details about a user" do
-    VCR.use_casette "details" do
+    VCR.use_casette("details") do
       expect(@user.details).must_be_kind_of Array
     end
   end
 
   it "returns a list of users" do
-    VCR.use_casette "self.list" do
+    VCR.use_casette("self.list") do
       expect(@user.self.list).must_be_kind_of Array
     end
   end
