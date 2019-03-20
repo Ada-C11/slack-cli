@@ -25,6 +25,10 @@ class User < Recipient
     return user_list
   end
 
-  def self.details
+  def details(user)
+    puts "Username: #{user.name}"
+    puts "ID: #{user.slack_id}"
+    puts "Name: #{user.real_name}"
+    puts "Status: #{user.status_text}"    
   end
 end
