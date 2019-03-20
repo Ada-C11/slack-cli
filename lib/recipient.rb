@@ -1,10 +1,11 @@
 require "httparty"
 require "dotenv"
-require "awesome_print"
 
 Dotenv.load
 
 module Slack
+  class ResponseError < StandardError; end
+
   class Recipient
     attr_reader :slack_id, :name
 
@@ -13,17 +14,12 @@ module Slack
       @name = name
     end
 
-    class ResponseError < StandardError; end
-
     def self.get(url, params)
       user_data = HTTParty.get(url, query: params)
 
       if user_data["ok"] == false
-        raise ResponseError, "There was an error!\nCode: #{user_data.code} Message: #{user_data.message}"
+        raise ResponseError, "There was an error!\nMessage: #{user_data["error"]}"
       end
-      # unless response.code == 200
-      #   raise SearchError, "Cannot find #{search_term}"
-      # end
 
       return user_data
     end
