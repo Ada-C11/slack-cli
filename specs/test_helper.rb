@@ -8,6 +8,7 @@ require "minitest/skip_dsl"
 require "webmock/minitest"
 require "vcr"
 require "dotenv"
+require "HTTParty"
 
 Dotenv.load
 

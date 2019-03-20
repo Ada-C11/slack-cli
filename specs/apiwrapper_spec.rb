@@ -24,8 +24,17 @@ describe "Api Wrapper module" do
   end
 
   describe "ApiWrapper.get_json" do
-    it "will return a hash" do
-      expect(Slack::ApiWrapper.get_json(url:"some_url",query_params:{key: "some_key"})).must_be_instance_of Hash
+    VCR.use_cassette("slack_api") do
+      before do
+        url = "https://slack.com/api/users.list"
+        query = {
+          token: ENV["SLACK_API_KEY"],
+        }
+        @response = Slack::ApiWrapper.get_json(url: url, query_params: query)
+      end
+      it "will return a Repsonse object" do
+        expect(@response).must_be_instance_of HTTParty::Response
+      end
     end
   end
 end
