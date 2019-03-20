@@ -10,8 +10,7 @@ class Recipient
 
   # constants
   MSG_URL = "https://slack.com/api/chat.postMessage"
-  USER_URL = "https://slack.com/api/users.list" # Move to User
-  CHANNEL_URL = "https://slack.com/api/channels.list" #move to Channel
+  TOKEN = ENV["SLACK_TOKEN"]
 
   attr_reader :send_message, :name, :slack_id, :error_helper
 
@@ -22,7 +21,7 @@ class Recipient
 
   def self.send_message(name:, message:)
     query_params = {
-      token: ENV["SLACK_TOKEN"],
+      token: TOKEN,
       channel: name,
       text: message,
     }
