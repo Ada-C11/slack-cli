@@ -6,6 +6,8 @@ Dotenv.load
 
 module Slack
   class Recipient
+    # class ResponseError < StandardError; end
+
     attr_reader :slack_id, :name
 
     def initialize(slack_id, name)
@@ -14,7 +16,16 @@ module Slack
     end
 
     def self.get(url, params)
-      response = HTTParty.get(url, query: params)
+      user_data = HTTParty.get(url, query: params)
+
+      if user_data["ok"] == false
+        raise ArgumentError, "There was an error!\nCode: #{user_data.code} Message: #{user_data.message}"
+      end
+      # unless response.code == 200
+      #   raise SearchError, "Cannot find #{search_term}"
+      # end
+
+      return user_data
     end
 
     def details

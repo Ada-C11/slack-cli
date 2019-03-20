@@ -2,16 +2,35 @@ require "test_helper"
 
 describe "User Class" do
   describe "self.get" do
-    it "returns an array" do
+    it "sucessfully gets a response from Slack API for user list" do
       VCR.use_cassette("user_information_find") do
-        URL = "https://slack.com/api/users.list"
+        url = "https://slack.com/api/users.list"
         query = {token: ENV["KEY"]}
-        expect(Slack::User.get(URL, query)).must_be_kind_of HTTParty::Response
-        # expect(User.list(User.get(URL, query))).must_be_kind_of Array
+        request = Slack::User.get(url, query)
+
+        expect(request["ok"]).must_equal true
       end
     end
 
-    it "returns instances of Users" do
+    it "will raise an exception if the GET request fails" do
+      VCR.use_cassette("user_information_find") do
+        url = "https://slack.com/api/users.list"
+        query = {token: "dkdkdkdkdkdkd"}
+
+        expect {
+          Slack::User.get(url, query)
+        }.must_raise ArgumentError
+      end
     end
+
+    # describe "self.list" do
+    #   it "returns an array" do
+    #     VCR.use_cassette("user_information_find") do
+
+    #       Slack::User.list("https://slack.com/api/users.list", {token: ENV["KEY"]})
+    #     end
+    #   end
+
+    # end
   end
 end
