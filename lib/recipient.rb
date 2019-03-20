@@ -16,5 +16,9 @@ module SlackCLI
     def self.list
       raise NotImplementedError, "Implement me in a child class!"
     end
+
+    def details
+      raise NotImplementedError, "Implement me in a child class!"
+    end
   end
 end
