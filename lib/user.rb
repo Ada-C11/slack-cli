@@ -6,7 +6,7 @@ require "pry"
 
 class User
   attr_reader :topic, :member_count
-  attr_accessor :user_names
+  attr_accessor :user_names, :real_name
   BASE_URL = "https://slack.com/api/users.list"
   TOKEN = ENV["SLACK_API_TOKEN"]
 
@@ -22,7 +22,7 @@ class User
       token: TOKEN,
     }
     user_info = HTTParty.get(BASE_URL, query: query)
-    if user_info.code != 200
+    if user_info["ok"] == false
       raise ArgumentError, "The error code is #{user_info.code} and the reason is: #{user_info.message}"
     else
       user_list = user_info["members"]

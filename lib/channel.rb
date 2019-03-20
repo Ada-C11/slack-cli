@@ -23,7 +23,7 @@ class Channel
       token: TOKEN,
     }
     channel_info = HTTParty.get(BASE_URL, query: query)
-    if channel_info.code != 200
+    if channel_info["ok"] == false
       raise ArgumentError, "The error code is #{channel_info.code} and the reason is: #{channel_info.message}"
     else
       channel_list = channel_info["channels"]
