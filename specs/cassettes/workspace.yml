@@ -25,13 +25,13 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Wed, 20 Mar 2019 16:29:03 GMT
+      - Wed, 20 Mar 2019 20:38:13 GMT
       Server:
       - Apache
       X-Content-Type-Options:
       - nosniff
       X-Slack-Req-Id:
-      - 3a40e75c-ff70-4bd5-beee-89f96db3f04a
+      - df63ca1d-1097-499d-be79-e01d54e8e400
       X-Oauth-Scopes:
       - identify,channels:read,users:read,chat:write:bot
       Expires:
@@ -57,13 +57,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       X-Via:
-      - haproxy-www-sfxy
+      - haproxy-www-524t
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 5971d213ff39e16c310a05523f08e121.cloudfront.net (CloudFront)
+      - 1.1 feeead777aa6b11f4775062f1953fdc4.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - KxMAzswAVs8JTGw_NOCzpJOw8nmrSZs7Bgo3dPys1qGlEmP0g-o55A==
+      - vMdNBZLcTzm4lljZJqWNQHY_LaMQMcb1EJGVtQS1E6knOL2PaFzoyQ==
     body:
       encoding: ASCII-8BIT
       string: '{"ok":true,"members":[{"id":"USLACKBOT","team_id":"TH2P32R19","name":"slackbot","deleted":false,"color":"757575","real_name":"Slackbot","tz":null,"tz_label":"Pacific
@@ -72,9 +72,9 @@ http_interactions:
         Chiv","real_name_normalized":"Sopheary Chiv","display_name":"Sopheary Chiv","display_name_normalized":"Sopheary
         Chiv","status_text":"","status_emoji":"","status_expiration":0,"avatar_hash":"g3fc544bd693","image_24":"https:\/\/secure.gravatar.com\/avatar\/3fc544bd693b9af7dcfb713f1cb65dc1.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0022-24.png","image_32":"https:\/\/secure.gravatar.com\/avatar\/3fc544bd693b9af7dcfb713f1cb65dc1.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0022-32.png","image_48":"https:\/\/secure.gravatar.com\/avatar\/3fc544bd693b9af7dcfb713f1cb65dc1.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0022-48.png","image_72":"https:\/\/secure.gravatar.com\/avatar\/3fc544bd693b9af7dcfb713f1cb65dc1.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0022-72.png","image_192":"https:\/\/secure.gravatar.com\/avatar\/3fc544bd693b9af7dcfb713f1cb65dc1.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0022-192.png","image_512":"https:\/\/secure.gravatar.com\/avatar\/3fc544bd693b9af7dcfb713f1cb65dc1.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0022-512.png","status_text_canonical":"","team":"TH2P32R19"},"is_admin":false,"is_owner":false,"is_primary_owner":false,"is_restricted":false,"is_ultra_restricted":false,"is_bot":false,"is_app_user":false,"updated":1552952644,"has_2fa":false},{"id":"UH2RGJ36Y","team_id":"TH2P32R19","name":"jessica.homet","deleted":false,"color":"9f69e7","real_name":"Jessica
         Homet","tz":"America\/Los_Angeles","tz_label":"Pacific Daylight Time","tz_offset":-25200,"profile":{"title":"","phone":"","skype":"","real_name":"Jessica
-        Homet","real_name_normalized":"Jessica Homet","display_name":"","display_name_normalized":"","status_text":"","status_emoji":"","status_expiration":0,"avatar_hash":"gf6a25943381","first_name":"Jessica","last_name":"Homet","image_24":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-24.png","image_32":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-32.png","image_48":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-48.png","image_72":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-72.png","image_192":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-192.png","image_512":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-512.png","status_text_canonical":"","team":"TH2P32R19"},"is_admin":true,"is_owner":true,"is_primary_owner":true,"is_restricted":false,"is_ultra_restricted":false,"is_bot":false,"is_app_user":false,"updated":1552952990,"has_2fa":false}],"cache_ts":1553099343,"response_metadata":{"next_cursor":""}}'
+        Homet","real_name_normalized":"Jessica Homet","display_name":"","display_name_normalized":"","status_text":"","status_emoji":"","status_expiration":0,"avatar_hash":"gf6a25943381","first_name":"Jessica","last_name":"Homet","image_24":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-24.png","image_32":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-32.png","image_48":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-48.png","image_72":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-72.png","image_192":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-192.png","image_512":"https:\/\/secure.gravatar.com\/avatar\/f6a259433810cefa3237505b0b21fb51.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2F00b63%2Fimg%2Favatars%2Fava_0014-512.png","status_text_canonical":"","team":"TH2P32R19"},"is_admin":true,"is_owner":true,"is_primary_owner":true,"is_restricted":false,"is_ultra_restricted":false,"is_bot":false,"is_app_user":false,"updated":1552952990,"has_2fa":false}],"cache_ts":1553114293,"response_metadata":{"next_cursor":""}}'
     http_version: 
-  recorded_at: Wed, 20 Mar 2019 16:29:03 GMT
+  recorded_at: Wed, 20 Mar 2019 20:38:13 GMT
 - request:
     method: get
     uri: https://slack.com/api/channels.list?token=<SLACK_API_TOKEN>
@@ -100,13 +100,13 @@ http_interactions:
       Connection:
       - keep-alive
       Date:
-      - Wed, 20 Mar 2019 16:29:03 GMT
+      - Wed, 20 Mar 2019 20:38:14 GMT
       Server:
       - Apache
       X-Content-Type-Options:
       - nosniff
       X-Slack-Req-Id:
-      - 4cad8c8f-b26e-4a6e-8eb7-1eba6f8c2bc9
+      - fc83d2de-cc61-4e93-8318-a42adbd122a3
       X-Oauth-Scopes:
       - identify,channels:read,users:read,chat:write:bot
       Expires:
@@ -132,13 +132,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       X-Via:
-      - haproxy-www-o038
+      - haproxy-www-imty
       X-Cache:
       - Miss from cloudfront
       Via:
-      - 1.1 53332bd6d55cfd374862eac4265e274a.cloudfront.net (CloudFront)
+      - 1.1 4f81f573d1d8e804c79450e430cd47be.cloudfront.net (CloudFront)
       X-Amz-Cf-Id:
-      - ITn0lSyCHHFm3hY2RAMs3J2-2XGWPTajS1JYJDZeEws8L199sa5s3g==
+      - AyY7VVidP4X7OCxVg6qdYaeygM_SOb-ipTZl2k9sE5XTsWAu6boqSQ==
     body:
       encoding: ASCII-8BIT
       string: '{"ok":true,"channels":[{"id":"CH0EFGJHE","name":"everyone","is_channel":true,"created":1552952596,"is_archived":false,"is_general":true,"unlinked":0,"creator":"UH2RGJ36Y","name_normalized":"everyone","is_shared":false,"is_org_shared":false,"is_member":true,"is_private":false,"is_mpim":false,"members":["UH0EG0QHE","UH2RGJ36Y"],"topic":{"value":"Company-wide
@@ -149,5 +149,5 @@ http_interactions:
         place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber
         you''d prefer to keep out of more focused work-related channels.","creator":"UH2RGJ36Y","last_set":1552952596},"previous_names":[],"num_members":2}],"response_metadata":{"next_cursor":""}}'
     http_version: 
-  recorded_at: Wed, 20 Mar 2019 16:29:04 GMT
+  recorded_at: Wed, 20 Mar 2019 20:38:14 GMT
 recorded_with: VCR 4.0.0

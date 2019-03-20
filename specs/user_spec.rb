@@ -21,11 +21,16 @@ describe "User" do
     describe "List" do
       it "can list itself" do
         VCR.use_cassette("users_found") do
-          Slack::User.list
+          response = Slack::User.list
 
-          # expect(list.first["Seattle"]).wont_be_nil
-          # expect(response["Seattle"][:lon]).must_equal "-122.3300624"
-          # expect(response["Seattle"][:lat]).must_equal "47.6038321"
+          expect(response[0].name).must_equal "slackbot"
+        end
+      end
+      it "does something else" do
+        VCR.use_cassette("users_found") do
+          response = Slack::User.list
+
+          expect(response[1].name).must_equal "sopheary.chiv"
         end
       end
     end

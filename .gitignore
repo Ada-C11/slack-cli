@@ -9,6 +9,7 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+/.DS_Store/
 
 # Used by dotenv library to load environment variables.
 # .env
@@ -53,4 +54,4 @@ build-iPhoneSimulator/
 .env
 
 # Ignore cassette files
-/specs/cassettes/
+# /specs/cassettes/
