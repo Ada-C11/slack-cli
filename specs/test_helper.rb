@@ -1,3 +1,9 @@
+
+require "simplecov"
+SimpleCov.start do
+  add_filter %r{^/specs?/}
+  add_filter "slack.rb"
+end
 require "minitest/autorun"
 require "minitest/reporters"
 require "vcr"
