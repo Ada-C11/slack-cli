@@ -30,5 +30,15 @@ describe "Channel class" do
         expect(response).must_equal true
       end
     end
+
+    it "will raise an error when given an invalid channel" do
+      VCR.use_cassette("slack-posts") do
+        exception = expect {
+          Slack::Channel.send_message("This post should not work", "invalid-channel")
+        }.must_raise Slack::SlackApiError
+  
+        expect(exception.message).must_equal 'channel_not_found'
+      end
+    end
   end
 end

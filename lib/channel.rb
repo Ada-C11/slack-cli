@@ -7,6 +7,8 @@ require "table_print"
 Dotenv.load
 
 module Slack
+  class SlackApiError < StandardError ;end
+  
   class Channel < Recipient
     attr_reader :topic, :member_count
 
@@ -29,7 +31,10 @@ module Slack
                                body: body,
                                headers: { "Content-Type" => "application/x-www-form-urlencoded" })
 
-      return true if response.code == 200 && response["ok"]
+      unless response.code == 200 && response["ok"]
+        raise SlackApiError, "channel_not_found"
+      end
+      return true                 
     end
 
     def details
