@@ -1,19 +1,27 @@
 require_relative "recipient"
 
 class Channel < Recipient
-  attr_reader
+  attr_reader :slack_id, :name, :topic, :member_count
   LIST_URL = "https://slack.com/api/channels.list"
 
-  def initialize
-    @topic
+  def initialize(slack_id:, name:, topic:, member_count:)
+    @slack_id = slack_id
+    @name = name
+    @topic = topic
     @member_count
   end
 
   def self.list
-    channels_json = Channel.get
+    response = Channel.get
 
-    list_of_channels = channels_json["channels"].select { |channel| channel["name"] }
-    return list_of_channels
+    channels = response["channels"].map do|channel| 
+      slack_id = channel["id"]
+      name = channel["name"]
+      topic = channel["topic"]
+      member_count = channel["num_member"]
+      self.new(slack_id: slack_id, name: name, topic: topic, member_count: )
+    end
+      return list_of_channels
   end
 
   def details(name)
@@ -25,5 +33,3 @@ class Channel < Recipient
   end
 end
 
-test = Channel.get
-binding.pry
