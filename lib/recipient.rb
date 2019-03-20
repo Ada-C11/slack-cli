@@ -14,7 +14,7 @@ class Recipient
   def send_message(message)
   end
 
-  def self.get(url, params)
+  def self.get
   end
 
   # def details - request details "package" from user or channel

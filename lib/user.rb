@@ -34,7 +34,7 @@ class User < Recipient
   end
 end
 
-#puts User.list
+# puts User.list
 #binding.pry
 #puts User.list
 # puts User.list["members"][0]["id"]

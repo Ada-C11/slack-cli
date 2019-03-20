@@ -15,8 +15,8 @@ class Channel < Recipient
     @member_count = member_count
   end
 
-  #   def details
-  #   end
+  def details
+  end
 
   def self.list
     query_params = {
@@ -36,6 +36,6 @@ class Channel < Recipient
   end
 end
 
-puts Channel.list
+# puts Channel.list
 
 # , "API call failed with code #{response.code} and reason '#{response["reason"]}"
