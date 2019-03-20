@@ -95,4 +95,28 @@ describe "SlackCLI::Workspace" do
       expect(@workspace.selected).must_be_nil
     end
   end
+
+  describe "show details" do
+    it "displays details for user" do
+      username = @workspace.users.first.name
+      @workspace.select_user(username)
+      user_detail = @workspace.show_details
+      expect(user_detail).must_be_kind_of String
+      expect(@workspace.users.first.details).must_equal user_detail
+    end
+
+    it "displays details for channel" do
+      channel_name = @workspace.channel.first.name
+      @workspace.select_channel(channel_name)
+      channel_detail = @workspace.show_details
+      expect(channel_detail).must_be_kind_of String
+      expect(@workspace.channels.first.details).must_equal channel_detail
+    end
+
+    it "returns nil if selected is nil" do
+      if @workspace.selected == nil
+        expect(@workspace.details).must_be_nil
+      end
+    end
+  end
 end
