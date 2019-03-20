@@ -23,9 +23,9 @@ describe "list_all method" do
     VCR.use_cassette("channel_find") do
       list_response = Slack::Channel.list_all
 
+      puts list_response
+
       expect(list_response.length).must_equal 3
-      expect(list_response).must_include "general"
-      expect(list_response).wont_include "test_channel"
     end
   end
 end
