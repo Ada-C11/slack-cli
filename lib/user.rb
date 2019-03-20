@@ -1,6 +1,7 @@
 require "httparty"
 require "dotenv"
 require "pry"
+require "table_print"
 
 Dotenv.load
 
@@ -13,13 +14,6 @@ module SlackCLI
       @username = username
       @real_name = real_name
       @slack_id = slack_id
-    end
-
-    def display_details
-      info_string = "\nSlack ID : #{slack_id}" +
-                    "\nUsername : #{username}" +
-                    "\nReal name : #{real_name}"
-      return info_string
     end
 
     def self.get_from_api

@@ -15,14 +15,6 @@ module SlackCLI
       @members = members
     end
 
-    def display_details
-      info_string = "\nSlack ID : #{id}" +
-                    "\nChannel name : #{channel_name}" +
-                    "\nTopic : #{topic}" +
-                    "\nMember count: #{members}"
-      return info_string
-    end
-
     def self.get_from_api
       query_parameters = {
         token: ENV["OAUTH_ACCESS_TOKEN"],

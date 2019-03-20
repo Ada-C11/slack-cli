@@ -21,9 +21,9 @@ def main
   until (input == "quit")
     case input
     when "list users"
-      puts workspace.display_users
+      workspace.display_users
     when "list channels"
-      puts workspace.display_channels
+      workspace.display_channels
     when "quit"
       break
     else

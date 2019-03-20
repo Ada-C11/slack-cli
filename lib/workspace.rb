@@ -15,11 +15,11 @@ module SlackCLI
     end
 
     def display_users
-      return users.map { |user| user.display_details }
+      return  tp users, :username, :real_name, :slack_id 
     end
 
     def display_channels
-      return channels.map { |channel| channel.display_details }
+      return tp channels, :id, :channel_name, :members, :topic => {:width => 120}
     end
   end
 end
