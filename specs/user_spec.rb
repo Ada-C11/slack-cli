@@ -28,18 +28,6 @@ describe "User class" do
     expect(new_user.slack_id).must_equal user_data[:slack_id]
   end
 
-  it "can display information about itself as a string" do
-    
-    new_user = SlackCLI::User.new(user_data[:username],
-                                  user_data[:real_name],
-                                  user_data[:slack_id])
-    pretty_printed_string = "\nSlack ID : #{user_data[:slack_id]}" +
-                            "\nUsername : #{user_data[:username]}" +
-                            "\nReal name : #{user_data[:real_name]}"
-
-    expect(new_user.display_details).must_equal pretty_printed_string
-  end
-
   it "loads array of users from Slack's API" do
     VCR.use_cassette("list users") do
       users = SlackCLI::User.get_from_api
