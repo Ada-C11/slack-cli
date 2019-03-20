@@ -40,7 +40,7 @@ class Slack
 end
 
 def main
-  puts "Welcome to the Ada Slack CLI!"
+  puts "Welcome to the Kasey-Elle Slack CLI!"
 
   slack = Slack.new
 
@@ -66,7 +66,7 @@ def main
   end
   # TODO project
 
-  puts "Thank you for using the Ada Slack CLI"
+  puts "Thank you for using the Kasey-Elle Slack CLI"
 end
 
 main if __FILE__ == $PROGRAM_NAME
