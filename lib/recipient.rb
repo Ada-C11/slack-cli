@@ -1,26 +1,25 @@
 module SlackAPI
+  class Recipient
 
-    class Recipient
-
-        attr_reader :slack_id, :name
-        
-        def initialize(slack_id:, name:)
-            @slack_id = slack_id
-            @name = name
-        end
-
-        def send_message(message)
-        end
-
-        def self.get(url, params)
-        end
-        
-        def details
-        end
-
-        def self.list
-        end
-
+    attr_reader :slack_id, :name
+    
+    def initialize(slack_id:, name:)
+        @slack_id = slack_id
+        @name = name
     end
+
+    def send_message(message)
+    end
+
+    def self.get(url, params)
+    end
+    
+    def details
+    end
+
+    def self.list
+    end
+
+  end
 
 end
