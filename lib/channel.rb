@@ -30,6 +30,7 @@ module SlackAPI
       return @@channels
     end
 
+    private
     def self.load
       query_parameters = {
         token: TOKEN,
