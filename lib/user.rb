@@ -1,15 +1,23 @@
 
 require "httparty"
+<<<<<<< HEAD
 require "pry"
 require_relative "recipient"
 require "dotenv"
 Dotenv.load
+=======
+require_relative "recipient"
+>>>>>>> refs/remotes/origin/master
 
 class User < Recipient
   BASE_URL = "https://slack.com/api/users.list"
   TOKEN = ENV["SLACK_TOKEN"]
 
+<<<<<<< HEAD
   def initialize
+=======
+  def initialize(slack_id, name)
+>>>>>>> refs/remotes/origin/master
     super
     @real_name = real_name
     @status_text = status_text

@@ -1,3 +1,6 @@
+require "httparty"
+require "dotenv"
+Dotenv.load
 
 class Recipient
   BASE_URL = "https://slack.com/api/chat.postMessage"
