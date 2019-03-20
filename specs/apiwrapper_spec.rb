@@ -25,7 +25,7 @@ describe "Api Wrapper module" do
 
   describe "ApiWrapper.get_json" do
     it "will return a hash" do
-      expect(Slack::ApiWrapper.get_json).must_be_instance_of Hash
+      expect(Slack::ApiWrapper.get_json(url:"some_url",query_params:{key: "some_key"})).must_be_instance_of Hash
     end
   end
 end

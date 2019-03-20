@@ -7,5 +7,9 @@ module Slack
       users = []
       return users
     end
+
+    def self.get_json(url:, query_params:)
+      return {}
+    end
   end
 end
