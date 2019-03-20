@@ -5,7 +5,7 @@ module Slack
     URL = "https://slack.com/api/channels.list"
     PARAM = {token: ENV["KEY"]}
 
-    attr_reader 
+    attr_reader :topic, :member_count
 
     def initialize(slack_id, name, topic, member_count)
       super(slack_id, name)

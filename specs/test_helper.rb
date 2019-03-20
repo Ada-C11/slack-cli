@@ -15,6 +15,7 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 require_relative "../lib/recipient"
 require_relative "../lib/user"
 require_relative "../lib/slack"
+require_relative "../lib/channels"
 
 VCR.configure do |config|
   config.cassette_library_dir = "specs/cassettes" # folder where casettes will be located
