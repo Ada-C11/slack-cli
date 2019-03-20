@@ -15,6 +15,9 @@ module SlackCLI
       @selected = find_user(user_info)
     end
 
+    def select_channel(channel_info)
+      @selected = find_channel(channel_info)
+    end
     private
 
     def find_user(user_info)
@@ -25,5 +28,15 @@ module SlackCLI
       end
       return nil
     end
+
+    def find_channel(channel_info)
+      @channels.each do |channel|
+        if channel_info == channel.slack_id || channel_info == channel.name
+          return channel
+        end
+      end
+      return nil
+    end
+
   end
 end

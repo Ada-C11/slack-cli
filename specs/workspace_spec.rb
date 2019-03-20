@@ -76,7 +76,7 @@ describe "SlackCLI::Workspace" do
       expect(@workspace.selected).must_equal @workspace.channels.first
       @workspace.select_channel(slack_id2)
       if slack_id1 != slack_id2
-        expect(@workspace.selected).must_equal @workspace.channel.last
+        expect(@workspace.selected).must_equal @workspace.channels.last
       end
     end
 
@@ -86,7 +86,7 @@ describe "SlackCLI::Workspace" do
       @workspace.select_user(user_slack_id)
       expect(@workspace.selected).must_equal @workspace.users.first
       @workspace.select_channel(channel_slack_id)
-      expect(@workspace.selected).must_equal @workspace.channel.first
+      expect(@workspace.selected).must_equal @workspace.channels.first
     end
 
     it "should return nil, given invalid channel" do
