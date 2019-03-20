@@ -10,20 +10,24 @@ class Channel < Recipient
   end
 
   def self.list
-    # calls the self.get method from parent
-    # retrieves the channel payload
-    # iteratest through the channel payload
-    # and displays list of channel names to the CLI
-    # as an array
     query_params = {
       token: TOKEN,
     }
-    response = Channel.get(query: query_params)
-    return response
+    
+    channels_json = Channel.get(query: query_params)
+
+   list_of_channels = channels_json["channels"].select { |channel| channel["name"] }
+    return list_of_channels
   end
 
-  def details
+  def details(name)
+    list.each do |channel|
+      if channel["name"] == name
+        puts channel["purpose"]["value"]
+      end
+    end
   end
 end
 
-# test = Channel.list
+test = HTTParty.get("https://slack.com/api/channels.list?token=xoxp-581967218119-580781269267-579777948256-23a22653dd928edbcbe9830d05729d53")
+binding.pry
