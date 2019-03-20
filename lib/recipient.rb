@@ -7,10 +7,8 @@ module Slack
       @name = name
     end
 
-    # def self.get
-    #   puts "Every subclass of Recipient will get here when you call the get method"
+    # def self.get(url, params)
     #   HTTParty.GET(url, query: params)
-    #   return "Dee is writing something specific >:)"
     # end
 
     # def self.list_all

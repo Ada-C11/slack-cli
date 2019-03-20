@@ -10,7 +10,7 @@ end
 
 describe "Get method" do
   it "Successfully GETs response from Slack API" do
-    VCR.use_cassette("location_find") do
+    VCR.use_cassette("channel_find") do
       response = Slack::Channel.get
 
       expect(response["ok"]).must_equal true
