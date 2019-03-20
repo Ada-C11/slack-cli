@@ -6,7 +6,7 @@ class User < Recipient
   LIST_URL = "https://slack.com/api/users.list"
   TOKEN = ENV["SLACK_TOKEN"]
 
-  attr_reader :real_name
+  attr_reader :real_name, :list_users
 
   def initialize
     @real_name = real_name
@@ -15,18 +15,15 @@ class User < Recipient
   end
 
   def self.list
-    # calls self.get from parent
-    # receives user payload
-    # iterate through payload to store in array
-    # return array
     response = User.get
+    return response
+  end
 
-    user_list = response["members"].map do |user|
+  def self.list_users
+    user_list = list["members"].map do |user|
       user["name"]
     end
-
-    binding.pry
+    return user_list
   end
 end
 
-puts User.list
