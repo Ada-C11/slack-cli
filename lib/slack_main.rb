@@ -16,17 +16,12 @@ USER_URL = "https://slack.com/api/users.list"
 
 def main
   puts "Welcome to the Ada Slack CLI!"
-  # load an instance of workspace
 
-  query_params = { token: ENV["SLACK_API_TOKEN"] }
+  channels = Slack::Channel.list
 
-  response1 = Slack::User.get(USER_URL, query_params)
-  users = response1["members"]
+  puts "Here's how many channels were loaded: #{channels.length}"
 
-  response2 = Slack::Channel.get(CHANNEL_URL, query_params)
-  channels = response2["channels"]
-
-  workspace = Slack::Workspace.new(users: users, channels: channels, selected: false)
+  puts "WHAT DO YOU WANNA DO, FOOL???"
 
   # Information about how many channels
   #puts workspace.channels
@@ -41,16 +36,29 @@ def main
   puts "Thank you for using the Ada Slack CLI"
 end
 
+main
 # main if __FILE__ == $PROGRAM_NAME
 
 # USER_URL = "https://slack.com/api/users.list"
 # CHANNEL_URL = "https://slack.com/api/channels.list"
 
-def get_recipient(type)
-  query_params = { token: ENV["SLACK_API_TOKEN"] }
-  if type == "user"
-    return HTTParty.get(USER_URL, query: query_params)
-  elsif type == "channels"
-    return HTTParty.get(CHANNEL_URL, query: query_params)
-  end
-end
+# THAT ONE TIME WHEN WE THOUGHT WE NEEDED BOTH RECIPIENTS AT THE SAME TIME (OR SOMETHING)
+# def get_recipient(type)
+#   query_params = { token: ENV["SLACK_API_TOKEN"] }
+#   if type == "user"
+#     return HTTParty.get(USER_URL, query: query_params)
+#   elsif type == "channels"
+#     return HTTParty.get(CHANNEL_URL, query: query_params)
+#   end
+# end
+
+# THAT ONE TIME WE MADE A WORKSPACE
+# query_params = { token: ENV["SLACK_API_TOKEN"] }
+
+# response1 = Slack::User.get(USER_URL, query_params)
+# users = response1["members"]
+
+# response2 = Slack::Channel.get(CHANNEL_URL, query_params)
+# channels = response2["channels"]
+
+# workspace = Slack::Workspace.new(users: users, channels: channels, selected: false)
