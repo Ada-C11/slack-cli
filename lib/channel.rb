@@ -1,6 +1,7 @@
 # require "dotenv"
 # require "httparty"
 # require "awesome_print"
+require "pry"
 
 require_relative "recipient"
 
@@ -14,7 +15,6 @@ module Slack
       @member_count = member_count
     end
 
-    #temp
     def self.list
       list = []
 
@@ -28,6 +28,8 @@ module Slack
 
         list << Slack::Channel.new(slack_id, name, topic, member_count)
       end
+
+      return list
     end
   end
 end

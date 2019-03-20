@@ -1,3 +1,5 @@
+
+
 module Slack
   class SlackError < StandardError; end
 
@@ -31,6 +33,10 @@ module Slack
     end
 
     def self.list
+      raise NotImplementedError, "Implement me in a child class!"
+    end
+
+    def self.print_list
       raise NotImplementedError, "Implement me in a child class!"
     end
 

@@ -11,7 +11,6 @@ module Slack
       @status_emoji = status_emoji
     end
 
-    #temp
     def self.list
       list = []
 
