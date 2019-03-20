@@ -42,3 +42,4 @@ end
 # response = HTTParty.post(self::MSG_URL, query: query_params)
 #end
 
+binding.pry
