@@ -26,7 +26,7 @@ module SlackAPI
     end
 
     def self.list
-      tp @@channels
+      self.load
       return @@channels
     end
 

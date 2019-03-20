@@ -8,7 +8,9 @@ describe "Channel" do
 
   describe "self.list" do
     it "can list details of all the channels" do
-      expect(SlackAPI::Channel.list).must_be_kind_of Array
+      VCR.use_cassette("channel_list") do
+        expect(SlackAPI::Channel.list).must_be_kind_of Array
+      end
     end
   end
 
