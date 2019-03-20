@@ -14,7 +14,7 @@ class Recipient
 
   CHANNEL_URL = "https://slack.com/api/channels.list"
   USER_URL = "https://slack.com/api/users.list"
-
+  POST_URL = "https://slack.com/api/chat.postMessage"
   def self.get(type)
     params = {
       "token" => ENV["SLACK_API_TOKEN"],
@@ -28,8 +28,20 @@ class Recipient
     response = HTTParty.get(url, query: params)
   end
 
-  def send_message(message)
-    response = HTTParty.post(url, message?)
+  def send_msg(message,recipient)
+    params = {
+      "token" => ENV["SLACK_API_TOKEN"],
+      "channel" => recipient,
+      "text" => message,
+      "as_user" => true
+    }
+
+    response = HTTParty.post(
+      POST_URL,
+      body: params,
+      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
+    )
+    return response
   end
 
   private

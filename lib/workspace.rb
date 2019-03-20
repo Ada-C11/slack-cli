@@ -45,6 +45,8 @@ class Workspace
     return return_array
   end
 
-  def send_message
+  def send_message(text)
+    selected.send_msg(text, selected.slack_id)
   end
 end
+binding.pry

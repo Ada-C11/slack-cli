@@ -16,9 +16,9 @@ describe "Workspace class" do
     it "returns text from print_details" do
       VCR.use_cassette("slack_workspace") do
         workspace = Workspace.new
-        expect(workspace.print_details("users")).must_be_kind_of String
+        expect(workspace.print_details("users")).must_be_kind_of Array
 
-        expect(workspace.print_details("channels")).must_be_kind_of String
+        expect(workspace.print_details("channels")).must_be_kind_of Array
       end
     end
 
@@ -57,6 +57,17 @@ describe "Workspace class" do
         expect(workspace.show_details).must_be_kind_of String
         workspace.select_user("USLACKBOT")
         expect(workspace.show_details).must_be_kind_of String
+      end
+    end
+  end
+
+  describe "post message to slack" do 
+    it "creates sends a message to a recipient" do
+      VCR.use_cassette("slack-posts") do
+        workspace = Workspace.new
+        workspace.select_channel("random")
+        response = workspace.send_message("This post should work")
+        expect(response["ok"]).must_equal true
       end
     end
   end
