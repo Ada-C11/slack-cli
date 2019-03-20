@@ -9,7 +9,7 @@ module Slack
     end
 
     def details
-      return ""
+      return "Name: #{name}, \nID: #{id}, \nTopic: #{topic}, \nMember Count: #{member_count}"
     end
   end
 end
