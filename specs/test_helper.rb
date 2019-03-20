@@ -7,6 +7,8 @@ require "minitest/reporters"
 require "minitest/skip_dsl"
 require "webmock/minitest"
 require "vcr"
+require "dotenv"
+Dotenv.load
 
 require_relative "../lib/recipient.rb"
 
