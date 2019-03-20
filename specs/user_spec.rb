@@ -1,3 +1,45 @@
+require_relative "test_helper"
+
+describe SlackApi do
+  describe "list users" do
+    it "returns valid users" do
+      VCR.use_cassette("slack_users_list") do
+        users_list = SlackApi::User.user_api
+
+        users_list.each do |user|
+          expect(user["team_id"]).wont_be_nil
+        end
+      end
+    end
+
+    it "includes a specific user" do
+      VCR.use_cassette("slack_user_list") do
+        users_list = SlackApi::User.user_api
+
+        expect(users_list.first["name"]).must_equal "slackbot"
+      end
+    end
+
+    it "users list will only include existent users" do
+      VCR.use_cassette("slack_users_list") do
+        users_list = SlackApi::User.user_api
+
+        users_list.each do |user|
+          name = "Not a User"
+          expect(user["name"]).wont_equal name
+        end
+      end
+    end
+    # it "returns info with a valid token" do
+    #   VCR.use_cassette("slack_channels_list") do
+    #     channels_list = SlackApi::Channel.channel_api
+
+    #     expect(channels_list["ok"]).must_equal true
+    #   end
+    # end
+  end
+end
+
 # users:
 
 #tests -->
