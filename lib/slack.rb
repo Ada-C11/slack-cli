@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 require 'dotenv'
 require 'httparty'
-require_relative '../specs/test_helper.rb'
+require_relative 'user'
+require_relative 'channel'
 Dotenv.load
 
 # BASE_URL = 'https://slack.com/api'
@@ -29,8 +30,10 @@ def main
 
     case input
     when "list users"
+      SlackAPI::User.load
       tp SlackAPI::User.list
     when "list channels"
+      SlackAPI::Channel.load
       tp SlackAPI::Channel.list
     end
 

@@ -29,7 +29,6 @@ module SlackAPI
             return @@list
         end
 
-    private 
         def self.load
             query_parameters = {token: TOKEN}
             response = HTTParty.get(BASE_URL, query: query_parameters)
