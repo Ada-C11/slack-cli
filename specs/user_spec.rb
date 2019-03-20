@@ -49,7 +49,7 @@ describe SlackCLI::User do
       end
 
       it "returns the correct information" do
-        expect(@detail).must_equal "Slack ID: #{@slack_id}, username: #{@name}, real name: #{@real_name}"
+        expect(@detail).must_equal "Slack ID: #{@slack_id}, Username: #{@name}, Real Name: #{@real_name}"
       end
     end
   end

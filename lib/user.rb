@@ -30,7 +30,7 @@ module SlackCLI
     end
 
     def details
-      return "Slack ID: #{slack_id}, username: #{name}, real name: #{real_name}"
+      return "Slack ID: #{slack_id}, Username: #{name}, Real Name: #{real_name}"
     end
   end
 end

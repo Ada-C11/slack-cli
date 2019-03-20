@@ -33,4 +33,22 @@ describe SlackCLI::Channel do
       end
     end
   end
+
+  describe "details" do
+    before do
+      @slack_id = "CH2SKTDBN"
+      @name = "Catssss"
+      @topic = "It's about cats, duh"
+      @member_count = "2,000,000"
+      @record = SlackCLI::Channel.new(slack_id: @slack_id, name: @name, topic: @topic, member_count: @member_count)
+    end
+
+    it "returns a string" do
+      expect(@detail).must_be_kind_of String
+    end
+
+    it "returns the correct information" do
+      expect(@detail).must_equal "Slack ID: #{@slack_id}, Name: #{@name}, Topic: #{@topic}, Member count: #{@member_count}"
+    end
+  end
 end
