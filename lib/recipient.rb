@@ -13,7 +13,7 @@ class Recipient
   LIST_URL = nil
   TOKEN = ENV["SLACK_TOKEN"]
 
-  attr_reader :send_message, :name, :slack_id, :error_helper
+  attr_reader :send_message, :name, :slack_id, :error_helper, :details, :list
 
   def initialize
     @slack_id = slack_id
@@ -48,6 +48,7 @@ class Recipient
     end
   end
 
+  #private
   def details
     raise NotImplementedError
   end
