@@ -7,6 +7,14 @@ require "minitest/reporters"
 require "minitest/skip_dsl"
 require "vcr"
 require "webmock/minitest"
+require "httparty"
+require "dotenv"
+Dotenv.load
+
+require_relative "../lib/slack.rb"
+require_relative "../lib/channel.rb"
+require_relative "../lib/user.rb"
+require_relative "../lib/workspace.rb"
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 

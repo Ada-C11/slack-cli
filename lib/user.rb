@@ -15,6 +15,8 @@ class User
     @user_names = []
   end
 
+  # self.get method to assign User object a @real_name
+
   def self.list
     query = {
       token: TOKEN,
