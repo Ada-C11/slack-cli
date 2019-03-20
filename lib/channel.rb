@@ -20,7 +20,7 @@ module Slack
       @member_count = member_count
     end # initialize
 
-    def self.channel_api_data
+    def self.list_channels
       query_parameters = {
         token: ENV["SLACK_API_TOKEN"],
       }
@@ -39,16 +39,6 @@ module Slack
       end # else
       return passes
     end # self.list
-
-    def self.list_channels
-      channel_response = self.channel_api_data
-
-      channel_names = channel_response.map do |channel|
-        channel["name"]
-      end
-
-      return channel_names
-    end
 
     # ap self.channel_api_data
     ap self.list_channels

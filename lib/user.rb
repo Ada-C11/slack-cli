@@ -18,7 +18,7 @@ module Slack
       @slack_id = slack_id
     end # initialize
 
-    def self.user_list
+    def self.list_users
       query_parameters = {
         token: ENV["SLACK_API_TOKEN"],
       }
@@ -27,7 +27,6 @@ module Slack
 
       slack_users = {}
       if (response.code == 200)
-        ap response
         user_passes = response["members"].map do |user|
           slack_users[user] = { "slack_id" => user["id"],
                                "username" => user["name"],
@@ -36,12 +35,8 @@ module Slack
       else
         puts "Error #{response.code} : #{response["message"]}"
       end # else
-      return user_passes
-    end # self.list
-
-    def details
     end
 
-    ap self.user_list
+    ap self.list_users
   end # class
 end # module
