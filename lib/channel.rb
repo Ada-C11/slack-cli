@@ -1,12 +1,16 @@
 require 'dotenv'
 require 'httparty'
 require 'pry'
+require 'table_print'
 Dotenv.load
 
 module SlackAPI
   class Channel
         
-  attr_reader :topic, :member_count
+  attr_reader :slack_id, :name, :topic, :member_count
+
+  BASE_URL = "https://slack.com/api/channels.list"
+  TOKEN = ENV['TOKEN']
 
     def initialize(slack_id:, name:, topic:, member_count:)
       # super(slack_id, name)
@@ -25,7 +29,7 @@ module SlackAPI
       query_parameters = {
         token: TOKEN,
       }
-      response = HTTParty.get(BASE_URL << CHANNEL_LIST, query: query_parameters)['channels']
+      response = HTTParty.get(BASE_URL, query: query_parameters)['channels']
       response.each do |channel|
         topic = channel['topic']['value']
         member_count = channel['num_members']
