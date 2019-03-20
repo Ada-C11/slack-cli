@@ -18,4 +18,8 @@ describe "Channel class" do
     expect(@response[0]).must_be_kind_of Slack::Channel
     expect(@response[0].member_count).must_be_kind_of Integer
   end
+
+  it "can retrieve details of a specific channel" do
+    expect (@response[0].details).must_be_kind_of String
+  end
 end

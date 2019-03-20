@@ -18,7 +18,7 @@ module Slack
     CHANNEL_URL = "https://slack.com/api/channels.list"
 
     def details
-
+      return @topic
       # list details for a specific channel
 
     end
