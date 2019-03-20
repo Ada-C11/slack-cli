@@ -48,8 +48,3 @@ end
 # }
 # response = HTTParty.post(self::MSG_URL, query: query_params)
 #end
-<<<<<<< HEAD
-=======
-
-binding.pry
->>>>>>> d42ca8f6f8f792a3ac7234863f5f80e6530c49bf
