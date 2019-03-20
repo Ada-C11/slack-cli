@@ -1,7 +1,4 @@
-require "httparty"
 require "pry"
-require "dotenv"
-Dotenv.load
 
 class Channel
   # attr_accessor :list_channels, :channel_list

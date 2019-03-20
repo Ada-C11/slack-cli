@@ -1,7 +1,4 @@
-require "httparty"
 require "pry"
-require "dotenv"
-Dotenv.load
 
 # module SlackAPI
 class User
@@ -51,8 +48,6 @@ class User
     end
     return selected_user
   end
-
-
 end # end of class
 
 # end
