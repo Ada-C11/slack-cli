@@ -1,6 +1,7 @@
 require 'httparty'
 require 'pry'
 require_relative 'recipient.rb'
+
 class SlackApiError < StandardError; end
 class User 
 
@@ -20,12 +21,12 @@ class User
   
   def self.get(url, params)
     response = HTTParty.get(url, query: params)
-
-    if response.code != 200 || response["message"] != "ok"
-      raise SlackApiError, "API call failed with code #{response.code} and reason #{response["reason"]}"
+    
+    if response["ok"] == false
+      raise SlackApiError, "API call failed with reason #{response["error"]}"
     end
     
-    
+    return response
   end
   
   def self.list   
