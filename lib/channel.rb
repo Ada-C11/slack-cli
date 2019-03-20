@@ -3,6 +3,7 @@ require_relative "recipient"
 class Channel < Recipient
   attr_reader :topic, :member_count
   LIST_URL = "https://slack.com/api/channels.list"
+  MSG_URL = ""
 
   def initialize(slack_id, name, topic, member_count)
     @slack_id = slack_id
@@ -26,9 +27,16 @@ class Channel < Recipient
   end
 
   def details
-    print "Channel name: #{name} \nID: #{slack_id} \ntopic: #{topic}, \nMember count:#{member_count}\n"
+    return "Channel name: #{name} \nID: #{slack_id} \ntopic: #{topic}, \nMember count:#{member_count}\n"
   end
 end
 
-test = Channel.list
-binding.pry
+#add this to recipient?
+# def send_message(message)
+# query_params = {
+#   token: TOKEN
+#   name: self
+#   message: message
+# }
+# response = HTTParty.post(self::MSG_URL, query: query_params)
+#end
