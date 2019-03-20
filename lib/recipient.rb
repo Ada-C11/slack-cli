@@ -3,57 +3,59 @@ require "pry"
 
 require "dotenv"
 Dotenv.load
+ 
+module SlackCli
+  class SlackError < StandardError; end
 
-class SlackError < StandardError; end
+  class Recipient
+    
 
-class Recipient
+    MSG_URL = "https://slack.com/api/chat.postMessage"
+    LIST_URL = nil
+    TOKEN = ENV["SLACK_TOKEN"]
 
-  # constants
-  MSG_URL = "https://slack.com/api/chat.postMessage"
-  LIST_URL = nil
-  TOKEN = ENV["SLACK_TOKEN"]
+    attr_reader :send_message, :name, :slack_id, :error_helper, :details, :list
 
-  attr_reader :send_message, :name, :slack_id, :error_helper, :details, :list
+    def initialize
+      @slack_id = slack_id
+      @name = name
+    end
 
-  def initialize
-    @slack_id = slack_id
-    @name = name
-  end
+    def self.send_message(name:, message:)
+      query_params = {
+        token: TOKEN,
+        channel: name,
+        text: message,
+      }
+      response = HTTParty.post(MSG_URL, query: query_params)
 
-  def self.send_message(name:, message:)
-    query_params = {
-      token: TOKEN,
-      channel: name,
-      text: message,
-    }
-    response = HTTParty.post(MSG_URL, query: query_params)
+      error_helper(response)
+    end
 
-    error_helper(response)
-  end
-
-  def self.get
-    query_params = {
-      token: TOKEN,
-    }
-    response = HTTParty.get(self::LIST_URL, query: query_params)
-    return response
-    error_helper(response)
-  end
-
-  #private
-  def details
-    raise NotImplementedError
-  end
-
-  def self.list
-    raise NotImplementedError
-  end
-
-  def self.error_helper(response)
-    if response["ok"] != true
-      raise SlackError, "#{response["error"]}"
-    else
+    def self.get
+      query_params = {
+        token: TOKEN,
+      }
+      response = HTTParty.get(self::LIST_URL, query: query_params)
       return response
+      error_helper(response)
+    end
+
+    #private
+    def details
+      raise NotImplementedError
+    end
+
+    def self.list
+      raise NotImplementedError
+    end
+
+    def self.error_helper(response)
+      if response["ok"] != true
+        raise SlackError, "#{response["error"]}"
+      else
+        return response
+      end
     end
   end
 end
