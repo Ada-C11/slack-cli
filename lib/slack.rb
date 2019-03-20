@@ -8,6 +8,7 @@ Dotenv.load
 
 def main
   channels_list = SlackApi::Channel.channel_api
+  users_list = SlackApi::User.user_api
 
   puts "Welcome to the Ada Slack CLI!"
   puts "What would you like to do?:"
@@ -19,7 +20,7 @@ def main
   until user_selection == "quit"
     case user_selection
     when "list users"
-      User.list
+      SlackApi::User.list(users_list)
     when "list channels"
       SlackApi::Channel.list(channels_list)
     end
