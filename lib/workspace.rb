@@ -18,6 +18,11 @@ module SlackCLI
     def select_channel(channel_info)
       @selected = find_channel(channel_info)
     end
+
+    def show_details
+      return @selected == nil ? nil : @selected.details
+    end
+
     private
 
     def find_user(user_info)

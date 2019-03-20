@@ -21,6 +21,8 @@ def main
     elsif response == "select channel"
       puts select_channel_by_input(workspace)
     elsif response == "details"
+      puts get_details(workspace)
+      
     else
       puts "Please make sure to select from the choices above. You can quit be entering 'quit'."
     end
@@ -62,6 +64,15 @@ def select_channel_by_input(workspace)
     puts "We couldn't find that channel"
   else
     puts "Channel has been selected"
+  end
+end
+
+def get_details(workspace)
+  detail_info = workspace.show_details
+  if detail_info == nil
+    puts "There is nothing selected to show details about. Please select a user or channel."
+  else
+    return detail_info
   end
 end
 

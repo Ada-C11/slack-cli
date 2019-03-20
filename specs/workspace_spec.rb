@@ -106,7 +106,7 @@ describe "SlackCLI::Workspace" do
     end
 
     it "displays details for channel" do
-      channel_name = @workspace.channel.first.name
+      channel_name = @workspace.channels.first.name
       @workspace.select_channel(channel_name)
       channel_detail = @workspace.show_details
       expect(channel_detail).must_be_kind_of String
@@ -115,7 +115,7 @@ describe "SlackCLI::Workspace" do
 
     it "returns nil if selected is nil" do
       if @workspace.selected == nil
-        expect(@workspace.details).must_be_nil
+        expect(@workspace.show_details).must_be_nil
       end
     end
   end
