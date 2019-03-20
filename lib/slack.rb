@@ -17,7 +17,9 @@ def main
     elsif response == "list channels"
       list_channels(workspace)
     elsif response == "select user"
+      puts select_user_by_input(workspace)
     elsif response == "select channel"
+      puts select_channel_by_input(workspace)
     elsif response == "details"
     else
       puts "Please make sure to select from the choices above. You can quit be entering 'quit'."
@@ -38,6 +40,28 @@ end
 def list_channels(workspace)
   workspace.channels.each do |channel|
     puts "Slack ID: #{channel.slack_id}, name: #{channel.name}, topic: #{channel.topic}, member count: #{channel.member_count}"
+  end
+end
+
+def select_user_by_input(workspace)
+  puts "What is the Slack ID or username? "
+  user_info = gets.chomp
+  user = workspace.select_user(user_info)
+  if user == nil 
+    puts "We couldn't find that user"
+  else
+    puts "User has been selected"
+  end
+end
+
+def select_channel_by_input(workspace)
+  puts "What is the Slack ID or name? "
+  channel_info = gets.chomp
+  channel = workspace.select_channel(channel_info)
+  if channel == nil 
+    puts "We couldn't find that channel"
+  else
+    puts "Channel has been selected"
   end
 end
 

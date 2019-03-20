@@ -30,5 +30,9 @@ module SlackCLI
       end
       return channels
     end
+
+    def details
+      return "Slack ID: #{slack_id}, Name: #{name}, Topic: #{topic}, Member count: #{member_count}"
+    end
   end
 end

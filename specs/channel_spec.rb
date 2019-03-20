@@ -41,6 +41,7 @@ describe SlackCLI::Channel do
       @topic = "It's about cats, duh"
       @member_count = "2,000,000"
       @record = SlackCLI::Channel.new(slack_id: @slack_id, name: @name, topic: @topic, member_count: @member_count)
+      @detail = @record.details
     end
 
     it "returns a string" do
