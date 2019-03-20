@@ -8,9 +8,11 @@ require "minitest/skip_dsl"
 require "webmock/minitest"
 require "vcr"
 require "dotenv"
+
 Dotenv.load
 
 require_relative "../lib/recipient.rb"
+require_relative "../lib/user.rb"
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
