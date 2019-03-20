@@ -8,7 +8,7 @@ def main
   puts "There are #{workspace.channels.count} channels in this workspace"
   puts "There are #{workspace.users.count} users in this workspace"
 
-  puts "You can: List Users, List Channels, or Quit."
+  puts "You can: List Users, List Channels, Select User, Select Channel, Details, or Quit."
   puts "Please enter what option you would like to take.  You can quit by entering 'quit'."
   response = gets.chomp.downcase
   while response != "quit"
@@ -16,10 +16,13 @@ def main
       list_users(workspace)
     elsif response == "list channels"
       list_channels(workspace)
+    elsif response == "select user"
+    elsif response == "select channel"
+    elsif response == "details"
     else
       puts "Please make sure to select from the choices above. You can quit be entering 'quit'."
     end
-    puts "\nPlease enter what you would like to do: \nList Users \nList Channels \nQuit"
+    puts "\nPlease enter what you would like to do: \nList Users \nList Channels \nSelect User \nSelect Channel \nDetails \nQuit"
     response = gets.chomp.downcase
   end
 
