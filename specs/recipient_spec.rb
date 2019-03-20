@@ -20,7 +20,7 @@ describe SlackCLI::Recipient do
 
   describe "self.get" do
     it "gets a response" do
-      VCR.use_cassette("recipient find") do
+      VCR.use_cassette("recipient") do
         url = "http://slack.com/api/users.list"
         params = {"token": ENV["SLACK_API_TOKEN"]}
 
@@ -28,6 +28,15 @@ describe SlackCLI::Recipient do
         expect(response).wont_be_nil
         expect(response).must_be_kind_of HTTParty::Response
         expect(response.code).wont_equal 401
+      end
+    end
+  end
+
+  describe "send message" do
+    it "can send a valid message" do
+      VCR.use_cassette("recipient") do
+        response = SlackCLI::Recipient.send_message("Hey I can post messages!")
+        expect(response).must_equal true
       end
     end
   end
