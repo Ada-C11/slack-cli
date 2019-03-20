@@ -11,8 +11,13 @@ module Slack
       # Implement here.
     end
 
-    def self.get(url, params)
-      response = HTTParty.get(url, query: params)
+    def self.get(url)
+      response = HTTParty.get(
+        url,
+        query: {
+          token: ENV["SLACK_API_TOKEN"],
+        },
+      )
 
       if response.code == 200
         return response

@@ -24,12 +24,6 @@ describe "User" do
           response = Slack::User.list
 
           expect(response[0].name).must_equal "slackbot"
-        end
-      end
-      it "does something else" do
-        VCR.use_cassette("users_found") do
-          response = Slack::User.list
-
           expect(response[1].name).must_equal "sopheary.chiv"
         end
       end

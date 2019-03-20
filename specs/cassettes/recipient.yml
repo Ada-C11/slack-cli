@@ -1,0 +1,78 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://slack.com/api/channels.list?token=<SLACK_API_TOKEN>
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '554'
+      Connection:
+      - keep-alive
+      Date:
+      - Wed, 20 Mar 2019 20:56:10 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - fb8ab65c-afab-4d83-93ef-31b2daaf44e1
+      X-Oauth-Scopes:
+      - identify,channels:read,users:read,chat:write:bot
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - channels:read
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-xhix
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 a077f80f2fe737f90e09bad4a75fa2bc.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 8bdvYbzthGc4hM0vhdCjp5L5jqsXuvAdsXA0sZf9xw1UcovSSrs7RA==
+    body:
+      encoding: ASCII-8BIT
+      string: '{"ok":true,"channels":[{"id":"CH0EFGJHE","name":"everyone","is_channel":true,"created":1552952596,"is_archived":false,"is_general":true,"unlinked":0,"creator":"UH2RGJ36Y","name_normalized":"everyone","is_shared":false,"is_org_shared":false,"is_member":true,"is_private":false,"is_mpim":false,"members":["UH0EG0QHE","UH2RGJ36Y"],"topic":{"value":"Company-wide
+        announcements and work-based matters","creator":"UH2RGJ36Y","last_set":1552952596},"purpose":{"value":"This
+        channel is for workspace-wide communication and announcements. All members
+        are in this channel.","creator":"UH2RGJ36Y","last_set":1552952596},"previous_names":[],"num_members":2},{"id":"CH0EFGQ72","name":"slack-api","is_channel":true,"created":1552952597,"is_archived":false,"is_general":false,"unlinked":0,"creator":"UH2RGJ36Y","name_normalized":"slack-api","is_shared":false,"is_org_shared":false,"is_member":true,"is_private":false,"is_mpim":false,"members":["UH0EG0QHE","UH2RGJ36Y"],"topic":{"value":"","creator":"","last_set":0},"purpose":{"value":"","creator":"","last_set":0},"previous_names":[],"num_members":2},{"id":"CH2P330M9","name":"random","is_channel":true,"created":1552952596,"is_archived":false,"is_general":false,"unlinked":0,"creator":"UH2RGJ36Y","name_normalized":"random","is_shared":false,"is_org_shared":false,"is_member":true,"is_private":false,"is_mpim":false,"members":["UH0EG0QHE","UH2RGJ36Y"],"topic":{"value":"Non-work
+        banter and water cooler conversation","creator":"UH2RGJ36Y","last_set":1552952596},"purpose":{"value":"A
+        place for non-work-related flimflam, faffing, hodge-podge or jibber-jabber
+        you''d prefer to keep out of more focused work-related channels.","creator":"UH2RGJ36Y","last_set":1552952596},"previous_names":[],"num_members":2}],"response_metadata":{"next_cursor":""}}'
+    http_version: 
+  recorded_at: Wed, 20 Mar 2019 20:56:10 GMT
+recorded_with: VCR 4.0.0

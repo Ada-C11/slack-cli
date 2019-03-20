@@ -15,13 +15,7 @@ module Slack
     def self.list
       list = []
 
-      url = "https://slack.com/api/users.list"
-
-      query_parameters = {
-        token: ENV["SLACK_API_TOKEN"],
-      }
-
-      response = self.get(url, query_parameters)
+      response = self.get("https://slack.com/api/users.list")
 
       response["members"].each do |member|
         slack_id = member["id"]
