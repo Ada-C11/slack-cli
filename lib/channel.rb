@@ -10,7 +10,7 @@ module SlackApi
     def self.channel_api
       url = "https://slack.com/api/channels.list"
       key = ENV["SLACK_API_TOKEN"]
-      parameters = { 'token': key }
+      parameters = {'token': key}
       response = HTTParty.get(url, query: parameters).to_s
       response = JSON.parse(response)
 

@@ -1,4 +1,44 @@
-#tests --> CHANNELS
+require_relative "test_helper"
+
+describe SlackApi do
+  describe "list channels" do
+    it "returns valid channels" do
+      VCR.use_cassette("slack_channels_list") do
+        channels_list = SlackApi::Channel.channel_api
+
+        channels_list.each do |channel|
+          expect(channel["is_channel"]).must_equal true
+        end
+      end
+    end
+
+    it "return includes a specific channel" do
+      VCR.use_cassette("slack_channels_list") do
+        channels_list = SlackApi::Channel.channel_api
+
+        expect(channels_list.first["name"]).must_equal "general"
+      end
+    end
+
+    it "channels list will only include existent channels " do
+      VCR.use_cassette("slack_channels_list") do
+        channels_list = SlackApi::Channel.channel_api
+
+        channels_list.each do |channel|
+          name = "Not a Channel"
+          expect(channel["name"]).wont_equal name
+        end
+      end
+    end
+    # it "returns info with a valid token" do
+    #   VCR.use_cassette("slack_channels_list") do
+    #     channels_list = SlackApi::Channel.channel_api
+
+    #     expect(channels_list["ok"]).must_equal true
+    #   end
+    # end
+  end
+end
 
 #0. make sure that what's being returned is in the format we want (i.e. a hash or array)
 

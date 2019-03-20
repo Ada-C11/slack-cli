@@ -11,6 +11,8 @@ require 'minitest/skip_dsl'
 require 'webmock/minitest'
 require 'vcr'
 
+require_relative "../lib/channel"
+
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 VCR.configure do |config|
