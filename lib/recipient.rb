@@ -10,6 +10,7 @@ class Recipient
 
   # constants
   MSG_URL = "https://slack.com/api/chat.postMessage"
+  LIST_URL = nil
   TOKEN = ENV["SLACK_TOKEN"]
 
   attr_reader :send_message, :name, :slack_id, :error_helper
@@ -30,8 +31,11 @@ class Recipient
     error_helper(response)
   end
 
-  def self.get(url, params)
-    response = HTTParty.get(url, query: params)
+  def self.get
+    query_params = { 
+      token: TOKEN 
+    }
+    response = HTTParty.get(LIST_URL, query: query_params)
 
     error_helper(response)
   end
