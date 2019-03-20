@@ -3,10 +3,12 @@ require "pry"
 describe "user class" do
   describe "initialize" do
     it "creates and instance of user" do
+      name = "mcarmelina"
+      slack_id = 123
       real_name = "Maria Wissler"
       status_text = ""
       status_emoji = ""
-      expect(User.new(real_name: real_name, status_text: status_text, status_emoji: status_emoji)).must_be_kind_of User
+      expect(User.new(name: name, slack_id: slack_id, real_name: real_name, status_text: status_text, status_emoji: status_emoji)).must_be_kind_of User
     end
   end
 
