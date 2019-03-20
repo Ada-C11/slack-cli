@@ -17,3 +17,14 @@ describe "Get method" do
     end
   end
 end
+
+describe "list_all method" do
+  it "gives a list of all user information from the API and returns a value of a 'general' channel name" do
+    VCR.use_cassette("channel_find") do
+      list_response = Slack::Channel.list_all
+
+      expect(list_response.length).must_equal 3
+      expect(list_response).must_include "general"
+    end
+  end
+end

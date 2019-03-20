@@ -17,8 +17,12 @@ module Slack
       return response_from_get
     end
 
-    # def self.list_all
-    #   self.get
-    # end
+    def self.list_all
+      if Channel.get.code != 200
+        raise ArgumentError, "Request is unsuccessful"
+      else all_channels = Channel.get["channels"].map do |channel|
+        channel["name"]
+      end       end
+    end
   end
 end
