@@ -34,21 +34,6 @@ describe "Channel" do
     expect(new_channel.members).must_equal channel_data[:members]
   end
 
-  it "can display information about itself as a string" do
-    new_channel = SlackCLI::Channel.new(
-      channel_data[:id],
-      channel_data[:channel_name],
-      channel_data[:topic],
-      channel_data[:members]
-    )
-    pretty_printed_string = "\nSlack ID : #{channel_data[:id]}" +
-                            "\nChannel name : #{channel_data[:channel_name]}" +
-                            "\nTopic : #{channel_data[:topic]}" +
-                            "\nMember count: #{channel_data[:members]}"
-
-    expect(new_channel.display_details).must_equal pretty_printed_string
-  end
-
   it "loads array of channels from Slack's API" do
     VCR.use_cassette("list_channels") do
       channels = SlackCLI::Channel.get_from_api
