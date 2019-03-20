@@ -17,8 +17,6 @@ describe "User class" do
     end
   end
 
-  # Check details method return String type
-
   describe "User#details" do
     it "returns a String" do
       expect(user.details).must_be_instance_of String

@@ -8,7 +8,7 @@ module Slack
     end
 
     def details
-      return ""
+      return "Name: #{name}, \nReal Name: #{real_name}, \nID: #{id}"
     end
   end
 end
