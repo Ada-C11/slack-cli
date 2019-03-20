@@ -16,17 +16,17 @@ describe "user" do
         user_list = SlackBot::User.list
 
         expect(user_list).must_be_kind_of Array
-        expect(user_list.first).must_be_kind_of Hash
-        expect(user_list.first).must_be_kind_of Hash
+        expect(user_list.first).must_be_kind_of SlackBot::User
+        expect(user_list.last).must_be_kind_of SlackBot::User
       end
     end
     it "Returns a real_name" do
       VCR.use_cassette("self.list") do
         user_list = SlackBot::User.list
 
-        expect(user_list.first[:real_name]).must_equal "Slackbot"
-        expect(user_list.first[:id]).must_equal "USLACKBOT"
-        expect(user_list.first[:name]).must_equal "slackbot"
+        expect(user_list.first.real_name).must_equal "Slackbot"
+        expect(user_list.first.id).must_equal "USLACKBOT"
+        expect(user_list.first.name).must_equal "slackbot"
       end
     end
     # it "will raise an error when given an invalid token" do

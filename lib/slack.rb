@@ -35,7 +35,7 @@ def main
     choice = get_user_input(options)
     case choice
     when "list users"
-      tp workspace.users
+      tp workspace.list_users
     when "list channels"
       tp workspace.channels
     when "quit"

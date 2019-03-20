@@ -1,4 +1,4 @@
-
+require "pry"
 
 module SlackBot
   class SlackApiError < StandardError; end
@@ -22,19 +22,19 @@ module SlackBot
       end
 
       users_array = response["members"].map do |user|
-        SlackBot::User.new(real_name: user["real name"], name: user["name"], id: user["id"])
+        SlackBot::User.new(real_name: user["real_name"], name: user["name"], id: user["id"])
       end
-
 
       return users_array
     end
 
     def details
-        {
-        real_name: = @real_name, 
-        name: = @user, 
-        id: = @user   
-        }
+      user_details = {
+        real_name: @real_name,
+        name: @user,
+        id: @user,
+      }
+      return user_details
     end
   end
 end
