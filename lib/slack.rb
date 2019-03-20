@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require_relative "user"
+require "table_print"
 
 Dotenv.load
 
@@ -12,10 +13,14 @@ def main
 
   puts "Please make a selection:\n1. list users\n2. list channels\n3. quit\n\n"
   selection = gets.chomp.to_i
+
+  # tp Author.limit(3), "name", "books.title", "books.photos.caption"
   if selection == 1
-    users.list.each do |user|
-      puts user.real_name
-    end
+    # users.list.each do |user| user.real_name
+    tp users.list, "slack_id", "name", "real_name"
+    # end
+  elsif selection == 3
+    exit
   end
 
   puts "Thank you for using the Ada Slack CLI"
