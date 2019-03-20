@@ -1,0 +1,200 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<SLACK_TOKEN>&text=Test%20message&channel=CH0E8S9UY
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Wed, 20 Mar 2019 20:37:03 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 41ad3fb3-177f-49cb-a670-07236f567555
+      X-Oauth-Scopes:
+      - identify,channels:read,im:read,users:read,users.profile:read,chat:write:user,chat:write:bot
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write:bot
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-saap
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 1c0b9f2790e77d82d7169b1fa7d0f9cc.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - hvpGfu3pzOoWtag7003c5KR9JFarSyOMBIhZBYOCyIyUzGYxtP8pfA==
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channel":"CH0E8S9UY","ts":"1553114223.000100","message":{"type":"message","subtype":"bot_message","text":"Test
+        message","ts":"1553114223.000100","username":"Ports - Shamira - API Project","bot_id":"BH2RK7F9S"}}'
+    http_version: 
+  recorded_at: Wed, 20 Mar 2019 20:37:03 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<SLACK_TOKEN>&text=Test%20message&channel=bogus
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Wed, 20 Mar 2019 20:37:03 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - c591a373-2156-428a-aa4c-5b6fe8db61a5
+      X-Oauth-Scopes:
+      - identify,channels:read,im:read,users:read,users.profile:read,chat:write:user,chat:write:bot
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write:bot
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-jogu
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 ccbc918e3ddfbe40c4d786475a6e7606.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - K2K1uIUC7L6YG1XcqrY8mCPWt5rYpFpE57GqivqB4puqlQR2kSfqKw==
+    body:
+      encoding: UTF-8
+      string: '{"ok":false,"error":"channel_not_found"}'
+    http_version: 
+  recorded_at: Wed, 20 Mar 2019 20:37:03 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<SLACK_TOKEN>&text=It%27s%20gonna%20work%21&channel=CH0E8S9UY
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Wed, 20 Mar 2019 20:38:10 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - a652ec9a-0e4d-4d30-94ad-224a0127acc3
+      X-Oauth-Scopes:
+      - identify,channels:read,im:read,users:read,users.profile:read,chat:write:user,chat:write:bot
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write:bot
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-risl
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 3e5a2f6c5b1171dae267d5a9344f95e8.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - IIjH_Itn-MU-s1jGyqIRosgRlNyKrLhkKR_A_J9BeaCurgMHU77NCA==
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channel":"CH0E8S9UY","ts":"1553114290.000200","message":{"type":"message","subtype":"bot_message","text":"It''s
+        gonna work!","ts":"1553114290.000200","username":"Ports - Shamira - API Project","bot_id":"BH2RK7F9S"}}'
+    http_version: 
+  recorded_at: Wed, 20 Mar 2019 20:38:10 GMT
+recorded_with: VCR 4.0.0

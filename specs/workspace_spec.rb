@@ -23,4 +23,7 @@ describe "show details method" do
       expect(test_workspace.show_details_user(user_test_1)).must_equal ["slackbot", "Slackbot", "USLACKBOT"]
     end
   end
+
+  # edge cases, what if the list is 0?
+  # argument error, this user/channel does not exist.
 end

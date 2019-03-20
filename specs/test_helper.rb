@@ -30,6 +30,7 @@ require_relative "../lib/user"
 require_relative "../lib/channel"
 require_relative "../lib/workspace"
 require_relative "../lib/recipient"
+require_relative "../lib/slack_api_wrapper"
 
 # What would you like to test
 # test for 200 status and message - different
