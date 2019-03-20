@@ -7,6 +7,8 @@ require_relative "channel"
 Dotenv.load
 
 def main
+  channels_list = SlackApi::Channel.channel_api
+
   puts "Welcome to the Ada Slack CLI!"
   puts "What would you like to do?:"
   puts "list users"
@@ -19,7 +21,7 @@ def main
     when "list users"
       User.list
     when "list channels"
-      Channel.list
+      SlackApi::Channel.list(channels_list)
     end
     puts "\nWhat would you like to do next?"
     puts "list users"
