@@ -8,4 +8,6 @@ def main
   puts "Thank you for using the Ada Slack CLI"
 end
 
+# Make sure all user input gets checked/converted for casing issues (.upcase for usernames, etc.)
+
 main if __FILE__ == $PROGRAM_NAME
