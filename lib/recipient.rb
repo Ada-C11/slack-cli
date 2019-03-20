@@ -13,7 +13,7 @@ class Recipient
   LIST_URL = nil
   TOKEN = ENV["SLACK_TOKEN"]
 
-  attr_reader :send_message, :name, :slack_id, :error_helper, :list
+  attr_reader :send_message, :name, :slack_id, :error_helper
 
   def initialize
     @slack_id = slack_id
@@ -32,12 +32,12 @@ class Recipient
   end
 
   def self.get
-    query_params = { 
-      token: TOKEN 
+    query_params = {
+      token: TOKEN,
     }
     response = HTTParty.get(self::LIST_URL, query: query_params)
-
-    error_helper(response)
+    return response
+    # error_helper(response)
   end
 
   def self.error_helper(response)
