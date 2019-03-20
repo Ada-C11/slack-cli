@@ -1,10 +1,15 @@
-#!/usr/bin/env rub
+#!/usr/bin/env ruby
 require "dotenv"
+require_relative "user"
+require_relative "channel"
+require_relative "workspace"
+require_relative "recipient"
 
 def main
   puts "Welcome to the Ada Slack CLI!"
   puts "We currently have #{User.list.length} members and #{Channel.list.length} channels."
 
+  # user_input = true
   puts ""
   puts "Please choose one of the the following number options"
   puts "1. List Users"
@@ -13,26 +18,35 @@ def main
   puts "4. Select Channel"
   puts "5. Send Message"
   puts "6. Quit"
-
   selection = gets.chomp
-
-  loop do
+  until selection == "6"
+    # # loop d
+    # break if selection == "6"
+    # until user_input == false
     case selection
     when "1"
       puts "Here is the list of users:"
       puts User.list
+      puts "What would you like to do next? "
+      selection = gets.chomp
     when "2"
       puts "Here is the list of channels: "
       puts Channel.list
+      puts "What would you like to do next? "
+      selection = gets.chomp
     when "3"
       chose_user = gets.chomp
       workspace = Workspace.new
       puts workspace.show_details_user(chose_user)
+      puts "What would you like to do next? "
+      selection = gets.chomp
     when "4"
       chose_channel = gets.chomp
       workspace = Workspace.new
       puts workspace.show_details_channel(chose_channel)
-    when "6"
+      puts "What would you like to do next? "
+      selection = gets.chomp
+    when "5"
       channel_name = Channel.list.map do |channel|
         channel[0]
       end
@@ -46,9 +60,14 @@ def main
       recipient = gets.chomp
       puts "Please input your message:"
       message = gets.chomp
-    when "6"
-      break
+
+      SlackApi.send_message(message, recipient)
+      puts "What would you like to do next? "
+      selection = gets.chomp
+      # when "6"
+      #   user_input = false
     end
+    # break
   end
 
   puts "Thank you for using the Ada Slack CLI"
