@@ -1,21 +1,16 @@
-require "httparty"
 require_relative "recipient"
-require "dotenv"
-Dotenv.load
 
 class Channel < Recipient
-  BASE_URL = "https://slack.com/api/channels.list"
-  TOKEN = ENV["SLACK_TOKEN"]
-
-  class SlackAPIError < StandardError; end
+  attr_reader :topic, :member_count
 
   def initialize(slack_id, name, topic, member_count)
-    super
+    super(slack_id, name)
     @topic = topic
     @member_count = member_count
   end
 
   def details
+    return "#{name} #{topic} member count: #{member_count} slack id: #{slack_id}"
   end
 
   def self.list
@@ -38,5 +33,3 @@ class Channel < Recipient
     return channel_list
   end
 end
-
-puts Channel.list
