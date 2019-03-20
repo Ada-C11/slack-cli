@@ -15,7 +15,14 @@ def main
   while selection != 3
     puts "#{users.list.length} users and #{channel.list.length} channels were uploaded.\n\n"
 
-  puts "Please make a selection:\n1. list users\n2. list channels\n3. quit\n\n"
+  puts "Please make a selection:\n"
+  puts "1. list users\n"
+  puts "2. list channels\n"
+  puts "3. select user\n"
+  puts "4. select channel\n"
+  puts "5. details\n"
+  puts "6. quit\n"
+  
   selection = gets.chomp.to_i
 
   if selection == 1
