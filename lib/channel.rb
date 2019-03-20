@@ -2,7 +2,7 @@ require_relative "recipient"
 
 class Channel < Recipient
   attr_reader
-  CHANNEL_URL = "https://slack.com/api/channels.list"
+  LIST_URL = "https://slack.com/api/channels.list"
 
   def initialize
     @topic
@@ -15,10 +15,10 @@ class Channel < Recipient
     # iteratest through the channel payload
     # and displays list of channel names to the CLI
     # as an array
-    params = {
+    query_params = {
       token: TOKEN,
     }
-    response = Channel.get(CHANNEL_URL, query: params)
+    response = Channel.get(query: query_params)
     return response
   end
 
@@ -26,4 +26,4 @@ class Channel < Recipient
   end
 end
 
-test = Channel.list
+# test = Channel.list
