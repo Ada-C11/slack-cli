@@ -1,27 +1,41 @@
+require 'dotenv'
+require 'httparty'
+require 'pry'
+Dotenv.load
+
 module SlackAPI
   class Channel
         
   attr_reader :topic, :member_count
 
-    def initialize(topic:, member_count:)
-      super(slack_id:, name:)
+    def initialize(slack_id:, name:, topic:, member_count:)
+      # super(slack_id, name)
+      @slack_id = slack_id
+      @name = name
       @topic = topic
       @member_count = member_count
     end
 
-    def details
+    def details(channel)
+      puts "Topic: #{channel.topic}, member count: #{channel.member_count}, slack ID: #{channel.slack_id}, name: #{channel.name}"
     end
 
     def self.list
-      channel_names = []
+      channels = []
       query_parameters = {
-        token: ENV['TOKEN'],
+        token: TOKEN,
       }
-      channels = HTTParty.get(BASE_URL << CHANNELS_LIST_PATH, query: query_parameters)['channels']
-      channel_names = channels.map do |channel|
-      channel['name']
+      response = HTTParty.get(BASE_URL << CHANNEL_LIST, query: query_parameters)['channels']
+      response.each do |channel|
+        topic = channel['topic']['value']
+        member_count = channel['num_members']
+        slack_id = channel['id']
+        name = channel['name']
+        new_channel = Channel.new(topic: topic, member_count: member_count, slack_id: slack_id, name: name)
+        puts new_channel
+        channels << new_channel
       end
-      return channel_names
+      return channels
     end
   end
 end
