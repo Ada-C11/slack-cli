@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
+require_relative "workspace"
 
 def main
   puts "Welcome to the Ada Slack CLI!"
-
-  # TODO project
+  workspace = Slack::Workspace.new
 
   puts "Thank you for using the Ada Slack CLI"
 end
