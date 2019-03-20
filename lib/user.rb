@@ -1,4 +1,5 @@
 require "pry"
+require "httparty"
 
 module SlackAPI
   class SlackError < StandardError; end
@@ -23,7 +24,7 @@ module SlackAPI
 
       if response["ok"]
         response["members"].each do |member|
-          user_list[member["name"]] = {"real name" => member["real_name"], "slack id" => member["id"]}
+          user_list[member["name"]] = { "real name" => member["real_name"], "slack id" => member["id"] }
           # binding.pry
         end
       else
@@ -39,6 +40,7 @@ module SlackAPI
 
       response = HTTParty.get(BASE_URL, query: query)
       selected_user = ""
+
       response["members"].each do |member|
         if member["id"] == identifier
           selected_user = identifier
@@ -61,19 +63,17 @@ module SlackAPI
 
       user_details = {}
 
-      if response.code != 200 # change to ok true/false instead of this
-        raise ArgumentError, "There was an error. The code is #{response.error}."
-      else
-        response["members"].each do |member|
-          if member["id"] == identifier || member["name"] == identifier
-            # binding.pry
-            user_details[member["name"]] = {"real name" => member["real_name"], "slack id" => member["id"]}
-          end
+      # if response["ok"] != true
+      #   raise SlackAPI::SlackError, "There was an error." # add error message later
+      # else
+      response["members"].each do |member|
+        if member["id"] == identifier || member["name"] == identifier
+          user_details[member["name"]] = { "real name" => member["real_name"], "slack id" => member["id"] }
+          return user_details
         end
-        # binding.pry
-        return user_details
-        # add conditional if member does not exist
       end
     end
+
+    # end
   end # end of class
 end # end of module

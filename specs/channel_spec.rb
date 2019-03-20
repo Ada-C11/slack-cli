@@ -40,3 +40,18 @@ describe "select_channel" do
     end
   end
 end
+
+describe "see_details" do
+  it "shows details for a selected channel" do
+    channel = SlackAPI::Channel.new
+    VCR.use_cassette("see_details") do
+      selected_channel = channel.select_channel("CH2SKTKPC")
+      channel_details = channel.see_details(selected_channel)
+
+      expect(channel_details).must_be_kind_of Hash
+      expect(channel_details.length).must_equal 1
+      expect(channel_details["general"]).must_equal "topic" => "Company-wide announcements and work-based matters",
+                                                    "member count" => 2, "id" => "CH2SKTKPC"
+    end
+  end
+end

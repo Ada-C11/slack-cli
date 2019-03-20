@@ -1,10 +1,13 @@
 #!/usr/bin/env ruby
 require_relative "user"
 require_relative "channel"
+require "httparty"
+require "dotenv"
+Dotenv.load
 
 def main
   puts "Welcome to the Ada Slack CLI!"
-  puts "The workspace has #{Channel.list_channels.length} channels and #{User.list_users.length} users"
+  puts "The workspace has #{SlackAPI::Channel.list_channels.length} channels and #{SlackAPI::User.list_users.length} users"
   ask_again = "Would you like to 'list users', 'list channels', 'select user', 'select channel', 'details', or 'quit'?"
   puts ask_again
   response = gets.chomp
@@ -12,17 +15,18 @@ def main
   until response == "quit"
     if response == "list users"
       # user = User.new
-      puts User.list_users
+      puts SlackAPI::User.list_users
       puts ask_again
       response = gets.chomp
     elsif response == "list channels"
-      puts Channel.list_channels
+      puts SlackAPI::Channel.list_channels
       puts ask_again
       response = gets.chomp
     elsif response == "select user"
+      select_response = "select user"
       puts "What is the user id or Slack name?"
       identifier = gets.chomp
-      user = User.new
+      user = SlackAPI::User.new
       selected_user = user.select_user(identifier)
       if selected_user == ""
         puts "There is no user with that identifier"
@@ -30,17 +34,24 @@ def main
       puts ask_again
       response = gets.chomp
     elsif response == "select channel"
+      select_response = "select channel"
       puts "What is the user id or Slack name?"
       identifier = gets.chomp
-      channel = Channel.new
-      selected_channel = channel.select_user(identifier)
+      channel = SlackAPI::Channel.new
+      selected_channel = channel.select_channel(identifier)
       if selected_channel == ""
         puts "There is no channel with that identifier"
       end
       puts ask_again
       response = gets.chomp
     elsif response == "details"
-      # selected_user or selected_channel is parameter for get details method, loop through api response and return hash with details
+      # if select_response == "select user"
+      details = user.see_details(selected_user)
+      #   puts details
+      # elsif select_response == "select channel"
+      #   details = channel.see_details(selected_channel)
+      #   puts details
+      # end
     end
   end
 end
