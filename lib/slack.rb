@@ -11,7 +11,8 @@ def main
   puts "2. List Channels"
   puts "3. Select User"
   puts "4. Select Channel"
-  puts "5. Quit"
+  puts "5. Send Message"
+  puts "6. Quit"
 
   selection = gets.chomp
 
@@ -31,7 +32,21 @@ def main
       chose_channel = gets.chomp
       workspace = Workspace.new
       puts workspace.show_details_channel(chose_channel)
-    when "5"
+    when "6"
+      channel_name = Channel.list.map do |channel|
+        channel[0]
+      end
+      puts "Here is a list of channels: #{channel_name}"
+
+      user_name = User.list.map do |user|
+        user[0]
+      end
+      puts "Here is a list of Users#{user_name}"
+      puts "Input the person's or channel's name you'd like to send to: "
+      recipient = gets.chomp
+      puts "Please input your message:"
+      message = gets.chomp
+    when "6"
       break
     end
   end

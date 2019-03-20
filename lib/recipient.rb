@@ -1,61 +1,29 @@
 require "httparty"
 require "dotenv"
+
 Dotenv.load
 
-class Recipient
-  attr_reader :slack_id, :name
+module SlackApi
   BASE_URL = "https://slack.com/api/chat.postMessage"
   SLACK_TOKEN = ENV["SLACK_TOKEN"]
 
-  def initialize(slack_id)
-    @slack_id = slack_id
-    @name = name
-  end
+  class SlackApiError < StandardError; end
 
-  # class SlackApiError < StandardError
-  #   raise SlackApiError, "This id does not exist"
-  # end
+  def self.send_message(message, user)
+    response = HTTParty.post(
+      "#{BASE_URL}",
+      headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+      body: {
+        token: SLACK_TOKEN,
+        text: message,
+        channel: user,
+      },
+    )
 
-  def send_message(message, user: true)
-    # query_param = {
-    #   token: SLACK_TOKEN,
-    #   channel: slack_id,
-    #   text: message,
-    #   as_user: user,
-    # }
-
-    # response = HTTParty.post(
-    #   "#{BASE_URL}",
-    #   body: {
-    #     token: SLACK_TOKEN,
-    #     text: message,
-    #     channel: slack_id,
-    #   },
-    # )
-
-    # if !response.code == 200 && response.parsed_response["ok"]
-    #   raise SlackApiError, "Oops something went wrong"
-    # end
-
-    # return response.code == 200 && response.parsed_response["ok"]
-
-    # if response.code != 200 raise SlackApiError, "This user/channel does not exist"
-
-  end
-
-  def self.get(url, params)
-    # SLACK_TOKEN = ENV["SLACK_TOKEN"]
-    # param = {
-    #   token: SLACK_TOKEN,
-    # }
-    # response = HTTParty.get(url, query: param)
-  end
-
-  private
-
-  def details
-  end
-
-  def self.list
+    if response["ok"]
+      return true
+    else
+      raise SlackApi::SlackApiError, "Error when posting #{message} to #{user}, error: #{response["error"]}"
+    end
   end
 end

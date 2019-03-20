@@ -1,23 +1,32 @@
 require_relative "test_helper"
 require "pry"
-# describe do
-#   # it "will raise an error when given an invalid channel" do
-#   #   error = Recipient.new(ES38768)
 
-#   #   VCR.use_cassette("slack-posts") do
-#   #     exception = expect {
-#   #       error.send_message("This post should not work", "invalid-channel")
-#   #     }.must_raise SlackApiError
+describe SlackApi do
+  it "can send a valid message" do
+    VCR.use_cassette("slack_message") do
+      return_value = SlackApi.send_message("It's gonna work!",
+                                           "CH0E8S9UY")
+      expect(return_value).must_equal true
+    end
+  end
 
-#   #     expect(exception.message).must_equal "Oops something went wrong"
-#   #   end
-#   # end
+  it "generates an error if given an invalid channel" do
+    VCR.use_cassette("slack_message") do
+      # return_value = SlackApi.send_message("Test message",
+      #  "bogus")
+      expect {
+        SlackApi.send_message("Test message",
+                              "bogus")
+      }.must_raise SlackApi::SlackApiError
+    end
+  end
 
-#   # verify that it sends a message
-
-#   # what happens with invalid text
-
-#   # what happends with invalid token
-
-#   # look at required and option, and how program should respond
-# end
+  it "will generate an error if given an invalid key" do
+    VCR.use_cassette("slack_message") do
+    end
+  end
+  it "will raise an error if given an empty message" do
+    VCR.use_cassette("slack_message") do
+    end
+  end
+end
