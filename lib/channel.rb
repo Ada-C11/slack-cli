@@ -15,7 +15,22 @@ module Slack
       @member_count = member_count
     end
 
+    BASE_URL = "https://slack.com/api/"
     CHANNEL_URL = "https://slack.com/api/channels.list"
+
+    def self.send_message(text, channel)
+      body = {
+        text: text,
+        channel: channel,
+        token: ENV["SLACK_API_TOKEN"],
+      }
+
+      response = HTTParty.post("#{BASE_URL}/chat.postMessage",
+                               body: body,
+                               headers: { "Content-Type" => "application/x-www-form-urlencoded" })
+
+      return true if response.code == 200 && response["ok"]
+    end
 
     def details
       return @topic
