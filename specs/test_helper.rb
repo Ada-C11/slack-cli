@@ -5,6 +5,7 @@ require "minitest"
 require "minitest/autorun"
 require "minitest/reporters"
 require "minitest/skip_dsl"
+require "webmock/minitest"
 require "vcr"
 
 require_relative "../lib/recipient.rb"
