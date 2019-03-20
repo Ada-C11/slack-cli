@@ -17,8 +17,10 @@ def main
     puts "\n\t\t\.:Menu:.
    |1|::List Channels
    |2|::List Users
-   |3|::Quit"
-
+   |3|::Select User
+   |4|::Select Channel
+   |7|::Quit"
+    puts "\nPlease select from the Menu:"
     answer = gets.chomp.to_i
 
     # List Stuff
@@ -27,9 +29,21 @@ def main
     when 1
       ap Slack::Channel.list_channels
     when 2
-    when 3
       ap Slack::User.list_users
+    when 3
+      puts "Please enter a username or real name:"
+      id = gets.chomp
+      ap Slack::User.select_user(id)
+
+      @new_user = Slack::User.new
+      ap @new_user.list_users
     when 4
+      # puts "Please enter a channel name or channel id:"
+      # id = gets.chomp
+      # ap Slack::Channel.select_channel(id)
+
+      # @new_channel = Slack::Channel.new
+      # ap @new_channel.list_channels
     when 5
     when 6
     when 7

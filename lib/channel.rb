@@ -13,12 +13,12 @@ module Slack
     attr_reader :channel_id, :channel_name, :topic, :member_count
     attr_accessor :channel_name, :topic
 
-    def initialize(channel_id, channel_name, topic)
-      @channel_id = channel_id
-      @channel_name = channel_name
-      @topic = topic
-      @member_count = member_count
-    end # initialize
+    # def initialize(channel_id, channel_name, topic)
+    #   @channel_id = channel_id
+    #   @channel_name = channel_name
+    #   @topic = topic
+    #   @member_count = member_count
+    # end # initialize
 
     def self.list_channels
       query_parameters = {
@@ -39,6 +39,28 @@ module Slack
       end # else
       return passes
     end # self.list
+
+    # def self.select_channel(id)
+    #   chosen_channel = ""
+
+    #   query_parameters = {
+    #     token: ENV["SLACK_API_TOKEN"],
+    #   }
+    #   response = HTTParty.get(CHANNEL_URL, query: query_parameters)
+
+    #   response["channels"].each do |channel|
+    #     if channel["id"] == id
+    #       chosen_channel = id
+    #     elsif channel["name"] == id
+    #       chosen_channel = id
+    #     end
+
+    #     if chosen_channel == ""
+    #       raise SlackError, "channel must have an id or a name."
+    #     end # end
+    #   end # each
+    #   return chosen_channel
+    # end # self.select_channel
 
     # ap self.channel_api_data
     # ap self.list_channels
