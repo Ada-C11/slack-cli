@@ -1,6 +1,6 @@
-require "dotenv"
-require "httparty"
-require "awesome_print"
+# require "dotenv"
+# require "httparty"
+# require "awesome_print"
 
 require_relative "recipient"
 

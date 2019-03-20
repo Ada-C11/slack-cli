@@ -18,26 +18,20 @@ describe "Recipient" do
 
   describe "self.get" do
     it "can get valid user data from the API" do
-      # VCR.use_cassette("recipient") do
-      #   url = "https://slack.com/api/users.list"
-      #   params = {
-      #     token:
-      #   }
+      VCR.use_cassette("recipient") do
+        url = "https://slack.com/api/users.list"
 
-      #   return_value = Slack::Recipient.get(url, params)
-      # end
+        return_value = Slack::Recipient.get(url)
+        expect(return_value["ok"]).must_equal true
+      end
     end
 
     it "can get valid channel data from the API" do
       VCR.use_cassette("recipient") do
         url = "https://slack.com/api/channels.list"
-        params =
-
-          return_value = Slack::Recipient.get(url)
+        return_value = Slack::Recipient.get(url)
+        expect(return_value["ok"]).must_equal true
       end
-    end
-
-    it "no URL?" do
     end
   end
 

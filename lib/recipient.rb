@@ -1,4 +1,6 @@
 module Slack
+  class SlackError < StandardError; end
+
   class Recipient
     attr_reader :slack_id, :name
 
@@ -19,13 +21,13 @@ module Slack
         },
       )
 
-      if response.code == 200
-        return response
+      if response.code == 200 && response["ok"]
+        return response.parsed_response
       else
-        raise ArgumentError, "Error: #{response.code} #{response.message}" # change this to a better error response
+        raise Slack::SlackError, "Error: #{response.code} #{response.message}"
       end
 
-      return response.parsed_response
+      # return response.parsed_response
     end
 
     def self.list

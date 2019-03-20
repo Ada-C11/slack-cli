@@ -27,6 +27,22 @@ describe "User" do
           expect(response[1].name).must_equal "sopheary.chiv"
         end
       end
+
+      it "returns the right data types" do
+        VCR.use_cassette("users_found") do
+          response = Slack::User.list
+
+          expect(response).must_be_kind_of Array
+          expect(response[0]).must_be_instance_of Slack::User
+          expect(response.last).must_be_instance_of Slack::User
+        end
+      end
+
+      # it "raise an error if no users found" do
+      #   VCR.use_cassette("no_users") do
+      #     expect { Slack::User.list }.must_equal []
+      #   end
+      # end
     end
   end
 end
