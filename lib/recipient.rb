@@ -13,8 +13,8 @@ module Slack
     #   return "Dee is writing something specific >:)"
     # end
 
-    def self.list_all
-      raise NotImplementedError, "Please implement in my child."
-    end
+    # def self.list_all
+    #   raise NotImplementedError, "Please implement in my child."
+    # end
   end
 end

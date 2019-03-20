@@ -1,9 +1,10 @@
 module Slack
   class User < Recipient
-    attr_reader :slack_id, :name, :url
+    attr_reader :slack_id, :name
 
-    def initialize(slack_id, name)
+    def initialize(slack_id, name, real_name)
       super(slack_id, name)
+      @real_name = real_name
     end
 
     def self.get
@@ -17,7 +18,11 @@ module Slack
       return response_from_get
     end
 
-    # def self.list_all
-
+    def self.list_all
+      users = User.get["members"].map do |user|
+        self.new(user["id"], user["real_name"], user["profile"]["real_name"])
+      end
+      return users
+    end
   end
 end

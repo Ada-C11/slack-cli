@@ -8,7 +8,7 @@ describe "Channel class" do
   end
 end
 
-describe "List_all method" do
+describe "Get method" do
   it "Successfully GETs response from Slack API" do
     VCR.use_cassette("location_find") do
       response = Slack::Channel.get

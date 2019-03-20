@@ -1,6 +1,6 @@
 module Slack
   class Channel < Recipient
-    attr_reader :slack_id, :name, :url
+    attr_reader :slack_id, :name
 
     def initialize(slack_id, name)
       super(slack_id, name)
@@ -18,6 +18,7 @@ module Slack
     end
 
     # def self.list_all
-
+    #   self.get
+    # end
   end
 end
