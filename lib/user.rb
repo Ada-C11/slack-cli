@@ -1,5 +1,5 @@
 module Slack
-  class Channel < Recipient
+  class User < Recipient
     attr_reader :slack_id, :name, :url
 
     def initialize(slack_id, name)
@@ -7,7 +7,7 @@ module Slack
     end
 
     def self.get
-      url = "https://slack.com/api/channels.list"
+      url = "https://slack.com/api/users.list"
       params = {
         token: ENV["KEY"],
       }
