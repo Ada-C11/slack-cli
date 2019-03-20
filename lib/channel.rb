@@ -15,7 +15,7 @@ module SlackCli
 
     def self.list
       response = SlackCli::Channel.get
-
+  
       channels = response["channels"].map do |channel|
         slack_id = channel["id"]
         name = channel["name"]
@@ -33,7 +33,7 @@ module SlackCli
       return nil
     end
 
-    def details
+    def details # what should I be?????
       return "Channel name: #{name} \nID: #{slack_id} \ntopic: #{topic}, \nMember count:#{member_count}\n"
     end
   end
