@@ -25,11 +25,7 @@ class Channel < Recipient
   end
 
   def details(name)
-    list.each do |channel|
-      if channel["name"] == name
-        puts channel["purpose"]["value"]
-      end
-    end
+    return "#{name}, #{slack_id}, #{topic}, #{member_count}"
   end
 end
 
