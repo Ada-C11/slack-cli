@@ -3,7 +3,7 @@ require "httparty"
 Dotenv.load
 
 class Recipient
-  class SlackApiError < Exception; end
+  class SlackApiError < StandardError; end
 
   attr_reader :slack_id, :name
 

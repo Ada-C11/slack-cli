@@ -11,9 +11,9 @@ def main
     input = gets.chomp
     case input
     when "list users"
-      workspace.print_details("users")
+      puts workspace.print_details("users")
     when "list channels"
-      workspace.print_details("channels")
+      puts workspace.print_details("channels")
     when "quit"
     else
       puts "Please select one of the options"

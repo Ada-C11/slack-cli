@@ -15,7 +15,11 @@ class Workspace
   def select_channel
   end
 
-  def select_user
+  def select_user(user_input)
+    selected_user = users.select do |user|
+      user.name == user_input || user.slack_id == user_input
+    end
+    return selected_user.first
   end
 
   def show_details
@@ -24,11 +28,11 @@ class Workspace
   def print_details(recipients)
     if recipients == "users"
       users.each do |user|
-        puts user.details
+        return user.details
       end
     elsif recipients == "channels"
       channels.each do |channel|
-        puts channel.details
+        return channel.details
       end
     end
   end
