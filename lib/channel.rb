@@ -23,10 +23,13 @@ module Slack
 
     end
 
-    def self.list
+    def self.channels_get
       query_params = { token: ENV["SLACK_API_TOKEN"] }
+      return Slack::Channel.get(CHANNEL_URL, query_params)
+    end
 
-      response = Slack::Channel.get(CHANNEL_URL, query_params)
+    def self.list
+      response = Slack::Channel.channels_get
       channels = response["channels"].map do |channel|
         name = channel["name"]
         id = channel["id"]
