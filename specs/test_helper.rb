@@ -4,15 +4,14 @@ SimpleCov.start
 require "dotenv"
 Dotenv.load
 
-require "webmock/minitest" # <-- do we need this?
-
 require "minitest/autorun"
 require "minitest/reporters"
 require "minitest/skip_dsl"
 require "vcr"
+require "webmock/minitest" # <-- do we need this?
 
 require_relative "../lib/slack.rb"
-require_relative "../specs/slack_spec"
+# require_relative "../specs/slack_spec"
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 

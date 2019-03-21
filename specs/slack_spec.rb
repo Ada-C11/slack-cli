@@ -11,8 +11,49 @@ describe "Slack" do
         # binding.pry
         expect(return_value).must_be_kind_of Slack
         expect(return_value.channels["channels"][0]["id"]).must_equal "CH41RMLP4"
+        expect(return_value.users["members"][1]["name"]).must_equal "cello.elle"
       end
     end
+  end
+
+  describe "select users and channels" do
+    it "select a user" do
+      VCR.use_cassette("slack_query") do # <-- .yml filename
+        user_a = user.select("UH53ZCBBR") # <-- this is "id" value for "kaseea"
+        user_b = user.select("kaseea") # <-- this is "name" value for "kaseea"
+
+        expect(user_a).must_equal "UH53ZCBBR"
+        expect(user_b).must_equal "kaseea"
+      end
+    end
+
+    it "select a channel" do
+      VCR.use_cassette("slack_query") do # <-- .yml filename
+        channel_a = channel.select("apiiiii:")
+        channel_b = channel.select("CH53ZCWDV") # <-- this is the "id" value for the general channel
+        expect(channel_a).must_equal "apiiiii"
+        expect(channel_a).must_equal "CH53ZCWDV"
+      end
+    end
+
+    it "select a channel" do
+      VCR.use_cassette("slack_query") do
+        # TEST GOES HERE
+      end
+    end
+
+    it "select a channel" do
+      VCR.use_cassette("slack_query") do
+        # TEST GOES HERE
+      end
+    end
+
+    it "select a channel" do
+      VCR.use_cassette("slack_query") do
+        # TEST GOES HERE
+      end
+    end
+    #
   end
 
   #   describe "send_msg" do
