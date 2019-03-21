@@ -9,15 +9,15 @@ class User < Recipient
   BASE_URL = "https://slack.com/api/users.list"
   TOKEN = ENV["SLACK_TOKEN"]
 
-  def initialize
-    super
+  def initialize(id, name, real_name)
+    super(id, name)
     @real_name = real_name
-    @status_text = status_text
-    @status_emoji = status_emoji
+    @id = id
+    @name = name
+
   end
 
   def self.list
-    puts TOKEN
     query_params = {
       token: TOKEN,
     }
@@ -27,15 +27,27 @@ class User < Recipient
     unless response.code == 200
       raise SearchError, "Cannot find #{search_term}"
     end
-    # response.each do |response|
-    #   puts "id: #{response.first["members"][0]}"
-    # end
-    return response
+    members_list = []
+    members = response["members"]
+    members.each do |member|
+      id = member["id"]
+      name = member["name"]
+      real_name = member["real_name"]
+      new_member = User.new(id, name, real_name)
+      members_list << new_member
+    end
+    return members_list
   end
+  def detail
+    puts "#{real_name}, slack user name: #{name}, id: #{id}"
+  end
+
+
 end
 
-#puts User.list
-#binding.pry
-#puts User.list
-# puts User.list["members"][0]["id"]
-# puts User.list["members"][0]["real_name"]
+# puts User.list
+# puts User.list[0]
+# #puts User.list
+#  puts User.list["members"][0]["id"]
+#  puts User.list["members"][0]["real_name"]
+#  puts User.list["members"][0]["name"]
