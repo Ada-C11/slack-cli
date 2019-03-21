@@ -39,7 +39,11 @@ module SlackCLI
     end
 
     def send_message(message)
-      selected.send_message(message)
+      if selected == nil
+        raise SlackApiError, "Invalid recipient"
+      else
+        selected.send_message(message)
+      end
     end
   end
 end
