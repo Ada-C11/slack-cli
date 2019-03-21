@@ -1,11 +1,14 @@
 require "httparty"
-require 'dotenv'
+require "dotenv"
 require_relative "recipient"
 require "table_print"
+require "httparty"
+require "pry"
 
 Dotenv.load
 
 module SlackAPI
+  class SlackApiError < StandardError; end
 
   class User
 
@@ -13,37 +16,57 @@ module SlackAPI
 
     attr_reader :real_name, :slack_id, :name, :list
 
-    BASE_URL = "https://slack.com/api/users.list"
-    TOKEN = ENV['TOKEN']
+    BASE_URL = "https://slack.com/api"
+    USERS_LIST_PATH = "/users.list"
+    CHAT_POST_MESSAGE_PATH = "/chat.postMessage"
+    TOKEN = ENV["TOKEN"]
     @@list = []
 
-    def initialize(real_name:,slack_id:, name:)
+    def initialize(real_name:, slack_id:, name:)
       @slack_id = slack_id
       @name = name
       @real_name = real_name
     end
 
     def details
-        detail_hash = {real_name: @real_name,slack_id: @slack_id, name: @name}
+      return { real_name: @real_name, slack_id: @slack_id, name: @name }
     end
 
     def self.list
       return @@list
     end
 
+    def send_message(text:, recipient:)
+      body = {
+        text: text,
+        channel: recipient.slack_id,
+        token: ENV["TOKEN"],
+      }
+
+      response = HTTParty.post("https://slack.com/api/chat.postMessage",
+                               body: body,
+                               headers: { "Content-Type" => "application/x-www-form-urlencoded" })
+
+      unless response.code == 200 && response.parsed_response["ok"]
+        raise SlackApiError, "Error when posting #{text} to #{recipient}, error: #{response.parsed_response["error"]}"
+      end
+
+      return response.code == 200 && response.parsed_response["ok"]
+    end
+
     private
+
     def self.load
-      query_parameters = {token: TOKEN}
-      response = HTTParty.get(BASE_URL, query: query_parameters)
+      query_parameters = { token: TOKEN }
+      response = HTTParty.get(BASE_URL << USERS_LIST_PATH, query: query_parameters)
       response["members"].length.times do |i|
         real_name = response["members"][i]["real_name"]
         slack_id = response["members"][i]["id"]
         name = response["members"][i]["name"]
-        new_user = SlackAPI::User.new(real_name: real_name,slack_id: slack_id, name: name)
+        new_user = SlackAPI::User.new(real_name: real_name, slack_id: slack_id, name: name)
         @@list.push(new_user)
-    end
+      end
       return @@list
     end
   end
 end
-

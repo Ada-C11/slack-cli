@@ -2,17 +2,19 @@ require 'minitest'
 require_relative 'test_helper.rb'
 
 describe "User" do
+  before do 
+    VCR.use_cassette("load_users") do
+      @response = SlackAPI::User.load
+    end
+  end
 
   describe "self.load" do
     it "can find the list of users" do
-        VCR.use_cassette("load_users") do
-          response = SlackAPI::User.load
-          expect(response).must_be_kind_of Array
-          expect(response[0]).must_be_kind_of SlackAPI::User
-          expect(response[0].name).must_equal "slackbot"
-          expect(response[0].real_name).must_equal "Slackbot"
-          expect(response[0].slack_id).must_equal "USLACKBOT"
-         end
+          expect(@response).must_be_kind_of Array
+          expect(@response[0]).must_be_kind_of SlackAPI::User
+          expect(@response[0].name).must_equal "slackbot"
+          expect(@response[0].real_name).must_equal "Slackbot"
+          expect(@response[0].slack_id).must_equal "USLACKBOT"
       end
   end
 
@@ -21,6 +23,28 @@ describe "User" do
           expect(SlackAPI::User.list).must_be_kind_of Array
          end
       end
+
+  end
+
+  describe "send message" do
+
+    it "sends a message to selected user" do
+      VCR.use_cassette("send_message") do
+        user = SlackAPI::User.list[0]
+        user2 = SlackAPI::User.list[1]
+        test = user.send_message(text: "hello", recipient: user2)
+        expect(test).must_equal true
+       end
+    end
+
+    it "sends a message to selected channel" do
+      VCR.use_cassette("send_message_to_channel") do
+        user = SlackAPI::User.list[0]
+        channel = SlackAPI::Channel.list[0]
+        test2 = user.send_message(text: "hello", recipient: channel)
+        expect(test2).must_equal true
+       end
+    end
 
   end
 

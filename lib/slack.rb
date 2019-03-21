@@ -48,7 +48,10 @@ def main
         workspace.selected = nil
         # Needs error checking
         user_id_or_name = gets.chomp
-        workspace.select_user(id_or_name: user_id_or_name)
+        selected = workspace.select_user(id_or_name: user_id_or_name)
+        if selected == nil
+          puts "User not found"
+        end
         puts "[A] show details for #{user_id_or_name}"
         puts "[B] Go back to main menu"
         # Needs error checking
@@ -62,6 +65,9 @@ def main
         workspace.selected = nil
         chan_id_or_name = gets.chomp.downcase
         workspace.select_channel(id_or_name: chan_id_or_name)
+        if selected == nil
+          puts "User not found"
+        end
         puts "[A] show details for #{chan_id_or_name}"
         puts "[B] Go back to main menu"
         # Needs error checking
