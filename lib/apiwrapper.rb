@@ -1,3 +1,7 @@
+require "httparty"
+require "dotenv"
+Dotenv.load
+
 module Slack
   module ApiWrapper
     class SlackError < StandardError; end
