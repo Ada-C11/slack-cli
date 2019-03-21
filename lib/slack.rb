@@ -14,23 +14,24 @@ def main
 ######## MESSAGE TO USER #########  
 current_session = Workspace.new
 
-  puts "Welcome to the Ada Slack CLI!"
-  puts "There are #{current_session.channels.length} channels in this workspace."
+  puts "\nWelcome to the Ada Slack CLI!"
+  puts "\nThere are #{current_session.channels.length} channels in this workspace."
   puts "There are #{current_session.users.length} users in this workspace."
   puts "Choose your next adventure from the following options: \n
         1. list users \n
         2. list channels \n
         3. quit"
         
-        user_selection = gets.chomp.downcase
+  user_selection = gets.chomp.downcase
     case user_selection
-    when "1" || "list users" || "users"
-      current_session.users.each { |user| puts user.name }
+    when "1" , "list users" , "users"
+      current_session.users.each { |user| puts "username: #{user.name} | real name: #{user.real_name} | Slack ID: #{user.slack_id}" }
       main
-    when "2" || "list channels" || "channels"
-      current_session.channels.each { |channel| puts channel.name}
+    when "2" , "list channels" , "channels"
+      current_session.channels.each { |channel| puts "name: #{channel.name} | topic: #{channel.topic["value"]} | member count: #{channel.member_count} | Slack ID: #{channel.slack_id}"}
       main
-    when "3" || "quit"
+    when "3" , "quit"
+      puts "Byeeeeeeeeeeeeeee"
       exit
     end
       
