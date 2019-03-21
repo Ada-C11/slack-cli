@@ -10,65 +10,68 @@ module Slack
 
     Dotenv.load
 
-    # attr_reader :username, :real_name, :slack_id
+    attr_reader :username, :real_name, :slack_id
 
-    # def initialize(username, real_name, slack_id)
-    #   @username = username
-    #   @real_name = real_name
-    #   @slack_id = slack_id
-    # end # initialize
+    def initialize(username:, real_name:, slack_id:)
+      @username = username
+      @real_name = real_name
+      @slack_id = slack_id
+    end # initialize
 
-    def self.list_users
+    def self.get_user_data
       query_parameters = {
         token: ENV["SLACK_API_TOKEN"],
       }
-      response = HTTParty.get(USER_URL, query: query_parameters)
-      ENV["SLACK_API_TOKEN"]
 
-      slack_users = {}
-      if (response.code == 200)
-        user_passes = response["members"].map do |user|
-          slack_users[user] = { "slack_id" => user["id"],
-                               "username" => user["name"],
-                               "realname" => user["real_name"] }
+      response = HTTParty.get(USER_URL, query: query_parameters)
+
+      if response.code == 200
+        user_data = response["members"].map do |user|
+          { username: user["name"],
+           real_name: user["real_name"],
+           slack_id: user["id"] }
         end
+        return user_data
       else
         raise Slack::SlackError, "There was an error. #{response.error}: #{response.message}"
-      end # else
-      return slack_users
-    end # end
-
-    def select_user(id)
-      query_parameters = {
-        token: ENV["SLACK_API_TOKEN"],
-      }
-      response = HTTParty.get(USER_URL, query: query_parameters)
-
-      chosen_one = ""
-      response["members"].each do |member|
-        if member["name"] == id
-          chosen_one = id
-        elsif member["real_name"] == id
-          chosen_one = id
-        end
-      end # each
-
-      if chosen_one == ""
-        raise Slack::SlackError, "User must have an id or a name."
-      end # end
-      return chosen_one
-    end # self.select_user
-
-    def show_details(id)
-      query_parameters = {
-        token: ENV["SLACK_API_TOKEN"],
-      }
-      response = HTTParty.get(USER_URL, query: query_parameters)
-      # query token
-      # response
-      # create a hash and iterate over user details. put result in hash and return it
+      end # if
     end
 
-    # ap self.list_users
+    # ap self.get_user_data
+
+    def self.list_users
+      users = get_user_data
+
+      return users
+    end
+
+    ap self.list_users
+
+    def self.select_user(name_or_id)
+      user_data = get_user_data
+      chosen_user = nil
+
+      user_data.each do |user|
+        if user[:username] == name_or_id
+          chosen_user = Slack::User.new(
+            username: user[:username],
+            real_name: user[:real_name],
+            slack_id: user[:slack_id],
+          )
+        elsif user[:real_name] == name_or_id
+          chosen_user = Slack::User.new(
+            username: user[:username],
+            real_name: user[:real_name],
+            slack_id: user[:slack_id],
+          )
+        end
+      end
+
+      if chosen_user == nil
+        raise Slack::SlackError, "There was an error. #{response.error}: #{response.message}"
+      end
+
+      return chosen_user
+    end
   end # class
 end # module

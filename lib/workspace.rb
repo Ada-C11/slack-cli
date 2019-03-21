@@ -36,15 +36,15 @@ def main
       answer = gets.chomp
     when 3
       puts "Please enter a username or real name:"
-      id = gets.chomp
-      user = Slack::User.new
-      chosen_one = user.select_user(id)
-      ap chosen_one
+      name_or_id = gets.chomp
+
+      chosen_user = Slack::User.select_user(name_or_id)
+      ap chosen_user
     when 4
       puts "Please enter a channel name or channel id:"
-      id = gets.chomp
-      channel = Slack::Channel.new
-      chosen_channel = channel.select_channel(id)
+      name_or_id = gets.chomp
+      # channel = Slack::Channel.new(@channel_id, @channel_name, @topic)
+      chosen_channel = Slack::Channel.select_channel(name_or_id)
       ap chosen_channel
     when 5
     when 6
