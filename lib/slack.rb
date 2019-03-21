@@ -4,6 +4,7 @@ require_relative "user"
 require_relative "channel"
 
 # require_relative "../specs/test_helper"
+require "colorize"
 require "table_print"
 require "httparty"
 require "pry"
@@ -28,11 +29,15 @@ def main
     when "list channels"
       tp workspace.channels, :name, :topic, :member_count, :slack_id
     when "select user"
-      puts "hehe haven't done this yet"
+      print "User ID or Username > "
+      input = gets.chomp
+      puts workspace.select_user(input)
     when "select channel"
-      puts "hehe haven't done this yet"
+      print "Channel ID or Channel Name > "
+      input = gets.chomp
+      puts workspace.select_channel(input)
     when "details"
-      puts "hehe haven't done this yet"
+      workspace.show_details # This is the only method that prints things within the method.
     end
 
     break if user_input == "quit"

@@ -36,10 +36,6 @@ module Slack
       raise NotImplementedError, "Implement me in a child class!"
     end
 
-    def self.print_list
-      raise NotImplementedError, "Implement me in a child class!"
-    end
-
     def details
       raise NotImplementedError, "Implement me in a child class!"
     end
