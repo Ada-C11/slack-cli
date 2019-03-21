@@ -12,5 +12,10 @@ module Slack
       @selected = channel
       return true
     end
+
+    def select_user(user:)
+      @selected = user
+      return true
+    end
   end
 end

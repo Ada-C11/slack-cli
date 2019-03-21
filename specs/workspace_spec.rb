@@ -34,8 +34,14 @@ describe "Workspace class" do
 
   describe "Workspace#Select_user" do
     it "will set the selected variable to input user" do
-      @workspace.select_user(channel: @workspace.users[1])
+      @workspace.select_user(user: @workspace.users[1])
       expect(@workspace.selected).must_equal @workspace.users[1]
+    end
+  end
+
+  describe "Workspace#list_all" do
+    it "will return a string" do
+      expect(@workspace.list_all).must_be_instance_of String
     end
   end
 end
