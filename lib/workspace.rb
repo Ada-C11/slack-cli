@@ -19,7 +19,7 @@ module Slack
       @selected = nil
     end
 
-    def select_user(user_descriptor) #return user or id/set the selected user
+    def select_user(user_descriptor)
       users.find do |user|
         if user_descriptor == user.name || user_descriptor == user.slack_id
           @selected = user
@@ -31,10 +31,16 @@ module Slack
       end
     end
 
-    # users.each do |user|
-    #     if name == user.name || name == user.slack_id     end
-
     def select_channel(channel_descriptor)
+      channels.find do |channel|
+        if channel_descriptor == channel.name || channel_descriptor == channel.slack_id
+          @selected = channel
+        end
+      end
+
+      if @selected == nil
+        return "Could not find a channel with that NAME or SLACK_ID."
+      end
     end
 
     def show_details #currently_selected_recipient
