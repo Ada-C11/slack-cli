@@ -12,7 +12,6 @@ module Slack
 
     def initialize(slack_id:, name:, topic:, member_count:)
       super(slack_id, name)
-      @name = name
       @topic = topic
       @member_count = member_count
     end
@@ -39,7 +38,7 @@ module Slack
       response = Slack::Channel.channels_get
       channels = response["channels"].map do |channel|
         name = channel["name"]
-        slack_id = channel["slack_id"]
+        slack_id = channel["id"]
         topic = channel["topic"]["value"]
         member_count = channel["members"].count
 
