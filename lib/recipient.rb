@@ -27,8 +27,8 @@ class Recipient
         if user["id"] == @slack_id
           puts "Your selected user has the following details:"
           puts "Name: #{user["real_name"]}"
-          puts "SlackID #{user["id"]}"
           puts "Username: #{user["name"]}"
+          puts "SlackID: #{user["id"]}"
         end
       end
     else
@@ -44,9 +44,10 @@ class Recipient
       channels.each do |channel|
         if channel["id"] == @slack_id
           puts "Your selected channel has the following details:"
-          puts "Channel name: #{(channel["name"]).capitalize}"
+          puts "Channel name: #{channel["name"]}"
           puts "Topic: #{channel["topic"]["value"]}"
-          puts "Purpose: #{channel["purpose"]["value"]}"
+          puts "Member Count: #{channel["members"].length}"
+          puts "Slack ID: #{channel["id"]}"
         end
       end
     end
