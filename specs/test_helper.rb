@@ -16,6 +16,7 @@ require_relative "../lib/recipient"
 require_relative "../lib/user"
 require_relative "../lib/slack"
 require_relative "../lib/channels"
+require_relative "../lib/workspace"
 
 VCR.configure do |config|
   config.cassette_library_dir = "specs/cassettes" # folder where casettes will be located
