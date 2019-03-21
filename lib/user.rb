@@ -1,24 +1,19 @@
 require "pry"
 require "httparty"
+require_relative "recipient"
 
 module SlackAPI
   class SlackError < StandardError; end
 
-  class User
-    #   attr_accessor :list_users, :user_list
+  class User < Recipient
+    # def initialize()
+    #   super("users.list")
+    # end
 
-    #   def initialize
-    #     @user_list = {}
-    #   end
-
-    BASE_URL = "https://slack.com/api/users.list"
+    BASE_URL = "https://slack.com/api/"
 
     def self.list_users
-      query = {
-        token: ENV["SLACK_API_TOKEN"],
-      }
-
-      response = HTTParty.get(BASE_URL, query: query)
+      response = Recipient.get("users.list")
 
       user_list = {}
 
@@ -34,11 +29,13 @@ module SlackAPI
     end
 
     def select_user(identifier)
-      query = {
-        token: ENV["SLACK_API_TOKEN"],
-      }
+      # query = {
+      #   token: ENV["SLACK_API_TOKEN"],
+      # }
 
-      response = HTTParty.get(BASE_URL, query: query)
+      # response = HTTParty.get(BASE_URL, query: query)
+      response = Recipient.get("users.list")
+
       selected_user = ""
 
       response["members"].each do |member|
@@ -55,11 +52,12 @@ module SlackAPI
     end
 
     def see_details(identifier)
-      query = {
-        token: ENV["SLACK_API_TOKEN"],
-      }
+      # query = {
+      #   token: ENV["SLACK_API_TOKEN"],
+      # }
 
-      response = HTTParty.get(BASE_URL, query: query)
+      # response = HTTParty.get(BASE_URL, query: query)
+      response = Recipient.get("users.list")
 
       user_details = {}
 

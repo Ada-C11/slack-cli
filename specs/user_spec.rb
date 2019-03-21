@@ -4,7 +4,7 @@ describe SlackAPI do
     it "list all users" do
       VCR.use_cassette("list_users") do
         response = SlackAPI::User.list_users
-
+        puts response
         expect(response).wont_be_nil
         expect(response.keys.include?("aribray")).must_equal true
         expect(response["aribray"]).must_equal "real name" => "Ariana Bray",

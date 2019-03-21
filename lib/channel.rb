@@ -1,24 +1,19 @@
 require "pry"
 require "httparty"
+require_relative "recipient"
 
 module SlackAPI
   class SlackError < StandardError; end
 
-  class Channel
-    # attr_accessor :list_channels, :channel_list
-
-    # def initialize
-    #   @channel_list = {}
+  class Channel < Recipient
+    # def initialize()
+    #   super("channels.list")
     # end
 
-    BASE_URL = "https://slack.com/api/channels.list"
+    BASE_URL = "https://slack.com/api/"
 
     def self.list_channels
-      query = {
-        token: ENV["SLACK_API_TOKEN"],
-      }
-
-      response = HTTParty.get(BASE_URL, query: query)
+      response = Recipient.get("channels.list")
 
       channel_list = {}
 
@@ -26,19 +21,15 @@ module SlackAPI
         raise SlackAPI::SlackError, "There was an error. The code is #{response["error"]}."
       else
         response["channels"].each do |channel|
-          channel_list[channel["name"]] = { "topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"] }
+          channel_list[channel["name"]] = {"topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"]}
           # binding.pry
         end
       end
       return channel_list
     end
 
-    def select_channel(identifier)
-      query = {
-        token: ENV["SLACK_API_TOKEN"],
-      }
-
-      response = HTTParty.get(BASE_URL, query: query)
+    def select_channel(identifier) # maybe in parent class?
+      response = Recipient.get("channels.list")
 
       selected_channel = ""
       response["channels"].each do |channel|
@@ -55,11 +46,7 @@ module SlackAPI
     end
 
     def see_details(identifier)
-      query = {
-        token: ENV["SLACK_API_TOKEN"],
-      }
-
-      response = HTTParty.get(BASE_URL, query: query)
+      response = Recipient.get("channels.list")
 
       channel_details = {}
 
@@ -68,7 +55,7 @@ module SlackAPI
       else
         response["channels"].each do |channel|
           if channel["id"] == identifier || channel["name"] == identifier
-            channel_details[channel["name"]] = { "topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"] }
+            channel_details[channel["name"]] = {"topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"]}
             return channel_details
           end
         end
