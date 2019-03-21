@@ -1,7 +1,11 @@
 require "httparty"
 
 module SlackCLI
+
   class Recipient
+
+    class SlackApiError < StandardError; end
+    
     attr_reader :slack_id, :name
 
     URL = "https://slack.com/api/chat.postMessage"
