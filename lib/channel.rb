@@ -7,7 +7,6 @@ require "table_print"
 Dotenv.load
 
 module Slack
-  class SlackApiError < StandardError; end
 
   class Channel < Recipient
     attr_reader :name, :id, :topic, :member_count
@@ -23,27 +22,27 @@ module Slack
     CHANNEL_URL = "https://slack.com/api/channels.list"
 
     # If supplied channel name or slack id then select corresponsing channel
-    def self.select_channel(slack_id)
-      selected_channel = list.find {|channel| channel.id == slack_id}
-      return selected_channel
-    end
+    # def self.select_channel(slack_id)
+    #   selected_channel = list.find {|channel| channel.id == slack_id}
+    #   return selected_channel
+    # end
 
-    def self.send_message(text, channel)
-      body = {
-        text: text,
-        channel: channel,
-        token: ENV["SLACK_API_TOKEN"],
-      }
+    # def self.send_message(text, channel)
+    #   body = {
+    #     text: text,
+    #     channel: channel,
+    #     token: ENV["SLACK_API_TOKEN"],
+    #   }
 
-      response = HTTParty.post("#{BASE_URL}/chat.postMessage",
-                               body: body,
-                               headers: { "Content-Type" => "application/x-www-form-urlencoded" })
+    #   response = HTTParty.post("#{BASE_URL}/chat.postMessage",
+    #                            body: body,
+    #                            headers: { "Content-Type" => "application/x-www-form-urlencoded" })
 
-      unless response.code == 200 && response["ok"]
-        raise SlackApiError, "channel_not_found"
-      end
-      return true
-    end
+    #   unless response.code == 200 && response["ok"]
+    #     raise SlackApiError, "channel_not_found"
+    #   end
+    #   return true
+    # end
 
     def details
       return @topic

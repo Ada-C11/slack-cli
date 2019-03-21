@@ -7,7 +7,6 @@ require "table_print"
 Dotenv.load
 
 module Slack
-  class SlackApiError < StandardError; end
 
   class User < Recipient
     attr_reader :real_name, :status_text, :status_emoji
@@ -22,27 +21,27 @@ module Slack
     USER_URL = "https://slack.com/api/users.list"
 
     # If supplied user name or slack id then select corresponding user
-    def self.select_user(slack_id)
-      selected_user = list.find {|user| user.id == slack_id}
-      return selected_user
-    end
+    # def self.select_user(slack_id)
+    #   selected_user = list.find {|user| user.id == slack_id}
+    #   return selected_user
+    # end
 
-    def self.send_message(text, channel)
-      body = {
-        text: text,
-        channel: channel,
-        token: ENV["SLACK_API_TOKEN"],
-      }
+    # def self.send_message(text, channel)
+    #   body = {
+    #     text: text,
+    #     channel: channel,
+    #     token: ENV["SLACK_API_TOKEN"],
+    #   }
 
-      response = HTTParty.post("#{BASE_URL}/chat.postMessage",
-                               body: body,
-                               headers: { "Content-Type" => "application/x-www-form-urlencoded" })
+    #   response = HTTParty.post("#{BASE_URL}/chat.postMessage",
+    #                            body: body,
+    #                            headers: { "Content-Type" => "application/x-www-form-urlencoded" })
 
-      unless response.code == 200 && response["ok"]
-        raise SlackApiError, "user_not_found"
-      end
-      return true
-    end
+    #   unless response.code == 200 && response["ok"]
+    #     raise SlackApiError, "user_not_found"
+    #   end
+    #   return true
+    # end
 
     def details
       return @real_name
