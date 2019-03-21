@@ -23,10 +23,10 @@ def main
     puts "quit"
     input = gets.chomp.downcase
 
-    # while input != "list users" || input != "list channels" || input != "quit"
-    #   puts "Please try again"
-    #   input = gets.chomp.downcase
-    # end
+    unless input == "list users" || input == "list channels" || input == "quit"
+      puts "Please try again"
+      input = gets.chomp.downcase
+    end
 
     case input
     when "list users"
@@ -35,6 +35,8 @@ def main
     when "list channels"
       SlackAPI::Channel.load
       tp SlackAPI::Channel.list
+    else 
+
     end
 
     puts "Thank you for using the Ada Slack CLI"
