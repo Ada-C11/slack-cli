@@ -42,6 +42,7 @@ def main
         puts "That channel does not exist"
       end
     when "details"
+      puts SlackApi::Workspace.show_details
     end
 
     puts "\nWhat would you like to do next?"
