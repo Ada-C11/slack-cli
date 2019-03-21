@@ -1,6 +1,6 @@
 require_relative "test_helper"
 
-describe SlackApi do
+describe SlackApi::User do
   describe "list users" do
     it "returns valid users" do
       VCR.use_cassette("slack_users_list") do

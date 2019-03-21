@@ -1,6 +1,6 @@
 require_relative "test_helper"
 
-describe SlackApi do
+describe SlackApi::Channel do
   describe "list channels" do
     it "returns valid channels" do
       VCR.use_cassette("slack_channels_list") do
