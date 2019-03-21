@@ -104,4 +104,24 @@ describe "Workspace class" do
       expect(selected_channel).must_be_nil
     end
   end
+
+  describe "show details" do
+    before do
+      VCR.use_cassette("test details") do
+        query_params = {
+          token: KEY,
+        }
+        @workspace = Slack::Workspace.new
+      end
+    end
+
+    it "details for selected recipient is string" do
+      @workspace.select_user("evelynnkaplan")
+      expect(@workspace.show_details).must_be_kind_of String
+    end
+
+    it "returns nil if no recipient" do
+      expect(@workspace.show_details).must_be_nil
+    end
+  end
 end

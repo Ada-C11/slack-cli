@@ -44,15 +44,7 @@ describe "Channel" do
     end
 
     it "returns the correct data" do
-      details = @channel.details
-      expected_details = {
-        slack_id: @channel.slack_id,
-        name: @channel.name,
-        topic: @channel.topic,
-        member_count: @channel.member_count,
-      }
-
-      expect(details).must_equal expected_details
+      expect(@channel.details).must_be_kind_of String
     end
   end
 end

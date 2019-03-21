@@ -39,6 +39,7 @@ module Slack
     end
 
     def show_details
+      return selected.details if selected
     end
 
     def send_message

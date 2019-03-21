@@ -34,12 +34,7 @@ module Slack
     end
 
     def details
-      return {
-               slack_id: slack_id,
-               name: name,
-               topic: topic,
-               member_count: member_count,
-             }
+      return "slack_id: #{slack_id}, name: #{name}, topic: #{topic}, member_count: #{member_count}"
     end
   end
 end

@@ -36,13 +36,7 @@ module Slack
     end
 
     def details
-      return {
-               slack_id: slack_id,
-               name: name,
-               real_name: real_name,
-               status_text: status_text,
-               status_emoji: status_emoji,
-             }
+      return "slack_id: #{slack_id}, name: #{name}, real_name: #{real_name}, status_text: #{status_text}, status_emoji: #{status_emoji}"
     end
   end
 end
