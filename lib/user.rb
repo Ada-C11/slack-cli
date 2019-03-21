@@ -1,3 +1,5 @@
+require_relative "recipient"
+
 module Slack
   class User < Recipient
     attr_reader :slack_id, :name
