@@ -8,11 +8,22 @@ describe "Api Wrapper module" do
     end
   end
 
-  describe "ApiWrapper.get_users" do
-    it "will return a Response object" do
+  describe "ApiWrapper.get_json" do
+    it "successfully gets a json object" do
+      url_tail = "users.list"
       VCR.use_cassette("slack_api") do
-        response = Slack::ApiWrapper.get_users
+        response = Slack::ApiWrapper.get_json(url_tail: url_tail)
         expect(response).must_be_instance_of HTTParty::Response
+      end
+    end
+
+    it "raise an error if an invalid url is used" do
+      url_tail = "abc"
+      VCR.use_cassette("slack_api") do
+        response =
+          expect {
+            Slack::ApiWrapper.get_json(url_tail: url_tail)
+          }.must_raise Slack::ApiWrapper::SlackError
       end
     end
   end
@@ -27,10 +38,18 @@ describe "Api Wrapper module" do
   end
 
   describe "ApiWrapper.post" do
-    it "will return a Response object" do
+    it "can send a valid message to a channel" do
       VCR.use_cassette("slack_api") do
         response = Slack::ApiWrapper.post(text: "test text", recipient: "random")
-        expect(response).must_be_instance_of HTTParty::Response
+        expect(response).must_equal true
+      end
+    end
+
+    it "can send a valid message to a user" do
+      VCR.use_cassette("slack_api") do
+        user_id = "UH2RH81RA"
+        response = Slack::ApiWrapper.post(text: "test text", recipient: user_id)
+        expect(response).must_equal true
       end
     end
   end
