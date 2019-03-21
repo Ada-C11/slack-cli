@@ -11,25 +11,9 @@ require_relative 'workspace.rb'
 Dotenv.load
 
 def main
-  url = "https://slack.com/api/channels.list"
-  user_url = "https://slack.com/api/users.list"
-  
-    query = {
-      token: KEY,
-    }
-
-  channel_response = HTTParty.get(url, query: query)
-  user_response = HTTParty.get(user_url, query: query)
-
-  channel_count = channel_response["channels"].count
-  user_count = user_response["members"].count
- 
-  channel_response["channels"].each do |channel|
-    puts channel["name"]
-  end
-  
-  
 ######## MESSAGE TO USER #########  
+workspace = Workspace.new
+
   puts "Welcome to the Ada Slack CLI!"
   puts "There are #{channel_count} channels in this workspace."
   puts "There are #{user_count} users in this workspace."
