@@ -1,8 +1,14 @@
+require_relative "workspace"
+require "httparty"
+require "dotenv"
+Dotenv.load
+
 module SlackCLI
+  USER_URL_MESSAGE = "https://slack.com/api/"
+  API_KEY = ENV["SLACK_API_TOKEN"]
+
   class User
     attr_reader :name, :id, :real_name
-    USER_URL_MESSAGE = "https://slack.com/api/"
-    API_KEY = ENV["SLACK_API_TOKEN"]
 
     def initialize(name, id, real_name)
       @name = name
@@ -12,12 +18,13 @@ module SlackCLI
 
     def self.get(url, param)
       query = {token: param}
-      @response = HTTParty.get(url, query: query)
-      return @response
+      response = HTTParty.get(url, query: query)
+      return response
     end
 
-    def self.list
-      members = @response["members"]
+    def self.list(url, param)
+      response = self.get(url, param)
+      members = response["members"]
       @formatted_list = []
       members.each do |member|
         name = member["name"]

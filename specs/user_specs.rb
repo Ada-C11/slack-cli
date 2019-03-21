@@ -14,7 +14,9 @@ describe SlackCLI do
     end
     let (:list_users) do
       VCR.use_cassette("user_get") do
-        SlackCLI::User.list
+        user = USER_URL
+        param = ENV["SLACK_API_TOKEN"]
+        SlackCLI::User.list(user, param)
       end
     end
     describe "self.get" do
@@ -30,14 +32,13 @@ describe SlackCLI do
     describe "self.list" do
       it "formats the list of users" do
         get_users
-        expect(SlackCLI::User.list).must_be_kind_of Array
-        ap SlackCLI::User.list
+        expect(list_users).must_be_kind_of Array
+        ap list_users
       end
     end
 
     describe "selecting a user" do
       it "creates an instance of user" do
-        # the instantiation of User class should happen in workspace
         expect(SlackCLI::User.new("myriam.waldend", "UH2P4B8R1", "myriam.waldend")).must_be_kind_of SlackCLI::User
       end
     end
