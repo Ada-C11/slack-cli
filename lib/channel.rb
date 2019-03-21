@@ -41,8 +41,6 @@ module Slack
 
     def details
       return @topic
-      # list details for a specific channel
-
     end
 
     def self.channels_get
@@ -65,5 +63,3 @@ module Slack
     end
   end
 end
-
-# query_params = { token: ENV["SLACK_API_TOKEN"] }

@@ -21,26 +21,25 @@ module Slack
     USER_URL = "https://slack.com/api/users.list"
 
 
-    # def self.send_message(text, channel)
-    #   body = {
-    #     text: text,
-    #     channel: channel,
-    #     token: ENV["SLACK_API_TOKEN"],
-    #   }
+    def self.send_message(text, channel)
+      body = {
+        text: text,
+        channel: channel,
+        token: ENV["SLACK_API_TOKEN"],
+      }
 
-    #   response = HTTParty.post("#{BASE_URL}/chat.postMessage",
-    #                            body: body,
-    #                            headers: { "Content-Type" => "application/x-www-form-urlencoded" })
+      response = HTTParty.post("#{BASE_URL}/chat.postMessage",
+                               body: body,
+                               headers: { "Content-Type" => "application/x-www-form-urlencoded" })
 
-    #   unless response.code == 200 && response["ok"]
-    #     raise SlackApiError, "channel_not_found"
-    #   end
-    #   return true
-    # end
+      # unless response.code == 200 && response["ok"]
+      #   raise SlackApiError, "user_not_found"
+      # end
+      return true
+    end
 
     def details
       return @real_name
-      # list details for a specific channel
     end
 
     def self.users_get
@@ -70,9 +69,5 @@ module Slack
 
   end
 end
-
-
-# USER_URL = "https://slack.com/api/users.list"
-# query_params = { token: ENV["SLACK_API_TOKEN"] }
 
 
