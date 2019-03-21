@@ -62,7 +62,18 @@ module Slack
       return chosen_channel
     end # self.select_channel
 
+    def show_details(id)
+      # query token
+      # response
+      # create a hash and iterate over channel details. put result in hash and return it
+    end
+
     # ap self.channel_api_data
     # ap self.list_channels
+
+    # added another file for the recipient?
+    # make some conditionals dependant on response code?
+
+    
   end # class
 end # module
