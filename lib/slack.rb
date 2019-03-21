@@ -31,43 +31,54 @@ def main
       puts "Enter username or slack id:"
 
       name_or_id = gets.chomp.downcase
-      workspace.select_user(name_or_id)
-      puts "Options: \ndetails \nsend message \nreturn to main menu"
-      input = gets.chomp.downcase
-
-      until (input == "return to main menu")
-        case input
-        when "details"
-          puts workspace.show_details
-        when "send message"
-          puts "Type a message to send:"
-          message = gets.chomp
-          workspace.send_message(message)
-        when "return to main menu"
-          break
-        end
-        puts "Options: \ndetails \nsend message \nquit"
+      user = workspace.select_user(name_or_id)
+      if user
+        puts "Options: \ndetails \nsend message \nreturn to main menu"
         input = gets.chomp.downcase
+
+        until (input == "return to main menu")
+          case input
+          when "details"
+            puts workspace.show_details
+          when "send message"
+            puts "Type a message to send:"
+            message = gets.chomp
+            workspace.send_message(message)
+          when "return to main menu"
+            break
+          end
+          puts "What would you like to do"
+          puts "Options: \ndetails \nsend message \nquit"
+          input = gets.chomp.downcase
+        end
+      else
+        puts "No user with that name or ID found"
       end
     when "select channel"
       puts "Enter channel name or id:"
       name_or_id = gets.chomp.downcase
-      workspace.select_channel(name_or_id)
-      puts "Options: \ndetails \nsend message \nreturn to main menu"
-      input = gets.chomp.downcase
-      until (input == "return to main menu")
-        case input
-        when "details"
-          puts workspace.show_details
-        when "send message"
-          puts "Type a message to send:"
-          message = gets.chomp
-          workspace.send_message(message)
-        when "return to main menu"
-          break
-        end
-        puts "Options: \ndetails \nsend message \nquit"
+      channel = workspace.select_channel(name_or_id)
+      if channel
+        puts "Options: \ndetails \nsend message \nreturn to main menu"
         input = gets.chomp.downcase
+
+        until (input == "return to main menu")
+          case input
+          when "details"
+            puts workspace.show_details
+          when "send message"
+            puts "Type a message to send:"
+            message = gets.chomp
+            workspace.send_message(message)
+          when "return to main menu"
+            break
+          end
+          puts "What would you like to do?"
+          puts "Options: \ndetails \nsend message \nquit"
+          input = gets.chomp.downcase
+        end
+      else
+        puts "No channel with that name or ID found"
       end
     when "quit"
       break

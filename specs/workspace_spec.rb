@@ -38,7 +38,7 @@ describe "Workspace object" do
     expect(@new_workspace.select_channel(id)).must_equal channel
   end
 
-  it "can send a valid message" do
+  it "can send a valid message with id to a channel" do
     VCR.use_cassette("post message") do
       id = @new_workspace.channels.first.slack_id
       @new_workspace.select_channel(id)
@@ -47,9 +47,48 @@ describe "Workspace object" do
     end
   end
 
-  it "will raise an error if the channel is nil or invalid"
-  nil_channel = @new_workspace.select_channel("")
-  expect {
-    @new_workspace.send_message("This is a test!")
-  }.must_raise SlackCLI::SlackApiError
+  it "can send a valid message with id to a user" do
+    VCR.use_cassette("post message") do
+      id = @new_workspace.users.first.slack_id
+      @new_workspace.select_user(id)
+      response = @new_workspace.send_message("This is a test!")
+      expect(response).must_equal true
+    end
+  end
+
+  it "can send a valid message with name to a channel" do
+    VCR.use_cassette("post message") do
+      name = @new_workspace.channels.first.name
+      @new_workspace.select_channel(name)
+      response = @new_workspace.send_message("This is a test!")
+      expect(response).must_equal true
+    end
+  end
+
+  it "can send a valid message with name to a user" do
+    VCR.use_cassette("post message") do
+      name = @new_workspace.users.first.name
+      @new_workspace.select_user(name)
+      response = @new_workspace.send_message("This is a test!")
+      expect(response).must_equal true
+    end
+  end
+
+  it "will raise an error if the channel is nil or invalid" do
+    VCR.use_cassette("post message") do
+      @new_workspace.select_channel("")
+      expect {
+        @new_workspace.send_message("This is a test!")
+      }.must_raise SlackCLI::SlackApiError
+    end
+  end
+
+  it "will raise an error if the user is nil or invalid" do
+    VCR.use_cassette("post message") do
+      @new_workspace.select_user("")
+      expect {
+        @new_workspace.send_message("This is a test!")
+      }.must_raise SlackCLI::SlackApiError
+    end
+  end
 end
