@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require 'httparty'
+require 'httparty' 
 require 'awesome_print'
 require 'dotenv'
 require_relative '../lib/recipient'
@@ -7,6 +7,9 @@ require_relative '../lib/channel'
 require_relative '../lib/user'
 Dotenv.load
 # require 'table_print'
+
+class SlackApiError < StandardError; end
+
 
 def main
   ap "Welcome to the Ada Slack CLI!"
@@ -61,7 +64,7 @@ def main
       if recipient.nil?
         puts "No details to show, please select a channel or user."
       else
-        if recipient.details(user["id"]) == nil
+        if user.nil?
           recipient.details(channel["id"])
         else
           recipient.details(user["id"])
