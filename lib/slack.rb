@@ -1,4 +1,4 @@
-require_relative 'workspace'
+require_relative "workspace"
 
 #driver code
 def main
@@ -37,10 +37,9 @@ def main
       workspace.select_channel(selected_channel)
     when "details"
       begin
-      puts workspace.show_details
-      puts "this worked!!!!!!!!!"
+        puts workspace.show_details
       rescue
-      puts "it's calling this instead"
+        puts "No user or channel selected, try again."
       end
     when "send message"
       workspace.send_message
@@ -48,8 +47,8 @@ def main
       puts "Thanks for checking out TatiHana! Bye bye..."
       exit
     end
-  options
-  choice = gets.chomp
+    options
+    choice = gets.chomp
   end
 end
 
