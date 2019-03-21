@@ -1,8 +1,10 @@
 #!/usr/bin/env ruby
 require 'dotenv'
 require 'httparty'
-require_relative 'user'
 require_relative 'channel'
+require_relative 'recipient'
+require_relative 'user'
+require_relative 'workspace'
 Dotenv.load
 
 # BASE_URL = 'https://slack.com/api'
@@ -14,9 +16,11 @@ token = ENV['TOKEN']
 
 def main
   input = 0
-  SlackAPI::User.load
-  SlackAPI::Channel.load
-  
+
+  users = SlackAPI::User.load
+  channels SlackAPI::Channel.load
+  SlackAPI::Workspace.new(users: users, channels: channels)
+
   until input == "quit" do
     puts "Welcome to the Ada Slack CLI!"
     puts "What would you like to do?"
