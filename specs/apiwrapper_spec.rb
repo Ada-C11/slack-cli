@@ -25,4 +25,13 @@ describe "Api Wrapper module" do
       end
     end
   end
+
+  describe "ApiWrapper.post" do
+    it "will return a Response object" do
+      VCR.use_cassette("slack_api") do
+        response = Slack::ApiWrapper.post(text: "test text", recipient: "random")
+        expect(response).must_be_instance_of HTTParty::Response
+      end
+    end
+  end
 end
