@@ -28,6 +28,15 @@ describe "User class" do
     end
   end
 
+  # user 2 - "UH2RH81RA"
+  # "elise.pham88"
+  # "elise.pham88"
+
+  # channel 2 = "CH2P3NB0T"
+  # "general"
+  #  "Company-wide announcements and work-based matters"
+  # 2
+
   describe "User.create_users" do
     it "will return an array" do
       expect(Slack::User.create_users).must_be_instance_of Array
