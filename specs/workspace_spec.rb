@@ -47,6 +47,26 @@ describe "Workspace class" do
 
     it "will return the correct String format" do
       test_list = @workspace.list_all(list: @workspace.channels)
+      expected_result = "Name: slack-api-project, \nID: CH0EG6M0Q, \nTopic: , \nMember Count: 2\n" +
+                        "-----------------------\n" +
+                        "Name: general, \nID: CH2P3NB0T, \nTopic: Company-wide announcements and work-based matters, \nMember Count: 2\n" +
+                        "-----------------------\n" +
+                        "Name: random, \nID: CH2RH8AMA, \nTopic: Non-work banter and water cooler conversation, \nMember Count: 2\n" +
+                        "-----------------------\n" +
+                        "Name: super-awesome-stuffs, \nID: CH3UNG023, \nTopic: , \nMember Count: 2\n" +
+                        "-----------------------\n"
+      expect(test_list).must_equal expected_result
+    end
+
+    it "will return the correct String format" do
+      test_list = @workspace.list_all(list: @workspace.users)
+      expected_result = "Name: slackbot, \nReal Name: Slackbot, \nID: USLACKBOT\n" +
+                        "-----------------------\n" +
+                        "Name: elise.pham88, \nReal Name: elise.pham88, \nID: UH2RH81RA\n" +
+                        "-----------------------\n" +
+                        "Name: s.dippolito, \nReal Name: Sav Dippolito, \nID: UH3UN350X\n" +
+                        "-----------------------\n"
+      expect(test_list).must_equal expected_result
     end
   end
 end
