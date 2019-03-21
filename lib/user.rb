@@ -10,5 +10,10 @@ module Slack
     def details
       return "Name: #{name}, \nReal Name: #{real_name}, \nID: #{id}"
     end
+
+    def self.create_users
+      users = []
+      return users
+    end
   end
 end

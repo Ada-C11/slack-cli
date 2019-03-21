@@ -31,9 +31,8 @@ describe "Api Wrapper module" do
       VCR.use_cassette("slack_api") do
         real_token = ENV["SLACK_API_KEY"]
         ENV["SLACK_API_KEY"] = "NOT_REAL_TOKEN"
-        error = expect {
-          Slack::ApiWrapper.post(text: "Test message with invalid key",
-                                 recipient: "general")
+        expect {
+          Slack::ApiWrapper.post(text: "Test message with invalid key", recipient: "general")
         }.must_raise Slack::ApiWrapper::SlackError
         ENV["SLACK_API_KEY"] = real_token
       end
