@@ -38,7 +38,7 @@ module SlackCli
         Real Name: #{real_name}
         Status Text: #{status_text}
         Status Emoji: #{status_emoji}"
-      puts user_details
+      return user_details
     end
   end
 end

@@ -15,7 +15,7 @@ describe "Channel" do
       expect(channels["ok"]).must_equal true
     end
   end
-  
+
   describe "list" do
     it "creates a list of all channels" do
       channels = channel_list
@@ -28,9 +28,9 @@ describe "Channel" do
   end
 
   describe "details" do
-    it "lists details for an instance of channel" do
-      channels = channel_list
-      expect(channels[1].details).must_be_kind_of String
+    it "lists details for an instance of Channel" do
+      channel = channel_list[1]
+      expect(channel.details).must_be_kind_of String
     end
   end
 end
