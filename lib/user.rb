@@ -59,6 +59,12 @@ module Slack
       return chosen_one
     end # self.select_user
 
+    def show_details(id)
+      # query token
+      # response
+      # create a hash and iterate over user details. put result in hash and return it
+    end
+
     # ap self.list_users
   end # class
 end # module
