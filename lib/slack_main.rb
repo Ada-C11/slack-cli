@@ -14,14 +14,53 @@ Dotenv.load
 CHANNEL_URL = "https://slack.com/api/channels.list"
 USER_URL = "https://slack.com/api/users.list"
 
+def ask(prompt)
+  print "#{prompt} > "
+  input = gets.chomp
+  return input
+end
+
+def menu
+  puts "\nMENU"
+  puts "1. List users"
+  puts "2. List channels"
+  puts "3. Quit"
+
+  input = ask("What do you want to do?")
+  return input
+end
+
 def main
   puts "Welcome to the Ada Slack CLI!"
 
   channels = Slack::Channel.list
 
-  puts "Here's how many channels were loaded: #{channels.length}"
+  puts "\nHere's how many channels were loaded: #{channels.length}"
 
-  puts "WHAT DO YOU WANNA DO, FOOL???"
+  selection = menu
+
+  until selection == "3"
+    if selection == "1"
+
+      # DO STUFF!
+
+    elsif selection == "2"
+      channels = Slack::Channel.list
+
+      puts "\nHere are the channels:"
+
+      channels.each_with_index do |channel, i|
+        puts "#{i + 1}. #{channel.name.capitalize} -- #{channel.topic} -- #{channel.member_count} -- #{channel.id}"
+      end
+    else
+      puts "\nInvalid entry.  Please try again!"
+    end
+
+    selection = menu
+  end
+
+  # list channels
+  # quit
 
   # Information about how many channels
   #puts workspace.channels

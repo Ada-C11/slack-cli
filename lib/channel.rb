@@ -7,12 +7,14 @@ require "table_print"
 Dotenv.load
 
 module Slack
-  class SlackApiError < StandardError ;end
-  
-  class Channel < Recipient
-    attr_reader :topic, :member_count
+  class SlackApiError < StandardError; end
 
-    def initialize(topic:, member_count:)
+  class Channel < Recipient
+    attr_reader :name, :id, :topic, :member_count
+
+    def initialize(name:, id:, topic:, member_count:)
+      @name = name
+      @id = id
       @topic = topic
       @member_count = member_count
     end
@@ -34,7 +36,7 @@ module Slack
       unless response.code == 200 && response["ok"]
         raise SlackApiError, "channel_not_found"
       end
-      return true                 
+      return true
     end
 
     def details
@@ -56,7 +58,7 @@ module Slack
         topic = channel["topic"]["value"]
         member_count = channel["members"].count
 
-        Slack::Channel.new(topic: topic, member_count: member_count)
+        Slack::Channel.new(name: name, id: id, topic: topic, member_count: member_count)
       end
 
       return channels
