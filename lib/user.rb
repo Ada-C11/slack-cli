@@ -1,12 +1,13 @@
 module SlackCLI
   class User
-    attr_reader :name, :id
+    attr_reader :name, :id, :real_name
     USER_URL_MESSAGE = "https://slack.com/api/"
     API_KEY = ENV["SLACK_API_TOKEN"]
 
-    def initialize(name, id)
+    def initialize(name, id, real_name)
       @name = name
       @id = id
+      @real_name = real_name
     end
 
     def self.get(url, param)
@@ -16,34 +17,26 @@ module SlackCLI
     end
 
     def self.list
-      list_fields = ["name", "real_name", "id"]
-      type = "members"
-      members = @response[type]
-      formatted_list = []
+      members = @response["members"]
+      @formatted_list = []
       members.each do |member|
-        hash = {}
-        list_fields.each do |field|
-          hash["#{field}"] = member[field]
-        end
-        formatted_list << hash
+        name = member["name"]
+        real_name = member["real_name"]
+        id = member["id"]
+        @formatted_list << self.new(name, id, real_name)
       end
-      return formatted_list
+      return @formatted_list
     end
 
     def self.details(parameter_to_find)
-      members_info = @response["members"]
-      members_info.each do |member|
-        if member["name"] == parameter_to_find || member["id"] == parameter_to_find
-          details =
-            "\n\nThe user's real name is: #{member["real_name"]}
-            Occupation: #{member["profile"]["title"]}
-            Status: #{member["profile"]["status_text"]}
-            Team id is: #{member["team_id"]}
-            Contact Information:
-                Phone number -> #{member["profile"]["phone"]} 
-                Skype -> #{member["profile"]["skype"]}\n\n"
-
-          return details
+      details_user = ""
+      @formatted_list.each do |member|
+        if member.name == parameter_to_find || member.id == parameter_to_find
+          details_user = "USER'S DETAILS:
+            Name: #{member.name}
+            Id: #{member.id}
+            Real name: #{member.real_name}."
+          return details_user
         end
       end
       raise ArgumentError, "The user you are trying to find does not exist"
