@@ -24,27 +24,26 @@ describe "Api Wrapper module" do
   end
 
   describe "ApiWrapper.get_json" do
-    it "will return a Repsonse object" do
+    it "will return a Response object" do
       VCR.use_cassette("slack_api") do
-        url = "https://slack.com/api/users.list"
+        url = "users.list"
         query = {
           token: ENV["SLACK_API_KEY"],
         }
-        response = Slack::ApiWrapper.get_json(url: url, query_params: query)
+        response = Slack::ApiWrapper.get_json(url_tail: url, query_params: query)
         expect(response).must_be_instance_of HTTParty::Response
       end
     end
-    
+
     it "raises an error when receiving invalid url" do
       VCR.use_cassette("slack_api") do
-        url = "abc"
+        url = "somethin.gelse"
         query = {
           token: ENV["SLACK_API_KEY"],
         }
-
         expect {
-          Slack::ApiWrapper.get_json(url: url, query_params: query)
-        }.must_raise SlackError
+          Slack::ApiWrapper.get_json(url_tail: url, query_params: query)
+        }.must_raise Slack::SlackError
       end
     end
   end
