@@ -1,5 +1,6 @@
 require "httparty"
 require "dotenv"
+require_relative "workspace"
 
 Dotenv.load
 
@@ -19,14 +20,14 @@ module SlackApi
     # have two responses if select is a type of user choose 1st response
     # else if user input is a type of channel choose 2nd response. the channel can be select_user or select_channel from the main
     # we'd have to require workspace
-
+    test_workspace = Workspace.new
     response = HTTParty.post(
       "#{BASE_URL}",
-      headers: {"Content-Type" => "application/x-www-form-urlencoded"},
+      headers: { "Content-Type" => "application/x-www-form-urlencoded" },
       body: {
         token: SLACK_TOKEN,
         text: message,
-        channel: user_id, #.select_user(chose_user)
+        channel: test_workspace.select_channel(user), #.select_user(chose_user)
         as_user: true,
       },
     )

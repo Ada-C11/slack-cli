@@ -73,18 +73,14 @@ def main
       puts "What would you like to do next? "
       selection = gets.chomp
     when "Details"
-      puts workspace.show_details(details)
+      puts Workspace.show_details(details)
       puts "What would you like to do next? "
       selection = gets.chomp
     when "Send Message"
-      puts "Here is a list of channels: #{channel_name}"
-      puts "Here is a list of Users#{user_name}"
-      puts "Input the person's or channel's name you'd like to send to: "
-      recipient = gets.chomp
       puts "Please input your message:"
       message = gets.chomp
 
-      SlackApi.send_message(message, recipient)
+      SlackApi.send_message(message, chose_channel)
       puts "What would you like to do next? "
       selection = gets.chomp
     end
