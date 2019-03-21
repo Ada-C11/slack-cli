@@ -21,7 +21,9 @@ module Slack
       return selected_channel
     end
 
-    def select_user
+    def select_user(slack_id)
+      selected_user = @users.find { |user| user.slack_id == slack_id }
+      return selected_user
     end
 
     def show_details
