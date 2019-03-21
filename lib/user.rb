@@ -24,7 +24,7 @@ module SlackAPI
 
       if response["ok"]
         response["members"].each do |member|
-          user_list[member["name"]] = { "real name" => member["real_name"], "slack id" => member["id"] }
+          user_list[member["name"]] = {"real name" => member["real_name"], "slack id" => member["id"]}
           # binding.pry
         end
       else
@@ -68,12 +68,10 @@ module SlackAPI
       # else
       response["members"].each do |member|
         if member["id"] == identifier || member["name"] == identifier
-          user_details[member["name"]] = { "real name" => member["real_name"], "slack id" => member["id"] }
+          user_details[member["name"]] = {"real name" => member["real_name"], "slack id" => member["id"]}
           return user_details
         end
       end
     end
-
-    # end
   end # end of class
 end # end of module

@@ -45,13 +45,17 @@ def main
       puts ask_again
       response = gets.chomp
     elsif response == "details"
-      # if select_response == "select user"
-      details = user.see_details(selected_user)
-      #   puts details
-      # elsif select_response == "select channel"
-      #   details = channel.see_details(selected_channel)
-      #   puts details
-      # end
+      if select_response == "select user"
+        details = user.see_details(selected_user)
+        puts details
+        puts ask_again
+        response = gets.chomp
+      elsif select_response == "select channel"
+        details = channel.see_details(selected_channel)
+        puts details
+        puts ask_again
+        response = gets.chomp
+      end
     end
   end
 end
