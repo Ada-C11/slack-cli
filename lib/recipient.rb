@@ -1,5 +1,8 @@
-class Recipent
+require 'dotenv'
+require 'httparty'
+Dotenv.load
 
+class Recipient
   @slack_id = slack_id
   @name = name
 
@@ -7,14 +10,15 @@ class Recipent
     #code here
   end
 
-  def self.get(url, params)
-    #code here
-  end
+  # def self.get(url, params)
+  #   #code here
+  # end
 
   def details
-    #code here
+    raise 'Please implement me'
   end
 
   def self.list
-    #code here
+    raise 'Please implement me'
   end
+end
