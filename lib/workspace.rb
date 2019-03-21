@@ -27,7 +27,7 @@ module Slack
       end
 
       if @selected == nil
-        return "Could not find a user with that USER_NAME or SLACK_ID."
+        return "Could not find a user with USER_NAME or SLACK_ID #{user_descriptor}."
       end
     end
 
@@ -39,7 +39,7 @@ module Slack
       end
 
       if @selected == nil
-        return "Could not find a channel with that NAME or SLACK_ID."
+        return "Could not find a channel with NAME or SLACK_ID #{channel_descriptor}."
       end
     end
 
