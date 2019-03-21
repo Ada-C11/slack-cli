@@ -73,6 +73,32 @@ describe "Workspace Class" do
         end
       end
     end
+
+    it "finds a channel by slack id and stores it in the selected variable" do
+      VCR.use_cassette("workspace_information_find") do
+        slack_ids = ["CH317B6EN", "CH408C1CP", "CH4AZQMJS"]
+        topics = ["All doggos all the time! :dog:",
+                  "Company-wide announcements and work-based matters",
+                  "Non-work banter and water cooler conversation"]
+        workspace = Slack::Workspace.new
+
+        slack_ids.each_with_index do |slack_id, i|
+          find_channel = workspace.select_channel(slack_id)
+          selected_channel = workspace.selected
+          expect(selected_channel).must_be_kind_of Slack::Channel
+          expect(selected_channel.topic).must_equal "#{topics[i]}"
+        end
+      end
+    end
+
+    it "returns an error message if user_name or slack_id are invalid" do
+      VCR.use_cassette("workspace_information_find") do
+        workspace = Slack::Workspace.new
+        find_channel = workspace.select_channel("potato daniels")
+        selected_channel = workspace.selected
+        assert_nil(selected_channel, msg = nil)
+      end
+    end
     # select_channel end
   end
   # end end
