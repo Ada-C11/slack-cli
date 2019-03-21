@@ -38,10 +38,18 @@ describe "Workspace object" do
     expect(@new_workspace.select_channel(id)).must_equal channel
   end
 
-  describe "Recipient class" do
-    it "can send a valid message" do
-      response = SlackCLI::Recipient.send_message("This is a test!")
+  it "can send a valid message" do
+    VCR.use_cassette("post message") do
+      id = @new_workspace.channels.first.slack_id
+      @new_workspace.select_channel(id)
+      response = @new_workspace.send_message("This is a test!")
       expect(response).must_equal true
     end
   end
+
+  it "will raise an error if the channel is nil or invalid"
+  nil_channel = @new_workspace.select_channel("")
+  expect {
+    @new_workspace.send_message("This is a test!")
+  }.must_raise SlackCLI::SlackApiError
 end
