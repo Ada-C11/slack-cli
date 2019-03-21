@@ -15,15 +15,16 @@ token = ENV['TOKEN']
 def main
   input = 0
 
-  while input != "quit" do
+  until input == "quit" do
     puts "Welcome to the Ada Slack CLI!"
     puts "What would you like to do?"
     puts "list users"
     puts "list channels"
     puts "quit"
     input = gets.chomp.downcase
+    valid_input = ["list users", "list channels", "select user", "select channel", "quit"]
 
-    unless input == "list users" || input == "list channels" || input == "quit"
+    until valid_input.include?(input)
       puts "Please try again"
       input = gets.chomp.downcase
     end
