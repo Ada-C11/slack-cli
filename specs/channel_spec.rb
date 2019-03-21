@@ -58,3 +58,14 @@ describe "see_details" do
     end
   end
 end
+
+describe "send_msg" do
+  it "sends a message to selected channel" do
+    channel = SlackAPI::Channel.new()
+    VCR.use_cassette("see_details") do
+      selected_channel = channel.select_channel("CH2SKTKPC")
+      msg = channel.send_msg("CH2SKTKPC", "This is a test message!")
+      expect(msg).must_equal true
+    end
+  end
+end
