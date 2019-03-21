@@ -11,20 +11,28 @@ require "dotenv"
 Dotenv.load
 
 def main
+  workspace = Slack::Workspace.new
+
   puts "Welcome to the Ada Slack CLI!"
   # TODO project
   loop do
     puts "What would you like to do next?"
-    puts "[list users] [list channels] [quit]"
+    puts "[list users] [list channels] [select user] [select channel] [details] [quit]"
     print "> "
 
     user_input = gets.chomp
 
     case user_input.downcase
     when "list users"
-      tp Slack::User.list, :name, :real_name, :slack_id
+      tp workspace.users, :name, :real_name, :slack_id
     when "list channels"
-      tp Slack::Channel.list, :name, :topic, :member_count, :slack_id
+      tp workspace.channels, :name, :topic, :member_count, :slack_id
+    when "select user"
+      puts "hehe haven't done this yet"
+    when "select channel"
+      puts "hehe haven't done this yet"
+    when "details"
+      puts "hehe haven't done this yet"
     end
 
     break if user_input == "quit"
