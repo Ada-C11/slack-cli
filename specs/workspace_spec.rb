@@ -27,15 +27,22 @@ describe "Workspace class" do
   end
 
   it "can select a Channel" do
-    selected_channel = @workspace.select_channel("CH0EE9NJC")
-    expect(selected_channel).must_be_kind_of Slack::Channel
+    @workspace.select_channel("CH0EE9NJC")
+    expect(@workspace.selected).must_be_kind_of Slack::Channel
   end
 
   it "Channel returns nil if given invalid id" do
-    expect(@workspace.select_channel("INVALID_ID")).must_equal nil
+    @workspace.select_channel("INVALID_ID")
+    expect(@workspace.selected).must_equal nil
+  end
+
+  it "can select a User" do
+    @workspace.select_user("USLACKBOT")
+    expect(@workspace.selected).must_be_kind_of Slack::User
   end
 
   it "User returns nil if given invalid id" do
-    expect(@workspace.select_user("INVALID_ID")).must_equal nil
+    @workspace.select_user("INVALID_ID")
+    expect(@workspace.selected).must_equal nil
   end
 end
