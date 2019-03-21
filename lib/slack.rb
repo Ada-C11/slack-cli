@@ -47,7 +47,7 @@ def main
   puts "there are #{slack.channels["channels"].length} channels and #{slack.users["members"].length}"
 
   def options
-    puts "What should we do next? (list channels/ list users/ quit):"
+    puts "What should we do next? (list channels / list users / quit):"
     return gets.chomp.downcase
   end
 
