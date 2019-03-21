@@ -7,7 +7,6 @@ module Slack
       @name = name
     end
 
-
     # def self.get(url, params)
     #   HTTParty.GET(url, query: params)
     # end

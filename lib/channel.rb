@@ -2,7 +2,7 @@ require_relative "recipient"
 
 module Slack
   class Channel < Recipient
-    attr_reader :slack_id, :name
+    attr_reader :slack_id, :name, :num_members, :topic
 
     def initialize(slack_id, name, num_members, topic)
       super(slack_id, name)

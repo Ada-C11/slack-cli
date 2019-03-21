@@ -2,7 +2,7 @@ require_relative "recipient"
 
 module Slack
   class User < Recipient
-    attr_reader :slack_id, :name
+    attr_reader :slack_id, :name, :real_name
 
     def initialize(slack_id, name, real_name)
       super(slack_id, name)
@@ -22,7 +22,7 @@ module Slack
 
     def self.list_all
       users = User.get["members"].map do |user|
-        self.new(user["name"], user["profile"]["real_name"], user["id"])
+        self.new(user["id"], user["name"], user["profile"]["real_name"])
       end
       return users
     end
