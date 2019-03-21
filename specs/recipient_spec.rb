@@ -3,7 +3,6 @@ SimpleCov.start
 
 require_relative "test_helper"
 require_relative "../lib/recipient.rb"
-require_relative "../lib/slack_main.rb"
 
 describe "Recipient class" do
   before do

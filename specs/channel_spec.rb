@@ -3,7 +3,6 @@ SimpleCov.start
 
 require_relative "test_helper"
 require_relative "../lib/channel.rb"
-require_relative "../lib/slack_main.rb"
 
 describe "Channel class" do
   before do
