@@ -44,6 +44,7 @@ module Slack
     end
 
     def show_details #currently_selected_recipient
+      return false if @selected == nil
       tp @selected, @selected.details
     end
 

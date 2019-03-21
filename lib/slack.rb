@@ -34,15 +34,19 @@ def main
     when "2", "list channels"
       tp workspace.channels, "name", "slack_id", "topic", "member_count"
     when "3", "select_user"
-      print "Please enter in the user's USER_NAME or SLACK_ID: "
+      print "Please enter in the user's USER_NAME or SLACK_ID: ".colorize(:blue)
       user_descriptor = gets.chomp
-      puts "\n#{workspace.select_user(user_descriptor)}".colorize(:red)
+      puts "\n#{workspace.select_user(user_descriptor)}".colorize(:light_red)
     when "4", "select channel"
-      print "Please enter in the channel's NAME or SLACK_ID: "
+      print "Please enter in the channel's NAME or SLACK_ID: ".colorize(:green)
       channel_descriptor = gets.chomp
-      puts "\n#{workspace.select_channel(channel_descriptor)}".colorize(:red)
+      puts "\n#{workspace.select_channel(channel_descriptor)}".colorize(:light_red)
     when "5", "details"
-      workspace.show_details
+      if !workspace.show_details
+        puts "No channel or user has been selected.".colorize(:light_red)
+      else
+        workspace.show_details
+      end
     when "6", "quit"
       puts "Thank you for using the Ada Slack CLI".colorize(:magenta)
       exit
