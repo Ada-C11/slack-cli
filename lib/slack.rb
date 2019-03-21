@@ -42,7 +42,9 @@ def main
         puts "No user or channel selected, try again."
       end
     when "send message"
-      workspace.send_message
+      puts "What would you like to send to #{@selected.name}?"
+      message = gets.chomp
+      workspace.send_message(message)
     when "quit"
       puts "Thanks for checking out TatiHana! Bye bye..."
       exit

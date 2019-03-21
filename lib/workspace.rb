@@ -39,10 +39,13 @@ class Workspace
     end
   end
 
-  def send_message
-    puts "What would you like to send to #{@selected.name}?"
-    message = gets.chomp
-    @selected.send_message(@selected.slack_id, message)
+  def send_message(message)
+    message.strip!
+    if message.length == 0
+      raise SlackCli::SlackError, "Message must cannot be nil or blank..."
+    else
+      @selected.send_message(@selected.slack_id, message)
+    end
   end
 
   def list_channels
