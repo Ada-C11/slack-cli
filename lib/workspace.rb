@@ -24,6 +24,16 @@ class Workspace
     end
   end
 
+  def select_channel(channel)
+    selected_channel = @channels["channels"].select { |channel_info| channel_info["name"] == channel }
+    if selected_channel.empty?
+      raise ArgumentError, "That channel is invalid"
+    else
+      @selected = selected_channel
+      return @selected
+    end
+  end
+
   def self.show_details
     #format details for selected user/channel w/ table gem
   end

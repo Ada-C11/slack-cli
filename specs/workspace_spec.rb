@@ -6,7 +6,6 @@ describe "Workspace class" do
     it "initializes a Workspace object" do
       VCR.use_cassette("Workspace") do
         response = Workspace.new
-        #binding.pry
         expect(response).must_be_instance_of Workspace
       end
     end
@@ -25,6 +24,23 @@ describe "Workspace class" do
       VCR.use_cassette("Channel") do
         response = Workspace.new
         expect { response.select_user("tildee") }.must_raise ArgumentError
+      end
+    end
+  end
+
+  describe "select_channel" do
+    it "selects a known channel" do
+      VCR.use_cassette("Workspace") do
+        response = Workspace.new
+        response.select_channel("general")
+        expect(response.selected[0]["name"]).must_equal "general"
+      end
+    end
+
+    it "raises an Argument if channel info is invalid" do
+      VCR.use_cassette("Channel") do
+        response = Workspace.new
+        expect { response.select_channel("fur_babes") }.must_raise ArgumentError
       end
     end
   end
