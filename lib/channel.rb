@@ -1,17 +1,17 @@
 require "httparty"
 require "dotenv"
+require_relative "recipient"
 
 Dotenv.load
 
 module SlackCLI
-  class Channel
+  class Channel < Recipient
     BASE_URL = "https://slack.com/api/channels.list"
 
     attr_reader :slack_id, :name, :topic, :members
 
-    def initialize(id, channel_name, topic, members)
-      @slack_id = id
-      @name = channel_name
+    def initialize(slack_id, name, topic, members)
+      super(slack_id, name)
       @topic = topic
       @members = members
     end
@@ -21,7 +21,8 @@ module SlackCLI
         token: ENV["OAUTH_ACCESS_TOKEN"],
       }
 
-      response = HTTParty.get(BASE_URL, query: query_parameters)
+      response = get(BASE_URL, query_parameters)
+
       if (response.code == 200)
         channels = response["channels"].map do |channel|
           slack_id = channel["id"]

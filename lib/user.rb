@@ -2,27 +2,26 @@ require "httparty"
 require "dotenv"
 require "pry"
 require "table_print"
+require_relative "recipient"
 
 Dotenv.load
 
 module SlackCLI
-  class User
+  class User < Recipient
     BASE_URL = "https://slack.com/api/users.list"
-    TOKEN = ENV["OAUTH_ACCESS_TOKEN"]
     attr_reader :name, :real_name, :slack_id
 
-    def initialize(username, real_name, slack_id)
-      @name = username
+    def initialize(name, real_name, slack_id)
+      super(slack_id, name)
       @real_name = real_name
-      @slack_id = slack_id
     end
 
     def self.get_from_api
       query_parameters = {
-        token: TOKEN,
+        token: ENV["OAUTH_ACCESS_TOKEN"],
       }
 
-      response = HTTParty.get(BASE_URL, query: query_parameters)
+      response = get(BASE_URL, query_parameters)
 
       if (response.code == 200)
         users = response["members"].map do |member|
