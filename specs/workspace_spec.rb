@@ -18,5 +18,10 @@ describe "Workspace class" do
       expect(@workspace).must_respond_to :selected
       expect(@workspace.selected).must_be_nil
     end
+
+    it "has correct instance variable types" do
+      expect(@workspace.channels[1]).must_be_instance_of Slack::Channel
+      expect(@workspace.users[1]).must_be_instance_of Slack::User
+    end
   end
 end
