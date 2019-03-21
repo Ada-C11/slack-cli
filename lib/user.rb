@@ -1,5 +1,6 @@
 require "pry"
 require "httparty"
+require_relative "recipient.rb"
 
 class User < Recipient
   attr_reader :real_name, :status_text, :status_emoji
@@ -11,7 +12,7 @@ class User < Recipient
     @status_emoji = status_emoji
   end
 
-  def self.list
+  def self.list #factory method
     response = self.get("users.list")
     user_list = []
     response["members"].each do |member|
@@ -25,10 +26,11 @@ class User < Recipient
     return user_list
   end
 
-  def details(user)
-    puts "Username: #{user.name}"
-    puts "ID: #{user.slack_id}"
-    puts "Name: #{user.real_name}"
-    puts "Status: #{user.status_text}"    
+  def details #business logic
+    # check that this works
+    puts "Username: #{self.name}"
+    puts "ID: #{self.slack_id}"
+    puts "Name: #{self.real_name}"
+    puts "Status: #{self.status_text}"
   end
 end

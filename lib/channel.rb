@@ -23,10 +23,10 @@ class Channel < Recipient
     return channel_list
   end
 
-  def details(channel)
-    puts "Name: #{channel.name}"
-    puts "ID: #{channel.slack_id}"
-    puts "Topic: #{channel.topic}"
-    puts "Number of members: #{channel.member_count}"
+  def details
+    puts "Name: #{self.name}"
+    puts "ID: #{self.slack_id}"
+    puts "Topic: #{self.topic}"
+    puts "Number of members: #{self.member_count}"
   end
 end

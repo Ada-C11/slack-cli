@@ -9,7 +9,6 @@ class Recipient
   def initialize(slack_id:, name:)
     @slack_id = slack_id
     raise ArgumentError if !name.is_a? String
-
     @name = name
   end
 
@@ -18,10 +17,8 @@ class Recipient
   def self.get(endpoint, params = {})
     url = BASE_URL + endpoint
     params[:token] = ENV["SLACK_API_TOKEN"]
-    p params
     response = HTTParty.get(url, query: params)
     unless response.code == 200 && response.parsed_response["ok"]
-      p response["error"]
       raise SlackApiError, response["error"]
     end
     return response
