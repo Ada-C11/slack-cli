@@ -49,5 +49,3 @@ module SlackCli
     end
   end
 end
-
-binding.pry

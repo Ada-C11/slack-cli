@@ -27,10 +27,9 @@ describe "User child class" do
   end
 
   describe "user self.list_users method" do 
-    it "returns all usernames in workspace in array" do
+    it "returns all usernames in workspace as a string" do
       VCR.use_cassette("user_response") do 
-        expect(SlackCli::User.list_users).must_be_kind_of Array 
-        expect(SlackCli::User.list_users.length).must_equal 3
+        expect(SlackCli::User.list_users).must_equal nil
       end
     end
   end
