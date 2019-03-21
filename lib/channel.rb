@@ -21,6 +21,7 @@ class Channel < Recipient
     end
     channel_list = []
     channels = raw_data["channels"]
+
     channels.each do |channel|
       slack_id = channel["id"]
       name = channel["name"]

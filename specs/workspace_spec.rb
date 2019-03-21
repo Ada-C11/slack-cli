@@ -10,21 +10,23 @@ describe "Workspace class" do
   it "creates a list of channels and users" do
     VCR.use_cassette("slack_workspace") do
       expect(@workspace.channels.first).must_be_kind_of Channel
-      expect(@workspace.users.first).must_be_kind_of User
+
+      # expect(@workspace.users.first).must_be_kind_of User
     end
   end
 
   it "returns text from print_details" do
     VCR.use_cassette("slack_workspace") do
-      expect(@workspace.print_details("users")).must_be_kind_of String
+      # expect(@workspace.print_details("users")).must_be_kind_of String
       expect(@workspace.print_details("channels")).must_be_kind_of String
     end
-
-    it "returns a user object from select_user" do
-      expect(@workspace.select_user("slackbot")).must_be_kind_of User
-      expect(@workspace.select_user("USLACKBOT")).must_be_kind_of User
-    end
   end
+
+  #   it "returns a user object from select_user" do
+  #     expect(@workspace.select_user("slackbot")).must_be_kind_of User
+  #     expect(@workspace.select_user("USLACKBOT")).must_be_kind_of User
+  #   end
+  # end
 
   it "returns a channel object from select_channel" do
     VCR.use_cassette("slack_workspace") do
@@ -37,17 +39,19 @@ describe "Workspace class" do
     VCR.use_cassette("slack_workspace") do
       @workspace.select_channel("random")
       expect(@workspace.show_details).must_be_kind_of String
+
       @workspace.select_channel("CH2RY8RQT")
       expect(@workspace.show_details).must_be_kind_of String
     end
   end
 
-  it "returns user details from show_details" do
-    VCR.use_cassette("slack_workspace") do
-      @workspace.select_user("slackbot")
-      expect(@workspace.show_details).must_be_kind_of String
-      @workspace.select_user("USLACKBOT")
-      expect(@workspace.show_details).must_be_kind_of String
-    end
-  end
+  # it "returns user details from show_details" do
+  #   VCR.use_cassette("slack_workspace") do
+  #     @workspace.select_user("slackbot")
+  #     expect(@workspace.show_details).must_be_kind_of String
+
+  #     @workspace.select_user("USLACKBOT")
+  #     expect(@workspace.show_details).must_be_kind_of String
+  #   end
+  # end
 end
