@@ -1,39 +1,47 @@
 #!/usr/bin/env ruby
-require_relative "user"
-require_relative "channels"
+require_relative "workspace"
 require "table_print"
 
 Dotenv.load
 
 # module Slack
 def main
-  users = Slack::User
-  channel = Slack::Channel
-  
+  # users = Slack::User
+  # channel = Slack::Channel
+  workspace = Slack::Workspace.new
+
   puts "Welcome to the Ada Slack CLI!"
+  print "#{workspace.users.length} users and #{workspace.channels.length} "
+  puts "channels were uploaded."
+
   selection = 1
-  while selection != 3
-    puts "#{users.list.length} users and #{channel.list.length} channels were uploaded.\n\n"
+  while selection != 6
+    puts "\nPlease make a selection:\n\n"
+    puts "1. list users"
+    puts "2. list channels"
+    puts "3. select user"
+    puts "4. select channel"
+    puts "5. details"
+    puts "6. quit\n\n"
 
-  puts "Please make a selection:\n"
-  puts "1. list users\n"
-  puts "2. list channels\n"
-  puts "3. select user\n"
-  puts "4. select channel\n"
-  puts "5. details\n"
-  puts "6. quit\n"
-  
-  selection = gets.chomp.to_i
+    selection = gets.chomp.to_i
 
-  if selection == 1
-    # users.list.each do |user| user.real_name
-    tp users.list, "slack_id", "name", "real_name"
-  elsif selection == 2
-    tp channel.list, "slack_id", "name", "topic", "member_count"
-  elsif selection == 3
-    puts "Thank you for using the Ada Slack CLI"
-    exit
-  end # end
+    if selection == 1 || selection == "list users"
+      puts ""
+      tp workspace.users, "slack_id", :Name => {:display_method => "real_name"},
+                                      :include => {:User_Name => {:display_method => "name"}}
+    elsif selection == 2 || selection == "list channels"
+      tp workspace.channels, "name", "slack_id", "topic", "member_count"
+    elsif selection == 3 || selection == "select_user"
+      puts "Please enter in the user's USER_NAME or SLACK_ID:"
+      user_descriptor = gets.chomp
+      puts workspace.select_user(user_descriptor)
+    elsif selection == 4 || selection == "select channel"
+    elsif selection == 5 || selection == "details"
+    elsif selection == 6 || selection == "quit"
+      puts "Thank you for using the Ada Slack CLI"
+      exit
+    end # end
   end
 end
 

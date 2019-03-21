@@ -7,8 +7,6 @@ module Slack
 
     attr_reader :real_name
 
-    puts 'ENV["KEY2"]', ENV["KEY"]
-
     def initialize(slack_id, name, real_name)
       super(slack_id, name)
       @real_name = real_name
