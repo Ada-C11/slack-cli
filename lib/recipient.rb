@@ -7,6 +7,8 @@ module Slack
   class ResponseError < StandardError; end
 
   class Recipient
+    URL = "https://slack.com/api/chat.postMessage"
+
     attr_reader :slack_id, :name
 
     def initialize(slack_id, name)
@@ -24,7 +26,19 @@ module Slack
       return user_data
     end
 
-    def send_message
+    def send_message(message, selected)
+      message_request = HTTParty.post(URL,
+                                      body: {
+                                        token: ENV["KEY"],
+                                        text: message,
+                                        channel: selected,
+                                        as_user: true,
+                                      },
+                                      headers: {"Content-Type" => "application/x-www-form-urlencoded"})
+
+      if message_request["ok"] == false
+        raise ResponseError, "There was an error!\nMessage: #{message_request["error"]}"
+      end
     end
 
     def details

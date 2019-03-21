@@ -23,7 +23,8 @@ def main
     puts "3. select user".colorize(:blue)
     puts "4. select channel".colorize(:green)
     puts "5. details".colorize(:yellow)
-    puts "6. quit\n\n".colorize(:light_red)
+    puts "6. send message".colorize(:yellow)
+    puts "7. quit\n".colorize(:light_red)
 
     selection = gets.chomp
 
@@ -42,12 +43,21 @@ def main
       channel_descriptor = gets.chomp
       puts "\n#{workspace.select_channel(channel_descriptor)}".colorize(:light_red)
     when "5", "details"
-      if !workspace.show_details
+      if workspace.show_details == false
         puts "No channel or user has been selected.".colorize(:light_red)
       else
         workspace.show_details
       end
-    when "6", "quit"
+    when "6", "send message"
+      print "Please enter in a message to send: ".colorize(:yellow)
+      message = gets.chomp
+      sending_message = workspace.send_message(message)
+      if sending_message == false
+        puts "--- No channel or user selected. ----".colorize(:light_red)
+      elsif sending_message == nil
+        puts "--- Invalid message, unable to send. ---".colorize(:light_red)
+      else puts "--- Message sent succesfully! ---".colorize(:blue)       end
+    when "7", "quit"
       puts "Thank you for using the Ada Slack CLI".colorize(:magenta)
       exit
     end # end
