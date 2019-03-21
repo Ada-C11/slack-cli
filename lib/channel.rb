@@ -8,7 +8,7 @@ module SlackCLI
   class Channel < Recipient
     BASE_URL = "https://slack.com/api/channels.list"
 
-    attr_reader :slack_id, :name, :topic, :members
+    attr_reader :topic, :members
 
     def initialize(slack_id, name, topic, members)
       super(slack_id, name)

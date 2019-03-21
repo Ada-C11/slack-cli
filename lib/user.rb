@@ -9,7 +9,7 @@ Dotenv.load
 module SlackCLI
   class User < Recipient
     BASE_URL = "https://slack.com/api/users.list"
-    attr_reader :name, :real_name, :slack_id
+    attr_reader :real_name
 
     def initialize(name, real_name, slack_id)
       super(slack_id, name)
