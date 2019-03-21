@@ -10,7 +10,7 @@ class Slack
   #self.get(url, params)
   #details
   #self.list
-
+  self.initialize()
   query_parameters = {
     token: ENV["SLACK_API_TOKEN"],
     pretty: 1,

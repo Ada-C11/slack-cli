@@ -1,0 +1,67 @@
+types of tests:
+
+add one for invalid tokens
+
+check for 200? basically, "ok" is true or false
+
+3 tests for send messaging
+describe Slack do 
+    describe "send_msg" do
+        it "can send a valid message" do
+            VCR.use_cassette("slack_message") do
+                return_value = SlackApi.send_msg("Test message", "apiiiii")
+
+                expect(return_value).must_equal true
+            end 
+        end
+    end
+end
+
+BASE_URL = https://slack.com/api/
+
+def self.send_msg(text, channel)
+    response = HTTParty.post(
+        "#{BASE_URL}chat.postMessage"
+        headers: { 'Content-Type' => 'application/x-www-form-urlencoded' },
+        body: {
+            token: SLACK_API_TOKEN,
+            channel: channel,
+            text: message,
+        },
+    )
+
+    if response["ok"]
+        return true
+    else
+        raise SlackError, "Error when posting #{message} to #{channel}, error: #{response["error"]}"
+    end
+
+end
+
+class SlackError < StandardError; end
+
+it "generates an error if given an invalid channel" do
+    
+            VCR.use_cassette("slack_message") do
+                expect {
+                    return_value = SlackApiWrapper.send_msg("Test message", "bogus")
+                }.must_raise SlackError
+            end
+
+it "will raise an error if given an empty message" do
+
+end
+
+notes:
+
+above, the def self.send_msg 
+was in 
+
+module SlackApi
+    BASE_URL = 
+    API_KEY = ENV["token"]
+
+    then slack error line
+    then send_msg
+
+    end

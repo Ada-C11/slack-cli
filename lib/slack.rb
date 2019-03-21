@@ -7,6 +7,8 @@ Dotenv.load
 # list users
 # list channels
 # quit
+class SlackError < StandardError; end
+
 class Slack
   attr_reader :channels, :users
 
@@ -37,6 +39,15 @@ class Slack
       puts "real name: #{x["real_name"]}"
     end
   end
+
+  def select_user
+  end
+
+  def select_channel
+  end
+
+  def details
+  end
 end
 
 def main
@@ -47,7 +58,7 @@ def main
   puts "there are #{slack.channels["channels"].length} channels and #{slack.users["members"].length}"
 
   def options
-    puts "What should we do next? (list channels/ list users/ quit):"
+    puts "What should we do next? (list channels/ list users/ select user/ select channel/ details/ quit):"
     return gets.chomp.downcase
   end
 
@@ -60,6 +71,12 @@ def main
       slack.lists_channels
     when "list users"
       slack.lists_users
+    when "select user"
+      slack.select_user
+    when "select channel"
+      slack.select_channel
+    when "details"
+      slack.details
     when "quit"
       continue = false
     end
