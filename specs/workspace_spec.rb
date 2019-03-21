@@ -26,8 +26,8 @@ describe "Workspace class" do
   end
 
   describe "Workspace#Select_channel" do
-    it "will set the selected variable to input channel" do
-      @workspace.select_channel(channel: @workspace.channels[1])
+    it "will set the selected variable to input channel and returns true" do
+      expect(@workspace.select_channel(channel: @workspace.channels[1])).must_equal true
       expect(@workspace.selected).must_equal @workspace.channels[1]
     end
   end
