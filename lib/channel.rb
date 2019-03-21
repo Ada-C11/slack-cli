@@ -26,7 +26,7 @@ module SlackCli
     end
 
     def details
-      return "Channel name: #{name} \nID: #{slack_id} \ntopic: #{topic}, \nMember count:#{member_count}\n"
+      puts "Channel name: #{name} \nID: #{slack_id} \ntopic: #{topic}, \nMember count:#{member_count}\n"
     end
   end
 end

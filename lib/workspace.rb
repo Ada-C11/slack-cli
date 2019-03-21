@@ -15,18 +15,22 @@ class Workspace
   end
 
   def select_channel(name)
-    #  @selected = @channels.select { |channel| if channel.name == name || channel.slack_id == name } # test this
+    @selected = @channels.find do |channel| 
+      channel.name == name || channel.slack_id == name
+    end
   end
 
-  def select_user(user)
-    # @selected = @users.select { |user| if user.name == name || user.slack_id == name } # test this
+  def select_user(name)
+    @selected = @users.find do |user| 
+      user.name == name || user.slack_id == name
+    end
   end
 
-  def show_details(selected_item)
+  def show_details
     @selected.details
   end
 
-  def send_message
+  def send_messagea # wrong number of arguments bug?
     message = gets.chomp
     @selected.send_message(name: @selected.name, message: message)
   end
@@ -59,6 +63,7 @@ def main
     - select user
     - select channel
     - details
+    - send message
     - quit
     Enter your choice now:"
     # selected = false
@@ -66,6 +71,7 @@ def main
 
   options
   choice = gets.chomp
+
   loop do
     case choice
     when "list users"
@@ -75,20 +81,25 @@ def main
     when "select user"
       puts "what user would you like to select?"
       selected_user = gets.chomp
-      sought_user = SlackCli::Workspace.select_user(selected_user)
-      # selected = true if sought_user != nil
-
+      workspace.select_user(selected_user)
     when "select channel"
+      puts "What channel would you like to select?"
       selected_channel = gets.chomp
-      # sought_channel = SlackCli::Workspace.select_channel(selected_channel)
+      workspace.select_channel(selected_channel)
+      puts "Channels selected: #{your_selection.name}"
     when "details"
-      # think about logic
+      puts "Details for #{workspace.selected.name}..."
+      workspace.show_details
+    when "send message"
+      puts "What would you like to send to #{workspace.selected.name}?"
+      workspace.send_messagea # wrong number of arguments bug?
     when "quit"
       puts "Thanks for checking out TatiHana! Bye bye..."
       exit
     else
-      # add something here
+      puts "Invalid option! :("
     end
+
     options
     choice = gets.chomp
   end

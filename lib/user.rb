@@ -32,13 +32,13 @@ module SlackCli
       return users
     end
 
-    def self.details
+    def details
       user_details = "Username: #{name}
         Slack ID: #{slack_id}
         Real Name: #{real_name}
         Status Text: #{status_text}
         Status Emoji: #{status_emoji}"
-      return user_details
+      puts user_details
     end
   end
 end
