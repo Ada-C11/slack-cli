@@ -42,7 +42,7 @@ module Slack
     end
 
     def self.list
-      result = get.()
+      raise NotImplementedError, "Implement me in a child class!"
     end
   end
 end

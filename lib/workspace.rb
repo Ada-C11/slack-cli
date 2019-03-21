@@ -12,8 +12,8 @@ module Slack
 
     def initialize
       @users = Slack::User.list
-      @channels = channels
-      @selected = false
+      @channels = Slack::Channel.list
+      @selected = nil
     end
 
     def select_channel(slack_id)

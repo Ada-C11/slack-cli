@@ -18,5 +18,13 @@ describe "Workspace class" do
 
   it "has an array of Users" do
     expect(@workspace.users).must_be_kind_of Array
+    expect(@workspace.users[0]).must_be_kind_of Slack::User
   end
+
+  it "has an array of Channels" do
+    expect(@workspace.channels).must_be_kind_of Array
+    expect(@workspace.channels[0]).must_be_kind_of Slack::Channel
+  end
+
+
 end
