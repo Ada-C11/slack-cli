@@ -1,4 +1,5 @@
 require_relative "recipient"
+require_relative "apiwrapper"
 
 module Slack
   class User < Recipient
