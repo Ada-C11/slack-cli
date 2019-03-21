@@ -37,9 +37,10 @@ def main
       workspace.select_channel(selected_channel)
     when "details"
       begin
-        puts workspace.show_details
-      rescue SlackCli::SlackError
-        break
+      puts workspace.show_details
+      puts "this worked!!!!!!!!!"
+      rescue
+      puts "it's calling this instead"
       end
     when "send message"
       workspace.send_message
@@ -47,10 +48,9 @@ def main
       puts "Thanks for checking out TatiHana! Bye bye..."
       exit
     end
-      puts "Invalid option! :("
-    end
   options
   choice = gets.chomp
+  end
 end
 
 main if __FILE__ == $0
