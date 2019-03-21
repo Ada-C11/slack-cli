@@ -58,29 +58,33 @@ def main
       selection = gets.chomp
     when "Select User"
       puts "Here are all the members' user names: #{user_name}"
-      chose_user = gets.chomp
+      chose = gets.chomp #chose_user
       workspace = Workspace.new
-      details = workspace.select_user(chose_user)
+      details = workspace.select_user(chose)
       puts "You just selected #{details}"
       puts "What would you like to do next? "
       selection = gets.chomp
     when "Select Channel"
       puts "Here are all the channels' names: #{channel_name}"
-      chose_channel = gets.chomp
+      chose = gets.chomp #chose_channel
       workspace = Workspace.new
-      details = workspace.select_channel(chose_channel)
+      details = workspace.select_channel(chose)
       puts "You just selected #{details}"
       puts "What would you like to do next? "
       selection = gets.chomp
     when "Details"
-      puts Workspace.show_details(details)
+      ###### JUST CHANGED
+      puts workspace.show_details(details)
       puts "What would you like to do next? "
       selection = gets.chomp
     when "Send Message"
       puts "Please input your message:"
       message = gets.chomp
 
-      SlackApi.send_message(message, chose_channel)
+      ### WE NEED TO ROUTE PATH TO CORRECT LIKE OF SEND MESSAGE
+
+      SlackApi.send_message(message, chose)
+      # SlackApi.send_message(message, chose_channel)
       puts "What would you like to do next? "
       selection = gets.chomp
     end

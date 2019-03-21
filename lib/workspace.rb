@@ -17,7 +17,7 @@ class Workspace
   def initialize
     @user = []
     @channel = []
-    @selected = selected
+    # @selected = selected
   end
 
   class SlackApiError < StandardError; end

@@ -29,6 +29,15 @@ module SlackApi
     # have two responses if select is a type of user choose 1st response
     # else if user input is a type of channel choose 2nd response. the channel can be select_user or select_channel from the main
     # we'd have to require workspace
+
+    #### testing user stuff
+    practice = []
+    User.list.each do |user_name|
+      if user_name[0] == user
+        practice << user_name[2]
+      end
+    end
+
     test_workspace = Workspace.new
     if channel_name.include?(user)
       response = HTTParty.post(
@@ -48,7 +57,8 @@ module SlackApi
         body: {
           token: SLACK_TOKEN,
           text: message,
-          channel: test_workspace.select_user(user), #.select_user(chose_user)
+          channel: practice[0],
+          # test_workspace.select_user(user) #.select_user(chose_user)
           as_user: true,
         },
       )
