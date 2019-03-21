@@ -26,7 +26,7 @@ describe "Api Wrapper module" do
           }.must_raise Slack::ApiWrapper::SlackError
       end
     end
-
+#making changes so we can debug
     it "raise an error when an invalid token is used" do
       VCR.use_cassette("slack_api") do
         real_token = ENV["SLACK_API_KEY"]
