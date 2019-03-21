@@ -10,7 +10,7 @@ module SlackApi
   class SlackError < StandardError; end
 
   class Workspace
-    # attr_reader :channels, :users
+    attr_reader :channels, :users
 
     def initialize
       @users = SlackApi::User.user_api
@@ -51,15 +51,15 @@ module SlackApi
       end
     end
 
-    # def self.send_message(message)
-    #   if (SlackApi::Channel.channel_api).include?(@selected)
-    #     SlackApi::Channel.send_message(message, @selected)
-    #   elsif (SlackApi::User.user_api).include?(@selected)
-    #     # SlackApi::user .method for sending message to user
-    #   else
-    #     error_message = "You have not selected a user or channel yet."
-    #     return error_message
-    #   end
-    # end
+    def self.send_message(message)
+      if (SlackApi::Channel.channel_api).include?(@selected)
+        SlackApi::Channel.send_message(message, @selected)
+      elsif (SlackApi::User.user_api).include?(@selected)
+        # SlackApi::user .method for sending message to user
+      else
+        error_message = "You have not selected a user or channel yet."
+        return error_message
+      end
+    end
   end
 end

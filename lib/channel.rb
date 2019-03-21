@@ -17,25 +17,25 @@ module SlackApi
       return response["channels"]
     end
 
-    # def self.send_message(message, recipient)
-    #   url = "https://slack.com/api/channels.list"
-    #   key = ENV["SLACK_API_TOKEN"]
+    def self.send_message(message, recipient)
+      url = "https://slack.com/api/"
+      key = ENV["SLACK_API_TOKEN"]
 
-    #   response = HTTParty.post(
-    #     "#{url}chat.postMessage",
-    #     headers: {"Content-Type" => "application/x-www-form-urlencoded"},
-    #     body: {
-    #       token: key,
-    #       text: message,
-    #       channel: recipient,
-    #     },
-    #   )
-    #   if response["ok"]
-    #     return true
-    #   # else
-    #   #   raise SlackApi::SlackError, "Error when posting message to #{response[:body][:channel]}, error: #{response["error"]}"
-    #   end
-    # end
+      response = HTTParty.post(
+        "#{url}chat.postMessage",
+        headers: {"Content-Type" => "application/x-www-form-urlencoded"},
+        body: {
+          token: key,
+          text: message,
+          channel: recipient,
+        },
+      )
+      if response["ok"]
+        return true
+      else
+        raise SlackApi::SlackError, "Error when posting message to #{response[:body][:channel]}, error: #{response["error"]}"
+      end
+    end
 
     def self.list(channels_list)
       puts "\nHere are a list of your channels for this Workspace:"

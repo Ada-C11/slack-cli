@@ -8,8 +8,9 @@ require_relative "workspace"
 Dotenv.load
 
 def main
-  channels_list = SlackApi::Channel.channel_api
-  users_list = SlackApi::User.user_api
+  # channels_list = SlackApi::Channel.channel_api
+  # users_list = SlackApi::User.user_api
+  workspace = SlackApi::Workspace.new
 
   user_options = "list users\nlist channels\nselect user\nselect channel\ndetails\nsend message\nquit"
 
@@ -21,9 +22,9 @@ def main
   until user_selection == "quit"
     case user_selection
     when "list users"
-      puts SlackApi::User.list(users_list)
+      puts SlackApi::User.list(workspace.users)
     when "list channels"
-      puts SlackApi::Channel.list(channels_list)
+      puts SlackApi::Channel.list(workspace.channels)
     when "select user"
       print "Enter username or user's ID: "
       user_input = gets.chomp
@@ -42,7 +43,7 @@ def main
       puts "(This will send to the recipient you have selected)"
       print "What message would you like to send? "
       user_message = gets.chomp
-      # SlackApi::Workspace.send_message(user_message)
+      SlackApi::Workspace.send_message(user_message)
     end
 
     puts "\nWhat would you like to do next?"
