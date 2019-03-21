@@ -10,33 +10,6 @@ require "pry"
 
 Dotenv.load
 
-def display_selected_menu
-  name_or_id = gets.chomp.downcase
-  user = workspace.select_user(name_or_id)
-  if user
-    puts "Options: \ndetails \nsend message \nreturn to main menu"
-    input = gets.chomp.downcase
-
-    until (input == "return to main menu")
-      case input
-      when "details"
-        puts workspace.show_details
-      when "send message"
-        puts "Type a message to send:"
-        message = gets.chomp
-        workspace.send_message(message)
-      when "return to main menu"
-        break
-      end
-      puts "What would you like to do"
-      puts "Options: \ndetails \nsend message \nquit"
-      input = gets.chomp.downcase
-    end
-  else
-    puts "No recipient with that name or ID found"
-  end
-end
-
 def main
   users = SlackCLI::User.get_from_api
   channels = SlackCLI::Channel.get_from_api
@@ -55,11 +28,47 @@ def main
     when "list channels"
       workspace.display_channels
     when "select user"
-      puts "Enter user name or id"
-      display_selected_menu
+      puts "Enter username or slack id:"
+
+      name_or_id = gets.chomp.downcase
+      user = workspace.select_user(name_or_id)
+      puts "Options: \ndetails \nsend message \nreturn to main menu"
+      input = gets.chomp.downcase
+
+      until (input == "return to main menu")
+        case input
+        when "details"
+          puts workspace.show_details
+        when "send message"
+          puts "Type a message to send:"
+          message = gets.chomp
+          workspace.send_message(message)
+        when "return to main menu"
+          break
+        end
+        puts "Options: \ndetails \nsend message \nreturn to main menu"
+        input = gets.chomp.downcase
+      end
     when "select channel"
       puts "Enter channel name or id:"
-      display_selected_menu
+      name_or_id = gets.chomp.downcase
+      workspace.select_channel(name_or_id)
+      puts "Options: \ndetails \nsend message \nreturn to main menu"
+      input = gets.chomp.downcase
+      until (input == "return to main menu")
+        case input
+        when "details"
+          puts workspace.show_details
+        when "send message"
+          puts "Type a message to send:"
+          message = gets.chomp
+          workspace.send_message(message)
+        when "return to main menu"
+          break
+        end
+        puts "Options: \ndetails \nsend message \nquit"
+        input = gets.chomp.downcase
+      end
     when "quit"
       break
     else

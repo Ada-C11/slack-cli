@@ -24,13 +24,13 @@ module SlackCLI
 
     def select_user(name_or_id)
       @selected = users.find { |user| user.name == name_or_id }
-      @selected ||= users.find { |user| user.slack_id == name_or_id }
+      selected ||= users.find { |user| user.slack_id == name_or_id }
       return selected
     end
 
     def select_channel(name_or_id)
       @selected = channels.find { |channel| channel.name == name_or_id }
-      @selected ||= channels.find { |channel| channel.slack_id == name_or_id }
+      selected ||= channels.find { |channel| channel.slack_id == name_or_id }
       return selected
     end
 
