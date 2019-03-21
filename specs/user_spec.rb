@@ -45,6 +45,16 @@ describe "User Class" do
         expect(users.length).must_equal 3
       end
     end
+
+    describe "#details" do
+      it "must return an array that contains the correct strings" do
+        user = Slack::User.new("potato", "head", "toy")
+        expect(user.details).must_be_kind_of Array
+        expect(user.details[0]).must_equal "name"
+        expect(user.details[1]).must_equal "slack_id"
+        expect(user.details[2]).must_equal "real_name"
+      end
+    end
     # # end end
   end
 end

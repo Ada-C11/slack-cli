@@ -23,7 +23,7 @@ module Slack
     end
 
     def details
-      ["name", "slack_id", "topic", "member_count"]
+      super.push("topic", "member_count")
     end
   end
 end

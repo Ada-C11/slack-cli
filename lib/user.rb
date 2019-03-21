@@ -21,7 +21,7 @@ module Slack
     end
 
     def details
-      ["real_name", "name", "slack_id"]
+      super << "real_name"
     end
   end
 end

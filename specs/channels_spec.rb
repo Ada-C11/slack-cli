@@ -36,5 +36,17 @@ describe "Self.list" do
         expect(channels[i]).must_be_kind_of Slack::Channel
       end
     end
+
+    describe "#details" do
+      it "must return an array that contains the correct strings" do
+        channel = Slack::Channel.new("potato", "head", "toy", "story")
+        expect(channel.details).must_be_kind_of Array
+        expect(channel.details[0]).must_equal "name"
+        expect(channel.details[1]).must_equal "slack_id"
+        expect(channel.details[2]).must_equal "topic"
+        expect(channel.details[3]).must_equal "member_count"
+      end
+    end
+    # # end end
   end
 end

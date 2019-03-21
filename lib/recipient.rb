@@ -27,8 +27,8 @@ module Slack
     def send_message
     end
 
-    def details(user_or_channel)
-      tp user_or_channel
+    def details
+      ["name", "slack_id"]
     end
 
     def self.list

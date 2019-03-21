@@ -11,40 +11,40 @@ def main
   # channel = Slack::Channel
   workspace = Slack::Workspace.new
 
-  puts "Welcome to the Ada Slack CLI!"
-  print "#{workspace.users.length} users and #{workspace.channels.length} "
-  puts "channels were uploaded."
+  puts "Welcome to the Ada Slack CLI!".colorize(:magenta)
+  print "#{workspace.users.length} users and #{workspace.channels.length} ".colorize(:magenta)
+  puts "channels were uploaded.".colorize(:magenta)
 
   selection = 1
   while selection != 6
-    puts "\nPlease make a selection:\n\n"
-    puts "1. list users"
-    puts "2. list channels"
-    puts "3. select user"
-    puts "4. select channel"
-    puts "5. details"
-    puts "6. quit\n\n"
+    puts "\nPlease make a selection:\n".colorize(:magenta)
+    puts "1. list users".colorize(:blue)
+    puts "2. list channels".colorize(:green)
+    puts "3. select user".colorize(:blue)
+    puts "4. select channel".colorize(:green)
+    puts "5. details".colorize(:yellow)
+    puts "6. quit\n\n".colorize(:light_red)
 
-    selection = gets.chomp.to_i
+    selection = gets.chomp
 
-    if selection == 1 || selection == "list users"
-      puts ""
+    case selection
+    when "1", "list users"
       tp workspace.users, "slack_id", :Name => {:display_method => "real_name"},
                                       :include => {:User_Name => {:display_method => "name"}}
-    elsif selection == 2 || selection == "list channels"
+    when "2", "list channels"
       tp workspace.channels, "name", "slack_id", "topic", "member_count"
-    elsif selection == 3 || selection == "select_user"
+    when "3", "select_user"
       print "Please enter in the user's USER_NAME or SLACK_ID: "
       user_descriptor = gets.chomp
       puts "\n#{workspace.select_user(user_descriptor)}".colorize(:red)
-    elsif selection == 4 || selection == "select channel"
+    when "4", "select channel"
       print "Please enter in the channel's NAME or SLACK_ID: "
       channel_descriptor = gets.chomp
       puts "\n#{workspace.select_channel(channel_descriptor)}".colorize(:red)
-    elsif selection == 5 || selection == "details"
+    when "5", "details"
       workspace.show_details
-    elsif selection == 6 || selection == "quit"
-      puts "Thank you for using the Ada Slack CLI"
+    when "6", "quit"
+      puts "Thank you for using the Ada Slack CLI".colorize(:magenta)
       exit
     end # end
   end
