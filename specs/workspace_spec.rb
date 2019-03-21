@@ -39,17 +39,31 @@ describe SlackApi::Workspace do
     # write tests for User ID also
   end
 
-  #   describe "show_details" do
-  #     it "returns details for the correct recipient" do
-  #       VCR.use_cassette("slack_workspace") do
+  describe "show_details" do
+    it "returns details for the correct channel" do
+      VCR.use_cassette("slack_workspace") do
+        workspace = SlackApi::Workspace.new
+        workspace.select_channel("random")
 
-  #       end
-  #     end
+        expect(workspace.show_details).must_include "CH3UGLBHV"
+      end
+    end
 
-  #     it "returns an error message if no recipient has been selected" do
-  #       skip
-  #       VCR.use_cassette("slack_workspace") do
-  #       end
-  #     end
-  #   end
+    it "returns details for the correct user" do
+      VCR.use_cassette("slack_workspace") do
+        workspace = SlackApi::Workspace.new
+        workspace.select_user("slackbot")
+
+        expect(workspace.show_details).must_include "USLACKBOT"
+      end
+    end
+
+    it "returns an error message if no recipient has been selected" do
+      VCR.use_cassette("slack_workspace") do
+        workspace = SlackApi::Workspace.new
+
+        expect(workspace.show_details).must_include "You have not selected a user or channel yet."
+      end
+    end
+  end
 end
