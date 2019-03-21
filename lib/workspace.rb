@@ -23,6 +23,10 @@ module Slack
 
     def list_all(list:)
       result = ""
+      list.each do |elem|
+        result << elem.details
+        result << "\n-----------------------\n"
+      end
       return result
     end
   end
