@@ -1,16 +1,13 @@
 require_relative 'test_helper'
 
-BASE_URL = "https://slack.com/api/"
-KEY = ENV["TOKEN"]
   
 describe "User class" do
   describe "Get and List methods" do
     
     it "returns an array of users" do
       VCR.use_cassette("get-and-list") do 
-        url = "#{BASE_URL}users.list"
-        params =  {token: KEY}
-        @users = User.get(url, params)
+        
+        @users = User.get('users.list')
         
       expect(@users[1].real_name).must_equal "Karla Guadron"
       expect(@users.length).must_equal 3

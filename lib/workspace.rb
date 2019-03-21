@@ -1,4 +1,6 @@
 require 'httparty'
+require_relative 'user.rb'
+require_relative 'channel.rb'
 
 class Workspace
 

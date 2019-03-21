@@ -4,8 +4,7 @@ class Channel < Recipient
   
   attr_reader :topic, :member_count
   
-  def initialize
-    # super(slack_id, name)
+  def initialize(name:, topic:, member_count:)
     @topic = topic
     @member_count = member_count
     @name = name
