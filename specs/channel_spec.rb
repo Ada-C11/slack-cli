@@ -2,10 +2,10 @@ require_relative "test_helper"
 
 describe "Channel" do
   let(:get_response) do
-    VCR.use_cassette("slack/get") { SlackCli::Channel.get }
+    VCR.use_cassette("slack/channel_get") { SlackCli::Channel.get }
   end
   let(:channel_list) do
-    VCR.use_cassette("slack/list") { SlackCli::Channel.list }
+    VCR.use_cassette("slack/channel_list") { SlackCli::Channel.list }
   end
 
   describe "self get method" do
@@ -15,6 +15,7 @@ describe "Channel" do
       expect(channels["ok"]).must_equal true
     end
   end
+  
   describe "list" do
     it "creates a list of all channels" do
       channels = channel_list
@@ -29,9 +30,7 @@ describe "Channel" do
   describe "details" do
     it "lists details for an instance of channel" do
       channels = channel_list
-      channel_deets = channels[1].details
-
-      expect(channel_deets).must_equal channels[1].details
+      expect(channels[1].details).must_be_kind_of String
     end
   end
 end

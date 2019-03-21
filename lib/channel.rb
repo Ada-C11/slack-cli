@@ -26,17 +26,8 @@ module SlackCli
     end
 
     def details
-      puts "Channel name: #{name} \nID: #{slack_id} \ntopic: #{topic}, \nMember count:#{member_count}\n"
+      deets = "Channel name: #{name} \nID: #{slack_id} \ntopic: #{topic}, \nMember count:#{member_count}\n"
+      return deets
     end
   end
 end
-
-#add this to recipient?
-# def send_message(message)
-# query_params = {
-#   token: TOKEN
-#   name: self
-#   message: message
-# }
-# response = HTTParty.post(self::MSG_URL, query: query_params)
-#end
