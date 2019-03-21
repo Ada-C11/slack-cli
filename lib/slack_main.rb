@@ -37,6 +37,11 @@ def main
 
   puts "\nHere's how many channels were loaded: #{channels.length}"
 
+  users = Slack::Channel.list
+
+  puts "\nHere's how many users were loaded: #{users.length}"
+
+
   selection = menu
 
   until selection == "3"
@@ -44,14 +49,14 @@ def main
       users = Slack::User.list
       puts "\nHere are the users:"
       users.each_with_index do |user, i|
-        puts "#{i + 1}. #{user.real_name} -- #{user.status_text} -- #{user.status_emoji}"
+        puts "#{i + 1}. name:#{user.real_name} --status:#{user.status_text} --emoji:#{user.status_emoji}"
       end
 
     elsif selection == "2"
       channels = Slack::Channel.list
       puts "\nHere are the channels:"
       channels.each_with_index do |channel, i|
-        puts "#{i + 1}. #{channel.name.capitalize} -- #{channel.topic} -- #{channel.member_count} -- #{channel.id}"
+        puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.id}"
       end
     else
       puts "\nInvalid entry.  Please try again!"
@@ -59,19 +64,6 @@ def main
 
     selection = menu
   end
-
-  # list channels
-  # quit
-
-  # Information about how many channels
-  #puts workspace.channels
-  # Info about how many users
-  #puts workspace.users
-
-  # 3 options to interact with program
-  # list users
-  # list channels
-  # quit
 
   puts "Thank you for using the Ada Slack CLI"
 end
