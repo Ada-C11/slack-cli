@@ -33,6 +33,16 @@ describe "user class" do
     end
   end
 
+  describe "raises errors for incorrect endpoint" do
+    it "raises an error for incorrect endpoint" do
+      VCR.use_cassette("check_method_error_raised") do
+        endpoint = "ret424252E#1231+=.y"
+        exception = expect { User.get(endpoint) }.must_raise SlackApiError
+        expect(exception.message).must_equal "unknown_method"
+      end
+    end
+  end
+
   describe "create list of users" do
     before do
       VCR.use_cassette("list_users") do

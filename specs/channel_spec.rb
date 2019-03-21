@@ -12,16 +12,32 @@ describe "channel class" do
   end
 
   describe "can connect to API" do
-    before do
+    it "accesses api" do
       VCR.use_cassette("connect to endpoints channels_list") do
         endpoint = "channels.list"
         @response = Channel.get(endpoint)
       end
-    end
-
-    it "accesses api" do
       expect(@response.code == 200 && @response.parsed_response["ok"]).must_equal true
     end
+  end
+
+  describe "raises errors for incorrect endpoint" do
+    it "raises an error for incorrect endpoint" do
+      VCR.use_cassette("check_method_error_raised") do
+        endpoint = "ret424252E#1231+=.y"
+        exception = expect { Channel.get(endpoint) }.must_raise SlackApiError
+        expect(exception.message).must_equal "unknown_method"
+      end
+    end
+
+    # it "raises an error for incorrect token" do
+    #   VCR.use_cassette("check_auth_error_raised") do
+    #     endpoint = "channels.list"
+    #     params = {:token => "0123456789abcdef"}
+    #     p params
+    #     expect(Channel.get(endpoint, params)).must_equal "invalid_auth"
+    #   end
+    # end
   end
 
   describe "creates list of channels" do
