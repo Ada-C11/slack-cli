@@ -16,9 +16,21 @@ class Workspace
   
   
   def select_channel(channel)
+    @channels.each do |x|
+      if channel.downcase == (x.name).downcase || channel.downcase == (x.slack_id).downcase
+        @selected = x
+      end
+    end
+    return @selected
   end
   
   def select_user(user)
+    @users.each do |x|
+      if user.downcase == (x.name).downcase || user.downcase == (x.slack_id).downcase
+        @selected = x
+      end
+    end
+    return @selected
   end
   
   def show_details
@@ -27,3 +39,4 @@ class Workspace
   def send_message
   end
 end
+

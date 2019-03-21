@@ -2,7 +2,6 @@ require 'httparty'
 require 'pry'
 require_relative 'recipient.rb'
 require_relative 'slack_api_error.rb'
-require_relative 'workspace.rb'
 
 
 class User < Recipient  
