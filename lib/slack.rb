@@ -6,7 +6,6 @@ require_relative "../lib/workspace"
 Dotenv.load
 
 def display_options
-  puts "\nWhat would you like to do?"
   puts "\nChoose from one of the following:"
   puts "------------------------------"
   puts "\nSelect user"
@@ -19,7 +18,14 @@ end
 
 def main
   puts "Welcome to the Ada Slack CLI!"
+  puts "\nWhat would you like to do?"
+  options = ["select user", "select channel", "details", "quit"]
+
   option = display_options
+  until options.include?(option)
+    puts "Please input a valid option."
+    option = display_options
+  end
 
   until option == "quit"
     case option
@@ -27,33 +33,35 @@ def main
       puts "You chose to select a user. Please provide a username or Slack ID"
       selected = gets.chomp()
       workspace = Workspace.new(selected: selected)
-      user = workspace.select_user
-      until !user.nil?
+      selection = workspace.select_user
+      until !selection.nil?
         puts "Please provide a valid username or Slack ID"
         selected = gets.chomp
         workspace = Workspace.new(selected: selected)
-        user = workspace.select_user
+        selection = workspace.select_user
       end
-      puts "You have selected #{user.real_name}"
+      puts "You have selected #{selection.real_name}"
+      puts "\nWhat would you like to do next?"
       option = display_options
     when "select channel"
       puts "You chose to select a channel. Please provide a channel name or Slack ID"
       selected = gets.chomp()
       workspace = Workspace.new(selected: selected)
-      channel = workspace.select_channel
-      until !channel.nil?
+      selection = workspace.select_channel
+      until !selection.nil?
         puts "Please provide a valid Channel name or Slack ID"
         selected = gets.chomp
         workspace = Workspace.new(selected: selected)
-        channel = workspace.select_channel
+        selection = workspace.select_channel
       end
-      puts "You have selected #{channel.name}"
+      puts "You have selected #{selection.name}"
       option = display_options
     when "details"
+      selection.details
+      puts "\nWhat would you like to do next?"
+      option = display_options
     end
   end
-
-  return if option == 2
 
   #if option = #, select_user
   #username = gets.chomp
