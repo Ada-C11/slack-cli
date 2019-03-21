@@ -52,7 +52,7 @@ module Slack
       return false if @selected == nil
       return nil if message == ""
 
-      @selected.send_message(message, @selected.slack_id)
+      return @selected.send_message(message, @selected.slack_id)
     end
   end
 end

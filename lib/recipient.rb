@@ -39,6 +39,8 @@ module Slack
       if message_request["ok"] == false
         raise ResponseError, "There was an error!\nMessage: #{message_request["error"]}"
       end
+
+      return message_request
     end
 
     def details

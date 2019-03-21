@@ -8,4 +8,9 @@ describe "Recipient Class" do
       }.must_raise NotImplementedError
     end
   end
+
+  describe "#send_message" do
+    it "raises an Error if incorrect parameters are given" do
+    end
+  end
 end

@@ -123,8 +123,34 @@ describe "Workspace Class" do
         end
       end
     end
-
-    # select_channel end
   end
+
+  describe "#send_message" do
+    it "sends a message if all requirements are met" do
+      VCR.use_cassette("recipient_information_find") do
+        workspace = Slack::Workspace.new
+        workspace.select_user("cloudylopez")
+        message = workspace.send_message("You're the best!! :dog:")
+        expect(message["ok"]).must_equal true
+      end
+    end
+
+    it "returns false if no channel or user are selected" do
+      VCR.use_cassette("recipient_information_find") do
+        workspace = Slack::Workspace.new
+        message = workspace.send_message("You're the best!! :dog:")
+        expect(message).must_equal false
+      end
+    end
+
+    it "returns nil if invalid message is entered" do
+      VCR.use_cassette("recipient_information_find") do
+        workspace = Slack::Workspace.new
+        message = workspace.send_message("")
+        expect(message).must_equal false
+      end
+    end
+  end
+
   # end end
 end
