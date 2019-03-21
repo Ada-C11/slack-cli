@@ -45,10 +45,21 @@ module SlackApi
         user_details = "\nUsername: #{@selected["name"]}\nSlack ID: #{@selected["id"]} \nReal name: #{@selected["real_name"]}"
 
         return user_details
-      else 
+      else
         error_message = "You have not selected a user or channel yet."
         return error_message
       end
     end
+
+    # def self.send_message(message)
+    #   if (SlackApi::Channel.channel_api).include?(@selected)
+    #     SlackApi::Channel.send_message(message, @selected)
+    #   elsif (SlackApi::User.user_api).include?(@selected)
+    #     # SlackApi::user .method for sending message to user
+    #   else
+    #     error_message = "You have not selected a user or channel yet."
+    #     return error_message
+    #   end
+    # end
   end
 end
