@@ -7,7 +7,7 @@ require_relative "../lib/user.rb"
 describe "User class" do
   before do
     VCR.use_cassette("user_list") do
-      query_params = { token: ENV["SLACK_API_TOKEN"] }
+      #query_params = { token: ENV["SLACK_API_TOKEN"] }
       @response = Slack::User.list
     end
   end

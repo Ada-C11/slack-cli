@@ -1,14 +1,24 @@
+require "pry"
+require "dotenv"
+require "httparty"
+require "table_print"
+
+require_relative "user"
+require_relative "channel"
+
 module Slack
   class Workspace
     attr_reader :users, :channels, :selected
 
-    def initialize(users:, channels:, selected: false)
-      @users = users
+    def initialize
+      @users = Slack::User.list
       @channels = channels
       @selected = false
     end
 
-    def select_channel
+    def select_channel(slack_id)
+      selected_channel = @channels.find { |channel| channel.slack_id == slack_id }
+      return selected_channel
     end
 
     def select_user

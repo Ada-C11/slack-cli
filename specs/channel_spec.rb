@@ -7,7 +7,7 @@ require_relative "../lib/channel.rb"
 describe "Channel class" do
   before do
     VCR.use_cassette("channel_list") do
-      query_params = { token: ENV["SLACK_API_TOKEN"] }
+      #query_params = { token: ENV["SLACK_API_TOKEN"] }
       @response = Slack::Channel.list
     end
   end
@@ -35,8 +35,8 @@ describe "Channel class" do
         exception = expect {
           Slack::Channel.send_message("This post should not work", "invalid-channel")
         }.must_raise Slack::SlackApiError
-  
-        expect(exception.message).must_equal 'channel_not_found'
+
+        expect(exception.message).must_equal "channel_not_found"
       end
     end
   end
