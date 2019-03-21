@@ -24,4 +24,11 @@ describe "Workspace class" do
       expect(@workspace.users[1]).must_be_instance_of Slack::User
     end
   end
+
+  describe "Workspace#Select_channel" do
+    it "will set the selected variable to input channel" do
+      @workspace.select_channel(channel: @workspace.channels[1])
+      expect(@workspace.selected).must_equal @workspace.channels[1]
+    end
+  end
 end
