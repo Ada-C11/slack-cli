@@ -43,7 +43,7 @@ describe "Api Wrapper module" do
         }
         expect {
           Slack::ApiWrapper.get_json(url_tail: url, query_params: query)
-        }.must_raise Slack::SlackError
+        }.must_raise Slack::ApiWrapper::SlackError
       end
     end
   end

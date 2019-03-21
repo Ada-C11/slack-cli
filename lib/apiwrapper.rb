@@ -1,10 +1,11 @@
 module Slack
-  class SlackError < Exception; end
-
   module ApiWrapper
+    class SlackError < StandardError; end
+
+    URL_BASE = "https://slack.com/api/"
+
     def self.get_channels
     end
-    URL_BASE = "https://slack.com/api/"
 
     def self.get_users
       users = []
