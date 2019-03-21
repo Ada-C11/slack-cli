@@ -11,5 +11,17 @@ module Slack
     def details
       return "Name: #{name}, \nID: #{id}, \nTopic: #{topic}, \nMember Count: #{member_count}"
     end
+
+    def self.create_channels
+      channels = []
+      response = ApiWrapper::get_channels
+      response["channels"].each do |channel|
+        channels << self.new(id: channel["id"],
+                             name: channel["name"],
+                             member_count: channel["num_members"],
+                             topic: channel["topic"]["value"])
+      end
+      return channels
+    end
   end
 end
