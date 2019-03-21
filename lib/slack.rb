@@ -1,7 +1,6 @@
 require_relative "recipient"
 require_relative "user"
 require_relative "channel"
-require "pry"
 require "dotenv"
 require "httparty"
 Dotenv.load
@@ -25,7 +24,10 @@ def main
       puts "Please enter channel name or Slack ID:"
       channel_input = gets.chomp.upcase
     elsif choice == "DETAILS"
-      #call get method
+      #call workspace.selected
+      #if that's nil or empty, raise error
+      #else call details method on selected
+      #return details
     end
     puts "Choose from the following options:\n1. List users\n2. List Channels\n3. Select User\n4. Select Channel\n5. Details\n6. Quit"
     choice = gets.chomp.upcase

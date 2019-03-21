@@ -9,6 +9,16 @@ describe "Channel class" do
       end
     end
   end
+
+  describe "Channel#get" do
+    it "returns information from the API" do
+      VCR.use_cassette("Channel") do
+        response = Channel.get
+        expect(response["ok"]).must_equal true
+      end
+    end
+  end
+
   describe "Channel#list" do
     it "includes a known channel" do
       VCR.use_cassette("Channel") do
@@ -23,12 +33,5 @@ describe "Channel class" do
         expect(response).must_equal 3
       end
     end
-
-    # it "will raise an exception if the search fails" do
-    #   VCR.use_cassette("Channel") do
-    #     response = Channel.list
-    #     expect { response }.must_raise ArgumentError
-    #   end
-    # end
   end
 end

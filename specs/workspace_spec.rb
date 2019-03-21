@@ -1,5 +1,4 @@
 require_relative "test_helper"
-require "pry"
 
 describe "Workspace class" do
   describe "Workspace#initialize" do
@@ -20,6 +19,8 @@ describe "Workspace class" do
       end
     end
 
+    #ADD SLACK ID SEARCH TEST HERE
+
     it "raises an Argument if user info is invalid" do
       VCR.use_cassette("Channel") do
         response = Workspace.new
@@ -36,6 +37,8 @@ describe "Workspace class" do
         expect(response.selected[0]["name"]).must_equal "general"
       end
     end
+
+    #ADD SLACK ID SEARCH TEST HERE
 
     it "raises an Argument if channel info is invalid" do
       VCR.use_cassette("Channel") do

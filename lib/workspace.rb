@@ -15,7 +15,7 @@ class Workspace
   end
 
   def select_user(user)
-    selected_user = @users["members"].select { |user_info| user_info["name"] == user }
+    selected_user = @users["members"].select { |user_info| user_info.has_value?(user) }
     if selected_user.empty?
       raise ArgumentError, "That user is invalid"
     else
@@ -25,7 +25,7 @@ class Workspace
   end
 
   def select_channel(channel)
-    selected_channel = @channels["channels"].select { |channel_info| channel_info["name"] == channel }
+    selected_channel = @channels["channels"].select { |channel_info| channel_info.has_value?(channel) }
     if selected_channel.empty?
       raise ArgumentError, "That channel is invalid"
     else

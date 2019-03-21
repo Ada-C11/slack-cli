@@ -1,7 +1,6 @@
 require "httparty"
 require "dotenv"
 Dotenv.load
-require "pry"
 
 class Channel
   attr_reader :topic, :member_count
