@@ -52,5 +52,14 @@ describe "Api Wrapper module" do
         expect(response).must_equal true
       end
     end
+
+    it "will raise exception if invalid channel used" do
+      VCR.use_cassette("slack_api") do
+        user_id = "Noarealid234"
+        expect {
+          Slack::ApiWrapper.post(text: "test text", recipient: user_id)
+        }.must_raise Slack::ApiWrapper::SlackError
+      end
+    end
   end
 end
