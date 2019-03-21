@@ -3,20 +3,26 @@ require_relative "channel"
 require_relative "slack"
 require "dotenv"
 require "httparty"
+require "pry"
 Dotenv.load
 
 class Workspace
   attr_accessor :selected, :users, :channels
 
   def initialize
-    @users = User.get
-    @channels = Channel.get
+    @users = User.list
+    @channels = Channel.list
     @selected = selected
   end
 
-  def select_user(user)
-    selected_user = @users["members"].select { |user_info| user_info.has_value?(user) }
-    if selected_user.empty?
+  def select_user(user_identifier)
+    selected_user = nil
+    @users.each do |user|
+      if user.username == user_identifier || user.id == user_identifier
+        selected_user = user
+      end
+    end
+    if selected_user == nil
       raise ArgumentError, "That user is invalid"
     else
       @selected = selected_user
@@ -24,9 +30,14 @@ class Workspace
     end
   end
 
-  def select_channel(channel)
-    selected_channel = @channels["channels"].select { |channel_info| channel_info.has_value?(channel) }
-    if selected_channel.empty?
+  def select_channel(channel_identifier)
+    selected_channel = nil
+    @channels.each do |channel|
+      if channel.channel_name == channel_identifier || channel.id == channel_identifier
+        selected_channel = channel
+      end
+    end
+    if selected_channel == nil
       raise ArgumentError, "That channel is invalid"
     else
       @selected = selected_channel

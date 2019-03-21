@@ -4,7 +4,7 @@ describe "User class" do
   describe "User#initialize" do
     it "initializes a User object" do
       VCR.use_cassette("User") do
-        response = User.new
+        response = User.new("Larry", "Truck", "1234")
         expect(response).must_be_instance_of User
       end
     end
@@ -23,7 +23,14 @@ describe "User class" do
     it "includes a known User" do
       VCR.use_cassette("User") do
         response = User.list
-        expect(response).must_include "ngocle"
+        expect(response[0]).must_be_instance_of User
+      end
+    end
+
+    it "User details are correct" do
+      VCR.use_cassette("User") do
+        response = User.list
+        expect(response[1].username).must_equal "amyesh08"
       end
     end
 

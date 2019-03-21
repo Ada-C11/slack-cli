@@ -3,14 +3,14 @@ require "httparty"
 Dotenv.load
 
 class User
-  attr_reader :topic, :member_count
-  attr_accessor :user_names, :real_name, :user_info
+  attr_accessor :username, :real_name, :user_info, :id
   BASE_URL = "https://slack.com/api/users.list"
   TOKEN = ENV["SLACK_API_TOKEN"]
 
-  def initialize
+  def initialize(real_name, username, id)
+    @username = username
     @real_name = real_name
-    @user_names = []
+    @id = id
     @user_info = User.get
   end
 
@@ -28,9 +28,9 @@ class User
   def self.list
     user_info = User.get
     user_list = user_info["members"]
-    @user_names = user_list.map do |user|
-      user["name"]
+    users = user_list.map do |user|
+      User.new(user["real_name"], user["name"], user["id"])
     end
-    return @user_names
+    return users
   end
 end

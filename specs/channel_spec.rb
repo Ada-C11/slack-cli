@@ -1,10 +1,11 @@
 require_relative "test_helper"
+require "pry"
 
 describe "Channel class" do
   describe "Channel#initialize" do
     it "initializes a Channel object" do
       VCR.use_cassette("Channel") do
-        response = Channel.new
+        response = Channel.new("fur_babes", "1234", "pets", ["AUAIWFS"])
         expect(response).must_be_instance_of Channel
       end
     end
@@ -23,7 +24,8 @@ describe "Channel class" do
     it "includes a known channel" do
       VCR.use_cassette("Channel") do
         response = Channel.list
-        expect(response).must_include "general"
+        expect(response[0]).must_be_instance_of Channel
+        expect(response[0].member_count).must_be_instance_of Integer
       end
     end
 

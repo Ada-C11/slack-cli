@@ -1,17 +1,19 @@
 require "httparty"
 require "dotenv"
 Dotenv.load
+require "pry"
 
 class Channel
-  attr_reader :topic, :member_count
-  attr_accessor :channel_names
+  attr_accessor :channel_name, :id, :topic, :members, :member_count
   BASE_URL = "https://slack.com/api/channels.list"
   TOKEN = ENV["SLACK_API_TOKEN"]
 
-  def initialize
+  def initialize(channel_name, id, topic, members)
+    @channel_name = channel_name
+    @id = id
     @topic = topic
-    @member_count = member_count
-    @channel_names = []
+    @members = members
+    @member_count = members.length
   end
 
   def self.get
@@ -28,9 +30,9 @@ class Channel
   def self.list
     channel_info = Channel.get
     channel_list = channel_info["channels"]
-    @channel_names = channel_list.map do |channel|
-      channel["name"]
+    channels = channel_list.map do |channel|
+      Channel.new(channel["name"], channel["id"], channel["topic"], channel["members"])
     end
-    return @channel_names
+    return channels
   end
 end

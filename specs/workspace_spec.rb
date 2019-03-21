@@ -11,18 +11,24 @@ describe "Workspace class" do
   end
 
   describe "select_user" do
-    it "selects a known user" do
+    it "selects a known user by username" do
       VCR.use_cassette("Workspace") do
         response = Workspace.new
         response.select_user("ngocle")
-        expect(response.selected[0]["name"]).must_equal "ngocle"
+        expect(response.selected.username).must_equal "ngocle"
       end
     end
 
-    #ADD SLACK ID SEARCH TEST HERE
+    it "selects a known user by slack id" do
+      VCR.use_cassette("Workspace") do
+        response = Workspace.new
+        response.select_user("UH553UM7G")
+        expect(response.selected.username).must_equal "ngocle"
+      end
+    end
 
     it "raises an Argument if user info is invalid" do
-      VCR.use_cassette("Channel") do
+      VCR.use_cassette("Workspace") do
         response = Workspace.new
         expect { response.select_user("tildee") }.must_raise ArgumentError
       end
@@ -34,16 +40,22 @@ describe "Workspace class" do
       VCR.use_cassette("Workspace") do
         response = Workspace.new
         response.select_channel("general")
-        expect(response.selected[0]["name"]).must_equal "general"
+        expect(response.selected.channel_name).must_equal "general"
       end
     end
 
-    #ADD SLACK ID SEARCH TEST HERE
+    it "selects a known channel by slack id" do
+      VCR.use_cassette("Workspace") do
+        response = Workspace.new
+        response.select_channel("CH41W659D")
+        expect(response.selected.channel_name).must_equal "general"
+      end
+    end
 
     it "raises an Argument if channel info is invalid" do
-      VCR.use_cassette("Channel") do
+      VCR.use_cassette("Workspace") do
         response = Workspace.new
-        expect { response.select_channel("fur_babes") }.must_raise ArgumentError
+        expect { response.select_channel("starburst") }.must_raise ArgumentError
       end
     end
   end
