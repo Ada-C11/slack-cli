@@ -54,8 +54,31 @@ describe "User class" do
       expect(@users[1].real_name).must_equal "elise.pham88"
     end
 
-    it "returns correct number of users in workspace" do 
+    it "returns correct number of users in workspace" do
       expect(@users.length).must_equal 3
+    end
+  end
+
+  describe "Channel.create_channels" do
+    before do
+      VCR.use_cassette("slack_api") do
+        @channels = Slack::Channel.create_channels
+      end
+    end
+
+    it "will return an array" do
+      expect(@channels).must_be_instance_of Array
+    end
+
+    it "returns correct Channel objects" do
+      expect(@channels[1].name).must_equal "general"
+      expect(@channels[1].id).must_equal "CH2P3NB0T"
+      expect(@channels[1].topic).must_equal "Company-wide announcements and work-based matters"
+      expect(@channels[1].member_count).must_equal 2
+    end
+
+    it "returns correct number of channels in workspace" do
+      expect(@channels.length).must_equal 4
     end
   end
 end
