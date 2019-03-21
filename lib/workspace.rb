@@ -23,6 +23,16 @@ module SlackCLI
       return @selected == nil ? nil : @selected.details
     end
 
+    def send_message
+      if @selected != nil
+        message = gets.chomp
+        @selected.send_message(message)
+        return true
+      else
+        return false
+      end
+    end
+
     private
 
     def find_user(user_info)
@@ -42,6 +52,5 @@ module SlackCLI
       end
       return nil
     end
-
   end
 end
