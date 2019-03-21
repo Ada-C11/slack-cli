@@ -5,14 +5,18 @@ describe SlackCLI do
   USER_URL = "https://slack.com/api/users.list"
 
   describe "User class" do
-    let (:get_list) do # To be used in some test when the method requires data that comes from the Slack API
+    let (:get_users) do
       VCR.use_cassette("user_get") do
         user = USER_URL
         param = ENV["SLACK_API_TOKEN"]
-        expect(SlackCLI::User.get(user, param)).must_be_kind_of HTTParty::Response
+        SlackCLI::User.get(user, param)
       end
     end
-
+    let (:list_users) do
+      VCR.use_cassette("user_get") do
+        SlackCLI::User.list
+      end
+    end
     describe "self.get" do
       it "imports list of users from slack" do
         VCR.use_cassette("user_get") do
@@ -25,7 +29,7 @@ describe SlackCLI do
 
     describe "self.list" do
       it "formats the list of users" do
-        get_list
+        get_users
         expect(SlackCLI::User.list).must_be_kind_of Array
         ap SlackCLI::User.list
       end
@@ -34,18 +38,20 @@ describe SlackCLI do
     describe "selecting a user" do
       it "creates an instance of user" do
         # the instantiation of User class should happen in workspace
-        expect(SlackCLI::User.new("myriam.waldend", "UH2P4B8R1")).must_be_kind_of SlackCLI::User
+        expect(SlackCLI::User.new("myriam.waldend", "UH2P4B8R1", "myriam.waldend")).must_be_kind_of SlackCLI::User
       end
     end
 
     describe "self.details" do
       it "gives a description of the user" do
-        get_list
+        get_users
+        list_users
         expect(SlackCLI::User.details("UH2P4B8R1")).must_be_kind_of String
-        puts SlackCLI::User.details("UH2P4B8R1")
+        ap SlackCLI::User.details("UH2P4B8R1")
       end
       it "raises ArgumentError when the user does not exist" do
-        get_list
+        get_users
+        list_users
         expect { SlackCLI::User.details("IMACATIMAKITTYCAT") }.must_raise ArgumentError
       end
     end
