@@ -1,13 +1,12 @@
 require_relative "test_helper"
 
 describe SlackCLI::Recipient do
+  before do
+    @slack_id = "CH2SKTDBN"
+    @name = "random"
+    @record = SlackCLI::Recipient.new(slack_id: @slack_id, name: @name)
+  end
   describe "constructor" do
-    before do
-      @slack_id = "CH2SKTDBN"
-      @name = "random"
-      @record = SlackCLI::Recipient.new(slack_id: @slack_id, name: @name)
-    end
-
     it "is an instance of Recipient" do
       expect(@record).must_be_kind_of SlackCLI::Recipient
     end
@@ -34,8 +33,8 @@ describe SlackCLI::Recipient do
 
   describe "send message" do
     it "can send a valid message" do
-      VCR.use_cassette("recipient") do
-        response = SlackCLI::Recipient.send_message("Hey I can post messages!")
+      VCR.use_cassette("workspace") do
+        response = @record.send_message("Hey I can post messages!")
         expect(response).must_equal true
       end
     end

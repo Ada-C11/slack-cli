@@ -4,6 +4,9 @@ module SlackCLI
   class Recipient
     attr_reader :slack_id, :name
 
+    URL = "https://slack.com/api/chat.postMessage"
+    API_KEY = ENV["SLACK_API_TOKEN"]
+
     def initialize(slack_id:, name:)
       @slack_id = slack_id
       @name = name
@@ -19,6 +22,23 @@ module SlackCLI
 
     def details
       raise NotImplementedError, "Implement me in a child class!"
+    end
+
+    def send_message(message)
+      body = {
+        token: API_KEY,
+        text: message,
+        channel: self.slack_id
+      }
+      headers = { 'Content-Type' => 'application/x-www-form-urlencoded' }
+      response = HTTParty.post(URL, body: body, headers: headers)
+
+      unless response.code == 200 && response.parsed_response["ok"]
+        # raise SlackApiError, "Error when posting #{message} to #{channel}, error: #{response.parsed_response["error"]}"
+        raise StandardError, "message could not be sent"
+      end
+  
+      return true
     end
   end
 end
