@@ -19,7 +19,7 @@ def main
 
   users = SlackAPI::User.load
   channels SlackAPI::Channel.load
-  SlackAPI::Workspace.new(users: users, channels: channels)
+  workspace = SlackAPI::Workspace.new(users: users, channels: channels)
 
   until input == "quit" do
     puts "Welcome to the Ada Slack CLI!"
