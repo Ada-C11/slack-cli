@@ -37,8 +37,8 @@ module SlackCli
         token: TOKEN,
       }
       response = HTTParty.get(self::LIST_URL, query: query_params)
-      return response
       error_helper(response)
+      return response
     end
 
     #private

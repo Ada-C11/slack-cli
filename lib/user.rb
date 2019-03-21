@@ -1,24 +1,24 @@
-require 'pry'
+require "pry"
 
-require_relative 'recipient'
+require_relative "recipient"
 
 module SlackCli
-  class User < Recipient 
+  class User < Recipient
     LIST_URL = "https://slack.com/api/users.list"
     TOKEN = ENV["SLACK_TOKEN"]
 
-    attr_reader :real_name, :status_text, :status_emoji, :list_users, :details
+    attr_reader :real_name, :status_text, :status_emoji
 
     def initialize(name, slack_id, real_name, status_text, status_emoji)
       @name = name
       @slack_id = slack_id
       @real_name = real_name
-      @status_text = status_text 
+      @status_text = status_text
       @status_emoji = status_emoji
     end
 
     def self.list
-      response = SlackCli::User.get
+      response = get
 
       users = response["members"].map do |user|
         name = user["name"]
@@ -32,13 +32,6 @@ module SlackCli
       return users
     end
 
-    def self.list_users
-      list.each do |user|
-        puts "#{user.real_name} Slack ID: #{user.slack_id}"
-      end
-      return nil
-    end
-
     def self.details
       user_details = "Username: #{name}
         Slack ID: #{slack_id}
@@ -49,5 +42,3 @@ module SlackCli
     end
   end
 end
-
-binding.pry

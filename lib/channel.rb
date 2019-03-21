@@ -2,9 +2,8 @@ require_relative "recipient"
 
 module SlackCli
   class Channel < SlackCli::Recipient
-    attr_reader :topic, :member_count, :list_channels
+    attr_reader :topic, :member_count
     LIST_URL = "https://slack.com/api/channels.list"
-    MSG_URL = ""
 
     def initialize(slack_id, name, topic, member_count)
       @slack_id = slack_id
@@ -14,7 +13,7 @@ module SlackCli
     end
 
     def self.list
-      response = SlackCli::Channel.get
+      response = get
   
       channels = response["channels"].map do |channel|
         slack_id = channel["id"]
@@ -26,14 +25,7 @@ module SlackCli
       return channels
     end
 
-    def self.list_channels
-      list.each do |channel|
-        puts "Channel name: #{channel.name} ID: #{channel.slack_id} topic: #{channel.topic}, Member count:#{channel.member_count}"
-      end
-      return nil
-    end
-
-    def details # what should I be?????
+    def details
       return "Channel name: #{name} \nID: #{slack_id} \ntopic: #{topic}, \nMember count:#{member_count}\n"
     end
   end
