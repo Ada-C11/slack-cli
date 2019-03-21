@@ -1,16 +1,25 @@
-require_relative "slack"
-require_relative "top"
+# require_relative "slack"
 require "httparty"
 require "dotenv"
 require "table_print"
 Dotenv.load
 
 class User
-  attr_reader :topic, :member_count, :ch_name
+  attr_reader :user_name, :user_id, :real_name
 
-  def lists_users
-    @users["members"].each do |x|
-      puts x["name"]
-    end
+  def initialize(user_name, user_id, real_name)
+    @user_name = user_name
+    @user_id = user_id
+    @real_name = real_name
+  end
+
+  def print
+    puts "name: #{user_name}"
+    puts "id: #{user_id}"
+    puts "real name: #{real_name}"
+  end
+
+  def details
+    print
   end
 end
