@@ -14,7 +14,9 @@ token = ENV['TOKEN']
 
 def main
   input = 0
-
+  SlackAPI::User.load
+  SlackAPI::Channel.load
+  
   until input == "quit" do
     puts "Welcome to the Ada Slack CLI!"
     puts "What would you like to do?"
@@ -31,10 +33,8 @@ def main
 
     case input
     when "list users"
-      SlackAPI::User.load
       tp SlackAPI::User.list
     when "list channels"
-      SlackAPI::Channel.load
       tp SlackAPI::Channel.list
     else 
 
