@@ -18,7 +18,13 @@ class Recipient
   def self.get(endpoint, params = {})
     url = BASE_URL + endpoint
     params[:token] = ENV["SLACK_API_TOKEN"]
-    HTTParty.get(url, query: params)
+    p params
+    response = HTTParty.get(url, query: params)
+    unless response.code == 200 && response.parsed_response["ok"]
+      p response["error"]
+      raise SlackApiError, response["error"]
+    end
+    return response
   end
 
   def self.list
