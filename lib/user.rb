@@ -7,7 +7,6 @@ require "table_print"
 Dotenv.load
 
 module Slack
-
   class User < Recipient
     attr_reader :real_name, :status_text, :status_emoji
 
@@ -24,23 +23,6 @@ module Slack
     # def self.select_user(slack_id)
     #   selected_user = list.find {|user| user.id == slack_id}
     #   return selected_user
-    # end
-
-    # def self.send_message(text, channel)
-    #   body = {
-    #     text: text,
-    #     channel: channel,
-    #     token: ENV["SLACK_API_TOKEN"],
-    #   }
-
-    #   response = HTTParty.post("#{BASE_URL}/chat.postMessage",
-    #                            body: body,
-    #                            headers: { "Content-Type" => "application/x-www-form-urlencoded" })
-
-    #   unless response.code == 200 && response["ok"]
-    #     raise SlackApiError, "user_not_found"
-    #   end
-    #   return true
     # end
 
     def details
@@ -64,15 +46,5 @@ module Slack
 
       return users
     end
-    
-
-
-
-
-  
-
-
   end
 end
-
-

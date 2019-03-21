@@ -34,8 +34,8 @@ describe "User class" do
         exception = expect {
           Slack::User.send_message("This post should not work", "invalid-name")
         }.must_raise Slack::SlackApiError
-  
-        expect(exception.message).must_equal 'user_not_found'
+
+        expect(exception.message).must_equal "channel_not_found"
       end
     end
   end
