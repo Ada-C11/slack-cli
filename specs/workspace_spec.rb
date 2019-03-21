@@ -2,11 +2,19 @@ require_relative "test_helper"
 
 describe SlackApi::Workspace do
   describe "select_channel" do
-    it "selects a valid channel" do
+    it "selects a valid channel name" do
       VCR.use_cassette("slack_workspace") do
         workspace = SlackApi::Workspace.new
         valid_channel_name = "random"
         expect(workspace.select_channel(valid_channel_name)).must_equal true
+      end
+    end
+
+    it "selects a valid channel ID" do
+      VCR.use_cassette("slack_workspace") do
+        workspace = SlackApi::Workspace.new
+        valid_channel_id = "CH3UGLBHV"
+        expect(workspace.select_channel(valid_channel_id)).must_equal true
       end
     end
 
@@ -17,14 +25,29 @@ describe SlackApi::Workspace do
         expect(workspace.select_channel(invalid_channel_name)).must_equal false
       end
     end
+
+    it "returns a false if select_channel is not given an input" do
+      VCR.use_cassette("slack_workspace") do
+        workspace = SlackApi::Workspace.new
+        expect(workspace.select_channel("")).must_equal false
+      end
+    end
   end
 
   describe "select_user" do
-    it "selects a valid user" do
+    it "selects a valid username" do
       VCR.use_cassette("slack_workspace") do
         workspace = SlackApi::Workspace.new
         valid_user_name = "slackbot"
         expect(workspace.select_user(valid_user_name)).must_equal true
+      end
+    end
+
+    it "selects a valid user ID" do
+      VCR.use_cassette("slack_workspace") do
+        workspace = SlackApi::Workspace.new
+        valid_user_id = "USLACKBOT"
+        expect(workspace.select_user(valid_user_id)).must_equal true
       end
     end
 
@@ -36,7 +59,12 @@ describe SlackApi::Workspace do
       end
     end
 
-    # write tests for User ID also
+    it "returns a false if select_user is not given an input" do
+      VCR.use_cassette("slack_workspace") do
+        workspace = SlackApi::Workspace.new
+        expect(workspace.select_user("")).must_equal false
+      end
+    end
   end
 
   describe "show_details" do
