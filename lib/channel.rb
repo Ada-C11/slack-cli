@@ -18,7 +18,11 @@ class Channel
   
   def self.list_channels(channels)
     channels.each do |channel|
-      puts channel["name"]
+      puts "Channel name: #{channel["name"]}"
+      puts "Topic: #{channel["topic"]["value"]}"
+      puts "Member Count: #{channel["members"].length}"
+      puts "Slack ID: #{channel["id"]}"
+      puts
     end
   end
 

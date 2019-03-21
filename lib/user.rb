@@ -18,7 +18,10 @@ class User
 
   def self.list_users(users)
     users.each do |user|
-      puts user["name"]
+      puts "Name: #{user["real_name"]}"
+      puts "Username: #{user["name"]}"
+      puts "SlackID: #{user["id"]}"
+      puts
     end
   end
 
