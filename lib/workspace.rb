@@ -7,5 +7,10 @@ module Slack
       @channels = Channel.create_channels
       @selected = nil
     end
+
+    def select_channel(channel:)
+      @selected = channel
+      return true
+    end
   end
 end

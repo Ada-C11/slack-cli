@@ -31,4 +31,11 @@ describe "Workspace class" do
       expect(@workspace.selected).must_equal @workspace.channels[1]
     end
   end
+
+  describe "Workspace#Select_user" do
+    it "will set the selected variable to input user" do
+      @workspace.select_user(channel: @workspace.users[1])
+      expect(@workspace.selected).must_equal @workspace.users[1]
+    end
+  end
 end
