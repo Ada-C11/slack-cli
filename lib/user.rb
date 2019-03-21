@@ -10,7 +10,6 @@ class User
   KEY = ENV["TOKEN"]  
   attr_reader :real_name
   
-
   
   def initialize(username:, real_name:, slack_id:)
     # super(slack_id, name)
@@ -38,7 +37,6 @@ class User
   
   def self.list   
     # return @response["members"].each { |member| puts member["name"] }
-    
   end
 
 end
