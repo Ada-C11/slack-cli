@@ -53,5 +53,9 @@ describe "User class" do
       expect(@users[1].id).must_equal "UH2RH81RA"
       expect(@users[1].real_name).must_equal "elise.pham88"
     end
+
+    it "returns correct number of users in workspace" do 
+      expect(@users.length).must_equal 3
+    end
   end
 end
