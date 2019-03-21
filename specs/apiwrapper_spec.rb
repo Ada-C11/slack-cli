@@ -26,6 +26,18 @@ describe "Api Wrapper module" do
           }.must_raise Slack::ApiWrapper::SlackError
       end
     end
+
+    it "raise an error when an invalid token is used" do
+      VCR.use_cassette("slack_api") do
+        real_token = ENV["SLACK_API_KEY"]
+        ENV["SLACK_API_KEY"] = "NOT_REAL_TOKEN"
+        error = expect {
+          Slack::ApiWrapper.post(text: "Test message with invalid key",
+                                 recipient: "general")
+        }.must_raise Slack::ApiWrapper::SlackError
+        ENV["SLACK_API_KEY"] = real_token
+      end
+    end
   end
 
   describe "ApiWrapper.get_channels" do

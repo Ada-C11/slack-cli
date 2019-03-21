@@ -3,7 +3,6 @@ module Slack
     class SlackError < StandardError; end
 
     URL_BASE = "https://slack.com/api/"
-    TOKEN = ENV["SLACK_API_KEY"]
 
     def self.get_channels
       url_tail = "channels.list"
@@ -18,8 +17,9 @@ module Slack
     end
 
     def self.get_json(url_tail:)
+      token = ENV["SLACK_API_KEY"]
       query_params = {
-        "token": TOKEN,
+        "token": token,
       }
       response = HTTParty.get("#{URL_BASE}#{url_tail}", query: query_params)
       if !response["ok"]
@@ -29,11 +29,12 @@ module Slack
     end
 
     def self.post(text:, recipient:)
+      token = ENV["SLACK_API_KEY"]
       response = HTTParty.post(
         "#{URL_BASE}chat.postMessage",
         headers: { "Content-Type" => "application/x-www-form-urlencoded" },
         body: {
-          token: TOKEN,
+          token: token,
           channel: recipient,
           text: text,
         },
