@@ -26,7 +26,7 @@ class Channel < Recipient
   def details
     puts "Name: #{self.name}"
     puts "ID: #{self.slack_id}"
-    puts "Topic: #{self.topic}"
+    puts "Topic: #{self.topic["value"]}"
     puts "Number of members: #{self.member_count}"
   end
 end
