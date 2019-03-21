@@ -38,17 +38,20 @@ describe "User class" do
   # 2
 
   describe "User.create_users" do
-    let(:users) {
-      Slack::User.create_users
-    }
+    before do
+      VCR.use_cassette("slack_api") do
+        @users = Slack::User.create_users
+      end
+    end
+
     it "will return an array" do
-      expect(users).must_be_instance_of Array
+      expect(@users).must_be_instance_of Array
     end
 
     it "returns correct User objects" do
-      expect(users[1].name).must_equal "elise.pham88"
-      expect(users[1].id).must_equal "UH2RH81RA"
-      expect(users[1].real_name).must_equal "elise.pham88"
+      expect(@users[1].name).must_equal "elise.pham88"
+      expect(@users[1].id).must_equal "UH2RH81RA"
+      expect(@users[1].real_name).must_equal "elise.pham88"
     end
   end
 end

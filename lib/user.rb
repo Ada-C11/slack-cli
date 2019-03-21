@@ -13,6 +13,12 @@ module Slack
 
     def self.create_users
       users = []
+      response = ApiWrapper::get_users
+      response["members"].each do |user|
+        users << self.new(id: user["id"],
+                          name: user["name"],
+                          real_name: user["real_name"])
+      end
       return users
     end
   end
