@@ -33,7 +33,7 @@ def main
       until (input2 == "quit")
         case input2
         when "details"
-          workspace.show_details
+          workspace.show_details(name_or_id)
         when "send message"
           workspace.send_message
         when "quit"
@@ -49,7 +49,7 @@ def main
       until (input3 == "quit")
         case input3
         when "details"
-          workspace.show_details
+          workspace.show_details(name_or_id)
         when "send message"
           workspace.send_message
         when "quit"

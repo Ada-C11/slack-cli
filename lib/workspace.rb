@@ -33,5 +33,13 @@ module SlackCLI
       @selected ||= channels.find { |channel| channel.slack_id == name_or_id }
       return selected
     end
+
+    def show_details(name_or_id)
+      if users.find { |user| user.name == name_or_id } 
+        
+      elsif @channels.include?(name_or_id.class) 
+        channel = channels.find { |channel| return channel if channel.name == name_or_id}
+      end
+    end
   end
 end
