@@ -16,8 +16,6 @@ module Slack
       return HTTParty.get(url, query: params)
     end
 
-    # Helper method used by user and channel to raise arg
-
     # Helper method used by user and channel to send message
     def self.send_message(text, channel)
       body = {
@@ -39,9 +37,8 @@ module Slack
 
     private
 
-    # abstract
-
     def details
+      raise NotImplementedError, "Implement me in a child class!"
     end
 
     def self.list
