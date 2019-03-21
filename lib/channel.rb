@@ -17,12 +17,15 @@ module Slack
 
     def self.create_channels
       channels = []
-      response = ApiWrapper::get_channels
-      response["channels"].each do |channel|
-        channels << self.new(id: channel["id"],
-                             name: channel["name"],
-                             member_count: channel["num_members"],
-                             topic: channel["topic"]["value"])
+      begin
+        response = ApiWrapper::get_channels
+        response["channels"].each do |channel|
+          channels << self.new(id: channel["id"],
+                               name: channel["name"],
+                               member_count: channel["num_members"],
+                               topic: channel["topic"]["value"])
+        end
+      rescue ApiWrapper::SlackError
       end
       return channels
     end
