@@ -41,7 +41,8 @@ describe "Workspace class" do
 
   describe "Workspace#list_all" do
     it "will return a string" do
-      expect(@workspace.list_all).must_be_instance_of String
+      expect(@workspace.list_all(list: @workspace.channels)).must_be_instance_of String
+      expect(@workspace.list_all(list: @workspace.users)).must_be_instance_of String
     end
   end
 end
