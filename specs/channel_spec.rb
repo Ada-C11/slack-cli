@@ -21,6 +21,7 @@ describe "Channel" do
       channels = channel_list
 
       expect(channels).must_be_kind_of Array
+      
       channels.each do |channel|
         expect(channel).must_be_instance_of SlackCli::Channel
       end
@@ -30,6 +31,7 @@ describe "Channel" do
   describe "details" do
     it "lists details for an instance of Channel" do
       channel = channel_list[1]
+
       expect(channel.details).must_be_kind_of String
     end
   end

@@ -1,4 +1,4 @@
-require_relative "test_helper.rb"
+require_relative "test_helper"
 
 describe "User child class" do
   let(:get_response) do
@@ -29,6 +29,7 @@ describe "User child class" do
   describe "details" do
     it "lists details for an instance of User" do
       user = users_list[1]
+
       expect(user.details).must_be_kind_of String
     end
   end
