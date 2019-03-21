@@ -10,6 +10,7 @@ module Slack
   class SlackApiError < StandardError; end
 
   class User < Recipient
+    attr_reader :real_name, :status_text, :status_emoji
 
     def initialize(real_name:, status_text:, status_emoji:)
       @real_name = real_name

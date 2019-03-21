@@ -41,14 +41,15 @@ def main
 
   until selection == "3"
     if selection == "1"
-
-      # DO STUFF!
+      users = Slack::User.list
+      puts "\nHere are the users:"
+      users.each_with_index do |user, i|
+        puts "#{i + 1}. #{user.real_name} -- #{user.status_text} -- #{user.status_emoji}"
+      end
 
     elsif selection == "2"
       channels = Slack::Channel.list
-
       puts "\nHere are the channels:"
-
       channels.each_with_index do |channel, i|
         puts "#{i + 1}. #{channel.name.capitalize} -- #{channel.topic} -- #{channel.member_count} -- #{channel.id}"
       end
