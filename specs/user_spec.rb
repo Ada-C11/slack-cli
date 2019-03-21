@@ -4,7 +4,6 @@ describe SlackAPI do
     it "list all users" do
       VCR.use_cassette("list_users") do
         response = SlackAPI::User.list_users
-        puts response
         expect(response).wont_be_nil
         expect(response.keys.include?("aribray")).must_equal true
         expect(response["aribray"]).must_equal "real name" => "Ariana Bray",
@@ -58,6 +57,34 @@ describe SlackAPI do
         expect(user_details.length).must_equal 1
         expect(user_details["aribray"]).must_equal "real name" => "Ariana Bray",
                                                    "slack id" => "UH3UT3SJK"
+      end
+    end
+  end
+
+  describe "send_usr_msg" do
+    it "sends a message to selected user" do
+      VCR.use_cassette("send_usr_msg") do
+        msg = SlackAPI::User.new.send_msg("UH3UT3SJK", "This is a test message!")
+        expect(msg).must_equal true
+      end
+    end
+
+    it "generates an error if given an invalid user" do
+      VCR.use_cassette("send_usr_msg") do
+        expect {
+          SlackAPI::User.new.send_msg("bob's your uncle", "Test message")
+        }.must_raise SlackAPI::SlackError
+      end
+    end
+
+    it "will raise an error if given an empty message" do
+      VCR.use_cassette("send_usr_msg") do
+        error = expect {
+          SlackAPI::User.new.send_msg("UH3UT3SJK",
+                                      "")
+        }.must_raise SlackAPI::SlackError
+
+        # expect(error.message).must_equal "Error when posting  to ports-api-testing, error: no_text"
       end
     end
   end

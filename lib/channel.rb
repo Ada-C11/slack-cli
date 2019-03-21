@@ -17,7 +17,7 @@ module SlackAPI
         raise SlackAPI::SlackError, "There was an error. The code is #{response["error"]}."
       else
         response["channels"].each do |channel|
-          channel_list[channel["name"]] = {"topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"]}
+          channel_list[channel["name"]] = { "topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"] }
         end
       end
       return channel_list
@@ -50,7 +50,7 @@ module SlackAPI
       else
         response["channels"].each do |channel|
           if channel["id"] == identifier || channel["name"] == identifier
-            channel_details[channel["name"]] = {"topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"]}
+            channel_details[channel["name"]] = { "topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"] }
             return channel_details
           end
         end
@@ -60,7 +60,7 @@ module SlackAPI
     def send_msg(recipient, text)
       response = HTTParty.post(
         "#{BASE_URL}chat.postMessage",
-        headers: {"Content-Type" => "application/x-www-form-urlencoded"},
+        headers: { "Content-Type" => "application/x-www-form-urlencoded" },
         body: {
           token: ENV["SLACK_API_TOKEN"],
           channel: recipient,
@@ -70,7 +70,7 @@ module SlackAPI
       if response["ok"]
         return true
       else
-        raise SlackApi::SlackError, "Error when posting #{text} to #{channel}, error: #{response["error"]}"
+        raise SlackAPI::SlackError, "Error when posting #{text} to #{recipient}, error: #{response["error"]}"
       end
     end
   end #end of class
