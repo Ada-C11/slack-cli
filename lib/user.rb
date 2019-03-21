@@ -60,6 +60,10 @@ module Slack
     end # self.select_user
 
     def show_details(id)
+      query_parameters = {
+        token: ENV["SLACK_API_TOKEN"],
+      }
+      response = HTTParty.get(USER_URL, query: query_parameters)
       # query token
       # response
       # create a hash and iterate over user details. put result in hash and return it
