@@ -61,5 +61,14 @@ describe "Api Wrapper module" do
         }.must_raise Slack::ApiWrapper::SlackError
       end
     end
+
+    it "will raise exception if no text is provided" do
+      VCR.use_cassette("slack_api") do
+        user_id = "UH2RH81RA"
+        expect {
+          Slack::ApiWrapper.post(text: "", recipient: user_id)
+        }.must_raise Slack::ApiWrapper::SlackError
+      end
+    end
   end
 end
