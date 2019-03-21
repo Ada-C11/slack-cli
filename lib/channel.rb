@@ -12,7 +12,11 @@ class Channel < Recipient
   
   
   def self.list
-    return self.get('channels.list')
+    response = self.get('channels.list')
+    channels = response["channels"].map do |channel|
+      self.create_from_api_response(channel)
+    end
+    return channels
   end
   
   private

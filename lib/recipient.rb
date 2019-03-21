@@ -30,7 +30,6 @@ class Recipient
 # Endpoint is somthing like 'users.list' or 'channels.list'
   def self.get(endpoint)
     url = BASE_URL + endpoint
-    puts url
     params = {
       token: KEY
     }

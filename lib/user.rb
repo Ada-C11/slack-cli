@@ -33,7 +33,7 @@ class User < Recipient
     real_name = member["real_name"]
     slack_id = member["id"]
       
-    self.new(slack_id: slack_id, name: name, real_name: real_name, )
+    return self.new(slack_id: slack_id, name: name, real_name: real_name, )
   end
  
 end # end User class
