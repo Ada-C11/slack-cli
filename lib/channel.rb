@@ -41,7 +41,6 @@ module SlackAPI
         slack_id = channel['id']
         name = channel['name']
         new_channel = Channel.new(topic: topic, member_count: member_count, slack_id: slack_id, name: name)
-        puts new_channel
         @@channels << new_channel
       end
       return @@channels

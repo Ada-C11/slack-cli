@@ -23,6 +23,9 @@ module SlackAPI
       @real_name = real_name
     end
 
+    def details
+        detail_hash = {real_name: @real_name,slack_id: @slack_id, name: @name}
+    end
 
     def self.list
       return @@list

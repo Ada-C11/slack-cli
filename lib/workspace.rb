@@ -15,11 +15,19 @@ module SlackAPI
       @selected = selected
     end
 
-    def select_channel
+    def select_channel(id_or_name:)
+        @channels.each do |channel|
+            if channel.name == id_or_name
+                @selected = channel
+            elsif channel.slack_id == id_or_name
+                @selected = channel
+            end
+        end
+        return @selected
     end 
 
-    def select_user(id_or_name: nil)
-        users.each do |user|
+    def select_user(id_or_name:)
+        @users.each do |user|
             if user.name == id_or_name
                 @selected = user
             elsif user.slack_id == id_or_name
@@ -30,6 +38,7 @@ module SlackAPI
     end
 
     def show_details
+        @selected.details
     end
 
     def send_message
