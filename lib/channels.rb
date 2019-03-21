@@ -21,6 +21,10 @@ module Slack
         self.new(channel["id"], channel["name"], channel["topic"]["value"], channel["members"].length)
       end
     end
+
+    def details
+      ["name", "slack_id", "topic", "member_count"]
+    end
   end
 end
 

@@ -24,10 +24,11 @@ module Slack
       return user_data
     end
 
-    def details
+    def send_message
     end
 
-    def send_message
+    def details(user_or_channel)
+      tp user_or_channel
     end
 
     def self.list

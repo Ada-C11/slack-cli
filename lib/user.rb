@@ -20,8 +20,8 @@ module Slack
       end
     end
 
-    def details(user)
-      tp user, "real_name", "name", "slack_id"
+    def details
+      ["real_name", "name", "slack_id"]
     end
   end
 end
