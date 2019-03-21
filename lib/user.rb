@@ -30,9 +30,9 @@ module SlackAPI
 
       response["members"].each do |member|
         if member["id"] == identifier
-          selected_user = identifier
+          selected_user = member["id"]
         elsif member["name"] == identifier
-          selected_user = identifier
+          selected_user = member["id"]
         end
       end
       if selected_user == ""

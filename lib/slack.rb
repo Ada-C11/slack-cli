@@ -8,7 +8,7 @@ Dotenv.load
 def main
   puts "Welcome to the Ada Slack CLI!"
   puts "The workspace has #{SlackAPI::Channel.list_channels.length} channels and #{SlackAPI::User.list_users.length} users"
-  ask_again = "Would you like to 'list users', 'list channels', 'select user', 'select channel', 'details', or 'quit'?"
+  ask_again = "Would you like to 'list users', 'list channels', 'select user', 'select channel', 'details', 'send message', or 'quit'?"
   puts ask_again
   response = gets.chomp
 
@@ -27,8 +27,8 @@ def main
       puts "What is the user id or Slack name?"
       identifier = gets.chomp
       user = SlackAPI::User.new
-      selected_user = user.select_user(identifier)
-      if selected_user == ""
+      selected_recipient = user.select_user(identifier)
+      if selected_recipient == ""
         puts "There is no user with that identifier"
       end
       puts ask_again
@@ -38,24 +38,30 @@ def main
       puts "What is the user id or Slack name?"
       identifier = gets.chomp
       channel = SlackAPI::Channel.new
-      selected_channel = channel.select_channel(identifier)
-      if selected_channel == ""
+      selected_recipient = channel.select_channel(identifier)
+      if selected_recipient == ""
         puts "There is no channel with that identifier"
       end
       puts ask_again
       response = gets.chomp
     elsif response == "details"
       if select_response == "select user"
-        details = user.see_details(selected_user)
+        details = user.see_details(selected_recipient)
         puts details
         puts ask_again
         response = gets.chomp
       elsif select_response == "select channel"
-        details = channel.see_details(selected_channel)
+        details = channel.see_details(selected_recipient)
         puts details
         puts ask_again
         response = gets.chomp
       end
+    elsif response == "send message"
+      puts "What would you like to say?"
+      text = gets.chomp
+      msg = SlackAPI::User.new.send_msg(selected_recipient, text)
+      puts ask_again
+      response = gets.chomp
     end
   end
 end
