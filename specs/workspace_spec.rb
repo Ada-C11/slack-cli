@@ -15,22 +15,26 @@ describe "Workspace object" do
   end
 
   it "selects a user by username" do
-    name = users.first.username
-    expect(select_user(name)).must_equal users.first
+    user = @new_workspace.users.first
+    name = @new_workspace.users.first.name
+    expect(@new_workspace.select_user(name)).must_equal user
   end
 
   it "selects a user by id" do
-    id = users.first.slack_id
-    expect(select_user(id)).must_equal users.first
+    user = @new_workspace.users.first
+    id = @new_workspace.users.first.slack_id
+    expect(@new_workspace.select_user(id)).must_equal user
   end
 
   it "selects a channel by name" do
-    channel = channels.first.channel_name
-    expect(select_channel(channel)).must_equal channels.first
+    channel = @new_workspace.channels.first
+    name = @new_workspace.channels.first.name
+    expect(@new_workspace.select_channel(name)).must_equal channel
   end
 
   it "selects a channel by id" do
-    id = channels.first.id
-    expect(select_channel(id)).must_equal channels.first
-  end 
+    channel = @new_workspace.channels.first
+    id = @new_workspace.channels.first.slack_id
+    expect(@new_workspace.select_channel(id)).must_equal channel
+  end
 end

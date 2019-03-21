@@ -6,11 +6,12 @@ Dotenv.load
 module SlackCLI
   class Channel
     BASE_URL = "https://slack.com/api/channels.list"
-    attr_reader :id, :channel_name, :topic, :members
+
+    attr_reader :slack_id, :name, :topic, :members
 
     def initialize(id, channel_name, topic, members)
-      @id = id
-      @channel_name = channel_name
+      @slack_id = id
+      @name = channel_name
       @topic = topic
       @members = members
     end

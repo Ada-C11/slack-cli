@@ -21,7 +21,7 @@ describe "User class" do
                                   user_data[:real_name],
                                   user_data[:slack_id])
 
-    expect(new_user.username).must_equal user_data[:username]
+    expect(new_user.name).must_equal user_data[:username]
     expect(new_user.real_name).must_equal user_data[:real_name]
     expect(new_user.slack_id).must_equal user_data[:slack_id]
   end

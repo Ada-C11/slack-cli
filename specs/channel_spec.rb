@@ -28,8 +28,8 @@ describe "Channel" do
       channel_data[:members]
     )
 
-    expect(new_channel.id).must_equal channel_data[:id]
-    expect(new_channel.channel_name).must_equal channel_data[:channel_name]
+    expect(new_channel.slack_id).must_equal channel_data[:id]
+    expect(new_channel.name).must_equal channel_data[:channel_name]
     expect(new_channel.topic).must_equal channel_data[:topic]
     expect(new_channel.members).must_equal channel_data[:members]
   end

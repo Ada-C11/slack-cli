@@ -9,10 +9,10 @@ module SlackCLI
   class User
     BASE_URL = "https://slack.com/api/users.list"
     TOKEN = ENV["OAUTH_ACCESS_TOKEN"]
-    attr_reader :username, :real_name, :slack_id
+    attr_reader :name, :real_name, :slack_id
 
     def initialize(username, real_name, slack_id)
-      @username = username
+      @name = username
       @real_name = real_name
       @slack_id = slack_id
     end
@@ -26,10 +26,10 @@ module SlackCLI
 
       if (response.code == 200)
         users = response["members"].map do |member|
-          username = member["name"]
+          name = member["name"]
           real_name = member["real_name"]
           slack_id = member["id"]
-          new(username, real_name, slack_id)
+          new(name, real_name, slack_id)
         end
         return users
       else
