@@ -10,16 +10,16 @@ def main
 
   # TODO project
 
-  puts "\t\t\This workspace has #{Slack::Channel.list_channels.length} channels."
-  puts "\t\t\This workspace has #{Slack::User.list_users.length} users."
+  puts "This workspace has #{Slack::Channel.list_channels.length} channels."
+  puts "This workspace has #{Slack::User.list_users.length} users."
 
   loop do
-    puts "\n\t\t\.:Menu:.
-   |1|::List Channels
-   |2|::List Users
-   |3|::Select User
-   |4|::Select Channel
-   |7|::Quit"
+    puts "\n\t\t~ MENU ~
+   \t|1|::List Channels
+   \t|2|::List Users
+   \t|3|::Select User
+   \t|4|::Select Channel
+   \t|7|::Quit"
     puts "\nPlease select from the Menu:"
     answer = gets.chomp.to_i
 
@@ -40,16 +40,12 @@ def main
       user = Slack::User.new
       chosen_one = user.select_user(id)
       ap chosen_one
-      # @new_user = Slack::User.new
-      # ap @new_user.list_users
     when 4
       puts "Please enter a channel name or channel id:"
       id = gets.chomp
       channel = Slack::Channel.new
       chosen_channel = channel.select_channel(id)
       ap chosen_channel
-      # @new_channel = Slack::Channel.new
-      # ap @new_channel.list_channels
     when 5
     when 6
     when 7
