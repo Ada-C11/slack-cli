@@ -29,9 +29,3 @@ VCR.configure do |config|
     ENV["SLACK_API_TOKEN"]
   end
 end
-
-require_relative "../lib/recipient.rb"
-require_relative "../lib/user.rb"
-require_relative "../lib/channel.rb"
-require_relative "../lib/slack.rb"
-require_relative "../lib/workspace.rb"

@@ -25,7 +25,7 @@ def main
       puts "Please enter channel name or Slack ID:"
       channel_input = gets.chomp.upcase
     elsif choice == "DETAILS"
-      #call detail method
+      #call get method
     end
     puts "Choose from the following options:\n1. List users\n2. List Channels\n3. Select User\n4. Select Channel\n5. Details\n6. Quit"
     choice = gets.chomp.upcase
