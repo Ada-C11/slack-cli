@@ -26,5 +26,8 @@ describe "Workspace class" do
     expect(@workspace.channels[0]).must_be_kind_of Slack::Channel
   end
 
-
+  it "can select a Channel" do
+    selected_channel = @workspace.select_channel("CH0EE9NJC")
+    expect(selected_channel).must_be_kind_of Slack::Channel
+  end
 end
