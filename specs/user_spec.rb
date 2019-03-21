@@ -35,7 +35,7 @@ describe SlackAPI do
       user = SlackAPI::User.new
       VCR.use_cassette("select_user") do
         response = user.select_user("aribray")
-        expect(response).must_equal "aribray"
+        expect(response).must_equal "UH3UT3SJK"
       end
     end
     it "raises a SlackError if the user's name or id is invalid" do
