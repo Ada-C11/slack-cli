@@ -15,11 +15,24 @@ module Slack
       return name_channels
     end
 
-    def self.selected_all_channels
+    def self.all_channels_details
       channels = Slack::Channel.list_all.map do |channel|
         "Channel ID #{channel.slack_id}'s name is #{channel.name}. \nIt has #{channel.num_members} members.  \nThe topic for this channel is: #{channel.topic}."
       end
       return channels
+    end
+
+    def self.select_channel(channel_identifier)
+      find_channel = Slack::Channel.list_all.find {
+        |channel|
+        channel.name == channel_identifier ||
+        channel.slack_id == channel_identifier
+      }
+
+      return find_channel
+    end
+
+    def self.selected_channel_details
     end
 
     def self.user_list_all
@@ -30,11 +43,21 @@ module Slack
       return name_users
     end
 
-    def self.selected_all_users
+    def self.all_users_details
       users = Slack::User.list_all.map do |user|
-        "User ID: #{user.slack_id}'s real name is #{user.real_name} and displace name is #{user.name}."
+        "User ID: #{user.slack_id}'s real name is #{user.real_name} and display name is #{user.name}."
       end
       return users
+    end
+
+    def self.select_user(user_identifier)
+      find_user = Slack::User.list_all.find {
+        |user|
+        user.name == user_identifier ||
+        user.slack_id == user_identifier
+      }
+
+      return find_user
     end
   end
 end

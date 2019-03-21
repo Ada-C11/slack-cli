@@ -15,7 +15,21 @@ def main
 
   puts "Users loaded: ", Slack::Workspace.user_list_all.length
 
-  puts "Please select from the following options: list_users, list_channels, or quit\n"
+  puts "Please select from the following options: list users, list channels, or quit"
+
+  selection = gets.chomp.downcase
+
+  until selection == "quit"
+    if selection == "list channels"
+      puts Slack::Workspace.all_channels_details
+    elsif selection == "list users"
+      puts Slack::Workspace.all_users_details
+    else
+      puts "Please enter a valid selection."
+    end
+    puts "What would you like to do next? (list users, list channels, or quit)"
+    selection = gets.chomp.downcase
+  end
 
   # Should we use a case statement here for the 3 options?
 
