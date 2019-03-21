@@ -2,13 +2,15 @@
 require_relative "user"
 require_relative "channel"
 require "terminal-table"
+require 'pry'
+
 
 class Workspace
   attr_reader :users, :channels, :selected, :list_users, :list_channels
 
   def initialize
-    @users = User.list
-    @channels = Channel.list
+    @users = SlackCli::User.list
+    @channels = SlackCli::Channel.list
     @selected = selected
   end
 
@@ -29,23 +31,24 @@ class Workspace
     @selected.send_message(name: @selected.name, message: message)
   end
 
-  def self.list_channels
+  def list_channels
     @channels.each do |channel|
       puts "Channel name: #{channel.name} ID: #{channel.slack_id} topic: #{channel.topic}, Member count:#{channel.member_count}"
     end
     return nil
   end
 
-  def self.list_users
+  def list_users
     @users.each do |user|
       puts "#{user.real_name} Slack ID: #{user.slack_id}"
     end
-    return nil
+    return nil 
   end
 end
 
 #driver code
 def main
+  workspace = Workspace.new
   puts "TatiHana Slack Channels loaded #{SlackCli::Channel.list.length} channels"
   puts "TatiHana Users loaded #{SlackCli::User.list.length} users"
 
@@ -66,9 +69,9 @@ def main
   loop do
     case choice
     when "list users"
-      puts SlackCli::Workspace.list_users
+      puts workspace.list_users
     when "list channels"
-      puts SlackCli::Workspace.list_channels
+      puts workspace.list_channels
     when "select user"
       puts "what user would you like to select?"
       selected_user = gets.chomp
