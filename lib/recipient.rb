@@ -5,7 +5,7 @@ Dotenv.load
 class Recipient
   class SlackApiError < StandardError; end
 
-  attr_reader :slack_id, :name
+  attr_accessor :slack_id, :name
 
   def initialize(slack_id, name)
     @slack_id = slack_id
@@ -28,19 +28,22 @@ class Recipient
     response = HTTParty.get(url, query: params)
   end
 
-  def send_msg(message,recipient)
+  def send_msg(message, recipient)
     params = {
       "token" => ENV["SLACK_API_TOKEN"],
       "channel" => recipient,
       "text" => message,
-      "as_user" => true
+      "as_user" => true,
     }
 
     response = HTTParty.post(
       POST_URL,
       body: params,
-      headers: { 'Content-Type' => 'application/x-www-form-urlencoded' }
+      headers: { "Content-Type" => "application/x-www-form-urlencoded" },
     )
+    unless response.code == 200 && response.parsed_response["ok"]
+      raise SlackApiError, "Error: #{response.parsed_response["error"]}"
+    end
     return response
   end
 

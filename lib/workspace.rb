@@ -49,4 +49,5 @@ class Workspace
     selected.send_msg(text, selected.slack_id)
   end
 end
-binding.pry
+
+# binding.pry

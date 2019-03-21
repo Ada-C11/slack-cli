@@ -61,13 +61,22 @@ describe "Workspace class" do
     end
   end
 
-  describe "post message to slack" do 
+  describe "post message to slack" do
     it "creates sends a message to a recipient" do
       VCR.use_cassette("slack-posts") do
         workspace = Workspace.new
         workspace.select_channel("random")
         response = workspace.send_message("This post should work")
         expect(response["ok"]).must_equal true
+      end
+    end
+
+    it "raises an error for invalid channel" do
+      VCR.use_cassette("slack-posts") do
+        workspace = Workspace.new
+        workspace.select_channel("random")
+        workspace.selected.slack_id = "garbage"
+        expect { workspace.send_message("This post should not work") }.must_raise Recipient::SlackApiError
       end
     end
   end

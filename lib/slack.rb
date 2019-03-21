@@ -7,7 +7,7 @@ def main
   workspace = Workspace.new
   input = ""
   while input != "quit"
-    puts "Choose an option: \n list users \n list channels \n \n select user \n select channel \n details \n quit"
+    puts "Choose an option: \n list users \n list channels \n \n select user \n select channel \n details \n \n send message \n quit"
     input = gets.chomp
     case input
     when "list users"
@@ -27,6 +27,14 @@ def main
         puts "Please select a user or channel as a recipient"
       else
         puts workspace.show_details
+      end
+    when "send message"
+      if workspace.selected == nil
+        puts "Please select a user or channel as a recipient"
+      else
+        print "Enter your message: "
+        text = gets.chomp
+        workspace.send_message(text)
       end
     when "quit"
     else
