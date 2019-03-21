@@ -20,7 +20,7 @@ class Workspace
     # @selected = selected
   end
 
-  class SlackApiError < StandardError; end
+  # class SlackApiError < StandardError; end
 
   # make these Class methods
   def select_channel(selected)
@@ -77,7 +77,7 @@ class Workspace
     end
 
     if selected == ""
-      raise SlackApiError, "No user of channel was selected!"
+      raise ArgumentError, "No user of channel was selected!"
     end
   end
 

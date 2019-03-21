@@ -10,7 +10,7 @@ module SlackApi
   BASE_URL = "https://slack.com/api/chat.postMessage"
   SLACK_TOKEN = ENV["SLACK_TOKEN"]
 
-  class SlackApiError < StandardError; end
+  # class SlackApiError < StandardError; end
 
   def self.send_message(message, user)
     user_name = User.list.map do |user|
@@ -42,7 +42,7 @@ module SlackApi
     if channel_name.include?(user)
       response = HTTParty.post(
         "#{BASE_URL}",
-        headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+        headers: {"Content-Type" => "application/x-www-form-urlencoded"},
         body: {
           token: SLACK_TOKEN,
           text: message,
@@ -53,7 +53,7 @@ module SlackApi
     elsif user_name.include?(user)
       response = HTTParty.post(
         "#{BASE_URL}",
-        headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+        headers: {"Content-Type" => "application/x-www-form-urlencoded"},
         body: {
           token: SLACK_TOKEN,
           text: message,
@@ -67,7 +67,7 @@ module SlackApi
     if response["ok"]
       return true
     else
-      raise SlackApi::SlackApiError, "Error when posting #{message} to #{user}, error: #{response["error"]}"
+      raise SlackApi::ArgumentError, "Error when posting #{message} to #{user}, error: #{response["error"]}"
     end
   end
 end
