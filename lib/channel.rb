@@ -1,3 +1,5 @@
+require_relative "recipient"
+
 module Slack
   class Channel < Recipient
     attr_reader :member_count, :topic
