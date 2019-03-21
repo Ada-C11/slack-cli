@@ -21,7 +21,6 @@ def main
 
   options
   choice = gets.chomp
-
   loop do
     case choice
     when "list users"
@@ -37,20 +36,21 @@ def main
       selected_channel = gets.chomp
       workspace.select_channel(selected_channel)
     when "details"
-      puts "Details for #{workspace.selected.name}..."
-      workspace.show_details
+      begin
+        puts workspace.show_details
+      rescue SlackCli::SlackError
+        break
+      end
     when "send message"
-      workspace.send_messagea
+      workspace.send_message
     when "quit"
       puts "Thanks for checking out TatiHana! Bye bye..."
       exit
-    else
+    end
       puts "Invalid option! :("
     end
-
-    options
-    choice = gets.chomp
-  end
+  options
+  choice = gets.chomp
 end
 
 main if __FILE__ == $0
