@@ -40,27 +40,27 @@ module Slack
       return passes
     end # self.list
 
-    # def self.select_channel(id)
-    #   chosen_channel = ""
+    def select_channel(id)
+      chosen_channel = ""
 
-    #   query_parameters = {
-    #     token: ENV["SLACK_API_TOKEN"],
-    #   }
-    #   response = HTTParty.get(CHANNEL_URL, query: query_parameters)
+      query_parameters = {
+        token: ENV["SLACK_API_TOKEN"],
+      }
+      response = HTTParty.get(CHANNEL_URL, query: query_parameters)
 
-    #   response["channels"].each do |channel|
-    #     if channel["id"] == id
-    #       chosen_channel = id
-    #     elsif channel["name"] == id
-    #       chosen_channel = id
-    #     end
+      response["channels"].each do |channel|
+        if channel["id"] == id
+          chosen_channel = id
+        elsif channel["name"] == id
+          chosen_channel = id
+        end
 
-    #     if chosen_channel == ""
-    #       raise SlackError, "channel must have an id or a name."
-    #     end # end
-    #   end # each
-    #   return chosen_channel
-    # end # self.select_channel
+        if chosen_channel == ""
+          raise SlackError, "channel must have an id or a name."
+        end # end
+      end # each
+      return chosen_channel
+    end # self.select_channel
 
     # ap self.channel_api_data
     # ap self.list_channels

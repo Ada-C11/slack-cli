@@ -27,21 +27,27 @@ def main
     case answer
 
     when 1
-      ap Slack::Channel.list_channels
+      puts Slack::Channel.list_channels
+      puts "Anything else?"
+      answer = gets.chomp
     when 2
-      ap Slack::User.list_users
+      puts Slack::User.list_users
+      puts "Anything else?"
+      answer = gets.chomp
     when 3
       puts "Please enter a username or real name:"
       id = gets.chomp
-      ap Slack::User.select_user(id)
-
-      @new_user = Slack::User.new
-      ap @new_user.list_users
+      user = Slack::User.new
+      chosen_one = user.select_user(id)
+      ap chosen_one
+      # @new_user = Slack::User.new
+      # ap @new_user.list_users
     when 4
-      # puts "Please enter a channel name or channel id:"
-      # id = gets.chomp
-      # ap Slack::Channel.select_channel(id)
-
+      puts "Please enter a channel name or channel id:"
+      id = gets.chomp
+      channel = Slack::Channel.new
+      chosen_channel = channel.select_channel(id)
+      ap chosen_channel
       # @new_channel = Slack::Channel.new
       # ap @new_channel.list_channels
     when 5

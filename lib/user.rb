@@ -33,18 +33,18 @@ module Slack
                                "realname" => user["real_name"] }
         end
       else
-        puts "Error #{response.code} : #{response["message"]}"
+        raise Slack::SlackError, "There was an error. #{response.error}: #{response.message}"
       end # else
       return slack_users
     end # end
 
-    def self.select_user(id)
-      chosen_one = ""
+    def select_user(id)
       query_parameters = {
         token: ENV["SLACK_API_TOKEN"],
       }
       response = HTTParty.get(USER_URL, query: query_parameters)
 
+      chosen_one = ""
       response["members"].each do |member|
         if member["name"] == id
           chosen_one = id
@@ -54,7 +54,7 @@ module Slack
       end # each
 
       if chosen_one == ""
-        raise SlackError, "User must have an id or a name."
+        raise Slack::SlackError, "User must have an id or a name."
       end # end
       return chosen_one
     end # self.select_user
