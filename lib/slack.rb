@@ -9,10 +9,19 @@ require_relative "../lib/user.rb"
 require_relative "../lib/channel.rb"
 require_relative "../lib/workspace.rb"
 
-def get_user_input(options)
+def get_user_options_input(options)
   input = gets.chomp.to_s.strip
   unless options.include?(input)
     puts "Please choose option from list"
+    input = gets.chomp.to_s.strip
+  end
+  return input
+end
+
+def get_user_input
+  input = gets.chomp.to_s.strip
+  unless input.length > 0
+    puts "Please enter an ID or name"
     input = gets.chomp.to_s.strip
   end
   return input
@@ -22,6 +31,9 @@ def list_options
   puts "Please choose from these options"
   puts "Enter 'list users' to view all users"
   puts "Enter 'list channels' to view all channels"
+  puts "Enter 'select user' to select a user"
+  puts "Enter 'select channel' to select a channel"
+  puts "Enter 'details' to display information about currently selected recipient"
   puts "Enter 'quit' to quit"
 end
 
@@ -31,17 +43,30 @@ def main
 
   while true
     list_options
-    options = ["list users", "list channels", "quit"]
-    choice = get_user_input(options)
+    options = ["list users", "list channels", "select user", "select channel", "details", "quit"]
+    choice = get_user_options_input(options)
     case choice
     when "list users"
       tp workspace.list_users
     when "list channels"
       tp workspace.list_channels
+    when "select user"
+      puts "Please enter a user ID or user name"
+      input = get_user_input
+      selected = workspace.select_user(input)
+      puts "Sorry, no user with that information" if selected == nil
+    when "select channel"
+      puts "Please enter a channel name channel ID"
+      input = get_user_input
+      selected = workspace.select_channel(input)
+      puts "Sorry, no channel with that information" if selected == nil
+    when "details"
+      tp [selected.details]
     when "quit"
       puts "Goodbye!"
       exit
     end
+    puts "\n\n"
   end
 
   puts "Thank you for using the Ada Slack CLI"
