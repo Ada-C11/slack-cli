@@ -32,9 +32,9 @@ module Slack
                                body: body,
                                headers: { "Content-Type" => "application/x-www-form-urlencoded" })
 
-      # unless response.code == 200 && response["ok"]
-      #   raise SlackApiError, "user_not_found"
-      # end
+      unless response.code == 200 && response["ok"]
+        raise SlackApiError, "user_not_found"
+      end
       return true
     end
 

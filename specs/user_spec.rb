@@ -24,19 +24,19 @@ describe "User class" do
   describe "send_message to user" do
     it "can send a message fine" do
       VCR.use_cassette("slack_post_user") do
-        response = Slack::User.send_message("This is our Test Msg to user!", "Rosalyn Anuseh")
+        response = Slack::User.send_message("This is our Test Msg to user!", "UH0EEP7NC")
         expect(response).must_equal true
       end
     end
 
-    # it "will raise an error when given an invalid channel" do
-    #   VCR.use_cassette("slack-post") do
-    #     exception = expect {
-    #       Slack::User.send_message("This post should not work", "invalid-name")
-    #     }.must_raise Slack::SlackApiError
+    it "will raise an error when given an invalid channel" do
+      VCR.use_cassette("slack-post") do
+        exception = expect {
+          Slack::User.send_message("This post should not work", "invalid-name")
+        }.must_raise Slack::SlackApiError
   
-    #     expect(exception.message).must_equal 'user_not_found'
-    #   end
-    # end
+        expect(exception.message).must_equal 'user_not_found'
+      end
+    end
   end
 end
