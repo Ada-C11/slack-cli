@@ -11,7 +11,16 @@ describe "Workspace" do
   end
 
   describe "select_user" do
-    
+    before do
+      workspace = SlackAPI::Workspace()
+    end
+    it "selects a user when one is provided" do
+      expect(SlackAPI::User.list).must_be_kind_of Array
+    end
+        end
+  
+    end
+  
   end
     
   describe "show_details" do

@@ -21,5 +21,7 @@ describe "User" do
           expect(SlackAPI::User.list).must_be_kind_of Array
          end
       end
+
   end
+
 
