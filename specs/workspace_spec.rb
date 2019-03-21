@@ -8,7 +8,7 @@ describe "SlackCLI::Workspace" do
   end
 
   describe "constructor" do
-    it "is an instance of Channel" do
+    it "is an instance of Workspace" do
       expect(@workspace).must_be_kind_of SlackCLI::Workspace
     end
 

@@ -24,7 +24,7 @@ describe SlackCLI::Channel do
 
   describe "self.list" do
     it "returns an array of channels" do
-      VCR.use_cassette("channels find") do
+      VCR.use_cassette("channels") do
         channels_array = SlackCLI::Channel.list
 
         expect(channels_array).must_be_kind_of Array
