@@ -22,6 +22,7 @@ class Workspace
 
   class SlackApiError < StandardError; end
 
+  # make these Class methods
   def select_channel(selected)
     #Channel.list
     #using param, find specific channel
