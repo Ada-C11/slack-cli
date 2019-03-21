@@ -15,19 +15,31 @@ def main
 
   puts "Users loaded: ", Slack::Workspace.user_list_all.length
 
-  puts "Please select from the following options: list users, list channels, or quit"
+  puts "Please select from the following options: list users, select user, list channels, select channel, or quit"
 
   selection = gets.chomp.downcase
 
   until selection == "quit"
     if selection == "list channels"
       puts Slack::Workspace.all_channels_details
+    elsif selection == "select channel"
+      puts "Which channel would you like to select?"
+      channel_identifier = gets.chomp.to_s
+      selected_channel = Slack::Workspace.select_channel(channel_identifier)
+      puts "Please type 'details' if you would like to see complete details."
+      answer = gets.chomp.downcase
     elsif selection == "list users"
       puts Slack::Workspace.all_users_details
+    elsif selection == "select user"
+      puts "Which user would you like to select?"
+      channel_identifier = gets.chomp.to_s
+      selected_user = Slack::Workspace.select_user(channel_identifier)
+      puts "Please type 'details' if you would like to see complete details."
+      answer = gets.chomp.downcase
     else
       puts "Please enter a valid selection."
     end
-    puts "What would you like to do next? (list users, list channels, or quit)"
+    puts "What would you like to do next? (list users, select user, list channels, select channel, or quit)"
     selection = gets.chomp.downcase
   end
 
