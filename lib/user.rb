@@ -38,7 +38,7 @@ module SlackCLI
 
     def display_details
       info_string = "\nSlack ID : #{slack_id}" +
-                    "\nUsername : #{username}" +
+                    "\nUsername : #{name}" +
                     "\nReal name : #{real_name}"
       return info_string
     end

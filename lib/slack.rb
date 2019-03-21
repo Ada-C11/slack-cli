@@ -14,10 +14,13 @@ def main
   users = SlackCLI::User.get_from_api
   channels = SlackCLI::Channel.get_from_api
   workspace = SlackCLI::Workspace.new(users: users, channels: channels)
+
   puts "Welcome to the Ada Slack CLI!"
   puts "What would you like to do?"
+
   puts "Options: \nlist users \nlist channels \nselect user \nselect channel \nquit"
   input = gets.chomp.downcase
+
   until (input == "quit")
     case input
     when "list users"
@@ -26,35 +29,45 @@ def main
       workspace.display_channels
     when "select user"
       puts "Enter username or slack id:"
+
       name_or_id = gets.chomp.downcase
       workspace.select_user(name_or_id)
-      puts "Options: \ndetails \nsend message \nquit"
-      input2 = gets.chomp.downcase
-      until (input2 == "quit")
-        case input2
+      puts "Options: \ndetails \nsend message \nreturn to main menu"
+      input = gets.chomp.downcase
+
+      until (input == "return to main menu")
+        case input
         when "details"
-          workspace.show_details(name_or_id)
+          puts workspace.show_details
         when "send message"
-          workspace.send_message
-        when "quit"
+          puts "Type a message to send:"
+          message = gets.chomp
+          workspace.send_message(message)
+        when "return to main menu"
           break
         end
+        puts "Options: \ndetails \nsend message \nquit"
+        input = gets.chomp.downcase
       end
     when "select channel"
       puts "Enter channel name or id:"
       name_or_id = gets.chomp.downcase
       workspace.select_channel(name_or_id)
-      puts "Options: \ndetails \nsend message \nquit"
-      input3 = gets.chomp.downcase
-      until (input3 == "quit")
-        case input3
+      puts "Options: \ndetails \nsend message \nreturn to main menu"
+      input = gets.chomp.downcase
+      until (input == "return to main menu")
+        case input
         when "details"
-          workspace.show_details
+          puts workspace.show_details
         when "send message"
-          workspace.send_message
-        when "quit"
+          puts "Type a message to send:"
+          message = gets.chomp
+          workspace.send_message(message)
+        when "return to main menu"
           break
         end
+        puts "Options: \ndetails \nsend message \nquit"
+        input = gets.chomp.downcase
       end
     when "quit"
       break

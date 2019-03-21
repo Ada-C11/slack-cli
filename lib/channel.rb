@@ -38,10 +38,10 @@ module SlackCLI
     end
 
     def display_details
-      return members.length info_string = "\nSlack ID : #{id}" +
-                                          "\nChannel name : #{channel_name}" +
-                                          "\nTopic : #{topic}" +
-                                          "\nMember count: #{members}"
+      info_string = "\nSlack ID : #{slack_id}" +
+                    "\nChannel name : #{name}" +
+                    "\nTopic : #{topic}" +
+                    "\nMember count: #{members}"
       return info_string
     end
   end
