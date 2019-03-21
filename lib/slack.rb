@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
-require "httparty"
+# require "httparty"
+
+# PURPOSE OF THIS FILE IS TO HOLD CLI PROMPTS
 
 # class Slack
 #   def initialize
@@ -26,18 +28,6 @@ require "httparty"
 #       when input =~ /[[:alpha:]]/
 #         puts "\nYour request was invalid."
 #       end
-#     end
-
-#     def select_channel
-#     end
-
-#     def select_user
-#     end
-
-#     def show_details
-#     end
-
-#     def send_message
 #     end
 
 #    puts "Thank you for using the Ada Slack CLI"

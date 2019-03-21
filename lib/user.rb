@@ -6,46 +6,41 @@ require "dotenv"
 Dotenv.load
 
 class User < Recipient
-  BASE_URL = "https://slack.com/api/users.list"
-  TOKEN = ENV["SLACK_TOKEN"]
+  attr_reader :real_name, :name, :slack_id
 
-  def initialize(id, name, real_name)
-    super(id, name)
+  def initialize(slack_id, name, real_name)
+    super(slack_id, name)
     @real_name = real_name
-    @id = id
+    @slack_id = slack_id
     @name = name
 
   end
 
   def self.list
-    query_params = {
-      token: TOKEN,
-    }
+    raw_data = self.get("user")
 
-    response = HTTParty.get(BASE_URL, query: query_params)
-
-    unless response.code == 200
-      raise SearchError, "Cannot find #{search_term}"
+    unless raw_data.code == 200
+      raise SlackApiError, "Improper request: #{raw_data.message}"
     end
     members_list = []
-    members = response["members"]
+    members = raw_data["members"]
     members.each do |member|
-      id = member["id"]
+      slack_id = member["id"]
       name = member["name"]
       real_name = member["real_name"]
-      new_member = User.new(id, name, real_name)
+      new_member = User.new(slack_id, name, real_name)
       members_list << new_member
     end
     return members_list
   end
   def detail
-    puts "#{real_name}, slack user name: #{name}, id: #{id}"
+    return "#{real_name}, slack user name: #{name}, slack_id: #{slack_id}"
   end
 
 
 end
 
-# puts User.list
+ puts User.list
 # puts User.list[0]
 # #puts User.list
 #  puts User.list["members"][0]["id"]
