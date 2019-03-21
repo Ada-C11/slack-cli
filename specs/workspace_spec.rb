@@ -86,4 +86,10 @@ describe "Workspace class" do
       end
     end
   end
+
+  describe "Workspace#details for selected" do
+    it "will return a String" do
+      expect(@workspace.details_for_selected).must_be_instance_of String
+    end
+  end
 end

@@ -32,13 +32,12 @@ module Slack
 
     def send_message(text:)
       return false unless selected
-      status = true
       begin
         ApiWrapper.post(text: text, recipient: selected.id)
       rescue ApiWrapper::SlackError
-        status = false
+        return false
       end
-      return status
+      return true
     end
   end
 end
