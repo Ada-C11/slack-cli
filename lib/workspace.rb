@@ -9,7 +9,7 @@ module SlackAPI
   attr_reader :users, :channels
   attr_accessor :selected
 
-    def initialize(users:, channels:, selected:)
+    def initialize(users:, channels:, selected: nil)
       @users = users
       @channels = channels
       @selected = selected
@@ -18,7 +18,15 @@ module SlackAPI
     def select_channel
     end 
 
-    def select_user
+    def select_user(id_or_name: nil)
+        users.each do |user|
+            if user.name == id_or_name
+                @selected = user
+            elsif user.slack_id == id_or_name
+                @selected = user
+            end
+        end
+        return @selected
     end
 
     def show_details
