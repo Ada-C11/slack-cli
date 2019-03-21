@@ -21,7 +21,7 @@ VCR.configure do |config|
   end
 end
 
-require "./lib/recipient.rb"
-require "./specs/recipient_spec.rb"
+require_relative "../lib/recipient.rb"
+require_relative "./recipient_spec.rb"
 # require "users_spec.rb"
 # require "channels_spec.rb"

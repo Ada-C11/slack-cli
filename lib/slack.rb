@@ -8,4 +8,4 @@ def main
   puts "Thank you for using the Ada Slack CLI"
 end
 
-main if __FILE__ == $PROGRAM_NAME
+main if $PROGRAM_NAME == __FILE__

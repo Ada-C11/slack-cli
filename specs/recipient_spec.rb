@@ -1,4 +1,5 @@
 require_relative "test_helper"
+require 'pry'
 USER_URL = "https://slack.com/api/users.list"
 CHANNEL_URL = "https://slack.com/api/channel.list"
 
@@ -35,11 +36,12 @@ describe "Recipient Class" do
     end
   end
 
-  # describe "self.list method" do
-  #   before do
-  #     VCR.use_cassette
-  #   end
+  describe "self.list method" do
 
-  #   it "returns a list of recipients as an array"
-  # end
+it "returns an array" do
+test_data = {"member" => [{"name" => "Myriam", "real_name" => "Myriam Walden-Duarte", "id" => "himyriam"}, {"name" => "Kate", "real_name" => "Kate Sandler", "id" => "katekate"}, {"name" => "Slackbot", "real_name" => "Beep beep click zzzap.", "id" => "10110100"}]}
+expect(SlackCLI::Recipient.list(test_data)).must_be_kind_of Array 
+puts SlackCLI::Recipient.list(test_data)
+  end
+end
 end
