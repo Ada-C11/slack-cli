@@ -10,13 +10,13 @@ module Slack
 
     Dotenv.load
 
-    attr_reader :username, :real_name, :slack_id
+    # attr_reader :username, :real_name, :slack_id
 
-    def initialize(username, real_name, slack_id)
-      @username = username
-      @real_name = real_name
-      @slack_id = slack_id
-    end # initialize
+    # def initialize(username, real_name, slack_id)
+    #   @username = username
+    #   @real_name = real_name
+    #   @slack_id = slack_id
+    # end # initialize
 
     def self.list_users
       query_parameters = {
@@ -30,12 +30,34 @@ module Slack
         user_passes = response["members"].map do |user|
           slack_users[user] = { "slack_id" => user["id"],
                                "username" => user["name"],
-                               "real name" => user["real_name"] }
+                               "realname" => user["real_name"] }
         end
       else
-        puts "Error #{response.code} : #{response["message"]}"
+        raise Slack::SlackError, "There was an error. #{response.error}: #{response.message}"
       end # else
-    end
+      return slack_users
+    end # end
+
+    def select_user(id)
+      query_parameters = {
+        token: ENV["SLACK_API_TOKEN"],
+      }
+      response = HTTParty.get(USER_URL, query: query_parameters)
+
+      chosen_one = ""
+      response["members"].each do |member|
+        if member["name"] == id
+          chosen_one = id
+        elsif member["real_name"] == id
+          chosen_one = id
+        end
+      end # each
+
+      if chosen_one == ""
+        raise Slack::SlackError, "User must have an id or a name."
+      end # end
+      return chosen_one
+    end # self.select_user
 
     # ap self.list_users
   end # class
