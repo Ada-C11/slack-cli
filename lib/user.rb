@@ -31,8 +31,8 @@ module SlackBot
     def details
       user_details = {
         real_name: @real_name,
-        name: @user,
-        id: @user,
+        name: @name,
+        id: @id,
       }
       return user_details
     end

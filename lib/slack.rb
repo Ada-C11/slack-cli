@@ -37,7 +37,7 @@ def main
     when "list users"
       tp workspace.list_users
     when "list channels"
-      tp workspace.channels
+      tp workspace.list_channels
     when "quit"
       puts "Goodbye!"
       exit

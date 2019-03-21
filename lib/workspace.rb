@@ -15,6 +15,13 @@ module SlackBot
       return user_list
     end
 
+    def list_channels
+        channel_list = @channels.map do |channel|
+          channel.details
+        end
+        return channel_list
+      end
+
     def select_user(input)
       found_user = @users.find do |user|
         input == user.id || input == user.name
@@ -23,8 +30,8 @@ module SlackBot
     end
 
     def select_channel(input)
-      found_channel = @channels.find do |user|
-        input == user["id"] || input == user["name"]
+      found_channel = @channels.find do |channel|
+        input == channel.id || input == channel.name
       end
       @selected = found_channel
     end
