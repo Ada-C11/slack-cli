@@ -10,8 +10,7 @@ describe "Workspace" do
      end
   end
 
-  describe "select_user and select_channel" do
-      
+  describe "select_user" do
     it "selects a user when name is provided" do
       @workspace.select_user(id_or_name:"slackbot")
       expect(@workspace.selected).must_be_kind_of SlackAPI::User
@@ -23,7 +22,9 @@ describe "Workspace" do
       expect(@workspace.selected).must_be_kind_of SlackAPI::User
       expect(@workspace.selected.slack_id).must_equal "USLACKBOT"
     end
+  end
 
+  describe "select_channel" do
     it "selects a channel when id is provided" do
       @workspace.select_channel(id_or_name:"CH2SBU69Y")
       expect(@workspace.selected).must_be_kind_of SlackAPI::Channel
@@ -35,11 +36,9 @@ describe "Workspace" do
       expect(@workspace.selected).must_be_kind_of SlackAPI::Channel
       expect(@workspace.selected.name).must_equal "everyone"
     end
-
   end
   
   describe "show_details" do
-
     it "shows details for a selected user" do
       @workspace.select_user(id_or_name:"slackbot")
       puts @workspace.show_details
