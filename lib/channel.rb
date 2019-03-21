@@ -8,21 +8,7 @@ class Channel
   BASE_URL = "https://slack.com/api/channels.list"
   SLACK_TOKEN = ENV["SLACK_TOKEN"]
 
-  def initialize
-    @name = name
-    @topic = topic
-    @member_count = member_count #some code that counts users.
-    @id = id
-  end
-
-  def details(name, topic, member_count, id)
-  end
-
   def self.list
-    #access the response/API above
-    # look inside response["members"]
-    # return username, real name, and slack ID
-
     query_param = {
       token: SLACK_TOKEN,
     }
@@ -39,7 +25,6 @@ class Channel
       list << channel_info
     end
 
-    # list is an array of arrays
     return list
   end
 end

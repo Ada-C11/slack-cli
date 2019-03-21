@@ -7,10 +7,6 @@ class User
 
   BASE_URL = "https://slack.com/api/users.list"
   SLACK_TOKEN = ENV["SLACK_TOKEN"]
-  # query_param = {
-  #   token: SLACK_TOKEN,
-  # }
-  # response = httparty.get(BASE_URL, query: query_param)
 
   def initialize
     @user_name = user_name
@@ -18,22 +14,7 @@ class User
     @slack_id = slack_id
   end
 
-  # def get_user
-  #   query_param = {
-  #     token: SLACK_TOKEN,
-  #   }
-  #   response = httparty.get(BASE_URL, query: query_param)
-  #   return response
-  # end
-
-  def details
-  end
-
   def self.list
-    #access the response/API above
-    # look inside response["members"]
-    # return username, real name, and slack ID
-
     query_param = {
       token: SLACK_TOKEN,
     }
@@ -49,7 +30,6 @@ class User
       list << member_info
     end
 
-    # list is an array of arrays
     return list
   end
 end

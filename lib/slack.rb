@@ -5,12 +5,6 @@ require_relative "channel"
 require_relative "workspace"
 require_relative "recipient"
 
-### WHAT DID I CHANGE
-#1. formatting for outputting List ____
-#2. moved channel_name and user_name to top
-#3. added to workspace class - show_details uses channel_name.include? or user_name.include?
-#4. added to workspace class - select_user or select_channel returns SELECTED = string
-
 def main
   channel_name = Channel.list.map do |channel|
     channel[0]
@@ -32,8 +26,7 @@ def main
   selection = gets.chomp
   until selection == "Quit"
 
-    #TODO: add command list every time teh loop repreats
-    # TODO: format output for listing
+    #TODO: add command list every time teh loop repeats
     case selection
     when "List Users"
       puts "Here is the list of users and their details:"
@@ -81,10 +74,7 @@ def main
       puts "Please input your message:"
       message = gets.chomp
 
-      ### WE NEED TO ROUTE PATH TO CORRECT LIKE OF SEND MESSAGE
-
       SlackApi.send_message(message, chose)
-      # SlackApi.send_message(message, chose_channel)
       puts "What would you like to do next? "
       selection = gets.chomp
     end

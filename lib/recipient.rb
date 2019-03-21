@@ -20,17 +20,8 @@ module SlackApi
     channel_name = Channel.list.map do |channel|
       channel[0]
     end
-    #   user_id = User.list.each do |id|
-    #     if user == id[0]
-    #       user[2]
-    #     end
-    #   end
 
-    # have two responses if select is a type of user choose 1st response
-    # else if user input is a type of channel choose 2nd response. the channel can be select_user or select_channel from the main
-    # we'd have to require workspace
-
-    #### testing user stuff
+    #### TODO: CHANGE VARIABLE NAME
     practice = []
     User.list.each do |user_name|
       if user_name[0] == user
@@ -42,7 +33,7 @@ module SlackApi
     if channel_name.include?(user)
       response = HTTParty.post(
         "#{BASE_URL}",
-        headers: {"Content-Type" => "application/x-www-form-urlencoded"},
+        headers: { "Content-Type" => "application/x-www-form-urlencoded" },
         body: {
           token: SLACK_TOKEN,
           text: message,
@@ -53,12 +44,11 @@ module SlackApi
     elsif user_name.include?(user)
       response = HTTParty.post(
         "#{BASE_URL}",
-        headers: {"Content-Type" => "application/x-www-form-urlencoded"},
+        headers: { "Content-Type" => "application/x-www-form-urlencoded" },
         body: {
           token: SLACK_TOKEN,
           text: message,
           channel: practice[0],
-          # test_workspace.select_user(user) #.select_user(chose_user)
           as_user: true,
         },
       )
