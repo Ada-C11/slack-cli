@@ -27,6 +27,9 @@ module Slack
     def details
     end
 
+    def send_message
+    end
+
     def self.list
       raise NotImplementedError, "Implement me in a child class!"
     end

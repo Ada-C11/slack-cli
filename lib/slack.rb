@@ -42,6 +42,7 @@ def main
       channel_descriptor = gets.chomp
       puts "\n#{workspace.select_channel(channel_descriptor)}".colorize(:red)
     elsif selection == 5 || selection == "details"
+      workspace.show_details
     elsif selection == 6 || selection == "quit"
       puts "Thank you for using the Ada Slack CLI"
       exit

@@ -44,6 +44,7 @@ module Slack
     end
 
     def show_details #currently_selected_recipient
+      User.details(selected)
     end
 
     def send_message(message)

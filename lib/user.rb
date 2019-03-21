@@ -19,6 +19,10 @@ module Slack
         self.new(user["id"], user["name"], user["profile"]["real_name"])
       end
     end
+
+    def details(user)
+      tp user, "real_name", "name", "slack_id"
+    end
   end
 end
 

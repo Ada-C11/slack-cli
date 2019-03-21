@@ -10,6 +10,7 @@ require "minitest/skip_dsl"
 require "webmock/minitest"
 require "vcr"
 require "dotenv"
+require "table_print"
 Dotenv.load
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
