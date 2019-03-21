@@ -35,5 +35,13 @@ module SlackCLI
         raise SlackApiError, "Error #{response.code} : #{response["message"]}"
       end
     end
+
+    def display_details
+      return members.length info_string = "\nSlack ID : #{id}" +
+                                          "\nChannel name : #{channel_name}" +
+                                          "\nTopic : #{topic}" +
+                                          "\nMember count: #{members}"
+      return info_string
+    end
   end
 end

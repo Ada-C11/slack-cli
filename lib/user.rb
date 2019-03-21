@@ -36,5 +36,12 @@ module SlackCLI
         raise SlackApiError, "Error #{response.code} : #{response["message"]}"
       end
     end
+
+    def display_details
+      info_string = "\nSlack ID : #{slack_id}" +
+                    "\nUsername : #{username}" +
+                    "\nReal name : #{real_name}"
+      return info_string
+    end
   end
 end

@@ -49,7 +49,7 @@ def main
       until (input3 == "quit")
         case input3
         when "details"
-          workspace.show_details(name_or_id)
+          workspace.show_details
         when "send message"
           workspace.send_message
         when "quit"
@@ -68,4 +68,4 @@ def main
   puts "Thank you for using the Ada Slack CLI"
 end
 
-  main if __FILE__ == $PROGRAM_NAME
+main if __FILE__ == $PROGRAM_NAME
