@@ -18,10 +18,16 @@ def main
       print "Enter the user name or Slack ID: "
       input_user = gets.chomp
       workspace.select_user(input_user)
+      if workspace.selected == nil
+        puts "User not found"
+      end
     when "select channel"
       print "Enter the channel name or Slack ID: "
       input_channel = gets.chomp
       workspace.select_channel(input_channel)
+      if workspace.selected == nil
+        puts "Channel not found"
+      end
     when "details"
       if workspace.selected == nil
         puts "Please select a user or channel as a recipient"
