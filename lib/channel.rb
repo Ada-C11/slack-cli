@@ -8,11 +8,11 @@ Dotenv.load
 
 module Slack
   class Channel < Recipient
-    attr_reader :name, :id, :topic, :member_count
+    attr_reader :topic, :member_count
 
-    def initialize(name:, id:, topic:, member_count:)
+    def initialize(slack_id:, name:, topic:, member_count:)
+      super(slack_id, name)
       @name = name
-      @id = id
       @topic = topic
       @member_count = member_count
     end
@@ -39,11 +39,11 @@ module Slack
       response = Slack::Channel.channels_get
       channels = response["channels"].map do |channel|
         name = channel["name"]
-        id = channel["id"]
+        slack_id = channel["slack_id"]
         topic = channel["topic"]["value"]
         member_count = channel["members"].count
 
-        Slack::Channel.new(name: name, id: id, topic: topic, member_count: member_count)
+        Slack::Channel.new(name: name, slack_id: slack_id, topic: topic, member_count: member_count)
       end
 
       return channels
