@@ -16,7 +16,7 @@ def main
   workspace = SlackCLI::Workspace.new(users: users, channels: channels)
   puts "Welcome to the Ada Slack CLI!"
   puts "What would you like to do?"
-  puts "Options: \nlist users \nlist channels \nquit"
+  puts "Options: \nlist users \nlist channels \nselect user \nselect channel \nquit"
   input = gets.chomp.downcase
   until (input == "quit")
     case input
@@ -24,6 +24,38 @@ def main
       workspace.display_users
     when "list channels"
       workspace.display_channels
+    when "select user"
+      puts "Enter username or slack id:"
+      name_or_id = gets.chomp.downcase
+      workspace.select_user(name_or_id)
+      puts "Options: \ndetails \nsend message \nquit"
+      input2 = gets.chomp.downcase
+      until (input2 == "quit")
+        case input2
+        when "details"
+          workspace.show_details
+        when "send message"
+          workspace.send_message
+        when "quit"
+          break
+        end
+      end
+    when "select channel"
+      puts "Enter channel name or id:"
+      name_or_id = gets.chomp.downcase
+      workspace.select_channel(name_or_id)
+      puts "Options: \ndetails \nsend message \nquit"
+      input3 = gets.chomp.downcase
+      until (input3 == "quit")
+        case input3
+        when "details"
+          workspace.show_details
+        when "send message"
+          workspace.send_message
+        when "quit"
+          break
+        end
+      end
     when "quit"
       break
     else
