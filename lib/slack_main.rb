@@ -37,7 +37,7 @@ def main
 
   puts "\nHere's how many channels were loaded: #{channels.length}"
 
-  users = Slack::Channel.list
+  users = Slack::User.list
 
   puts "\nHere's how many users were loaded: #{users.length}"
 

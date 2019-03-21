@@ -21,6 +21,7 @@ module Slack
     BASE_URL = "https://slack.com/api/"
     USER_URL = "https://slack.com/api/users.list"
 
+    # If supplied user name or slack id then select corresponding user
     def self.select_user(slack_id)
       selected_user = list.find {|user| user.id == slack_id}
       return selected_user

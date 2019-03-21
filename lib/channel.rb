@@ -22,6 +22,7 @@ module Slack
     BASE_URL = "https://slack.com/api/"
     CHANNEL_URL = "https://slack.com/api/channels.list"
 
+    # If supplied channel name or slack id then select corresponsing channel
     def self.select_channel(slack_id)
       selected_channel = list.find {|channel| channel.id == slack_id}
       return selected_channel

@@ -21,6 +21,7 @@ module Slack
     # abstract
 
     def details
+      
 
     end
 
