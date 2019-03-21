@@ -26,30 +26,34 @@ describe "Channel Initialize" do
 
   describe "select channel method" do
     it "selects channel when user inputs the name of the channel" do
-      # create new instance of channel, or can we use before do?
-      # VCR for the select channel method
-      # use response and set it equal to the select channel method with channel name as a parameter
-      # expect that response must equal whatever the channel name is
+      channel = Slack::Channel.new
+      VCR.use_cassette("select channel") do
+        response = channel.select_channel()
+        exepct(response).must_equal()
     end
 
     
     it "selects the channel when user inputs id" do
-      # create a new instance of channel
-      # VCR for the select channel method
-      # use response and set it equal to the select channel method with an id as a parameter
-      # expect that response must equal whater the id is
+      channel = Slack::Channel.new
+      VCR.use_cassette("select channel id") do
+        response = channel.select_channel()
+        expect(response).must_equal()
     end
 
     it "raises and error if the inputted channel name is not valid" do
-      # expect that a fake channel name must raise our slack error
+      expect{"bogusname"}.must_raise Slack::SlackError
     end
     
   end
 
   describe "show details method" do
     it "displays the details for the currently selected channel" do
-      # create new channel instance
+      channel = Slack.Channel.new
+      channel_selection = channel.select_channel()
       # set variable equal to selected channel
+      details = channel.show_details()
+      expect(details).must_be_instance_of(Hash)
+      expect()
       # set variable equal to channel details
       # expect that it's a hash
       # expect that the channel contains what it is supposed to

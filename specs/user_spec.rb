@@ -16,6 +16,9 @@ describe Slack do
 
   describe "select users method" do
     it "raises an error for bogus user names" do
+      user = Slack::User.new
+      VCR.use_cassette("select user") do  
+        expect(user.select_user("bogususer").must_raise
       # creates and new user instance
       # VCR to select user
       # expect that using the select user method on a fake username generates slack error
