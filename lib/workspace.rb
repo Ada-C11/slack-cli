@@ -25,6 +25,7 @@ module SlackApi
           return true
         end
       end
+      return false
     end
 
     def select_user(user_input)
@@ -34,6 +35,7 @@ module SlackApi
           return true
         end
       end
+      return false
     end
 
     def show_details
