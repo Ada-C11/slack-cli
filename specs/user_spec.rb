@@ -27,4 +27,10 @@ describe "User class" do
       expect(user.details).must_equal string_format
     end
   end
+
+  describe "User.create_users" do
+    it "will return an array" do
+      expect(Slack::User.create_users).must_be_instance_of Array
+    end
+  end
 end
