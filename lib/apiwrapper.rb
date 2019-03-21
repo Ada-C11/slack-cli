@@ -3,27 +3,28 @@ module Slack
     class SlackError < StandardError; end
 
     URL_BASE = "https://slack.com/api/"
+    TOKEN = ENV["SLACK_API_KEY"]
 
     def self.get_channels
-    end
-
-    def self.get_users
-      users = []
-      return users
-    end
-
-    private
-
-    def self.get_json(url_tail:, query_params:)
-      response = HTTParty.get(make_url(url_tail: url_tail), query: query_params)
+      query_params = {
+        "token": TOKEN,
+      }
+      response = HTTParty.get("#{URL_BASE}conversations.list", query: query_params)
       if !response["ok"]
         raise SlackError.new
       end
       return response
     end
 
-    def self.make_url(url_tail:)
-      return URL_BASE + url_tail
+    def self.get_users
+      query_params = {
+        "token": TOKEN,
+      }
+      response = HTTParty.get("#{URL_BASE}users.list", query: query_params)
+      if !response["ok"]
+        raise SlackError.new
+      end
+      return response
     end
   end
 end
