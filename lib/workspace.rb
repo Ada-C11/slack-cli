@@ -31,7 +31,12 @@ class Workspace
   end
 
   def show_details
-    @selected.details
+    if @selected == nil
+      raise SlackCli::SlackError, "No user or channel selected!"
+    else
+      puts "Details for #{workspace.selected.name}..."
+      @selected.details
+    end
   end
 
   def send_messagea
