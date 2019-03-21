@@ -72,9 +72,18 @@ describe "Workspace class" do
 
   describe "Workspace#send_message" do
     it "will return true if post succesful" do
-      @workspace.select_channel(channel: @workspace.channels[1])
-      expect(@workspace.send_message(text: "Something new to test!",
-                                     recipient: @workspace.selected)).must_equal true
+      VCR.use_cassette("slack_api") do
+        @workspace.select_channel(channel: @workspace.channels[1])
+        expect(@workspace.send_message(text: "Something new to test!")).must_equal true
+      end
+    end
+
+    it "will return false if post is unsuccessful" do
+      VCR.use_cassette("slack_api") do
+        expect(@workspace.send_message(text: "Something new to test!")).must_equal false
+        @workspace.select_channel(channel: @workspace.channels[1])
+        expect(@workspace.send_message(text: "")).must_equal false
+      end
     end
   end
 end

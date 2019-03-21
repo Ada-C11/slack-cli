@@ -29,5 +29,16 @@ module Slack
       end
       return result
     end
+
+    def send_message(text:)
+      return false unless selected
+      status = true
+      begin
+        ApiWrapper.post(text: text, recipient: selected.id)
+      rescue ApiWrapper::SlackError
+        status = false
+      end
+      return status
+    end
   end
 end
