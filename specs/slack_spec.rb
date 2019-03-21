@@ -1,8 +1,1 @@
-require_relative "test_helper.rb"
-
-describe "Slack" do
-  describe "test" do
-    it "passes" do
-    end
-  end
-end
+# AS WE LEARNED TODAY IN CLASS, WE DON'T NEED TO WRITE TESTS FOR DRIVER CODE!!! WOOOOOOOOO!!!

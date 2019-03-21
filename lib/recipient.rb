@@ -3,13 +3,11 @@ require "pry"
 
 require "dotenv"
 Dotenv.load
- 
+
 module SlackCli
   class SlackError < StandardError; end
 
   class Recipient
-    
-
     MSG_URL = "https://slack.com/api/chat.postMessage"
     LIST_URL = nil
     TOKEN = ENV["SLACK_TOKEN"]
@@ -21,7 +19,7 @@ module SlackCli
       @name = name
     end
 
-    def send_message(name, message)
+    def post_message(name, message)
       body_params = {
         token: TOKEN,
         as_user: true,

@@ -54,4 +54,10 @@ describe "Workspace class" do
       assert_nil(workspace.select_user(""))
     end
   end
+
+  describe "cases when our program should raise an exception created by user" do 
+  end
+
+  describe "cases when our program should raise an exception created by changes to API" do 
+  end
 end
