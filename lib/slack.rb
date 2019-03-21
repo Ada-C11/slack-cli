@@ -28,14 +28,14 @@ def main
     when "list channels"
       puts SlackApi::Channel.list(channels_list)
     when "select user"
-      print "Enter user's name or user's ID: "
+      print "Enter username or user's ID: "
       user_input = gets.chomp
 
       if SlackApi::Workspace.select_user(user_input) != true
         puts "That user does not exist"
       end
     when "select channel"
-      print "Enter channel's name or channel's ID: "
+      print "Enter channel name or channel's ID: "
       user_input = gets.chomp
 
       if SlackApi::Workspace.select_channel(user_input) != true

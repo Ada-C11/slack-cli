@@ -18,9 +18,9 @@ module SlackApi
     end
 
     def self.list(channels_list)
-      puts "Here are a list of your channels for this Workspace:"
+      puts "\nHere are a list of your channels for this Workspace:"
       list_of_channels = channels_list.map do |channel|
-        "\nChannel name: #{channel["name"]}, Slack ID: #{channel["id"]}, Topic: #{channel["topic"]["value"]}, Member count: #{channel["num_members"]}!"
+        "\nChannel name: #{channel["name"]}\nSlack ID: #{channel["id"]}\nTopic: #{channel["topic"]["value"]}\nMember count: #{channel["num_members"]}\n"
       end
       return list_of_channels
     end
