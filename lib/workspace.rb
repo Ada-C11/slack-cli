@@ -18,8 +18,8 @@ module SlackApi
       @selected = ""
     end
 
-    def self.select_channel(user_input)
-      (SlackApi::Channel.channel_api).each do |channel|
+    def select_channel(user_input)
+      @channels.each do |channel|
         if channel["name"] == user_input || channel["id"] == user_input
           @selected = channel
           return true
@@ -27,8 +27,8 @@ module SlackApi
       end
     end
 
-    def self.select_user(user_input)
-      (SlackApi::User.user_api).each do |user|
+    def select_user(user_input)
+      @users.each do |user|
         if user["name"] == user_input || user["id"] == user_input
           @selected = user
           return true
@@ -36,12 +36,12 @@ module SlackApi
       end
     end
 
-    def self.show_details
-      if (SlackApi::Channel.channel_api).include?(@selected)
+    def show_details
+      if @channels.include?(@selected)
         channel_details = "\nChannel name: #{@selected["name"]}\nSlack ID: #{@selected["id"]}\nTopic: #{@selected["topic"]["value"]}\nMember count: #{@selected["num_members"]}"
 
         return channel_details
-      elsif (SlackApi::User.user_api).include?(@selected)
+      elsif @users.include?(@selected)
         user_details = "\nUsername: #{@selected["name"]}\nSlack ID: #{@selected["id"]} \nReal name: #{@selected["real_name"]}"
 
         return user_details
@@ -51,8 +51,8 @@ module SlackApi
       end
     end
 
-    def self.send_message(message)
-      if (SlackApi::Channel.channel_api).include?(@selected)
+    def send_message(message)
+      if @channels.include?(@selected)
         SlackApi::Channel.send_message(message, @selected)
       elsif (SlackApi::User.user_api).include?(@selected)
         # SlackApi::user .method for sending message to user
