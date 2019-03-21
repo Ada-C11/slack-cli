@@ -69,4 +69,12 @@ describe "Workspace class" do
       expect(test_list).must_equal expected_result
     end
   end
+
+  describe "Workspace#send_message" do
+    it "will return true if post succesful" do
+      @workspace.select_channel(channel: @workspace.channels[1])
+      expect(@workspace.send_message(text: "Something new to test!",
+                                     recipient: @workspace.selected)).must_equal true
+    end
+  end
 end
