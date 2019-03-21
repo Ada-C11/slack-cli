@@ -41,13 +41,6 @@ describe "channel class" do
   end
 
   describe "creates list of channels" do
-    # before do
-    #   VCR.use_cassette("connect to endpoints channels_list") do
-    #     endpoint = "channels.list"
-    #     @response = Channel.get(endpoint)
-    #   end
-    # end
-
     it "returns a type of array" do
       VCR.use_cassette("returns array") do
         expect(Channel.list.is_a? Array).must_equal true

@@ -21,7 +21,7 @@ describe "user class" do
       end
     end
     it "gives a list of names" do
-      VCR.use_cassette("find members") do
+      VCR.use_cassette("find members not empty") do
         expect(@response).wont_be_nil
         expect(@response["members"].map { |member| member["name"] }.length).must_be :>, 0
       end
@@ -45,12 +45,12 @@ describe "user class" do
 
   describe "create list of users" do
     before do
-      VCR.use_cassette("list_users") do
+      VCR.use_cassette("self_list") do
         @user_list = User.list
       end
     end
     it "returns an array of users" do
-      VCR.use_cassette("list_users") do
+      VCR.use_cassette("list of users array") do
         expect(@user_list).must_be_kind_of Array
       end
     end
@@ -59,15 +59,15 @@ describe "user class" do
         expect(@user_list[0]).must_be_kind_of User
       end
     end
-    # can this be used for other channel?
-    it "returns a list with length 3" do
+
+    it "returns a list that is not empty" do
       VCR.use_cassette("length user list") do
         expect(@user_list.length).must_be :>, 0
       end
     end
 
     it "returns name of first user correctly" do
-      VCR.use_cassette("length user list") do
+      VCR.use_cassette("bot user name") do
         expect(@user_list.first.real_name).must_equal "Slackbot"
       end
     end

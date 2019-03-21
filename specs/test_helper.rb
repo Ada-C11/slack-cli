@@ -15,6 +15,7 @@ require_relative "../lib/recipient"
 require_relative "../lib/user"
 require_relative "../lib/channel"
 require_relative "../lib/apierror"
+require_relative "../lib/workspace"
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
