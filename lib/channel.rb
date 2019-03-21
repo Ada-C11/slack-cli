@@ -21,8 +21,8 @@ module SlackAPI
       @member_count = member_count
     end
 
-    def details(channel)
-      puts "Topic: #{channel.topic}, member count: #{channel.member_count}, slack ID: #{channel.slack_id}, name: #{channel.name}"
+    def details
+        return detail_hash = {slack_id: @slack_id, name: @name, topic: @topic, member_count: @member_count}
     end
 
     def self.list
