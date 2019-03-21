@@ -44,5 +44,9 @@ describe "Workspace class" do
       expect(@workspace.list_all(list: @workspace.channels)).must_be_instance_of String
       expect(@workspace.list_all(list: @workspace.users)).must_be_instance_of String
     end
+
+    it "will return the correct String format" do
+      test_list = @workspace.list_all(list: @workspace.channels)
+    end
   end
 end

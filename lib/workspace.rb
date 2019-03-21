@@ -1,3 +1,6 @@
+require_relative "channel"
+require_relative "user"
+
 module Slack
   class Workspace
     attr_reader :users, :channels, :selected
