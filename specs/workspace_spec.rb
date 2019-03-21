@@ -99,6 +99,31 @@ describe "Workspace Class" do
         assert_nil(selected_channel, msg = nil)
       end
     end
+
+    describe "#show_details" do
+      it "returns an instance of table_print when a valid paramter is passed" do
+        VCR.use_cassette("workspace_information_find") do
+          workspace = Slack::Workspace.new
+          select_user = workspace.select_user("kimberly.fasbender")
+          expect(workspace.show_details).must_be_kind_of TablePrint::Returnable
+
+          select_channel = workspace.select_channel("puppers")
+          expect(workspace.show_details).must_be_kind_of TablePrint::Returnable
+        end
+      end
+
+      it "returns false if an invalid channel/user is passed to it" do
+        VCR.use_cassette("workspace_information_find") do
+          workspace = Slack::Workspace.new
+          select_user = workspace.select_user("Reginald")
+          expect(workspace.show_details).must_equal false
+
+          select_channel = workspace.select_channel("Thomas")
+          expect(workspace.show_details).must_equal false
+        end
+      end
+    end
+
     # select_channel end
   end
   # end end
