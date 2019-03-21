@@ -79,5 +79,23 @@ describe "Workspace class" do
         expect { workspace.send_message("This post should not work") }.must_raise Recipient::SlackApiError
       end
     end
+
+    it "raises an error for invalid user" do
+      VCR.use_cassette("slack-posts") do
+        workspace = Workspace.new
+        workspace.select_user("slackbot")
+        workspace.selected.slack_id = "garbage"
+        expect { workspace.send_message("This post should not work") }.must_raise Recipient::SlackApiError
+      end
+    end
+
+    it "raises an error for invalid user" do
+      VCR.use_cassette("slack-posts") do
+        workspace = Workspace.new
+        workspace.select_user("slackbot")
+        workspace.selected.slack_id = "garbage"
+        expect { workspace.send_message("") }.must_raise Recipient::SlackApiError
+      end
+    end
   end
 end
