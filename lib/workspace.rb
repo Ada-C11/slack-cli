@@ -12,6 +12,10 @@ class Workspace
     @users = SlackCli::User.list
     @channels = SlackCli::Channel.list
     @selected = selected
+
+    unless selected == nil
+      raise SlackCli::SlackError, "No user or channel selected"
+    end
   end
 
   def select_channel(name)
@@ -30,14 +34,18 @@ class Workspace
     @selected.details
   end
 
-  def send_messagea # wrong number of arguments bug?
+  def send_messagea
+    puts "What would you like to send to #{@selected.name}?"
     message = gets.chomp
-    @selected.send_message(name: @selected.name, message: message)
+    @selected.send_message(@selected.slack_id, message)
   end
 
   def list_channels
     @channels.each do |channel|
-      puts "Channel name: #{channel.name} ID: #{channel.slack_id} topic: #{channel.topic}, Member count:#{channel.member_count}"
+      puts "Channel name: #{channel.name} 
+        ID: #{channel.slack_id} 
+        Topic: #{channel.topic}
+        Member count:#{channel.member_count}"
     end
     return nil
   end
@@ -86,13 +94,11 @@ def main
       puts "What channel would you like to select?"
       selected_channel = gets.chomp
       workspace.select_channel(selected_channel)
-      puts "Channels selected: #{your_selection.name}"
     when "details"
       puts "Details for #{workspace.selected.name}..."
       workspace.show_details
     when "send message"
-      puts "What would you like to send to #{workspace.selected.name}?"
-      workspace.send_messagea # wrong number of arguments bug?
+      workspace.send_messagea
     when "quit"
       puts "Thanks for checking out TatiHana! Bye bye..."
       exit

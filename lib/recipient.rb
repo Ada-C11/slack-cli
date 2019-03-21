@@ -21,15 +21,16 @@ module SlackCli
       @name = name
     end
 
-    def self.send_message(name:, message:)
-      query_params = {
+    def send_message(name, message)
+      body_params = {
         token: TOKEN,
+        as_user: true,
         channel: name,
         text: message,
       }
-      response = HTTParty.post(MSG_URL, query: query_params)
-
-      error_helper(response)
+      response = HTTParty.post(MSG_URL, body: body_params)
+      # error_helper(response)
+      return response
     end
 
     def self.get
@@ -37,7 +38,7 @@ module SlackCli
         token: TOKEN,
       }
       response = HTTParty.get(self::LIST_URL, query: query_params)
-      error_helper(response)
+      # error_helper(response)
       return response
     end
 
@@ -50,12 +51,11 @@ module SlackCli
       raise NotImplementedError
     end
 
-    def self.error_helper(response)
-      if response["ok"] != true
-        raise SlackError, "#{response["error"]}"
-      else
-        return response
+    def error_helper(response)
+      unless response.code != 200 || !response["ok"]
+        raise SlackError, "Error #{response.code}: #{response["error"]}"
       end
+      return response
     end
   end
 end
