@@ -7,40 +7,36 @@ require "pry"
 Dotenv.load
 
 class Workspace
-  attr_accessor :selected, :users, :channels
+  attr_accessor :selected, :selected, :users, :channels
 
   def initialize
     @users = User.list
     @channels = Channel.list
-    @selected = selected
+    @selected = nil
   end
 
   def select_user(user_identifier)
-    selected_user = nil
     @users.each do |user|
       if user.username == user_identifier || user.id == user_identifier
-        selected_user = user
+        @selected = user
       end
     end
-    if selected_user == nil
+    if @selected == nil
       raise ArgumentError, "That user is invalid"
     else
-      @selected = selected_user
       return @selected
     end
   end
 
   def select_channel(channel_identifier)
-    selected_channel = nil
     @channels.each do |channel|
       if channel.channel_name == channel_identifier || channel.id == channel_identifier
-        selected_channel = channel
+        @selected = channel
       end
     end
-    if selected_channel == nil
+    if @selected == nil
       raise ArgumentError, "That channel is invalid"
     else
-      @selected = selected_channel
       return @selected
     end
   end

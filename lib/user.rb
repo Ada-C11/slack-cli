@@ -1,9 +1,10 @@
 require "dotenv"
-require "httparty"
 Dotenv.load
+require "httparty"
+require "pry"
 
 class User
-  attr_accessor :username, :real_name, :user_info, :id
+  attr_accessor :username, :real_name, :id
   BASE_URL = "https://slack.com/api/users.list"
   TOKEN = ENV["SLACK_API_TOKEN"]
 
@@ -20,7 +21,7 @@ class User
     }
     @user_info = HTTParty.get(BASE_URL, query: query)
     if @user_info["ok"] == false
-      raise ArgumentError, "The error code is #{user_info.code} and the reason is: #{user_info.message}"
+      raise ArgumentError, "The error code is #{@user_info.code} and the reason is: #{@user_info["error"]}"
     end
     return @user_info
   end
@@ -34,3 +35,5 @@ class User
     return users
   end
 end
+
+# binding.pry

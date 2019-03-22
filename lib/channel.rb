@@ -1,6 +1,6 @@
-require "httparty"
 require "dotenv"
 Dotenv.load
+require "httparty"
 require "pry"
 
 class Channel
