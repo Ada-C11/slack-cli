@@ -18,9 +18,9 @@ module Slack
   
     def self.get(base_url, parameters)
       response = HTTParty.get(base_url, query: parameters)
-      # unless response.code == 200 && response.parsed_response["ok"]
-      #   raise SlackError, response["error"]
-      # end
+      unless response.code == 200 && response.parsed_response["ok"]
+        raise ResponseError, response["error"]
+      end
 
       return response
     end

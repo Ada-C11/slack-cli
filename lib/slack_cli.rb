@@ -55,7 +55,7 @@ def main
       end
 
     when 5
-      puts "What would you like to send to #{workspace.select_channel(name_or_id)}?"
+      puts "What would you like your message to say ?"
       message = gets.chomp
       workspace.send_message(message)
       puts "Your message has been sent! Yay!"

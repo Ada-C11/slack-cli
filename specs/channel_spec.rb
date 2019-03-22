@@ -1,28 +1,28 @@
 require_relative "test_helper"
 
 describe "Channels" do
-  # describe "self get method" do
-  #   it "returns a response from api for channels list" do
-  #     VCR.use_cassette("connect to channel api") do
-  #       url = "http://slack.com/api/channels.list"
-  #       query = {token: ENV["KEY"]}
-  #       request = Slack::Channel.get(url, query)
+  describe "self get method" do
+    it "returns a response from api for channels list" do
+      VCR.use_cassette("connect to channel api") do
+        url = "http://slack.com/api/channels.list"
+        query = {token: ENV["KEY"]}
+        request = Slack::Channel.get(url, query)
 
-  #       expect(request["ok"]).must_equal(true)
-  #     end
-  #   end
-  # end
+        expect(request).must_equal(true)
+      end
+    end
+  end
 
-  # it "raises exception if get request fails" do
-  #   VCR.use_cassette("connect to channel api") do
-  #     url = "https://slack.com/api/channel.list"
-  #     query = {token: "idontworkidontworkkkkkk"}
+  it "raises exception if get request fails" do
+    VCR.use_cassette("connect to channel api") do
+      url = "https://slack.com/api/channel.list"
+      query = {token: "idontworkidontworkkkkkk"}
 
-  #     expect {
-  #       Slack::Channel.get(url, query)
-  #     }.must_raise Slack::ResponseError
-  #   end
-  # end
+      expect {
+        Slack::Channel.get(url, query)
+      }.must_raise Slack::ResponseError
+    end
+  end
 
   describe "self list method" do
     it "returns channels array" do

@@ -7,10 +7,10 @@ describe "Workspace Class" do
           workspace = Slack::Workspace.new
           expect(workspace.users).must_be_kind_of(Array)
           expect(workspace.channels).must_be_kind_of(Array)
-        #   (0..2).each do |i|
-        #     expect(workspace.users[i]).must_be_kind_of(Slack::User)
-        #     expect(workspace.channels[i]).must_be_kind_of(Slack::Channel)
-        #   end
+          (0..2).each do |i|
+            expect(workspace.users[i]).must_be_kind_of(Slack::User)
+            expect(workspace.channels[i]).must_be_kind_of(Slack::Channel)
+          end
         end
       end
     end
@@ -60,7 +60,7 @@ describe "Workspace Class" do
 
     describe "select channel method" do
       it "finds a channel by name and stores it in the selected variable" do
-        VCR.use_cassette("workspace_information_find") do
+        VCR.use_cassette("workspace information") do
           channel_names = ["bassguitar", "general", "random"]
           topics = ["All bass no treble", "Company-wide announcements and work-based matters", "Non-work banter and water coolerconversation"]
         workspace = Slack::Workspace.new
@@ -75,27 +75,76 @@ describe "Workspace Class" do
     end
 
     it "finds a channel by slack id and stores it in the selected variable" do
-        VCR.use_cassette("workspace_information_find") do
+        VCR.use_cassette("workspace information") do
           slack_ids = ["CH317B6EN", "CH408C1CP", "CH4AZQMJS"]
-          topics = ["All doggos all the time! :dog:",
+          topics = ["I play bass guitar",
                     "Company-wide announcements and work-based matters",
                     "Non-work banter and water cooler conversation"]
           workspace = Slack::Workspace.new
   
           slack_ids.each_with_index do |slack_id, i|
-            find_channel = workspace.select_channel(slack_id)
+            search_channel = workspace.select_channel(slack_id)
             selected_channel = workspace.selection
-            expect(selected_channel).must_be_kind_of Slack::Channel
-            expect(selected_channel.topic).must_equal "#{topics[i]}"
+            expect(search_channel).must_be_kind_of(Slack::Channel)
+            expect(search_channel.topic).must_equal "#{topics[i]}"
           end
         end
       end
 
     end
+
+    it "gives an error message if user name or slack id ar invalid" do
+      VCR.use_cassette("workspace information") do
+        workspace = Slack::Workspace.new
+        search_channel = workspace.select_channel("crazy cat lady")
+        selected_channel = workspace.selection
+        assert_nil(selected_channel, msg = nil)
+      end
+    end
+
+    describe "Show details method" do
+      it "returns details" do
+
+      end
+      it "returns false boolean if invalid user or channel is passed in" do
+        VCR.use_cassette("workspace information") do
+          workspace = Slack::Workspace.new
+          puts "BBBBBBBBBBBB"
+          puts "#{workspace}"
+          select_user = workspace.select_user("FaiFai")
+          expect(select_user.show_details).must_equal false
+
+          select_channel = workspace.select_channel("Thomas")
+          expect(workspace.show_details).must_equal false
+        end
+      end
     
+    end
+
+    describe "send message method" do
+      it "sends a message if all requirements are met" do
+        VCR.use_cassette("recipient send message") do
+          workspace = Slack::Workspace.new
+          workspace.select_user("smarcha04")
+          message = workspace.send_message("Man I love playing guitar.")
+          expect(message).must_equal(true)
+        end
+      end
+
+      it "returns false if no channel or user are selected" do
+        VCR.use_cassette("recipient send message") do
+          workspace = Slack::Workspace.new
+          message = workspace.send_message("Man I love playing guitar.")
+          expect(message).must_equal false
+        end
+      end
+
+      it "returns nil if incorrect message is inputted" do
+        VCR.use_cassette("recipient send message") do
+          workspace = Slack::Workspace.new
+          message = workspace.send_message("")
+          expect(message).must_equal false
+        end
+      end
+    end
 end
-
-
-
-
-
