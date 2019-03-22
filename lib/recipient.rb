@@ -27,6 +27,7 @@ class Recipient
     end
 
     response = HTTParty.get(url, query: params)
+    return response
   end
 
   def send_msg(message)
