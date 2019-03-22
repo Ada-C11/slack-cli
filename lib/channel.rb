@@ -1,4 +1,3 @@
-require "HTTParty"
 require "awesome_print"
 require_relative "recipient"
 
@@ -7,7 +6,7 @@ module Slack
     BASE_URL = "https://slack.com/api/channels.list"
     PARAMETERS = {token: ENV["SLACK_API_TOKEN"]}
   
-    attr_reader :topic, :member_count
+    attr_reader  :topic, :member_count
 
     def initialize(name, slack_id, topic, member_count)
       super(name, slack_id)
@@ -24,7 +23,7 @@ module Slack
       end
     end
 
-    def show_details
+    def channel_details
       super.push("topic", "member_count")
     end
   end

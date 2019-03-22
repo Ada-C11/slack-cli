@@ -43,16 +43,14 @@ def main
       end
     when 4
       puts "Please enter a channel name or channel id:"
-      selection = gets.chomp
+      name_or_id = gets.chomp
 
-      workspace = Slack::Workspace.new
-      recipient = workspace.select_channel(selection)
 
-      puts "Show additional details for #{selection}? (Y/N)"
+      puts "Show additional details for #{name_or_id}? (Y/N)"
       choice = gets.chomp.downcase
 
       if choice == "y"
-        recipient.show_details
+        puts "#{workspace.show_details}"
       end
       # ap details
       # call show_details method and puts ap it

@@ -31,19 +31,20 @@ module Slack
     end
     
     def select_channel(name_or_id)
-      channels.find do |channel|
+      channels.each do |channel|
         if name_or_id == channel.name || name_or_id == channel.slack_id 
           @selection = channel
         end
       end
+      return @selection
       
-      if @selection == nil
-        return "Sorry, #{name_or_id} is not a valid channel."
-      end
+      # if @selection == nil
+      #   return "Sorry, #{name_or_id} is not a valid channel."
+      # end
     end
 
     def show_details
-      return @selection, @selection.details
+      return @selection, @selection.channel_details
       # if @selection == nil
       #   return false
         # ap @selection, @selection.details
