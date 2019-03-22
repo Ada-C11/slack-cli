@@ -25,14 +25,15 @@ module Slack
           @selection = user
         end
       end
-      return @selection
       if @selection == nil
         return "Sorry, #{name_or_id} is not a valid user."
       end
+      return @selection
+
     end
     
     def select_channel(name_or_id)
-      channels.each do |channel|
+      @channels.each do |channel|
         if name_or_id == channel.name || name_or_id == channel.slack_id 
           @selection = channel
         end
