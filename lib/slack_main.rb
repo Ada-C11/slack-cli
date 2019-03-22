@@ -56,13 +56,15 @@ def main
         puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.slack_id}"
       end
     elsif selection == "3" || selection == "4"
-      slack_id = ask("\nPlease enter a user id")
+      # slack_id = ask("\nPlease enter an id, channel name or username")
       case selection
       when "3"
-        workspace.select_user(slack_id)
+        identifier = ask("\nPlease enter an id or username")
+        workspace.select_user(identifier)
         puts "You've selected this user: #{workspace.selected.name}"
       when "4"
-        workspace.select_channel(slack_id)
+        identifier = ask("\nPlease enter an id or channel name")
+        workspace.select_channel(identifier)
         puts "You've selected this channel: #{workspace.selected.name}"
       end
     elsif selection == "5"
