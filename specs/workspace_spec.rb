@@ -34,6 +34,9 @@ describe "self.select_channel" do
 
       expect(selected_channel.name).must_equal "general"
       expect(selected_channel.slack_id).must_equal "CH2NW42JF"
+
+      selected_channel = Slack::Workspace.select_channel("geNeral")
+      expect(selected_channel.name).must_equal "general"
     end
   end
 end
@@ -41,9 +44,11 @@ end
 describe "self.selected_channel_details" do
   it "returns the details for the selected channel" do
     VCR.use_cassette("channel_find") do
-      channel_details = Slack::Workspace.selected_channel_details("CH2NW42JF")
+      channel = Slack::Channel.new("Pfeiffer_id", "Pfeiffer_name", 5, "Pfeiffer_topic")
+      channel_details = Slack::Workspace.selected_channel_details(channel)
       ap channel_details
-      # expect(channel_details.length).must_equal 1
+      expect(channel_details).must_match "Pfeiffer_id"
+      expect(channel_details).must_match "Pfeiffer_topic"
     end
   end
 end
@@ -82,6 +87,9 @@ describe "self.select_user" do
 
       expect(selected_user.name).must_equal "slackbot"
       expect(selected_user.slack_id).must_equal "USLACKBOT"
+
+      selected_user = Slack::Workspace.select_user("USLACKbOT")
+      expect(selected_user.name).must_equal "slackbot"
     end
   end
 end

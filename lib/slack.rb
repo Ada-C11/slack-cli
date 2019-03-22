@@ -24,7 +24,7 @@ def main
       puts Slack::Workspace.all_channels_details
     when "select channel"
       puts "Which channel would you like to select?"
-      channel_identifier = gets.chomp.downcase.to_s
+      channel_identifier = gets.chomp.to_s
       selected_channel = Slack::Workspace.select_channel(channel_identifier)
       if selected_channel.nil?
         puts "This channel doesn't exist. Exiting to main menu"
@@ -39,9 +39,17 @@ def main
       puts Slack::Workspace.all_users_details
     when "select user"
       puts "Which user would you like to select?"
-      user_identifier = gets.chomp.downcase.to_s
-      selected_user = Slack::Workspace.select_channel(user_identifier)
-      # puts selected_channel
+      user_identifier = gets.chomp.to_s
+      selected_user = Slack::Workspace.select_user(user_identifier)
+      if selected_user.nil?
+        puts "This user doesn't exist. Exiting to main menu"
+      else
+        puts "You have selected #{selected_user.name}. Please type 'details' for more info!"
+        answer = gets.chomp.downcase
+        if answer == "details"
+          puts Slack::Workspace.selected_user_details(selected_user)
+        end
+      end
     when "quit"
     else
       puts "Please enter a valid selection."

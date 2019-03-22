@@ -25,8 +25,8 @@ module Slack
 
     def self.select_channel(channel_identifier)
       find_channel = Slack::Channel.list_all.find do |channel|
-        channel.name == channel_identifier ||
-        channel.slack_id == channel_identifier
+        channel.name.downcase == channel_identifier.downcase ||
+        channel.slack_id.downcase == channel_identifier.downcase
       end
       # put some sort argument error here?
       return find_channel
@@ -56,11 +56,15 @@ module Slack
     def self.select_user(user_identifier)
       find_user = Slack::User.list_all.find {
         |user|
-        user.name == user_identifier ||
-        user.slack_id == user_identifier
+        user.name.downcase == user_identifier.downcase ||
+        user.slack_id.downcase == user_identifier.downcase
       }
 
       return find_user
+    end
+
+    def self.selected_user_details(chosen_user)
+      details = "User ID: #{chosen_user.slack_id}: \nReal name: #{chosen_user.real_name} \nDisplay name: #{chosen_user.name}."
     end
   end
 end
