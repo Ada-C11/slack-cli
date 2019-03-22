@@ -19,8 +19,8 @@ describe "Slack" do
   describe "select users and channels" do
     it "select a user" do
       VCR.use_cassette("slack_query") do # <-- .yml filename
-        user_a = user.select("UH53ZCBBR") # <-- this is "id" value for "kaseea"
-        user_b = user.select("kaseea") # <-- this is "name" value for "kaseea"
+        user_a = Slack.select_user("UH53ZCBBR") # <-- this is "id" value for "kaseea"
+        user_b = Slack.select_user("kaseea") # <-- this is "name" value for "kaseea"
 
         expect(user_a).must_equal "UH53ZCBBR"
         expect(user_b).must_equal "kaseea"
@@ -29,28 +29,41 @@ describe "Slack" do
 
     it "select a channel" do
       VCR.use_cassette("slack_query") do # <-- .yml filename
-        channel_a = channel.select("apiiiii:")
-        channel_b = channel.select("CH53ZCWDV") # <-- this is the "id" value for the general channel
+        channel_a = Slack.select_channel("apiiiii:")
+        channel_b = Slack.select_channel("CH53ZCWDV") # <-- this is the "id" value for the general channel
         expect(channel_a).must_equal "apiiiii"
         expect(channel_a).must_equal "CH53ZCWDV"
       end
     end
 
-    it "select a channel" do
+    it "raise an error if given an empty string" do
       VCR.use_cassette("slack_query") do
         # TEST GOES HERE
+        channel_x = Slack.select_channel("")
+        user_x = Slack.select_channel("")
+
+        expect(channel_x).must_raise SlackError
+        expect(user_x).must_raise SlackError
       end
     end
 
-    it "select a channel" do
+    it "raise an error if given a non-existant user or channel" do
       VCR.use_cassette("slack_query") do
         # TEST GOES HERE
+        channel_y = Slack.select_channel("Citris Fruit")
+        user_y = Slack.select_user("Pomolo")
+
+        expect(channel_y).must_raise SlackError, "No match for this user"
+        expect(user_y).must_raise SlackError, "No match for this user"
       end
     end
 
-    it "select a channel" do
+    it "raise an error if no user is selected" do
       VCR.use_cassette("slack_query") do
         # TEST GOES HERE
+        new_slack_instance = Slack.new
+        expect(new_slack_instance.chosen_user).must_equal nil # <-- do we want this to be nil or ""?
+        expect(new_slack_instance.chosen_user).must_raise SlackError # <-- also, I think we need chosen_user to be an attr_reader, or break this part into a different method
       end
     end
     #
