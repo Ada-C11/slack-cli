@@ -69,5 +69,18 @@ describe "Workspace" do
   
   describe "send_message" do
 
+    it "will raise an error when given an invalid channel" do
+      bad_channel = SlackAPI::Channel.new(slack_id: "123", name: "bad", topic: "bad", member_count: "1")
+      @workspace.channels.push(bad_channel)
+      @workspace.select_channel(id_or_name:"bad")
+      VCR.use_cassette("send_message_bad") do
+        exception = expect {
+          @workspace.send_message(text:"This post should not work")
+        }.must_raise SlackAPI::SlackApiError
+      end
+      @workspace.channels.pop
+    end
+  
+
   end
 end

@@ -8,6 +8,7 @@ require "pry"
 Dotenv.load
 
 module SlackAPI
+
   class SlackApiError < StandardError; end
 
   class User < Recipient
@@ -36,7 +37,6 @@ module SlackAPI
     end
 
     private
-
     def self.load
       query_parameters = { token: TOKEN }
       response = HTTParty.get(BASE_URL << USERS_LIST_PATH, query: query_parameters)
