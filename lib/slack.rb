@@ -12,13 +12,14 @@ def display_options
   puts "\nSelect channel"
   puts "\nDetails"
   puts "\nMessage"
+  puts "\nChange Settings"
   puts "\nQuit"
   option = gets.chomp.downcase
   return verify_options(option)
 end
 
 def verify_options(option)
-  options = ["select user", "select channel", "details", "message", "quit"]
+  options = ["select user", "select channel", "details", "message", "change settings", "quit"]
   until options.include?(option)
     puts "Please input a valid option."
     option = display_options
@@ -62,7 +63,7 @@ def main
       option = display_options
     when "details"
       begin
-        recipient.details
+        workspace.show_details(recipient)
         puts "\nWhat would you like to do next?"
         option = display_options
       rescue
@@ -84,6 +85,17 @@ def main
         puts "\nWhat would you like to do next?"
         option = display_options
       end
+    when "change settings"
+      puts "You can change the username displayed"
+      # puts "Please type either 'username' or 'icon emoji' or both to change either"
+      puts "What username would you like to use?"
+      setting_username_change = gets.chomp
+      params = {}
+      params[:username] = setting_username_change
+      Workspace.save_settings(params)
+      puts "Thanks, username is now #{setting_username_change}."
+      puts "Quit and restart the program for this change to be implemented"
+      option = display_options
     end
   end
 
@@ -91,3 +103,6 @@ def main
 end
 
 main if __FILE__ == $PROGRAM_NAME
+
+def verify_icon_emojis
+end
