@@ -19,10 +19,10 @@ class Workspace
   end
 
   def select_user(user_input)
-    @selected = users.find do |user|
+    @selected = users.select do |user|
       user.name == user_input || user.slack_id == user_input
     end
-    return @selected
+    @selected = selected.first
   end
 
   def show_details
