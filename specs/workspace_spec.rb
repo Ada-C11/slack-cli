@@ -50,14 +50,6 @@ describe "Workspace" do
       non_exiting_user = @workspace.select_user("jennifer.chiv")
       expect(non_exiting_user).must_equal "jennifer.chiv does not exist"
     end
-
-    it "raises ArgumentError if given an empty input" do
-      expect { @workspace.select_user("") }.must_raise ArgumentError
-    end
-
-    it "raises ArgumentError if input is nil" do
-      expect { @workspace.select_user }.must_raise ArgumentError
-    end
   end
 
   describe "select_channel" do
@@ -83,14 +75,6 @@ describe "Workspace" do
     it "handles the non-existing channel" do
       non_exiting_user = @workspace.select_channel("my-channel")
       expect(non_exiting_user).must_equal "my-channel does not exist"
-    end
-
-    it "raises ArgumentError if given an empty input" do
-      expect { @workspace.select_user("") }.must_raise ArgumentError
-    end
-
-    it "raises ArgumentError if input is nil" do
-      expect { @workspace.select_user }.must_raise ArgumentError
     end
   end
 

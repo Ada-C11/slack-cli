@@ -32,8 +32,6 @@ module Slack
     private
 
     def select(input, recipients)
-      raise ArgumentError, "no input entered" if input == nil
-      raise ArgumentError, "no input entered" if input == ""
       recipients.each do |recipient|
         if input == recipient.slack_id || input == recipient.name
           @selected = recipient
