@@ -1,4 +1,5 @@
 #! /usr/bin/env ruby
+#shebang line.
 require "dotenv"
 require_relative "./lib/slack"
 
@@ -14,8 +15,7 @@ def quit()
 end
 
 def list_users
-  puts 'yup, list users'
-  #code
+  puts $slack.users
 end
 
 def list_channels
@@ -23,10 +23,10 @@ def list_channels
 end
 
 commands = {
+  'list users' => method(:list_users),
+  'list channels' => method(:list_channels),
   'exit' => method(:quit),
   'quit' => method(:quit),
-  'list users' => method(:list_users),
-  'list channels' => method(:list_channels)
 }
 
 while !$time_to_go do
