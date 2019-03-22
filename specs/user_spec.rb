@@ -1,21 +1,15 @@
 require_relative "test_helper"
 
-describe "list" do
-  it "can get a list of users" do
-    VCR.use_cassette("list users") do
-      users = User.list
-      expect(users).wont_be_nil
-      expect(users).must_be_kind_of Array
+describe "User class" do
+  describe "self.list" do
+    it "can return all users" do
+      VCR.use_cassette("slack_user") do
+        response = User.get("user")
+
+        expect(response["members"]).wont_be_nil
+        expect(response["members"].first["name"]).must_equal "slackbot"
+        expect(response["members"].first["id"]).must_equal "USLACKBOT"
+      end
     end
   end
-  # it "will raise an exception if the search fails" do
-  #   VCR.use_cassette("list user") do
-     
-  #     expect {
-        
-  #     }.must_raise SearchError
-  #   end
-  # end
-
-
 end

@@ -28,20 +28,20 @@ class Workspace
     return @selected.details
   end
 
-  def print_details(recipients)
-    if recipients == "users"
-      return_array = []
-      users.each do |user|
-        return_array << user.details
-      end
-    elsif recipients == "channels"
-      return_array = []
-      channels.each do |channel|
-        return_array << channel.details
-      end
-    end
-    return return_array
-  end
+  # def print_details(recipients)
+  #   if recipients == "users"
+  #     return_array = []
+  #     users.each do |user|
+  #       return_array << user.details
+  #     end
+  #   elsif recipients == "channels"
+  #     return_array = []
+  #     channels.each do |channel|
+  #       return_array << channel.details
+  #     end
+  #   end
+  #   return return_array
+  # end
 
   def send_message
   end
