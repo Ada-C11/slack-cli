@@ -1,10 +1,9 @@
 require "dotenv"
 Dotenv.load
 require "httparty"
-require "pry"
 
 class User
-  attr_accessor :username, :real_name, :id
+  attr_reader :username, :real_name, :id
   BASE_URL = "https://slack.com/api/users.list"
   TOKEN = ENV["SLACK_API_TOKEN"]
 
@@ -35,5 +34,3 @@ class User
     return users
   end
 end
-
-# binding.pry

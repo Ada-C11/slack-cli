@@ -65,7 +65,7 @@ describe "Workspace class" do
       VCR.use_cassette("Workspace") do
         response = Workspace.new
         response.select_channel("general")
-        expect(response.show_details).must_be_instance_of TablePrint::Returnable
+        expect(response.show_details).must_be_instance_of Channel
       end
     end
 
@@ -73,7 +73,7 @@ describe "Workspace class" do
       VCR.use_cassette("Workspace") do
         response = Workspace.new
         response.select_user("ngocle")
-        expect(response.show_details).must_be_instance_of TablePrint::Returnable
+        expect(response.show_details).must_be_instance_of User
       end
     end
   end
@@ -84,6 +84,13 @@ describe "Workspace class" do
         response.select_channel("general")
         status = response.send_message("Hey I can post messages!")
         expect(status).must_equal true
+      end
+    end
+    it "raise an argument error when a message is invalid(empty,nil)" do
+      VCR.use_cassette("Workspace") do
+        response = Workspace.new
+        response.select_channel("general")
+        expect { response.send_message("") }.must_raise ArgumentError
       end
     end
 

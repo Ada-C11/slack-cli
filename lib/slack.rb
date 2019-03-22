@@ -10,7 +10,7 @@ require_relative "channel"
 def main
   work_space = Workspace.new
   puts "Welcome to the Ada Slack CLI!".colorize(:color => :blue, :mode => :bold)
-  puts "\nPlease Choose from the following options:\n1. List Users\n2. List Channels\n3. Select User\n4. Select Channel\n5. Details\n6. Quit".colorize(:color => :blue, :mode => :bold)
+  puts "\nPlease Choose from the following options:\n1. List Users\n2. List Channels\n3. Select User\n4. Select Channel\n5. Details\n6. Send Message\n7. Quit".colorize(:color => :blue, :mode => :bold)
   choice = gets.chomp.upcase
 
   until choice == "QUIT"
@@ -44,10 +44,21 @@ def main
       begin
         tp work_space.show_details
       rescue ArgumentError
-        puts "There is no recipient selected. Please select a user or a channel"
+        puts "There is no recipient selected. Please select a user or a channel."
       end
+    elsif choice == "SEND MESSAGE"
+      puts "Please enter your message below:"
+      user_message = gets.chomp
+      begin
+        work_space.send_message(user_message)
+      rescue ArgumentError
+        puts "The message is invalid. Please try again."
+      rescue NoMethodError
+        puts "Message failed to send. Please select a recipient and try again."
+      end
+      puts "Your message was successfully sent to the recipient!"
     end
-    puts "\nWhat would you like to do next?\n1. List Users\n2. List Channels\n3. Select User\n4. Select Channel\n5. Details\n6. Quit".colorize(:color => :blue, :mode => :bold)
+    puts "\nWhat would you like to do next?\n1. List Users\n2. List Channels\n3. Select User\n4. Select Channel\n5. Details\n6. Send Message\n7. Quit".colorize(:color => :blue, :mode => :bold)
     choice = gets.chomp.upcase
   end
   puts "Thank you for using the Ada Slack CLI!".colorize(:color => :green, :mode => :bold)

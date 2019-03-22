@@ -1,10 +1,9 @@
 require "dotenv"
 Dotenv.load
 require "httparty"
-require "pry"
 
 class Channel
-  attr_accessor :channel_name, :id, :topic, :members, :member_count
+  attr_reader :channel_name, :id, :topic, :members, :member_count
   BASE_URL = "https://slack.com/api/channels.list"
   TOKEN = ENV["SLACK_API_TOKEN"]
 
