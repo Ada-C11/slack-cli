@@ -7,11 +7,6 @@ describe "Workspace methods" do
         expect(test.selected.name).must_equal "api-project"
       end
     end
-    it "lets the user know when there are no channels" do
-      test = Workspace.new
-      test.channels = nil
-      expect(test.select_channel).must_raise SlackApiError
-    end
   end
 
   describe "Select user method" do

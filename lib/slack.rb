@@ -9,9 +9,6 @@ Dotenv.load
 
 def main
   @current_session = Workspace.new
-  # if @current_session.channels.length == 0 || @current_session.users.length == 0
-  #   puts "Hmm, this is strange"
-  # end
 
   puts "\nWelcome to the Ada Slack CLI!"
   puts "\nThere are #{@current_session.channels.length} channels in this workspace."
