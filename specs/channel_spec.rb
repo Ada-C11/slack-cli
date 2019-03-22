@@ -1,5 +1,5 @@
 require_relative "test_helper"
-CHANNEL_URL = "https://slack.com/api/channels.list"
+CHANNEL_URL = "https://slack.com/api/channels.list".freeze
 KEY = ENV["SLACK_API_TOKEN"]
 
 describe "Channel" do

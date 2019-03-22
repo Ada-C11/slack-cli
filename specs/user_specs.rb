@@ -2,7 +2,7 @@ require_relative "test_helper"
 require "awesome_print"
 
 describe SlackCLI do
-  USER_URL = "https://slack.com/api/users.list"
+  USER_URL = "https://slack.com/api/users.list".freeze
 
   describe "User class" do
     let (:get_users) do
@@ -76,10 +76,10 @@ describe SlackCLI do
       it "sends a message to the user" do
         VCR.use_cassette("slack_message") do
           text = "Interesting info:
-        Ron Swanson is a fictional character 
-        portrayed by actor Nick Offerman. 
-        The Ron Swanson Quotes API was developed 
-        by James Wright, an independent web developer. 
+        Ron Swanson is a fictional character
+        portrayed by actor Nick Offerman.
+        The Ron Swanson Quotes API was developed
+        by James Wright, an independent web developer.
         This API lets other developers integrate...
         for more info go to their website"
           user = "UH2P4B8R1"
