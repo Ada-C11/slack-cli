@@ -8,8 +8,11 @@ describe "Recipient" do
   after(:each) do
     VCR.eject_cassette
   end
+  let(:workspace) {
+    workspace = Workspace.new
+  }
 
-  describe "self.get"  do 
+  describe "self.get" do
     describe "cases when our program should raise an exception..." do
       it "should raise an exception created by changes to API" do
         class Dummy < SlackCli::Recipient
@@ -27,16 +30,16 @@ describe "Recipient" do
             return response
           end
         end
-  
+
         test_dummy = Dummy.get
         expect(test_dummy["ok"]).must_equal false
         expect(test_dummy["error"]).must_equal "invalid_auth"
       end
-  
+
       it "should raise an exception created by changes to API URL" do
         class Dummy < SlackCli::Recipient
           def self.list_url
-             return "http://slack.com/api/users.lis"
+            return "http://slack.com/api/users.lis"
           end
           def self.get
             super
@@ -45,7 +48,7 @@ describe "Recipient" do
             }
           end
         end
-  
+
         expect { Dummy.get }.must_raise SlackCli::SlackError
       end
     end
