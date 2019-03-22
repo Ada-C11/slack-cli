@@ -2,7 +2,7 @@ require_relative "test_helper"
 # THIS IS MY COMMENT - Jessica
 
 describe "Recipient" do
-  let(:slack_id) { 20 }
+  let(:slack_id) { 30 }
   let(:username) { "Sopheary" }
   let(:recipient) { Slack::Recipient.new(slack_id, username) }
 
