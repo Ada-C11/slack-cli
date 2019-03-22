@@ -5,7 +5,6 @@ describe "Channel class" do
     it "can return all channels" do
       VCR.use_cassette("slack_channel") do
         response = Channel.list
-
         channel = response.first
 
         expect(response).wont_be_nil

@@ -2,13 +2,13 @@ require_relative "test_helper"
 
 describe "User class" do
   describe "self.list" do
-    it "can return all users" do
+    it "can return all channels" do
       VCR.use_cassette("slack_user") do
-        response = User.get("user")
+        response = User.list
+        user = response.first
 
-        expect(response["members"]).wont_be_nil
-        expect(response["members"].first["name"]).must_equal "slackbot"
-        expect(response["members"].first["id"]).must_equal "USLACKBOT"
+        expect(response).wont_be_nil
+        expect(response.first.name).must_equal user.name
       end
     end
   end
