@@ -13,9 +13,6 @@ class Recipient
     @name = name
   end
 
-  def details
-  end
-
   def self.list
   end
 

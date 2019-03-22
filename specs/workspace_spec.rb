@@ -35,17 +35,26 @@ describe "Workspace methods" do
     it "tells the Program's user when the input does not match a user" do
       VCR.use_cassette("errors") do
         test = Workspace.new
-        expect(test.show_user_details("fbjkdf")).must_equal "user not found"
+        expect { test.show_user_details("fbjkdf") }.must_raise ArgumentError, "user not found"
       end
     end
   end
 
   describe "Send message to user method" do
-    it "can return specified channel" do
-      VCR.use_cassette("select-method") do
+    it "can send a valid message" do
+      VCR.use_cassette("slack_message") do
         test = Workspace.new
-        expect(test.select_channel("api-project")).must_be_instance_of Channel
-        expect(test.selected.name).must_equal "api-project"
+        test_message = test.send_msg_to_user("UH2SDTK2N",
+                                             "I know my lifestyle is driving you crazy...")
+
+        expect(test_message).must_equal "You: I know my lifestyle is driving you crazy..."
+      end
+    end
+    it "can raise an error when the given user is not found" do
+      VCR.use_cassette("slack_message") do
+        test = Workspace.new
+
+        expect { test.send_msg_to_user("UH2SD000", "This should be an error") }.must_raise ArgumentError, "user not found"
       end
     end
   end

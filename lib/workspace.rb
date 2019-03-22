@@ -19,7 +19,12 @@ class Workspace
         @selected = x
       end
     end
-    return @selected
+
+    if @selected == nil
+      raise ArgumentError, "channel not found"
+    else
+      return @selected
+    end
   end
 
   def select_user(user)
@@ -28,18 +33,21 @@ class Workspace
         @selected = x
       end
     end
-    return @selected
+
+    if @selected == nil
+      raise ArgumentError, "user not found"
+    else
+      return @selected
+    end
   end
 
   def show_user_details(name)
     x = select_user(name)
-    return "user not found" if x == nil
     return "username: #{x.name} | real name: #{x.real_name} | Slack id: #{x.slack_id}"
   end
 
   def show_channel_details(name)
     x = select_channel(name)
-    return "channel not found" if x == nil
     return "name: #{x.name} | topic: #{x.topic} | Slack id: #{x.slack_id}"
   end
 
