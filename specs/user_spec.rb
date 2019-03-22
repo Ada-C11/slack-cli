@@ -25,43 +25,6 @@ describe SlackAPI do
     end
   end
 
-  # describe "select_user" do
-  #   it "selects a user as the current recipient when user inputs ID" do
-  #     user = SlackAPI::User.new
-  #     VCR.use_cassette("select_user") do
-  #       response = user.select_user("UH3UT3SJK")
-  #       expect(response).must_equal "UH3UT3SJK"
-  #     end
-  #   end
-  #   it "selects a user as the current recipient when user inputs name" do
-  #     user = SlackAPI::User.new
-  #     VCR.use_cassette("select_user") do
-  #       response = user.select_user("aribray")
-  #       expect(response).must_equal "UH3UT3SJK"
-  #     end
-  #   end
-  #   it "raises a SlackError if the user's name or id is invalid" do
-  #     user = SlackAPI::User.new
-  #     VCR.use_cassette("select_user") do
-  #       expect { user.select_user("fakeuser") }.must_raise SlackAPI::SlackError
-  #     end
-  #   end
-  # end
-
-  # describe "see_details" do
-  #   it "shows details for selected user" do
-  #     user = SlackAPI::User.new
-  #     VCR.use_cassette("select_user") do
-  #       selected_user = user.select_user("UH3UT3SJK")
-  #       user_details = user.see_details(selected_user)
-
-  #       expect(user_details).must_be_kind_of Array
-  #       expect(user_details.length).must_equal 1
-  #       expect(user_details[0]).must_equal "name" => "aribray", "real name" => "Ariana Bray", "slack id" => "UH3UT3SJK"
-  #     end
-  #   end
-  # end
-
   describe "send_usr_msg" do
     it "sends a message to selected user" do
       VCR.use_cassette("send_usr_msg") do
