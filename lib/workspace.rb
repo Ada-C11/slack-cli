@@ -18,7 +18,7 @@ module Slack
 
     def select_channel(identifier)
       @selected = @channels.find do |channel|
-        channel.slack_id == identifier
+        channel.slack_id == identifier || channel.name == identifier
       end
     end
 
