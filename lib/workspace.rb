@@ -17,10 +17,7 @@ module Slack
     end
 
     def self.all_channels_details
-      channels = Slack::Channel.list_all.map do |channel|
-        "Channel ID: #{channel.slack_id}\nChannel name: #{channel.name} \nMembers: #{channel.num_members} \nChannel Topic: #{channel.topic}"
-      end
-      return channels
+      return Slack::Channel.list_all.map { |channel| channel.convert_to_string }
     end
 
     def self.select_channel(channel_identifier)
@@ -28,7 +25,6 @@ module Slack
         channel.name.downcase == channel_identifier.downcase ||
         channel.slack_id.downcase == channel_identifier.downcase
       end
-      # put some sort argument error here?
       return find_channel
     end
 

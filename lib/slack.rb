@@ -76,7 +76,7 @@ def main
           puts "Please select a valid input. Returning to main!"
         end
       end
-    when "details" || "send message"
+    when "details"
       puts "You haven't selected a user or channel. Exiting to main prompt."
     when "send message"
       puts "You haven't selected a user or channel. Exiting to main prompt."
