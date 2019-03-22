@@ -87,8 +87,6 @@ def main
     end
   end
 
-  #if repeat details
-
   puts "Thank you for using the Ada Slack CLI"
 end
 
