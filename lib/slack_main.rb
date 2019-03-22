@@ -3,7 +3,7 @@
 require "dotenv"
 require "pry"
 require "httparty"
-require 'terminal-table'
+require "terminal-table"
 
 require_relative "recipient"
 require_relative "channel"
@@ -63,7 +63,7 @@ def main
       puts "\nHere are the channels:"
       rows = []
       workspace.channels.each_with_index do |channel, i|
-        rows << [i + 1, channel.name.capitalize]
+        rows << [i + 1, channel.name, channel.topic, "#{channel.member_count} members", channel.slack_id]
         # puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.slack_id}"
       end
       table = Terminal::Table.new :rows => rows
@@ -96,8 +96,7 @@ def main
         table = Terminal::Table.new :rows => rows
         puts table
       end
-    else puts "\nInvalid entry.  Please try again!"
-    end
+    else puts "\nInvalid entry.  Please try again!"     end
 
     selection = menu
   end
