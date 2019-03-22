@@ -6,10 +6,7 @@ describe "self.list" do
       response = SlackAPI::Channel.list_channels
 
       expect(response).wont_be_nil
-      expect(response.keys.include?("general")).must_equal true
-      expect(response["general"]).must_equal "topic" => "Company-wide announcements and work-based matters",
-        "member count" => 2,
-        "id" => "CH2SKTKPC"
+      expect(response[0]).must_equal "name" => "general", "topic" => "Company-wide announcements and work-based matters", "member count" => 2, "id" => "CH2SKTKPC"
       expect(response.length).must_equal 3
     end
   end

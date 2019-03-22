@@ -11,12 +11,13 @@ module SlackAPI
     def self.list_users
       response = Recipient.get("users.list")
 
-      user_list = {}
+      user_list = [] #changed this to an array to use table print
 
       if response["ok"]
         response["members"].each do |member|
-          user_list[member["name"]] = { "real name" => member["real_name"], "slack id" => member["id"] }
+          user_list << {"name" => member["name"], "real name" => member["real_name"], "slack id" => member["id"]}
         end
+        # user_list is now an array of hashes
       else
         raise SlackAPI::SlackError, "There was an error. The code is #{response.error}."
       end
@@ -44,11 +45,15 @@ module SlackAPI
     def see_details(identifier)
       response = Recipient.get("users.list")
 
-      user_details = {}
+      user_details = []
 
       response["members"].each do |member|
         if member["id"] == identifier || member["name"] == identifier
-          user_details[member["name"]] = { "real name" => member["real_name"], "slack id" => member["id"] }
+          user_details <<
+            {"name" => member["name"],
+             "real name" => member["real_name"],
+             "slack id" => member["id"]}
+
           return user_details
         end
       end
@@ -56,7 +61,7 @@ module SlackAPI
 
     def send_msg(recipient, text)
       response = HTTParty.post("#{BASE_URL}chat.postMessage",
-                               headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+                               headers: {"Content-Type" => "application/x-www-form-urlencoded"},
                                body: {
                                  token: ENV["SLACK_API_TOKEN"],
                                  channel: recipient,

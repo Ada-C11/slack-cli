@@ -11,13 +11,13 @@ module SlackAPI
     def self.list_channels
       response = Recipient.get("channels.list")
 
-      channel_list = {}
+      channel_list = []
 
       if response["ok"] != true # write a test for this
         raise SlackAPI::SlackError, "There was an error. The code is #{response["error"]}."
       else
         response["channels"].each do |channel|
-          channel_list[channel["name"]] = { "topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"] }
+          channel_list << {"name" => channel["name"], "topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"]}
         end
       end
       return channel_list
@@ -50,7 +50,7 @@ module SlackAPI
       else
         response["channels"].each do |channel|
           if channel["id"] == identifier || channel["name"] == identifier
-            channel_details[channel["name"]] = { "topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"] }
+            channel_details[channel["name"]] = {"topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"]}
             return channel_details
           end
         end
@@ -60,7 +60,7 @@ module SlackAPI
     def send_msg(recipient, text)
       response = HTTParty.post(
         "#{BASE_URL}chat.postMessage",
-        headers: { "Content-Type" => "application/x-www-form-urlencoded" },
+        headers: {"Content-Type" => "application/x-www-form-urlencoded"},
         body: {
           token: ENV["SLACK_API_TOKEN"],
           channel: recipient,

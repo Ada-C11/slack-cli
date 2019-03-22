@@ -2,6 +2,7 @@
 require_relative "user"
 require_relative "channel"
 require "httparty"
+require "table_print"
 require "dotenv"
 Dotenv.load
 
@@ -14,12 +15,11 @@ def main
 
   until response == "quit"
     if response == "list users"
-      # user = User.new
-      puts SlackAPI::User.list_users
+      tp SlackAPI::User.list_users, "name", "real name", "slack id"
       puts ask_again
       response = gets.chomp
     elsif response == "list channels"
-      puts SlackAPI::Channel.list_channels
+      tp SlackAPI::Channel.list_channels, "name", "topic", "member count", "id"
       puts ask_again
       response = gets.chomp
     elsif response == "select user"
@@ -47,7 +47,7 @@ def main
     elsif response == "details"
       if select_response == "select user"
         details = user.see_details(selected_recipient)
-        puts details
+        tp details, "name", "real name", "slack id"
         puts ask_again
         response = gets.chomp
       elsif select_response == "select channel"

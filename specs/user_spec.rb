@@ -5,8 +5,7 @@ describe SlackAPI do
       VCR.use_cassette("list_users") do
         response = SlackAPI::User.list_users
         expect(response).wont_be_nil
-        expect(response.keys.include?("aribray")).must_equal true
-        expect(response["aribray"]).must_equal "real name" => "Ariana Bray",
+        expect(response[2]).must_equal "name" => "aribray", "real name" => "Ariana Bray",
           "slack id" => "UH3UT3SJK"
         expect(response.length).must_equal 3
       end
@@ -53,10 +52,9 @@ describe SlackAPI do
         selected_user = user.select_user("UH3UT3SJK")
         user_details = user.see_details(selected_user)
 
-        expect(user_details).must_be_kind_of Hash
+        expect(user_details).must_be_kind_of Array
         expect(user_details.length).must_equal 1
-        expect(user_details["aribray"]).must_equal "real name" => "Ariana Bray",
-                                                   "slack id" => "UH3UT3SJK"
+        expect(user_details[0]).must_equal "name" => "aribray", "real name" => "Ariana Bray", "slack id" => "UH3UT3SJK"
       end
     end
   end
