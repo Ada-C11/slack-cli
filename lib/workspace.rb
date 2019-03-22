@@ -2,6 +2,7 @@ require "pry"
 require "dotenv"
 require "httparty"
 require "table_print"
+require 'terminal-table'
 
 require_relative "user"
 require_relative "channel"
@@ -30,7 +31,15 @@ module Slack
     end
 
     def show_details
-      puts @selected.details
+      details = @selected.details
+
+      rows = []
+        details.each do |key, details|
+          rows << [key, details]
+        end
+
+      table = Terminal::Table.new :rows => rows
+      return table
     end
 
     def send_message

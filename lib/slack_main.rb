@@ -101,6 +101,7 @@ def main
       if workspace.selected.nil?
         puts "Whoops! You must select a recipient first"
       else
+        
 
       end
     else puts "\nInvalid entry.  Please try again!"     

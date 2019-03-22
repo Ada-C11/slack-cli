@@ -1,3 +1,4 @@
+require "terminal-table"
 require "httparty"
 require "simplecov"
 SimpleCov.start

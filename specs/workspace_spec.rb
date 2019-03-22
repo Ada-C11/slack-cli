@@ -63,6 +63,10 @@ describe "Workspace class" do
     end
 
     describe "show_details" do
+      it "does a thing" do
+        @workspace.select_user("v.jansen.martin")
+        expect(@workspace.show_details).must_be_kind_of Terminal::Table
+      end
       # tests for show_details here
     end
   end
