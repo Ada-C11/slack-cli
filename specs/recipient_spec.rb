@@ -14,6 +14,13 @@ describe "Recipient" do
   end
 
   describe "send message" do
+    it "sends a valid message" do
+      VCR.use_cassette("slack_message") do
+        users = Slack::User.list
+        return_value = users[0].send_message("hi")
+        expect(return_value).must_equal true
+      end
+    end
   end
 
   describe "self.get" do
