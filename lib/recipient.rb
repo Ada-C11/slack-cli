@@ -27,8 +27,8 @@ module SlackCli
         text: message,
       }
       response = HTTParty.post(MSG_URL, body: body_params)
-      # error_helper(response)
-      return response
+      return error_helper(response)
+      # return response
     end
 
     def self.get
@@ -36,8 +36,7 @@ module SlackCli
         token: TOKEN,
       }
       response = HTTParty.get(self::LIST_URL, query: query_params)
-      # error_helper(response)
-      return response
+      return error_helper(response)
     end
 
     #private
@@ -49,8 +48,8 @@ module SlackCli
       raise NotImplementedError
     end
 
-    def error_helper(response)
-      unless response.code != 200 || !response["ok"]
+    def self.error_helper(response)
+      unless response.code == 200 && response["ok"]
         raise SlackError, "Error #{response.code}: #{response["error"]}"
       end
       return response

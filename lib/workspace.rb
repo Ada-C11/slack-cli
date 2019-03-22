@@ -44,7 +44,7 @@ class Workspace
     if message.length == 0
       raise SlackCli::SlackError, "Message must cannot be nil or blank..."
     else
-      @selected.send_message(@selected.slack_id, message)
+      @selected.post_message(@selected.slack_id, message)
     end
   end
 
