@@ -15,13 +15,11 @@ module SlackAPI
 
     attr_reader :real_name
 
-    attr_accessor :list
-
     BASE_URL = "https://slack.com/api"
     USERS_LIST_PATH = "/users.list"
     CHAT_POST_MESSAGE_PATH = "/chat.postMessage"
     TOKEN = ENV["TOKEN"]
-    @@list = []
+    @@all = []
 
     def initialize(real_name:, slack_id:, name:)
       super(slack_id: slack_id, name: name)
@@ -35,7 +33,7 @@ module SlackAPI
     end
 
     def self.list
-      return @@list
+      return @@all
     end
 
     
@@ -47,9 +45,9 @@ module SlackAPI
         slack_id = response["members"][i]["id"]
         name = response["members"][i]["name"]
         new_user = SlackAPI::User.new(real_name: real_name, slack_id: slack_id, name: name)
-        @@list.push(new_user)
+        @@all.push(new_user)
       end
-      return @@list
+      return @@all
     end
 
 
