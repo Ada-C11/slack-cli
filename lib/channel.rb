@@ -10,7 +10,7 @@ module Slack
 
     Dotenv.load
 
-    attr_reader :channel_id, :channel_name, :topic, :member_count
+    attr_reader :channel_id, :channel_name, :topic, :member_count, :purpose
 
     def initialize(channel_id:, channel_name:, topic:)
       @channel_id = channel_id.to_s
@@ -47,8 +47,6 @@ module Slack
       return channels
     end
 
-    ap self.list_channels
-
     def self.select_channel(name_or_id)
       channel_data = get_channel_data
 
@@ -75,6 +73,17 @@ module Slack
       end
 
       return chosen_channel
+    end
+
+    def show_details(name_or_id)
+      channel_details = Channel.select_channel(name_or_id)
+
+      details = {
+        "Name" => channel_details.channel_name,
+        "Topic" => channel_details.topic["value"],
+      }
+      # details = channel_details.purpose
+      return details
     end
   end # class
 end # module

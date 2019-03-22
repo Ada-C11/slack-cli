@@ -40,12 +40,28 @@ def main
 
       chosen_user = Slack::User.select_user(name_or_id)
       ap chosen_user
+
+      puts "Show additional details? (Y/N)"
+      choice = gets.chomp.downcase
+
+      if choice == "y"
+        puts "no method yet"
+        # call show_details method and puts ap it
+      end
     when 4
       puts "Please enter a channel name or channel id:"
       name_or_id = gets.chomp
-      # channel = Slack::Channel.new(@channel_id, @channel_name, @topic)
       chosen_channel = Slack::Channel.select_channel(name_or_id)
-      ap chosen_channel
+
+      puts "Show additional details for #{name_or_id}? (Y/N)"
+      choice = gets.chomp.downcase
+
+      if choice == "y"
+        ap chosen_channel.show_details(name_or_id)
+      end
+      # ap details
+      # call show_details method and puts ap it
+
     when 5
     when 6
     when 7
