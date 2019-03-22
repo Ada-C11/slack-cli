@@ -14,6 +14,7 @@ describe "Workspace class" do
     it "can return a given user" do
       VCR.use_cassette("select-user") do
         test1 = Workspace.new
+        see_details_menu
           expect(test1.select_user("UH2SDTK2N")).must_be_instance_of User
           expect(test1.selected.name).must_equal "ksguadron"
        end

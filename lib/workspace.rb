@@ -24,6 +24,7 @@ class Workspace
     return @selected
   end
   
+  
   def select_user(user)
     @users.each do |x|
       if user.downcase == (x.name).downcase || user.downcase == (x.slack_id).downcase
@@ -33,15 +34,17 @@ class Workspace
     return @selected
   end
   
-  def show_details(recipient_type:, name:)
-    if recipient_type.downcase == "channel"
-      x = select_channel(name)
-    elsif recipient_type.downcase == "user"
-      x = select_user(name)
-    else
-      x = "User or channel not found"
-    end
+  
+  def show_user_details(name)
+    x = select_user(name)
+    return "user not found" if x == nil    
     return "username: #{x.name} | real name: #{x.real_name} | Slack id: #{x.slack_id}"
+  end
+  
+  def show_channel_details(name)
+    x = select_channel(name)
+    return "channel not found" if x == nil
+    return "name: #{x.name} | topic: #{x.topic} | Slack id: #{x.slack_id}"
   end
   
   def send_message
