@@ -65,8 +65,8 @@ describe "Workspace class" do
 
       expect(pigeon["ok"]).must_equal true
     end
+  end
 
-   it "raise an exception when a user enters nil in send_message" do
   describe "show details method" do 
     it "returns details for a selected user" do 
       workspace.select_user("hanalways")
