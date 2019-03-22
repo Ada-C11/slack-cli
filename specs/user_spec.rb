@@ -12,11 +12,27 @@ describe SlackApi::User do
       end
     end
 
-    it "includes a specific user" do
-      VCR.use_cassette("slack_users_json") do
+    it "includes a specific username" do
+      VCR.use_cassette("slack_user_list") do
         users_list = SlackApi::User.user_api
 
         expect(users_list.first["name"]).must_equal "slackbot"
+      end
+    end
+
+    it "includes a specific user's real name" do
+      VCR.use_cassette("slack_user_list") do
+        users_list = SlackApi::User.user_api
+
+        expect(users_list.first["real_name"]).must_equal "Slackbot"
+      end
+    end
+
+    it "includes a specific user's slack id" do
+      VCR.use_cassette("slack_user_list") do
+        users_list = SlackApi::User.user_api
+
+        expect(users_list.first["id"]).must_equal "USLACKBOT"
       end
     end
 
@@ -40,17 +56,6 @@ describe SlackApi::User do
   end
 
   describe "list users" do
-    it "contains slackbot as a user" do
-      skip
-      VCR.use_cassette("slack_users_list") do
-        users_list = SlackApi::User.user_api
-        # users_list.each do |user|
-
-        # end
-        expect(SlackApi::User.list(users_list)).must_include "slackbot"
-      end
-    end
-
     it "returns an array" do
       VCR.use_cassette("slack_users_list") do
         users_list = SlackApi::User.user_api
@@ -59,16 +64,3 @@ describe SlackApi::User do
     end
   end
 end
-
-# users:
-
-#tests -->
-
-#0. make sure that what's being returned is in the format we want (i.e. a hash or array)
-
-#2. make sure that the right things are being returned for each users
-# expect { one component of Amy's user info is } real name
-# expect { one component of Amy's user info is } slack_id
-# expect { one component of Amy's user info is } username
-
-#3. expect if there are NO users -> return empty array

@@ -44,7 +44,7 @@ def main
       puts "\n(This will send to the recipient you have selected)"
       print "What message would you like to send? "
       user_message = gets.chomp
-      puts workspace.send_message(user_message)
+      workspace.send_message(user_message)
     end
 
     puts "\nWhat would you like to do next?"
