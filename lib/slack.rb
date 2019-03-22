@@ -8,7 +8,7 @@ def main
   puts "There are #{workspace.channels.count} channels in this workspace"
   puts "There are #{workspace.users.count} users in this workspace"
 
-  puts "You can: List Users, List Channels, Select User, Select Channel, Details, or Quit."
+  puts "You can: List Users, List Channels, Select User, Select Channel, Details, Send Message, or Quit."
   puts "Please enter what option you would like to take.  You can quit by entering 'quit'."
   response = gets.chomp.downcase
   while response != "quit"
@@ -17,16 +17,17 @@ def main
     elsif response == "list channels"
       list_channels(workspace)
     elsif response == "select user"
-      puts select_user_by_input(workspace)
+      select_user_by_input(workspace)
     elsif response == "select channel"
-      puts select_channel_by_input(workspace)
+      select_channel_by_input(workspace)
     elsif response == "details"
       puts get_details(workspace)
-      
+    elsif response == "send message"
+      send_message(workspace)
     else
       puts "Please make sure to select from the choices above. You can quit be entering 'quit'."
     end
-    puts "\nPlease enter what you would like to do: \nList Users \nList Channels \nSelect User \nSelect Channel \nDetails \nQuit"
+    puts "\nPlease enter what you would like to do: \nList Users \nList Channels \nSelect User \nSelect Channel \nDetails \nSend Message \nQuit"
     response = gets.chomp.downcase
   end
 
@@ -35,13 +36,13 @@ end
 
 def list_users(workspace)
   workspace.users.each do |user|
-    puts "Slack ID: #{user.slack_id}, username: #{user.name}, real name: #{user.real_name}"
+    puts user.details
   end
 end
 
 def list_channels(workspace)
   workspace.channels.each do |channel|
-    puts "Slack ID: #{channel.slack_id}, name: #{channel.name}, topic: #{channel.topic}, member count: #{channel.member_count}"
+    puts channel.details
   end
 end
 
@@ -49,7 +50,7 @@ def select_user_by_input(workspace)
   puts "What is the Slack ID or username? "
   user_info = gets.chomp
   user = workspace.select_user(user_info)
-  if user == nil 
+  if user == nil
     puts "We couldn't find that user"
   else
     puts "User has been selected"
@@ -60,7 +61,7 @@ def select_channel_by_input(workspace)
   puts "What is the Slack ID or name? "
   channel_info = gets.chomp
   channel = workspace.select_channel(channel_info)
-  if channel == nil 
+  if channel == nil
     puts "We couldn't find that channel"
   else
     puts "Channel has been selected"
@@ -73,6 +74,16 @@ def get_details(workspace)
     puts "There is nothing selected to show details about. Please select a user or channel."
   else
     return detail_info
+  end
+end
+
+def send_message(workspace)
+  puts "What would you like to send?"
+  message = gets.chomp
+  if workspace.send_message(message)
+    puts "Message successfully sent"
+  else
+    puts "Please select a channel or user before sending message."
   end
 end
 
