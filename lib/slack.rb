@@ -26,7 +26,7 @@ def main
       puts "Which channel would you like to select?"
       channel_identifier = gets.chomp.downcase.to_s
       selected_channel = Slack::Workspace.select_channel(channel_identifier)
-      if selected_channel == nil
+      if selected_channel.nil?
         puts "This channel doesn't exist. Exiting to main menu"
       else
         puts "You have selected #{selected_channel.name}. Please type 'details' for more info!"

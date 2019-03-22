@@ -23,11 +23,10 @@ module Slack
     end
 
     def self.select_channel(channel_identifier)
-      find_channel = Slack::Channel.list_all.find {
-        |channel|
+      find_channel = Slack::Channel.list_all.find do |channel|
         channel.name == channel_identifier ||
         channel.slack_id == channel_identifier
-      }
+      end
       # put some sort argument error here?
       return find_channel
     end
