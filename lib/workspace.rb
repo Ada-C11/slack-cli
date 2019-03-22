@@ -17,11 +17,15 @@ module Slack
     end
 
     def select_channel(slack_id)
-      @selected = @channels.find { |channel| channel.slack_id == slack_id }
+      @selected = @channels.find do |channel|
+        channel.slack_id == slack_id
+      end
     end
 
     def select_user(slack_id)
-      @selected = @users.find { |user| user.slack_id == slack_id }
+      @selected = @users.find do |user|
+        user.slack_id == slack_id
+      end
     end
 
     def show_details
