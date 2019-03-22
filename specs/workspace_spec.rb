@@ -92,7 +92,7 @@ describe "Workspace" do
     it "sends a valid message" do
       VCR.use_cassette("slack_message") do
         select_user = @workspace.select_user("sopheary.chiv")
-        expect(select_user.send_message("test")).must_equal true
+        expect(@workspace.send_message("test")).must_equal true
       end
     end
   end
