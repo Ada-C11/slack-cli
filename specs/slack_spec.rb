@@ -46,24 +46,31 @@ describe "Slack" do
         expect(user_b).must_respond_to :details
       end
     end
+
+    #need a test for list channels
+    #need a test for list users
+
+    it "raise an error if given a non-existant user or channel" do
+      VCR.use_cassette("slack_query") do
+        # TEST GOES HERE
+        channel_y = Slack.select_channel("Citris Fruit")
+        user_y = Slack.select_user("Pomolo")
+
+        expect(channel_y).must_raise SlackError, "No match for this user"
+        expect(user_y).must_raise SlackError, "No match for this user"
+      end
+    end
+
+    it "raise an error if no user is selected" do
+      VCR.use_cassette("slack_query") do
+        # TEST GOES HERE
+        new_slack_instance = Slack.new
+        expect(new_slack_instance.chosen_user).must_equal nil # <-- do we want this to be nil or ""?
+        expect(new_slack_instance.chosen_user).must_raise SlackError # <-- also, I think we need chosen_user to be an attr_reader, or break this part into a different method
+      end
+    end
+    #
   end
-  #need a test for list channels
-  #need a test for list users
-
-  #need a test for main method
-  #I guess ones that test the usage of the loop
-
-  # it "select a channel" do
-  #   VCR.use_cassette("slack_query") do
-  #     # TEST GOES HERE
-  #   end
-  # end
-
-  # it "select a channel" do
-  #   VCR.use_cassette("slack_query") do
-  #     # TEST GOES HERE
-  #   end
-  # end
 
   # it "select a channel" do
   #   VCR.use_cassette("slack_query") do
