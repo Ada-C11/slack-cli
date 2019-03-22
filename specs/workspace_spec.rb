@@ -56,17 +56,21 @@ describe "Workspace class" do
       expect(@workspace.selected.name).must_equal "v.jansen.martin"
     end
 
-    it "returns nil if given invalid identifie" do
+    it "returns nil if given invalid identifier" do
       @workspace.select_user("INVALID_IDENTIFIER")
       expect(@workspace.selected).must_equal nil
     end
 
     describe "show_details" do
-      it "does a thing" do
+      it "returns a table for a selected user" do
         @workspace.select_user("v.jansen.martin")
         expect(@workspace.show_details).must_be_kind_of Terminal::Table
       end
-      # tests for show_details here
+
+      it "returns a table for a selected channel" do
+        @workspace.select_channel("general")
+        expect(@workspace.show_details).must_be_kind_of Terminal::Table
+      end
     end
 
     describe "send_message" do
@@ -75,6 +79,15 @@ describe "Workspace class" do
           @workspace.selected = @workspace.users[2]
           response = @workspace.send_message("This goes to a user!")
           expect(response).must_equal true
+        end
+      end
+
+      it "raises an exception if text is empty" do
+        VCR.use_cassette("send_empty_message") do
+          @workspace.selected = @workspace.users[2]
+          exception = expect {
+            @workspace.send_message("")
+          }.must_raise Slack::SlackApiError
         end
       end
 
