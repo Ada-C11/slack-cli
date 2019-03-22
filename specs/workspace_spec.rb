@@ -19,10 +19,6 @@ describe "instance methods" do
   before do
     VCR.use_cassette("slack_workspace") do
       @workspace = Workspace.new
-      @user = User.new("123", "usertest", "mr.usertest")
-      # (slack_id, name, real_name)
-      @channel = User.new("456", "channeltest", "testing", "100")
-      # (slack_id, name, topic, member_count)
     end
   end
 
@@ -35,8 +31,8 @@ describe "instance methods" do
 
   it "returns a user object from select_user" do
     VCR.use_cassette("slack_workspace") do
-      expect(@workspace.select_user("usertest")).must_be_kind_of User
-      expect(@workspace.select_user("123")).must_be_kind_of User
+      expect(@workspace.select_user("grace.m.shea")).must_be_kind_of User
+      # expect(@workspace.select_user("123")).must_be_kind_of User
     end
   end
 
@@ -49,14 +45,14 @@ describe "instance methods" do
 
   it "returns a channel object from select_channel" do
     VCR.use_cassette("slack_workspace") do
-      expect(@workspace.select_channel("channel_test")).must_be_kind_of Channel
-      expect(@workspace.select_channel("456")).must_be_kind_of Channel
+      expect(@workspace.select_channel("random")).must_be_kind_of Channel
+      # expect(@workspace.select_channel("456")).must_be_kind_of Channel
     end
   end
 
   # it "returns channel details from show_details" do
   #   VCR.use_cassette("slack_workspace") do
-  #     @workspace.select_channel("channel_test")
+  #     @workspace.select_channel("random")
   #     expect(@workspace.show_details).must_be_kind_of String
 
   #     @workspace.select_channel("456")
