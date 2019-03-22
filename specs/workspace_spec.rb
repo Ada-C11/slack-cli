@@ -25,16 +25,14 @@ describe "Workspace class" do
     end
   end
 
-  describe "Workspace#Select_channel" do
+  describe "Workspace#Select_recipient" do
     it "will set the selected variable to input channel and returns true" do
-      expect(@workspace.select_channel(channel: @workspace.channels[1])).must_equal true
+      expect(@workspace.select_recipient(recipient: @workspace.channels[1])).must_equal true
       expect(@workspace.selected).must_equal @workspace.channels[1]
     end
-  end
 
-  describe "Workspace#Select_user" do
-    it "will set the selected variable to input user" do
-      @workspace.select_user(user: @workspace.users[1])
+    it "will set the selected variable to input user and returns true" do
+      @workspace.select_recipient(recipient: @workspace.users[1])
       expect(@workspace.selected).must_equal @workspace.users[1]
     end
   end
@@ -73,7 +71,7 @@ describe "Workspace class" do
   describe "Workspace#send_message" do
     it "will return true if post succesful" do
       VCR.use_cassette("slack_api") do
-        @workspace.select_channel(channel: @workspace.channels[1])
+        @workspace.select_recipient(recipient: @workspace.channels[1])
         expect(@workspace.send_message(text: "Something new to test!")).must_equal true
       end
     end
@@ -81,7 +79,7 @@ describe "Workspace class" do
     it "will return false if post is unsuccessful" do
       VCR.use_cassette("slack_api") do
         expect(@workspace.send_message(text: "Something new to test!")).must_equal false
-        @workspace.select_channel(channel: @workspace.channels[1])
+        @workspace.select_recipient(recipient: @workspace.channels[1])
         expect(@workspace.send_message(text: "")).must_equal false
       end
     end
@@ -93,7 +91,7 @@ describe "Workspace class" do
     end
 
     it "will return string details of selected object if valid" do
-      @workspace.select_channel(channel: @workspace.channels[1])
+      @workspace.select_recipient(recipient: @workspace.channels[1])
       expect(@workspace.details_for_selected).must_equal "Name: general, \nID: CH2P3NB0T, \nTopic: Company-wide announcements and work-based matters, \nMember Count: 2"
     end
 

@@ -34,7 +34,12 @@ def main
     when "SELECT USER"
       print "Please enter user's name, real name or id: "
       input = gets.chomp.upcase
-      if workspace.find_user(input: input)
+      user = workspace.find_user(input: input)
+      if user
+        workspace.select_recipient(recipient: user)
+        puts "Currently, selected recipient is #{user.name}.\n\n"
+      else
+        puts "#{input.capitalize} is not a valid user.\n\n"
       end
     when "SELECT CHANNEL"
     when "DETAILS"
