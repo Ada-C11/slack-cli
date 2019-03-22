@@ -7,15 +7,15 @@ module Slack
       @name = name
     end
 
-    def send_message(message)
+    def post_message(message)
       url = "https://slack.com/api/chat.postMessage"
       params = {
         token: ENV["KEY"],
-        channel: recipient_identifier,
+        channel: @slack_id || @name,
         text: message,
       }
 
-      message_request = HTTParty.post(URL, query: params)
+      message_request = HTTParty.post(url, query: params)
       if message_request["ok"] == false
         raise ArgumentError, "Request is unsuccessful"
       else

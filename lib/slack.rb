@@ -29,11 +29,20 @@ def main
       if selected_channel.nil?
         puts "This channel doesn't exist. Exiting to main menu"
       else
-        puts "You have selected #{selected_channel.name}. Please type 'details' for more info or quit!"
+        puts "You have selected #{selected_channel.name}. What would you like to do: details, send message, or quit"
         answer = gets.chomp.downcase
         case answer
         when "details"
           puts Slack::Workspace.selected_channel_details(selected_channel)
+        when "send message"
+          puts "Type message: "
+          message = gets.chomp
+          if message == ""
+            puts "Can't send a blank message. \nType message :"
+            message = gets.chomp
+          else
+            Slack::Recipient.new(selected_channel.slack_id, selected_channel.name).post_message(message)
+          end
         when "quit"
         else
           puts "Please select a valid input. Returning to main!"
@@ -48,11 +57,20 @@ def main
       if selected_user.nil?
         puts "This user doesn't exist. Exiting to main menu"
       else
-        puts "You have selected #{selected_user.name}. Please type 'details' for more info or quit!"
+        puts "You have selected #{selected_user.name}. What would you like to do: details, send message, or quit"
         answer = gets.chomp.downcase
         case answer
         when "details"
-          puts puts Slack::Workspace.selected_user_details(selected_user)
+          puts Slack::Workspace.selected_user_details(selected_user)
+        when "send message"
+          puts "Type message: "
+          message = gets.chomp
+          if message == ""
+            puts "Can't send a blank message. \nType message :"
+            message = gets.chomp
+          else
+            Slack::Recipient.new(selected_user.slack_id, selected_user.name).post_message(message)
+          end
         when "quit"
         else
           puts "Please select a valid input. Returning to main!"

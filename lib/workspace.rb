@@ -66,8 +66,5 @@ module Slack
     def self.selected_user_details(chosen_user)
       details = "User ID: #{chosen_user.slack_id}: \nReal name: #{chosen_user.real_name} \nDisplay name: #{chosen_user.name}."
     end
-
-    def post_message_to(recipient_id)
-    end
   end
 end
