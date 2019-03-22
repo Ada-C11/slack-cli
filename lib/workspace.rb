@@ -8,7 +8,7 @@ class Workspace
   attr_reader :user, :channel
   attr_accessor :selected
 
-  # class SlackApiError < StandardError; end
+  class SlackApiError < StandardError; end
 
   def select_channel(selected)
     selected
@@ -41,7 +41,7 @@ class Workspace
     end
 
     if selected == ""
-      raise ArgumentError, "No user of channel was selected!"
+      raise SlackApiError, "No user of channel was selected!"
     end
   end
 end

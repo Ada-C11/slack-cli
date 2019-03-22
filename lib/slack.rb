@@ -30,10 +30,10 @@ def main
   puts ""
   puts "Please choose one of the the following options"
   display_options
-  selection = gets.chomp
-  until selection == "Quit"
+  selection = gets.chomp.downcase
+  until selection == "quit"
     case selection
-    when "List Users"
+    when "list users"
       puts "Here is the list of users and their details:"
       User.list.each do |user|
         puts "Username: #{user[0]}"
@@ -43,8 +43,8 @@ def main
       end
       puts "What would you like to do next? "
       display_options
-      selection = gets.chomp
-    when "List Channels"
+      selection = gets.chomp.downcase
+    when "list channels"
       puts "Here is the list of channels and their details: "
       Channel.list.each do |channel|
         puts "Name: #{channel[0]}"
@@ -55,37 +55,45 @@ def main
       end
       puts "What would you like to do next? "
       display_options
-      selection = gets.chomp
-    when "Select User"
+      selection = gets.chomp.downcase
+    when "select user"
       puts "Here are all the members' user names: #{user_name}"
-      chose = gets.chomp #chose_user
+      chose = gets.chomp.downcase #chose_user
       workspace = Workspace.new
       details = workspace.select_user(chose)
       puts "You just selected #{details}"
       puts "What would you like to do next? "
       display_options
-      selection = gets.chomp
-    when "Select Channel"
+      selection = gets.chomp.downcase
+    when "select channel"
       puts "Here are all the channels' names: #{channel_name}"
-      chose = gets.chomp #chose_channel
+      chose = gets.chomp.downcase #chose_channel
       workspace = Workspace.new
       details = workspace.select_channel(chose)
       puts "You just selected #{details}"
       puts "What would you like to do next? "
       display_options
-      selection = gets.chomp
-    when "Details"
-      puts workspace.show_details(details)
+      selection = gets.chomp.downcase
+    when "details"
+      if details == nil
+        puts "You must select user or channel first."
+      else
+        puts workspace.show_details(details)
+      end
       puts "What would you like to do next? "
-      selection = gets.chomp
-    when "Send Message"
-      puts "Please input your message:"
-      message = gets.chomp
+      selection = gets.chomp.downcase
+    when "send message"
+      if details == nil
+        puts "You must select user or channel first."
+      else
+        puts "Please input your message:"
+        message = gets.chomp.downcase
 
-      SlackApi.send_message(message, chose)
+        SlackApi.send_message(message, chose)
+      end
       puts "What would you like to do next? "
       display_options
-      selection = gets.chomp
+      selection = gets.chomp.downcase
     end
   end
 

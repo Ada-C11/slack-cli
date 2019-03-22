@@ -14,15 +14,11 @@ describe "show details method" do
 
   it "raises SlackApiError if list is nil" do
     VCR.use_cassette("slack_channels") do
-      #   response = test_channel.get_channel
       User.list
       test_workspace = Workspace.new
       test_workspace.select_user("")
 
-      expect { test_workspace.show_details(test_workspace.select_user("")) }.must_raise ArgumentError
+      expect { test_workspace.show_details(test_workspace.select_user("")) }.must_raise Workspace::SlackApiError
     end
   end
-
-  # edge cases, what if the list is 0?
-  # argument error, this user/channel does not exist.
 end

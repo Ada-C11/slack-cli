@@ -14,23 +14,19 @@ describe SlackApi do
 
   it "generates an error if given an invalid channel" do
     VCR.use_cassette("slack_message") do
-      # return_value = SlackApi.send_message("Test message",
-      #  "bogus")
-      puts "TESTING SOMETHIND #{SlackApi.send_message("Test message",
-                                                      "bogus")}"
       expect {
         SlackApi.send_message("Test message",
                               "bogus")
-      }.must_raise SlackApi::ArgumentError
+      }.must_raise ArgumentError
     end
   end
 
-  it "will generate an error if given an invalid key" do
-    VCR.use_cassette("slack_message") do
-    end
-  end
   it "will raise an error if given an empty message" do
     VCR.use_cassette("slack_message") do
+      expect {
+        SlackApi.send_message("",
+                              "angela.ohh")
+      }.must_raise SlackApi::SlackApiError
     end
   end
 end

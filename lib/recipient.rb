@@ -10,11 +10,11 @@ module SlackApi
   BASE_URL = "https://slack.com/api/chat.postMessage"
   SLACK_TOKEN = ENV["SLACK_TOKEN"]
 
-  # class SlackApiError < StandardError; end
+  class SlackApiError < StandardError; end
 
   def self.send_message(message, user)
-    user_name = User.list.map do |user|
-      user[0]
+    user_name = User.list.map do |user_list|
+      user_list[0]
     end
     # array of all channel names
     channel_name = Channel.list.map do |channel|
@@ -23,9 +23,9 @@ module SlackApi
 
     #### TODO: CHANGE VARIABLE NAME
     practice = []
-    User.list.each do |user_name|
-      if user_name[0] == user
-        practice << user_name[2]
+    User.list.each do |user_name_list|
+      if user_name_list[0] == user
+        practice << user_name_list[2]
       end
     end
 
@@ -52,12 +52,14 @@ module SlackApi
           as_user: true,
         },
       )
+    else
+      raise ArgumentError, "The input #{user} is not included in our channels."
     end
 
     if response["ok"]
       return true
     else
-      raise SlackApi::ArgumentError, "Error when posting #{message} to #{user}, error: #{response["error"]}"
+      raise SlackApiError, "Error when posting #{message} to #{user}, error: #{response["error"]}"
     end
   end
 end
