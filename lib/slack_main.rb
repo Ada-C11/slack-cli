@@ -80,15 +80,18 @@ def main
         workspace.select_channel(identifier)
       end
 
-      unless workspace.selected == nil
+      unless workspace.selected.nil?
         puts "You've selected: #{workspace.selected.name}"
       else
         puts "Whoops!  User or channel not found.  Please try again."
       end
     elsif selection == "5"
-      workspace.show_details
-    else
-      puts "\nInvalid entry.  Please try again!"
+      if workspace.selected.nil?
+        puts "Whoops! You must select a user or channel first"
+      else
+        workspace.show_details
+      end
+    else puts "\nInvalid entry.  Please try again!"
     end
 
     selection = menu

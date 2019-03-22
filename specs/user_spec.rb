@@ -18,7 +18,7 @@ describe "User class" do
   end
 
   it "can retrieve details of a specific user" do
-    expect (@response[0].details).must_be_kind_of String
+    expect (@response[0].details).must_be_kind_of Hash
   end
 
   describe "send_message to user" do
