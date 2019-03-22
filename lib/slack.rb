@@ -18,10 +18,10 @@ def get_user_options_input(options)
   return input
 end
 
-def get_user_input
+def get_user_input(message_to_user)
   input = gets.chomp.to_s.strip
-  unless input.length > 0
-    puts "Please enter an ID or name"
+  until input.length > 0
+    puts message_to_user
     input = gets.chomp.to_s.strip
   end
   return input
@@ -53,7 +53,7 @@ def main
       tp workspace.list_channels
     when "select user"
       puts "Please enter a user ID or user name"
-      input = get_user_input
+      input = get_user_input("Please enter an ID or name")
       selected = workspace.select_user(input)
       puts "Sorry, no user with that information" if selected == nil
     when "select channel"
@@ -68,8 +68,8 @@ def main
         puts "A recipient needs to be selected first"
       else
         puts "Enter the message you would like to send: "
-        message = gets.chomp.to_s.strip
-        workspace.send_message(message)
+        message_to_send = get_user_input("Message must be at least one character")
+        workspace.send_message(message_to_send)
       end
     when "quit"
       puts "Goodbye!"
