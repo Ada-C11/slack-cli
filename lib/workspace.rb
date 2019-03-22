@@ -29,8 +29,17 @@ class Workspace
     return channel_selected
   end
 
-  def show_details
-    user = select_user
-    user.details #need to change details so that this produces a hash and can be pretty printed out here
+  def send_message(message, recipient)
+    params = {}
+    params[:text] = message
+    params[:channel] = recipient.slack_id
+    p recipient.slack_id
+    # params[:as_user] = true
+    recipient.send_message(params)
   end
+
+  #   def show_details
+  #     user = select_user
+  #     user.details #need to change details so that this produces a hash and can be pretty printed out here
+  #   end
 end

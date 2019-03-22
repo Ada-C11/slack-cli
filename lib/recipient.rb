@@ -12,6 +12,13 @@ class Recipient
     @name = name
   end
 
+  def send_message(params)
+    endpoint = "chat.postMessage"
+    url = BASE_URL + endpoint
+    params[:token] = ENV["SLACK_API_TOKEN"]
+    response = HTTParty.post(url, body: params)
+  end
+
   private
 
   def self.get(endpoint, params = {})
