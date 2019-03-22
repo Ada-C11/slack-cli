@@ -24,7 +24,9 @@ def menu
   puts "\nMENU"
   puts "1. List users"
   puts "2. List channels"
-  puts "3. Quit"
+  puts "3. Select user"
+  puts "4. Select channel"
+  puts "5. Quit"
 
   input = ask("What do you want to do?")
   return input
@@ -44,19 +46,19 @@ def main
 
   selection = menu
 
-  until selection == "3"
+  until selection == "5"
     if selection == "1"
       users = Slack::User.list
       puts "\nHere are the users:"
       users.each_with_index do |user, i|
-        puts "#{i + 1}. name:#{user.real_name} --status:#{user.status_text} --emoji:#{user.status_emoji}"
+        puts "#{i + 1}. name:#{user.real_name} --status:#{user.status_text} --emoji:#{user.status_emoji}--slack_id:#{user.slack_id}--username:#{user.name}"
       end
 
     elsif selection == "2"
       channels = Slack::Channel.list
       puts "\nHere are the channels:"
       channels.each_with_index do |channel, i|
-        puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.id}"
+        puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.slack_id}"
       end
     else
       puts "\nInvalid entry.  Please try again!"
