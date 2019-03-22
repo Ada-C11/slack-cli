@@ -17,8 +17,10 @@ describe "show details method" do
       User.list
       test_workspace = Workspace.new
       test_workspace.select_user("")
+      test_workspace.select_channel("")
 
       expect { test_workspace.show_details(test_workspace.select_user("")) }.must_raise Workspace::SlackApiError
+      expect { test_workspace.show_details(test_workspace.select_channel("")) }.must_raise Workspace::SlackApiError
     end
   end
 end

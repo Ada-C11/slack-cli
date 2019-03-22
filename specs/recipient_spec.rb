@@ -8,7 +8,10 @@ describe SlackApi do
       return_value = SlackApi.send_message("It's gonna work!",
                                            "marshallscm")
 
+      return_value2 = SlackApi.send_message("It's gonna work!",
+                                            "everyone")
       expect(return_value).must_equal true
+      expect(return_value2).must_equal true
     end
   end
 
