@@ -1,6 +1,6 @@
 module SlackBot
   class Channel < Recipient
-    CHANNEL_PATH_URL = "channels.list?"
+    PATH_URL = "channels.list?"
     #   TOKEN = ENV["TOKEN"]
     attr_reader :num_members, :name, :id
 
@@ -11,8 +11,7 @@ module SlackBot
     end
 
     def self.list
-      query_parameters = { token: TOKEN }
-      response = HTTParty.get("#{BASE_URL}#{CHANNEL_PATH_URL}", query: query_parameters)
+      response = get(PATH_URL)
       unless response.code == 200 && response.parsed_response["ok"]
         raise SlackApiError, "Error when listing channels, error: #{response.parsed_response["error"]}"
       end

@@ -18,6 +18,12 @@ module SlackBot
       raise NotImplementedError
     end
 
+    def self.get(path_url)
+      query_parameters = { token: TOKEN }
+      response = HTTParty.get("#{BASE_URL}#{path_url}", query: query_parameters)
+      return response
+    end
+
     def send_message(message)
       body = {
         text: message,

@@ -4,7 +4,7 @@ module SlackBot
   # class SlackApiError < StandardError; end
 
   class User < Recipient
-    USER_PATH_URL = "users.list?"
+    PATH_URL = "users.list?"
     # TOKEN = ENV["TOKEN"]
     attr_reader :real_name, :name, :id
 
@@ -15,8 +15,7 @@ module SlackBot
     end
 
     def self.list
-      query_parameters = { token: TOKEN }
-      response = HTTParty.get("#{BASE_URL}#{USER_PATH_URL}", query: query_parameters)
+      response = get(PATH_URL)
       unless response.code == 200 && response.parsed_response["ok"]
         raise SlackApiError, "Error when listing users, error: #{response.parsed_response["error"]}"
       end
