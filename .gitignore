@@ -54,3 +54,7 @@ build-iPhoneSimulator/
 
 # Ignore cassette files
 /specs/cassettes/
+
+# Ignore test file
+test.rb
+
