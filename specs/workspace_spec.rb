@@ -22,12 +22,12 @@ describe "instance methods" do
     end
   end
 
-  # it "returns text from print_details" do
-  #   VCR.use_cassette("slack_workspace") do
-  #     expect(@workspace.print_details("users")).must_be_kind_of Array
-  #     expect(@workspace.print_details("channels")).must_be_kind_of Array
-  #   end
-  # end
+  it "returns text from print_details" do
+    VCR.use_cassette("slack_workspace") do
+      expect(@workspace.print_details("users")).must_be_kind_of Array
+      expect(@workspace.print_details("channels")).must_be_kind_of Array
+    end
+  end
 
   it "returns a user object from select_user" do
     VCR.use_cassette("slack_workspace") do
@@ -36,12 +36,12 @@ describe "instance methods" do
     end
   end
 
-  # it "returns text from print_details" do
-  #   VCR.use_cassette("slack_workspace") do
-  #     expect(@workspace.print_details("users")).must_be_kind_of String
-  #     expect(@workspace.print_details("channels")).must_be_kind_of String
-  #   end
-  # end
+  it "returns text from print_details" do
+    VCR.use_cassette("slack_workspace") do
+      expect(@workspace.print_details("users")).must_be_kind_of Array
+      expect(@workspace.print_details("channels")).must_be_kind_of Array
+    end
+  end
 
   it "returns a channel object from select_channel" do
     VCR.use_cassette("slack_workspace") do
@@ -50,25 +50,25 @@ describe "instance methods" do
     end
   end
 
-  # it "returns channel details from show_details" do
-  #   VCR.use_cassette("slack_workspace") do
-  #     @workspace.select_channel("random")
-  #     expect(@workspace.show_details).must_be_kind_of String
+  it "returns channel details from show_details" do
+    VCR.use_cassette("slack_workspace") do
+      @workspace.select_channel("random")
+      expect(@workspace.show_details).must_be_kind_of String
 
-  #     @workspace.select_channel("456")
-  #     expect(@workspace.show_details).must_be_kind_of String
-  #   end
-  # end
+      @workspace.select_channel("random")
+      expect(@workspace.show_details).must_be_kind_of String
+    end
+  end
 
-  # it "returns user details from show_details" do
-  #   VCR.use_cassette("slack_workspace") do
-  #     @workspace.select_user("test")
-  #     expect(@workspace.show_details).must_be_kind_of String
+  it "returns user details from show_details" do
+    VCR.use_cassette("slack_workspace") do
+      @workspace.select_user("test")
+      expect(@workspace.show_details).must_be_kind_of String
 
-  #     @workspace.select_user("test")
-  #     expect(@workspace.show_details).must_be_kind_of String
-  #   end
-  # end
+      @workspace.select_user("test")
+      expect(@workspace.show_details).must_be_kind_of String
+    end
+  end
 end
 
 # describe "post message to slack" do

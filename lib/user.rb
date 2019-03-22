@@ -32,7 +32,7 @@ class User < Recipient
     return members_list
   end
 
-  def detail
+  def details
     return "#{real_name}, slack user name: #{name}, slack_id: #{slack_id}"
   end
 end

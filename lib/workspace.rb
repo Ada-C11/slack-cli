@@ -25,10 +25,12 @@ class Workspace
     @selected = selected.first
   end
 
+  # used to show details for one user or channel
   def show_details
     return @selected.details
   end
 
+  # used to show details for all users or all channels
   def print_details(recipients)
     if recipients == "users"
       return_array = []
