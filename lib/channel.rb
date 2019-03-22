@@ -10,14 +10,19 @@ module SlackApi
     def initialize(raw_channel)
     end
 
-    def self.channel_api
-      url = "https://slack.com/api/channels.list"
-      key = ENV["SLACK_API_TOKEN"]
+    url = "https://slack.com/api/channels.list"
+    key = ENV["SLACK_API_TOKEN"]
+
+    def self.channel_api(url, key)
       parameters = { 'token': key }
       response = HTTParty.get(url, query: parameters).to_s
       response = JSON.parse(response)
 
-      return response["channels"]
+      if response["ok"] == true
+        return response["channels"]
+      else
+        raise SlackApi::SlackError, "Error with Channel API: #{response["error"]}"
+      end
     end
 
     def self.list(channels_list)

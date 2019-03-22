@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
-# require "dotenv"
-# require "httparty"
+
 require_relative "user"
 require_relative "channel"
 require_relative "workspace"
@@ -8,8 +7,6 @@ require_relative "workspace"
 Dotenv.load
 
 def main
-  # channels_list = SlackApi::Channel.channel_api
-  # users_list = SlackApi::User.user_api
   workspace = SlackApi::Workspace.new
 
   user_options = "list users\nlist channels\nselect user\nselect channel\ndetails\nsend message\nquit"

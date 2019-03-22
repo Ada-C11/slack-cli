@@ -7,14 +7,19 @@ module SlackApi
   class SlackError < StandardError; end
 
   class User #< Recipient
-    def self.user_api
-      url = "https://slack.com/api/users.list"
-      key = ENV["SLACK_API_TOKEN"]
-      parameters = {'token': key}
+    url = "https://slack.com/api/users.list"
+    key = ENV["SLACK_API_TOKEN"]
+
+    def self.user_api(url, key)
+      parameters = { 'token': key }
       response = HTTParty.get(url, query: parameters).to_s
       response = JSON.parse(response)
 
-      return response["members"]
+      if response["ok"] == true
+        return response["members"]
+      else
+        raise SlackApi::SlackError, "Error with User API: #{response["error"]}"
+      end
     end
 
     def self.list(users_list)

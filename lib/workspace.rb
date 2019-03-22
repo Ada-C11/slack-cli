@@ -13,8 +13,8 @@ module SlackApi
     attr_reader :channels, :users
 
     def initialize
-      @users = SlackApi::User.user_api
-      @channels = SlackApi::Channel.channel_api
+      @users = SlackApi::User.user_api("https://slack.com/api/users.list", ENV["SLACK_API_TOKEN"])
+      @channels = SlackApi::Channel.channel_api("https://slack.com/api/channels.list", ENV["SLACK_API_TOKEN"])
       @selected = ""
     end
 
@@ -60,7 +60,7 @@ module SlackApi
       if @channels.include?(@selected) || @users.include?(@selected)
         response = HTTParty.post(
           url,
-          headers: {"Content-Type" => "application/x-www-form-urlencoded"},
+          headers: { "Content-Type" => "application/x-www-form-urlencoded" },
           body: {
             token: key,
             text: message,
