@@ -59,7 +59,7 @@ def main
     elsif response == "send message"
       puts "What would you like to say?"
       text = gets.chomp
-      msg = SlackAPI::User.new.send_msg(selected_recipient, text)
+      msg = SlackAPI::Recipient.new.send_msg(selected_recipient, text)
       puts ask_again
       response = gets.chomp
     end

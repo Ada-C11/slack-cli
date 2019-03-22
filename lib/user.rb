@@ -58,21 +58,5 @@ module SlackAPI
         end
       end
     end
-
-    def send_msg(recipient, text)
-      response = HTTParty.post("#{BASE_URL}chat.postMessage",
-                               headers: {"Content-Type" => "application/x-www-form-urlencoded"},
-                               body: {
-                                 token: ENV["SLACK_API_TOKEN"],
-                                 channel: recipient,
-                                 text: text,
-                               })
-
-      if response["ok"] == false
-        raise SlackAPI::SlackError, "Error when posting #{text} to #{recipient}, error #{response["error"]}"
-      else
-        return true
-      end
-    end
   end # end of class
 end # end of module
