@@ -47,7 +47,9 @@ class Workspace
     return "name: #{x.name} | topic: #{x.topic} | Slack id: #{x.slack_id}"
   end
   
-  def send_message
+  def send_message(name, message)
+    x = select_channel(name)
+    
   end
 end
 

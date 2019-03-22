@@ -73,6 +73,9 @@ def see_details_menu
     end
 end
 
+def send_message_menu
+end
+
 def select_menu
   puts "What would like to do with the selected recipient? \n
         1. see details \n
