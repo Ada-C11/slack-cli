@@ -16,6 +16,12 @@ describe "Workspace class" do
 end
 
 describe "instance methods" do
+  before do
+    VCR.use_cassette("slack_workspace") do
+      @workspace = Workspace.new
+    end
+  end
+
   it "returns text from print_details" do
     VCR.use_cassette("slack_workspace") do
       expect(@workspace.print_details("users")).must_be_kind_of Array
@@ -66,6 +72,12 @@ describe "instance methods" do
 end
 
 describe "post message to slack" do
+  before do
+    VCR.use_cassette("slack_workspace") do
+      @workspace = Workspace.new
+    end
+  end
+
   it "creates sends a message to a recipient" do
     VCR.use_cassette("slack-posts") do
       @workspace.select_channel("random")
