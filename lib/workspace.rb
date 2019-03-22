@@ -25,6 +25,7 @@ module Slack
     end
 
     def show_details
+      puts @selected.details
     end
 
     def send_message

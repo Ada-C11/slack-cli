@@ -26,7 +26,8 @@ def menu
   puts "2. List channels"
   puts "3. Select user"
   puts "4. Select channel"
-  puts "5. Quit"
+  puts "5. Details (on selected user/channel)"
+  puts "6. Quit"
 
   input = ask("What do you want to do?")
   return input
@@ -43,7 +44,7 @@ def main
 
   selection = menu
 
-  until selection == "5"
+  until selection == "6"
     if selection == "1"
       puts "\nHere are the users:"
       workspace.users.each_with_index do |user, i|
@@ -64,6 +65,8 @@ def main
         workspace.select_channel(slack_id)
         puts "You've selected this channel: #{workspace.selected.name}"
       end
+    elsif selection == "5"
+      workspace.show_details
     else
       puts "\nInvalid entry.  Please try again!"
     end
