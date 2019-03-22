@@ -1,4 +1,6 @@
 require_relative "test_helper"
+CHANNEL_URL = "https://slack.com/api/channels.list"
+KEY = ENV["SLACK_API_TOKEN"]
 
 describe "Channel" do
   let (:channel_data) do
@@ -28,16 +30,15 @@ describe "Channel" do
       channel_data[:members]
     )
 
-    expect(new_channel.id).must_equal channel_data[:id]
-    expect(new_channel.name).must_equal channel_data[:channel_name]
-    expect(new_channel.topic).must_equal channel_data[:topic]
-    expect(new_channel.members).must_equal channel_data[:members]
+    expect(new_channel.id).must_equal(channel_data[:id])
+    expect(new_channel.name).must_equal(channel_data[:channel_name])
+    expect(new_channel.topic).must_equal(channel_data[:topic])
+    expect(new_channel.members).must_equal(channel_data[:members])
   end
 
   it "loads arrays of channels from Slack's API" do
     VCR.use_cassette("list_channels") do
-      param = ENV["SLACK_API_TOKEN"]
-      channels = SlackCLI::Channel.list("https://slack.com/api/channels.list", param)
+      channels = SlackCLI::Channel.list(CHANNEL_URL, KEY)
       expect(channels).must_be_instance_of Array
       channels.each do |channel|
         expect(channel).must_be_instance_of SlackCLI::Channel

@@ -102,5 +102,4 @@ module SlackCLI
     end
   end
 end
-
 SlackCLI::Main.main if $PROGRAM_NAME == __FILE__

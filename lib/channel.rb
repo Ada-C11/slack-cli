@@ -6,7 +6,7 @@ Dotenv.load
 
 module SlackCLI
   class Channel < Recipient
-    BASE_URL = "https://slack.com/api/channels.list".freeze
+    URL = "https://slack.com/api/channels.list".freeze
 
     attr_reader :topic, :members
 
@@ -24,18 +24,16 @@ module SlackCLI
 
     def self.list(url, param)
       response = self.get(url, param)
-    if response["ok"]
-      channels = response["channels"].map do |channel|
+      raise StandardError, "Error #{response.code} : #{response['message']}" if response["ok"].nil?
+      formatted_list = []
+      channels = response["channels"].each do |channel|
         slack_id = channel["id"]
         channel_name = channel["name"]
         topic = channel["topic"]["value"]
         members = channel["members"].length
-        self.new(slack_id, channel_name, topic, members)
+        formatted_list << self.new(slack_id, channel_name, topic, members)
       end
-      channels
-    else
-      raise SlackApiError, "Error #{response.code} : #{response['message']}"
-    end
+      formatted_list
     end
 
   def self.display
