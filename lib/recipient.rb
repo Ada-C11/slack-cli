@@ -14,6 +14,7 @@ class Recipient
   end
 
   def self.list
+    raise NotImplementedError, "Implement me in a child class"
   end
 
   private
