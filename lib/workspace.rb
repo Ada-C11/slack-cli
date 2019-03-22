@@ -1,4 +1,5 @@
 require "pry"
+require "json"
 
 require_relative "user"
 require_relative "channel"
@@ -43,6 +44,11 @@ class Workspace
       end
     end
     return return_array
+  end
+
+  def update_settings(name, emoji)
+    json_hash = { "username" => name,
+                  "icon_emoji" => emoji }
   end
 
   def send_message(text)

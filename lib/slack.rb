@@ -7,7 +7,7 @@ def main
   workspace = Workspace.new
   input = ""
   while input != "quit"
-    puts "Choose an option: \n list users \n list channels \n \n select user \n select channel \n details \n \n send message \n quit"
+    puts "Choose an option: \n list users \n list channels \n \n select user \n select channel \n details \n \n send message \n \n change settings \n quit"
     input = gets.chomp
     case input
     when "list users"
@@ -42,6 +42,12 @@ def main
         text = gets.chomp
         workspace.send_message(text)
       end
+    when "change settings"
+      print "Enter new username: "
+      name = gets.chomp
+      print "Enter new emoji: "
+      emoji = gets.chomp
+      workspace.update_settings(name, emoji)
     when "quit"
     else
       puts "Please select one of the options"
