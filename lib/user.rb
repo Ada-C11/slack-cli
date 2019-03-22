@@ -13,7 +13,6 @@ class User < Recipient
     @real_name = real_name
     @slack_id = slack_id
     @name = name
-
   end
 
   def self.list
@@ -33,14 +32,13 @@ class User < Recipient
     end
     return members_list
   end
+
   def detail
     return "#{real_name}, slack user name: #{name}, slack_id: #{slack_id}"
   end
-
-
 end
 
- puts User.list
+#  puts User.list
 # puts User.list[0]
 # #puts User.list
 #  puts User.list["members"][0]["id"]
