@@ -1,7 +1,6 @@
 require "httparty"
 require "dotenv"
-require "awesome_print"
-require "pry"
+require "awesome_print" 
 require_relative "channel"
 require_relative "user"
 
@@ -41,11 +40,11 @@ def main
       chosen_user = Slack::User.select_user(name_or_id)
       ap chosen_user
 
-      puts "Show additional details? (Y/N)"
+      puts "Show additional details for #{name_or_id}? (Y/N)"
       choice = gets.chomp.downcase
 
       if choice == "y"
-        puts "no method yet"
+        ap chosen_user.show_details(name_or_id)
         # call show_details method and puts ap it
       end
     when 4

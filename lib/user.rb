@@ -45,7 +45,7 @@ module Slack
       return users
     end
 
-    ap self.list_users
+    # ap self.list_users
 
     def self.select_user(name_or_id)
       user_data = get_user_data
@@ -72,6 +72,18 @@ module Slack
       end
 
       return chosen_user
+    end
+
+
+    def show_details(name_or_id)
+      user_details = User.select_user(name_or_id)
+
+      details = {
+        "Username" => user_details.username,
+        "Real Name" => user_details.real_name,
+        "Slack ID" => user_details.slack_id
+      }
+      return details
     end
   end # class
 end # module
