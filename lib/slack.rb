@@ -1,36 +1,63 @@
-!/usr/bin/env ruby
-require "httparty"
+#!/usr/bin/env ruby
+require_relative "workspace"
 
-# PURPOSE OF THIS FILE IS TO HOLD CLI PROMPTS
+def main
+  puts "Welcome to the Ada Slack CLI!"
 
-class Slack
-  def initialize
-  end
+  workspace = Workspace.new
+  input = ""
 
-  def main
-    puts "Welcome to the Ada Slack CLI!"
+  while input != "quit"
+    puts "Choose an option: 
+    \n 1. List users 
+    \n 2. List channels
+    \n 3. Select user 
+    \n 4. Select channel 
+    \n 5. Get details 
+    \n 6. Send message 
+    \n 7. Quit"
 
-    puts "Slack CLI Menu\n"
-    puts "1. List Users\n"
-    puts "2. List Channels\n"
-    puts "3. Quit\n"
-
-    loop do
-      puts "Please enter your selection from the above options."
-      input = gets.chomp.to_s
-      case
-      when input == "1"
-        puts users.list
-      when input == "2"
-        puts channels.list
-      when input == "3"
-        exit
-      when input =~ /[[:alpha:]]/
-        puts "\nYour request was invalid."
+    input = gets.chomp
+    case input
+    when "list users"
+      puts workspace.show_details("users")
+    when "list channels"
+      puts workspace.show_details("channels")
+    when "select user"
+      print "Enter the user name or Slack ID: "
+      input_user = gets.chomp
+      workspace.select_user(input_user)
+      if workspace.selected == nil
+        puts "User not found"
       end
+    when "select channel"
+      print "Enter the channel name or Slack ID: "
+      input_channel = gets.chomp
+      workspace.select_channel(input_channel)
+      if workspace.selected == nil
+        puts "Channel not found"
+      end
+    when "details"
+      if workspace.selected == nil
+        puts "Please select a user or channel."
+      else
+        puts workspace.show_details
+      end
+    when "send message"
+      if workspace.selected == nil
+        puts "Please select a user or channel."
+      else
+        print "Enter your message: "
+        text = gets.chomp
+        workspace.send_message(text)
+      end
+    when "quit"
+    else
+      puts "Please select a option from the menu."
     end
-
-   puts "Thank you for using the Ada Slack CLI"
   end
 
-  main if __FILE__ == $PROGRAM_NAME
+  puts "Thank you for using the Ada Slack CLI"
+end
+
+main if __FILE__ == $PROGRAM_NAME
