@@ -34,6 +34,7 @@ def list_options
   puts "Enter 'select user' to select a user"
   puts "Enter 'select channel' to select a channel"
   puts "Enter 'details' to display information about currently selected recipient"
+  puts "Enter 'send message' to send a message to selected recipient"
   puts "Enter 'quit' to quit"
 end
 
@@ -43,7 +44,7 @@ def main
 
   while true
     list_options
-    options = ["list users", "list channels", "select user", "select channel", "details", "quit"]
+    options = ["list users", "list channels", "select user", "select channel", "details", "send message", "quit"]
     choice = get_user_options_input(options)
     case choice
     when "list users"
@@ -62,6 +63,14 @@ def main
       puts "Sorry, no channel with that information" if selected == nil
     when "details"
       tp [selected.details]
+    when "send message"
+      if !workspace.selected
+        puts "A recipient needs to be selected first"
+      else
+        puts "Enter the message you would like to send: "
+        message = gets.chomp.to_s.strip
+        workspace.send_message(message)
+      end
     when "quit"
       puts "Goodbye!"
       exit
