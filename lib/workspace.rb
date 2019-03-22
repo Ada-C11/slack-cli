@@ -9,7 +9,7 @@ tp.set Channel, :channel_name, :id, :members, :topic
 Dotenv.load
 
 class Workspace
-  attr_accessor :selected, :selected, :users, :channels
+  attr_accessor :selected, :users, :channels
 
   def initialize
     @users = User.list
@@ -47,7 +47,18 @@ class Workspace
     tp @selected
   end
 
-  def self.send_message
-    # do a post request taking selected user as parameter
+  def send_message(message)
+    post_url = "https://slack.com/api/"
+    token = ENV["SLACK_API_TOKEN"]
+    response = HTTParty.post(
+      "#{post_url}/chat.postMessage",
+      body: {
+        token: token,
+        text: message,
+        channel: @selected.id,
+      },
+      headers: {"Content-Type" => "application/x-www-form-urlencoded"},
+    )
+    return response.code == 200 && response.parsed_response["ok"]
   end
 end
