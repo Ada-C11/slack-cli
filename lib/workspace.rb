@@ -8,6 +8,7 @@ Dotenv.load
 
 module Slack
   class ResponseError < StandardError; end
+
   class Workspace
     BASE_URL = "https://slack.com/api/users.list"
     attr_reader :users, :channels
@@ -18,8 +19,8 @@ module Slack
       @channels = Channel.list
       @selection = nil
     end
- 
-    def select_user(name_or_id) 
+
+    def select_user(name_or_id)
       users.each do |user|
         if name_or_id == user.name || name_or_id == user.slack_id || name_or_id == user.real_name
           @selection = user
@@ -30,27 +31,27 @@ module Slack
         return "Sorry, #{name_or_id} is not a valid user."
       end
     end
-    
+
     def select_channel(name_or_id)
       channels.each do |channel|
-        if name_or_id == channel.name || name_or_id == channel.slack_id 
+        if name_or_id == channel.name || name_or_id == channel.slack_id
           @selection = channel
         end
       end
-      return @selection
-      
+      # ap channels
       if @selection == nil
         return "Sorry, #{name_or_id} is not a valid channel."
       end
+      return @selection
     end
 
     def show_details
-      return @selection, @selection.channel_details
+      return @selection, @selection.details
       # if @selection == nil
       #   return false
-        # ap @selection, @selection.details
+      # ap @selection, @selection.details
       # end
-    end 
+    end
 
     def send_message(text)
       if @selection == nil
@@ -62,6 +63,6 @@ module Slack
       end
 
       return @selection.send_message(@selection.slack_id, text)
-    end  
+    end
   end
 end
