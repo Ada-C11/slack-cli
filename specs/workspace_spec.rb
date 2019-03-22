@@ -74,16 +74,16 @@ describe "Workspace" do
       selected = @workspace.select_channel("CH2P99HT6")
       expect(selected).must_equal nil
     end
-    it "returns nil if no user found with name given" do
+    it "returns nil if no channel found with name given" do
       selected = @workspace.select_channel("slack-bpi-project")
       expect(selected).must_equal nil
     end
-    it "returns a User object if given a valid user id" do
+    it "returns a Channel object if given a valid user id" do
       selected = @workspace.select_channel("CH2SL5C3C")
       expect(selected).must_be_kind_of SlackBot::Channel
       expect(selected.name).must_equal "everyone"
     end
-    it "returns a User object if given a valid name" do
+    it "returns a Channel object if given a valid name" do
       selected = @workspace.select_channel("random")
       expect(selected).must_be_kind_of SlackBot::Channel
       expect(selected.id).must_equal "CH2SL5DEW"
@@ -104,7 +104,7 @@ describe "Workspace" do
       VCR.use_cassette("send message with empty string") do
         message = ""
         expect {
-        @workspace.users.first.send_message(message)
+          @workspace.users.first.send_message(message)
         }.must_raise SlackBot::SlackApiError
       end
     end
@@ -112,7 +112,8 @@ describe "Workspace" do
     it "returns true if given a valid message and valid user/channel selected" do
       VCR.use_cassette("send message with empty string") do
         message = "Hello!"
-        expect(@workspace.users.first.send_message(message)).must_equal true
+        @workspace.select_user(@workspace.users.first.id)
+        expect(@workspace.send_message(message)).must_equal true
       end
     end
   end

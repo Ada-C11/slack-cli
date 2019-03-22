@@ -11,9 +11,7 @@ module SlackBot
 
     def self.list
       response = get(PATH_URL)
-      unless response.code == 200 && response.parsed_response["ok"]
-        raise SlackApiError, "Error when listing channels, error: #{response.parsed_response["error"]}"
-      end
+      check_response_code(response)
 
       channels_array = response["channels"].map do |channel|
         SlackBot::Channel.new(num_members: channel["num_members"], name: channel["name"], id: channel["id"])

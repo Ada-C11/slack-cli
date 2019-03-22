@@ -11,10 +11,11 @@ require_relative "../lib/workspace.rb"
 
 def get_user_options_input(options)
   input = gets.chomp.to_s.strip
-  unless options.include?(input)
+  until options.include?(input)
     puts "Please choose option from list"
     input = gets.chomp.to_s.strip
   end
+  puts "\n"
   return input
 end
 
@@ -24,18 +25,19 @@ def get_user_input(message_to_user)
     puts message_to_user
     input = gets.chomp.to_s.strip
   end
+  puts "\n"
   return input
 end
 
 def list_options
-  puts "Please choose from these options"
+  puts "\nPlease choose from these options:\n\n"
   puts "Enter 'list users' to view all users"
   puts "Enter 'list channels' to view all channels"
   puts "Enter 'select user' to select a user"
   puts "Enter 'select channel' to select a channel"
   puts "Enter 'details' to display information about currently selected recipient"
   puts "Enter 'send message' to send a message to selected recipient"
-  puts "Enter 'quit' to quit"
+  puts "Enter 'quit' to quit\n\n"
 end
 
 def main
@@ -52,7 +54,7 @@ def main
     when "list channels"
       tp workspace.list_channels
     when "select user"
-      puts "Please enter a user ID or user name"
+      puts "Please enter a user ID or user name:"
       input = get_user_input("Please enter an ID or name")
       selected = workspace.select_user(input)
       puts "Sorry, no user with that information" if selected == nil
@@ -62,7 +64,11 @@ def main
       selected = workspace.select_channel(input)
       puts "Sorry, no channel with that information" if selected == nil
     when "details"
-      tp [selected.details]
+      if workspace.selected
+        tp [selected.details]
+      else
+        puts "Please select a user or channel first"
+      end
     when "send message"
       if !workspace.selected
         puts "A recipient needs to be selected first"
@@ -70,6 +76,7 @@ def main
         puts "Enter the message you would like to send: "
         message_to_send = get_user_input("Message must be at least one character")
         workspace.send_message(message_to_send)
+        puts "Message sent!"
       end
     when "quit"
       puts "Goodbye!"
