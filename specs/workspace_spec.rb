@@ -92,4 +92,14 @@ describe "Workspace class" do
       expect(@workspace.details_for_selected).must_be_instance_of String
     end
   end
+
+  it "will return string details of selected object if valid" do
+    @workspace.select_channel(channel: @workspace.channels[1])
+    expect(@workspace.details_for_selected).must_equal "Name: general, \nID: CH2P3NB0T, \nTopic: Company-wide announcements and work-based matters, \nMember Count: 2"
+  end
+
+  it "will return empty string if selected object is nil" do
+    @workspace.select_channel(channel: @workspace.channels[1])
+    expect(@workspace.details_for_selected).must_equal ""
+  end
 end
