@@ -23,7 +23,6 @@ module Slack
 
     def self.list
       response = self.get(USER_URL, query: @query)
-      #   binding.pry
       users = response["members"].map do |user|
         id = user["id"]
         name = user["name"]

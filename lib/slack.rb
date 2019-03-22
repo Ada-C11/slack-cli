@@ -1,49 +1,35 @@
 #!/usr/bin/env ruby
 
-# implement details code
-# make a method
-# messages
-
 require_relative "workspace"
 require "table_print"
 
 def main
   workspace = Slack::Workspace.new
   puts "Welcome to the Ada Slack CLI! \n
-  There are #{workspace.channels.length} channels and #{workspace.users.length} users\n
-  What would you like to do?"
+  There are #{workspace.channels.length} channels and #{workspace.users.length} users\n"
 
-  commands = ["list users", "list channels", "select user", "select channel", "details", "quit"]
+  commands = ["list users", "list channels", "select user", "select channel", "details", "send message", "quit"]
 
-  puts "Here are your options:\n"
-  puts commands
+  while true
+    puts "\nWhat would you like to do?"
+    puts
+    puts commands
+    puts
+    input = gets.chomp.downcase
 
-  input = gets.chomp.downcase
-
-  until input == "quit"
     case input
     when "list users"
       tp workspace.users, :name, :slack_id, :real_name
-      puts "Great, what would you like to do next?"
-      input = gets.chomp.downcase
     when "list channels"
       tp workspace.channels, :name, :topic, :slack_id, :member_count
-      puts "Great, what would you like to do next?"
-      input = gets.chomp.downcase
     when "select user"
       puts "Please type in username or Slack ID"
       user = gets.chomp
       selected_user = workspace.select_user(user)
       if selected_user
         puts "You selected user #{selected_user.name}"
-        puts "What would you like to do next?"
-        puts commands
-        input = gets.chomp
       else
         puts "This user does not exist"
-        puts "What would you like to do next?"
-        puts commands
-        input = gets.chomp
       end
     when "select channel"
       puts "Please type in channel name or Slack ID"
@@ -51,31 +37,27 @@ def main
       selected_channel = workspace.select_channel(channel)
       if selected_channel
         puts "You selected the channel called \'#{selected_channel.name}\'"
-        puts "What would you like to do next?"
-        puts commands
-        input = gets.chomp
       else
         puts "This channel does not exist"
-        puts "What would you like to do next?"
-        puts commands
-        input = gets.chomp
       end
     when "details"
       if workspace.show_details == nil
         puts "No user or channel is selected"
-        puts "What would you like to do next?"
-        puts commands
-        input = gets.chomp
       else
         puts workspace.show_details
-        puts "What would you like to do next?"
-        puts commands
-        input = gets.chomp
       end
+    when "send message"
+      if workspace.selected == nil
+        puts "No user or channel selected. Try again"
+      else
+        puts "Write your message here"
+        message = gets.chomp
+        workspace.send_message(message)
+      end
+    when "quit"
+      break
     else
       puts "Command not valid. Please type one of the following"
-      puts commands
-      input = gets.chomp
     end
   end
 
