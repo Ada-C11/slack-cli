@@ -13,6 +13,3 @@ describe "Channel class" do
     end
   end
 end
-
-# members = response[0].members.count
-# expect(response.first.member_count).must_equal members
