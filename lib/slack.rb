@@ -9,20 +9,20 @@ def main
 
   while input != "quit"
     puts "Choose an option: 
-    \n 1. List users 
-    \n 2. List channels
-    \n 3. Select user 
-    \n 4. Select channel 
-    \n 5. Get details 
-    \n 6. Send message 
-    \n 7. Quit"
+    \n List users 
+    \n List channels
+    \n Select user 
+    \n Select channel 
+    \n Get details
+    \n Send message 
+    \n Quit"
 
-    input = gets.chomp
+    input = gets.chomp.downcase
     case input
     when "list users"
-      puts workspace.show_details("users")
+      puts workspace.print_details("users")
     when "list channels"
-      puts workspace.show_details("channels")
+      puts workspace.print_details("channels")
     when "select user"
       print "Enter the user name or Slack ID: "
       input_user = gets.chomp

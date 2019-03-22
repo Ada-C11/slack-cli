@@ -29,10 +29,10 @@ class Recipient
     response = HTTParty.get(url, query: params)
   end
 
-  def send_message(message, recipient)
+  def send_msg(message, deliver_to)
     params = {
       "token" => ENV["SLACK_API_TOKEN"],
-      "channel" => recipient,
+      "channel" => deliver_to,
       "text" => message,
       "as_user" => true,
     }
