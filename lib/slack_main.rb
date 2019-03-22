@@ -35,14 +35,11 @@ end
 def main
   puts "Welcome to the Ada Slack CLI!"
 
-  channels = Slack::Channel.list
+  workspace = Slack::Workspace.new
 
-  puts "\nHere's how many channels were loaded: #{channels.length}"
+  puts "\nHere's how many channels were loaded: #{workspace.channels.length}"
 
-  users = Slack::User.list
-
-  puts "\nHere's how many users were loaded: #{users.length}"
-
+  puts "\nHere's how many users were loaded: #{workspace.users.length}"
 
   selection = menu
 
@@ -53,7 +50,6 @@ def main
       users.each_with_index do |user, i|
         puts "#{i + 1}. name:#{user.real_name} --status:#{user.status_text} --emoji:#{user.status_emoji}--slack_id:#{user.slack_id}--username:#{user.name}"
       end
-
     elsif selection == "2"
       channels = Slack::Channel.list
       puts "\nHere are the channels:"
