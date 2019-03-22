@@ -15,7 +15,6 @@ describe "Workspace class" do
       VCR.use_cassette("select-user") do
         test1 = Workspace.new
           expect(test1.select_user("UH2SDTK2N")).must_be_instance_of User
-         binding.pry
           expect(test1.selected.name).must_equal "ksguadron"
        end
     end

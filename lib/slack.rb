@@ -20,11 +20,9 @@ current_session = Workspace.new
   puts "Choose your next adventure from the following options: \n
         1. list users \n
         2. list channels \n
-        3. select user \n
-        4. select channel \n
-        5. details \n
-        6. send message \n
-        7. quit"
+        3. see details \n
+        4. send message \n
+        5. quit"
         
   user_selection = gets.chomp.downcase
     case user_selection
@@ -34,10 +32,16 @@ current_session = Workspace.new
     when "2", "list channels" , "channels"
       current_session.channels.each { |channel| puts "name: #{channel.name} | topic: #{channel.topic["value"]} | member count: #{channel.member_count} | Slack ID: #{channel.slack_id}"}
       main
-    when "3", "select user", "user"
-      puts "Enter the user's username or Slack_ID"
-      user = gets.chomp
-      current_session.select_user(user)
+    when "3", "see details", "see", "details"
+      puts "Would you like to see details on a user or channel?"
+      puts "1. user"
+      puts "2. channel"
+      selection = gets.chomp.downcase
+      print "Enter the name of #{selection}: "
+      selection_name = gets.chomp.downcase
+        
+      puts current_session.show_details(recipient_type: selection, name: selection_name)
+      main
     when "4", "select channel", "channel"
       puts "Enter the channel name or Slack_ID"
       channel = gets.chomp
@@ -48,9 +52,15 @@ current_session = Workspace.new
     end
       
     
-  puts "Thank you for using the Ada Slack CLI"  
+  puts "\nThank you for using the Ada Slack CLI"  
 end
 
+def select_menu
+  puts "What would like to do with the selected recipient? \n
+        1. details \n
+        2. send message \n"
+  
+end
 
 
 main if __FILE__ == $PROGRAM_NAME

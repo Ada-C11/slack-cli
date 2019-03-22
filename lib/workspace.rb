@@ -33,7 +33,15 @@ class Workspace
     return @selected
   end
   
-  def show_details
+  def show_details(recipient_type:, name:)
+    if recipient_type.downcase == "channel"
+      x = select_channel(name)
+    elsif recipient_type.downcase == "user"
+      x = select_user(name)
+    else
+      x = "User or channel not found"
+    end
+    return "username: #{x.name} | real name: #{x.real_name} | Slack id: #{x.slack_id}"
   end
   
   def send_message
