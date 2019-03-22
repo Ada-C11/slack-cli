@@ -15,7 +15,7 @@ def main
 
   print "\nUsers loaded: ", Slack::Workspace.user_list_all.length
 
-  puts "\nPlease select from the following options: \n list channels, select channel, list users, select user, details, or quit"
+  puts "\nPlease select from the following options: \n list channels, select channel, list users, select user, or quit"
   selection = gets.chomp.downcase
 
   until selection == "quit"
@@ -29,10 +29,14 @@ def main
       if selected_channel.nil?
         puts "This channel doesn't exist. Exiting to main menu"
       else
-        puts "You have selected #{selected_channel.name}. Please type 'details' for more info!"
+        puts "You have selected #{selected_channel.name}. Please type 'details' for more info or quit!"
         answer = gets.chomp.downcase
-        if answer == "details"
+        case answer
+        when "details"
           puts Slack::Workspace.selected_channel_details(selected_channel)
+        when "quit"
+        else
+          puts "Please select a valid input. Returning to main!"
         end
       end
     when "list users"
@@ -44,10 +48,14 @@ def main
       if selected_user.nil?
         puts "This user doesn't exist. Exiting to main menu"
       else
-        puts "You have selected #{selected_user.name}. Please type 'details' for more info!"
+        puts "You have selected #{selected_user.name}. Please type 'details' for more info or quit!"
         answer = gets.chomp.downcase
-        if answer == "details"
-          puts Slack::Workspace.selected_user_details(selected_user)
+        case answer
+        when "details"
+          puts puts Slack::Workspace.selected_user_details(selected_user)
+        when "quit"
+        else
+          puts "Please select a valid input. Returning to main!"
         end
       end
     when "quit"
