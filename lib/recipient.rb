@@ -1,27 +1,38 @@
 module SlackCLI
   class Recipient
-    attr_reader :id, :name, :response
+    CHAT_URL = "https://slack.com/api/chat.postMessage".freeze
+    attr_reader :id, :name
 
     def initialize(id, name)
-      @id = id
       @name = name
-      @response = response
-      @user_params = ""
+      @id = id
     end
 
-    def self.get_response(url, param)
-      query = { token: param }
-      @response = HTTParty.get(url, query: query)
+    def self.get(url, params)
+      HTTParty.get(url, query: params)
     end
 
-    def self.list(key_words)
-      members_list = []
-      ["members"].each do |member|
-        key_words.each do |parameter, value|
-        members_list << {parameter => value}
-        end
-      end
-      return members_list
+    def send_message(message)
+      query_parameters = {
+        token: ENV["SLACK_API_TOKEN"],
+        channel: id,
+        text: message
+      }
+      response = HTTParty.post(
+        CHAT_URL,
+        body: query_parameters,
+        headers: { "Content-Type" => "application/x-www-form-urlencoded" }
+      )
+
+      response.code == 200 && response["ok"]
     end
+
+    def display_details
+      raise NotImplementedError, "Implement me from a child class!"
     end
+
+    def self.get
+      raise NotImplementedError, "Implement me from a child class!"
+    end
+  end
   end

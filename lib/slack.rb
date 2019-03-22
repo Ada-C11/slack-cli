@@ -16,9 +16,7 @@ module SlackCLI
         puts "  5. Quit"
         puts "\nPlease, choose one of the options available"
         option = gets.chomp.to_i
-        if option != 5
-          self.options(option)
-        end
+        options(option) if option != 5
       end
       puts "Thank you for using the Ada Slack CLI\n\n"
       exit
@@ -26,11 +24,11 @@ module SlackCLI
 
     def self.options(option)
       if option == 1
-        self.list_users
+        list_users
       elsif option == 2
-        self.list_channels
+        list_channels
       elsif option == 3
-        self.select_user
+        select_user
       end
     end
 
@@ -49,7 +47,17 @@ module SlackCLI
     end
 
     def self.list_channels
-      # Code to list channels
+      workspace = Workspace.new
+      channel_list = workspace.channel
+      puts "\n\n----List of Slack Channels----\n\n"
+      channel_list.each_with_index do |user, index|
+        puts "User N.#{index + 1}"
+        puts "  Name: #{user.name}"
+        puts "  Real Name:#{user.real_name}"
+        puts "  ID: #{user.id}\n\n"
+      end
+      puts "Press any key to continue...\n\n"
+      gets.chomp
     end
 
     def self.select_user
@@ -61,11 +69,11 @@ module SlackCLI
       puts "\nPlease, choose one of the options available"
       recipient_option = gets.chomp.to_i
       if recipient_option == 1
-        self.users_details(user)
+        users_details(user)
       elsif recipient_option == 2
         puts "\n\n-> Type away..."
         text = gets.chomp
-        self.user_message(text, user)
+        user_message(text, user)
       end
     end
 
@@ -73,7 +81,7 @@ module SlackCLI
       begin
         details = Workspace.users_details(user)
         puts details
-      rescue
+      rescue StandardError
         puts "\n\nThe user does not exist!"
       end
       puts "Press any key to continue...\n\n"
@@ -83,10 +91,8 @@ module SlackCLI
     def self.user_message(text, user)
       begin
         status = Workspace.user_message(text, user)
-        if status
-          puts "\n\n---Message sucessfully sent!---"
-        end
-      rescue
+        puts "\n\n---Message sucessfully sent!---" if status
+      rescue StandardError
         puts "\n\nOops, something went wrong..."
         puts "To send a message you must provide the ID (while we improve this feature)"
         puts "Also, make sure you're choosing a valid user."
