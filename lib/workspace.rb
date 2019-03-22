@@ -1,6 +1,7 @@
 module Slack
   class Workspace
-    attr_reader :users, :channels, :selected
+    attr_reader :users, :channels
+    attr_accessor :selected # only needed here because of tests... that seems wrong?
 
     def initialize
       @users = User.list
@@ -21,8 +22,12 @@ module Slack
 
       if selected.class == Slack::User
         tp selected, :name, :real_name, :slack_id
+        return selected
       elsif selected.class == Slack::Channel
         tp selected, :name, :topic, :member_count, :slack_id
+        return selected
+      else
+        return nil
       end
     end
 

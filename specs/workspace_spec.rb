@@ -21,7 +21,7 @@ describe "Workspace" do
 
       expect(@workspace.users).must_be_kind_of Array
       expect(@workspace.channels).must_be_kind_of Array
-      expect(@workspace.selected).must_equal nil
+      assert_nil(@workspace.selected) # Changed based on CL feedback... does this make sense?
       # end
     end
   end
@@ -94,8 +94,23 @@ describe "Workspace" do
     end
   end
 
-  describe "show_details" do
-    it "shows the details of the selected recipient" do
+  describe "show_details" do # don't know if this is the best way to test this
+    let(:user) { @workspace.users[0] }
+    let(:channel) { @workspace.channels[0] }
+    it "returns selected recipient if recipient is selected" do
+      @workspace.selected = user
+      method = @workspace.show_details
+      expect(method).must_equal @workspace.selected
+      expect(method).must_be_instance_of Slack::User
+    end
+    it "shows the details of the selected channel" do
+      @workspace.selected = channel
+      method = @workspace.show_details
+      expect(method).must_equal @workspace.selected
+      expect(method).must_be_instance_of Slack::Channel
+    end
+    it "returns nil if no selected user" do
+      assert_nil(@workspace.show_details)
     end
   end
 end
