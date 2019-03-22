@@ -54,6 +54,16 @@ def main
       workspace.channels.each_with_index do |channel, i|
         puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.slack_id}"
       end
+    elsif selection == "3" || selection == "4"
+      slack_id = ask("\nPlease enter a user id")
+      case selection
+      when "3"
+        workspace.select_user(slack_id)
+        puts "You've selected this user: #{workspace.selected.name}"
+      when "4"
+        workspace.select_channel(slack_id)
+        puts "You've selected this channel: #{workspace.selected.name}"
+      end
     else
       puts "\nInvalid entry.  Please try again!"
     end
