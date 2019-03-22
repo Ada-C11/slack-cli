@@ -15,7 +15,9 @@ module SlackAPI
 
     #attr_accessor :status_text, :status_emoji
 
-    attr_reader :real_name, :list
+    attr_reader :real_name
+
+    attr_writer :list
 
     BASE_URL = "https://slack.com/api"
     USERS_LIST_PATH = "/users.list"
@@ -36,7 +38,7 @@ module SlackAPI
       return @@list
     end
 
-    private
+    
     def self.load
       query_parameters = { token: TOKEN }
       response = HTTParty.get(BASE_URL << USERS_LIST_PATH, query: query_parameters)
@@ -49,5 +51,7 @@ module SlackAPI
       end
       return @@list
     end
+
+    
   end
 end
