@@ -36,4 +36,5 @@ class User < Recipient
     return "#{real_name}, slack user name: #{name}, slack_id: #{slack_id}"
   end
 end
-puts User.list
+
+# puts User.list
