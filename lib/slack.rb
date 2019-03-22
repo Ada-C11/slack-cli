@@ -2,6 +2,8 @@
 require_relative "workspace.rb"
 require "table_print"
 
+# :nocov:
+
 def main
   puts "Welcome to the Ada Slack CLI!"
 
@@ -84,5 +86,5 @@ def send_message(workspace)
     puts "Please select a channel or user before sending message."
   end
 end
-
+# :nocov:
 main if __FILE__ == $PROGRAM_NAME
