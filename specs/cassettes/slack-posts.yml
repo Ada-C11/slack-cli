@@ -215,4 +215,69 @@ http_interactions:
         work","user":"UH2SDUECA","ts":"1553294732.000200"}}'
     http_version: 
   recorded_at: Fri, 22 Mar 2019 22:45:32 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<SLACK_TOKEN>&channel=whatever&text=shouldn%27t%20work&as_user=true
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 Mar 2019 22:54:29 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 8e41640a-afc9-4bb8-9b2a-1e7a64c77035
+      X-Oauth-Scopes:
+      - identify,read,post,client,apps,admin
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write:user,client
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-852m
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 e9dbb62af8eec6cb13379a137374c506.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - TJgLKvzvBn7sgT3ghRYpPbQntywNr0Gfj5nyM9wzTrvqrshFRJHoQA==
+    body:
+      encoding: UTF-8
+      string: '{"ok":false,"error":"channel_not_found"}'
+    http_version: 
+  recorded_at: Fri, 22 Mar 2019 22:54:29 GMT
 recorded_with: VCR 4.0.0

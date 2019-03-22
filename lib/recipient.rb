@@ -5,7 +5,7 @@ Dotenv.load
 class Recipient
   class SlackApiError < StandardError; end
 
-  attr_reader :slack_id, :name
+  attr_accessor :slack_id, :name
 
   def initialize(slack_id, name)
     @slack_id = slack_id
