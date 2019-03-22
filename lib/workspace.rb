@@ -39,5 +39,10 @@ module Slack
       end
       return true
     end
+
+    def details_for_selected
+      return "" unless selected
+      return selected.details
+    end
   end
 end
