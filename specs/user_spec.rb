@@ -1,5 +1,4 @@
 require_relative 'test_helper'
-
   
 describe "User class" do
   describe "initialization" do

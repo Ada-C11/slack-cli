@@ -24,17 +24,12 @@ def main
     case user_selection
     when "1", "list users", "users"
       @current_session.users.each do |user| 
-        puts "username: #{user.name} | 
-              real name: #{user.real_name} | 
-              Slack ID: #{user.slack_id}" 
+        puts "username: #{user.name} | real name: #{user.real_name} | Slack ID: #{user.slack_id}" 
       end
       main
     when "2", "list channels", "channels"
       @current_session.channels.each do |channel| 
-        puts "name: #{channel.name} | 
-              topic: #{channel.topic["value"]} | 
-              member count: #{channel.member_count} | 
-              Slack ID: #{channel.slack_id}"
+        puts "name: #{channel.name} | topic: #{channel.topic["value"]} | member count: #{channel.member_count} | Slack ID: #{channel.slack_id}"
       end
       main
     when "3", "see details", "see", "details"

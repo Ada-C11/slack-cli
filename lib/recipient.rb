@@ -5,8 +5,7 @@ Dotenv.load
   BASE_URL = "https://slack.com/api/"
   KEY = ENV["TOKEN"]
   
-class Recipient
-  
+class Recipient 
   attr_reader :slack_id, :name
 
   def initialize(slack_id, name)

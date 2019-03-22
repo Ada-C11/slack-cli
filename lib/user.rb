@@ -7,7 +7,6 @@ require_relative 'slack_api_error.rb'
 class User < Recipient  
   attr_reader :real_name
   
-  
   def initialize(slack_id:, name:, real_name:)
     super(slack_id, name)
     @real_name = real_name  
