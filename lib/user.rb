@@ -1,4 +1,3 @@
-
 require "httparty"
 require "pry"
 require_relative "recipient"
@@ -37,10 +36,3 @@ class User < Recipient
     return "#{real_name}, slack user name: #{name}, slack_id: #{slack_id}"
   end
 end
-
-#  puts User.list
-# puts User.list[0]
-# #puts User.list
-#  puts User.list["members"][0]["id"]
-#  puts User.list["members"][0]["real_name"]
-#  puts User.list["members"][0]["name"]

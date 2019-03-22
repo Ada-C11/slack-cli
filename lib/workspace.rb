@@ -10,6 +10,7 @@ class Workspace
     @selected = nil
   end
 
+  # modify this
   def select_channel(user_input)
     selected = channels.select do |channel|
       channel.name == user_input || channel.slack_id == user_input
@@ -18,10 +19,10 @@ class Workspace
   end
 
   def select_user(user_input)
-    selected = users.select do |user|
+    @selected = users.find do |user|
       user.name == user_input || user.slack_id == user_input
     end
-    @selected = selected.first
+    return @selected
   end
 
   def show_details

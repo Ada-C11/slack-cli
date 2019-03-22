@@ -34,3 +34,5 @@ class Channel < Recipient
     return channel_list
   end
 end
+
+# puts Channel.list
