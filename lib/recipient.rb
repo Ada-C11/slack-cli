@@ -22,14 +22,6 @@ module SlackCLI
       return response
     end
 
-    def self.list
-      raise NotImplementedError, "Implement me in a child class!"
-    end
-
-    def details
-      raise NotImplementedError, "Implement me in a child class!"
-    end
-
     def send_message(message)
       body = {
         token: API_KEY,
@@ -44,6 +36,16 @@ module SlackCLI
       end
 
       return true
+    end
+
+    private
+
+    def self.list
+      raise NotImplementedError, "Implement me in a child class!"
+    end
+
+    def details
+      raise NotImplementedError, "Implement me in a child class!"
     end
   end
 end

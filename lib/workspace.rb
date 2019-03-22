@@ -23,9 +23,8 @@ module SlackCLI
       return @selected == nil ? nil : @selected.details
     end
 
-    def send_message
+    def send_message(message)
       if @selected != nil
-        message = gets.chomp
         @selected.send_message(message)
         return true
       else

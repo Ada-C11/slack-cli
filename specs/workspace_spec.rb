@@ -119,4 +119,46 @@ describe "SlackCLI::Workspace" do
       end
     end
   end
+
+  describe "send_message" do
+    it "returns true if able to send message to user" do
+      VCR.use_cassette("workspace") do
+        username = @workspace.users.first.name
+        @workspace.select_user(username)
+        response = @workspace.send_message("Hey I can post messages!")
+        expect(response).must_equal true
+      end
+    end
+
+    it "returns true if able to send message to channel" do
+      VCR.use_cassette("workspace") do
+        channel = @workspace.channels.first.name
+        @workspace.select_channel(channel)
+        response = @workspace.send_message("Hey I can post messages!")
+        expect(response).must_equal true
+      end
+    end
+
+    it "returns false if selected is nil" do
+      VCR.use_cassette("workspace") do
+        response = @workspace.send_message("Hey I can post messages!")
+        expect(response).must_equal false
+      end
+    end
+  end
+
 end
+
+
+# it "will raise an error when given an invalid channel" do
+#   VCR.use_cassette("workspace") do
+#     slack_id = "invalid_id"
+#     name = "invalid-channel"
+#     bad_record = SlackCLI::Recipient.new(slack_id: slack_id, name: name)
+#     exception = expect {
+#       bad_record.send_message("This post should not work")
+#     }.must_raise SlackCLI::Recipient::SlackApiError
+
+#     expect(exception.message).must_equal "Error when posting This post should not work to invalid_id, error: channel_not_found"
+#   end
+# end

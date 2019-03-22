@@ -44,14 +44,14 @@ describe SlackCLI::Recipient do
 
   describe "send message" do
     it "can send a valid message" do
-      VCR.use_cassette("workspace") do
+      VCR.use_cassette("recipient") do
         response = @record.send_message("Hey I can post messages!")
         expect(response).must_equal true
       end
     end
 
     it "will raise an error when given an invalid channel" do
-      VCR.use_cassette("workspace") do
+      VCR.use_cassette("recipient") do
         slack_id = "invalid_id"
         name = "invalid-channel"
         bad_record = SlackCLI::Recipient.new(slack_id: slack_id, name: name)
