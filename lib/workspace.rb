@@ -53,5 +53,14 @@ module Slack
       end
       return nil
     end
+
+    def find_channel(input:)
+      channels.each do |channel|
+        if input == channel.name.upcase || input == channel.id.upcase
+          return channel
+        end
+      end
+      return nil
+    end
   end
 end
