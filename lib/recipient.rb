@@ -33,17 +33,16 @@ class Recipient
     # settings = {}
     file = File.read("lib/bot-settings.json")
     settings = JSON.parse(file)
-
     params = {
       "token" => ENV["SLACK_API_TOKEN"],
-      "channel" => recipient,
+      "channel" => recipient.slack_id,
       "text" => message,
-      "as_user" => false,
       "username" => settings["username"],
       "icon_emoji" => settings["icon_emoji"],
     }
-
-    puts params
+    if recipient.class == User
+      params["as_user"] = true
+    end
 
     response = HTTParty.post(
       POST_URL,

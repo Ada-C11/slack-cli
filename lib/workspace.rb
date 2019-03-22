@@ -56,7 +56,7 @@ class Workspace
   end
 
   def send_message(text)
-    selected.send_msg(text, selected.slack_id)
+    selected.send_msg(text, selected)
   end
 end
 
