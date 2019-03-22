@@ -1,7 +1,7 @@
 # workspace
 require_relative "user"
 require_relative "channel"
-require "terminal-table"
+require "table_print"
 require 'pry'
 
 
@@ -12,10 +12,6 @@ class Workspace
     @users = SlackCli::User.list
     @channels = SlackCli::Channel.list
     @selected = selected
-
-    unless selected == nil
-      raise SlackCli::SlackError, "No user or channel selected"
-    end
   end
 
   def select_channel(name)
@@ -34,7 +30,6 @@ class Workspace
     if @selected == nil
       raise SlackCli::SlackError, "No user or channel selected!"
     else
-      # puts "Details for #{workspace.selected.name}..."
       @selected.details
     end
   end
@@ -44,7 +39,7 @@ class Workspace
     if message.length == 0
       raise SlackCli::SlackError, "Message must cannot be nil or blank..."
     else
-      @selected.send_message(@selected.slack_id, message)
+      @selected.post_message(@selected.slack_id, message)
     end
   end
 

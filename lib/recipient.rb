@@ -40,7 +40,6 @@ module SlackCli
       return response
     end
 
-    #private
     def details
       raise NotImplementedError
     end
@@ -49,8 +48,9 @@ module SlackCli
       raise NotImplementedError
     end
 
+    # private
     def error_helper(response)
-      unless response.code != 200 || !response["ok"]
+      unless response.code == 200 && response["ok"]
         raise SlackError, "Error #{response.code}: #{response["error"]}"
       end
       return response

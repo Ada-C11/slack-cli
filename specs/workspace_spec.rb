@@ -57,47 +57,47 @@ describe "Workspace class" do
     end
   end
 
-  describe "cases when our program should raise an exception..." do
-    it "should raise an exception created by changes to API" do
-      class Dummy < SlackCli::Recipient
-        LIST_URL = "http://slack.com/api/users.list"
-        BADTOKEN = "123"
-        def self.get
-          query_params = {
-            token: BADTOKEN,
-          }
-          response = HTTParty.get(self::LIST_URL, query: query_params)
-          # error_helper(response)
-          return response
-        end
-      end
-
-      test_dummy = Dummy.get
-      expect(test_dummy["ok"]).must_equal false
-      expect(test_dummy["error"]).must_equal "invalid_auth"
+  describe "show details method" do 
+    it "returns details for a selected user" do 
+      workspace.select_user("hanalways")
+      expect(workspace.show_details).must_be_kind_of String
     end
 
-    it "should raise an exception created by changes to API URI" do
-      class Dummy < SlackCli::Recipient
-        LIST_URL = "http://slack.com/api/users.lis"
-        def self.get
-          query_params = {
-            token: TOKEN,
-          }
-          response = HTTParty.get(self::LIST_URL, query: query_params)
-          # error_helper(response)
-          return response
-        end
-      end
-
-      test_dummy = Dummy.get
-      expect(test_dummy["ok"]).must_equal false
-      expect(test_dummy["req_method"]).must_equal "users.lis"
+    it "returns details for a selected channel" do 
+      workspace.select_channel("everyone")
+      expect(workspace.show_details).must_be_kind_of String
     end
 
+    it "must raise SlackError for no selected user or channel" do
+      workspace.select_channel("")
+      expect {
+        workspace.show_details
+      }.must_raise SlackCli::SlackError
+    end
+  end
+
+  describe "send_message method" do 
     it "raise an exception when a user enters nil in send_message" do
       message = ""
       expect { workspace.send_message(message) }.must_raise SlackCli::SlackError
+    end
+
+    it "successfully sends a message with selected user" do
+      workspace.select_user("tatsqui")
+      test_message = workspace.send_message("test")
+      expect(test_message["ok"]).must_equal true
+    end
+  end
+
+  describe "list_channels method" do 
+    it "returns details of a channel as nil" do 
+      assert_nil(workspace.list_channels)
+    end
+  end
+
+  describe "list_users method" do 
+    it "returns details of a user as nil" do 
+      assert_nil(workspace.list_users)
     end
   end
 end
