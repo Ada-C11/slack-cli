@@ -114,5 +114,14 @@ describe "Workspace" do
       end
     end
 
+    it "it sends message with digits for text" do
+      channel = @workspace.channels[0].name
+      @workspace.select_channel(id_or_name: channel)
+      VCR.use_cassette("send_digit_message_to_channel") do
+        response = @workspace.send_message(text: 123)
+        expect(response).must_equal true
+      end
+    end
+
   end
 end
