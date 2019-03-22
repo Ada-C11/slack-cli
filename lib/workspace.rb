@@ -42,10 +42,10 @@ module Slack
       recipients.each do |recipient|
         if input == recipient.slack_id || input == recipient.name
           @selected = recipient
-          return input
+          return @selected
         end
       end
-      return "#{input} does not exist"
+      return false
     end
   end
 end

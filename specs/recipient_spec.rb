@@ -22,6 +22,13 @@ describe "Recipient" do
         expect(return_value).must_equal true
       end
     end
+
+    it "raises an error if api sends back not okay" do
+      VCR.use_cassette("recipient") do
+        users = Slack::User.list
+        expect { users[0].send_message("hi", token: "This-is-wrong") }.must_raise Slack::SlackError
+      end
+    end
   end
 
   describe "self.get" do

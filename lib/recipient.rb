@@ -11,12 +11,12 @@ module Slack
       @name = name
     end
 
-    def send_message(message)
+    def send_message(message, token: ENV["SLACK_API_TOKEN"])
       response = HTTParty.post(
         "https://slack.com/api/chat.postMessage",
         headers: {"Content-Type" => "application/x-www-form-urlencoded"},
         body: {
-          token: ENV["SLACK_API_TOKEN"],
+          token: token,
           channel: self.slack_id,
           text: message,
         },
@@ -25,7 +25,7 @@ module Slack
       if response["ok"]
         return true
       else
-        raise SlackApi::SlackError, "Error when posting #{text} to #{channel}, error: #{response.parsed_response["error"]}"
+        raise Slack::SlackError, "Error: #{response.parsed_response["error"]}"
       end
     end
 

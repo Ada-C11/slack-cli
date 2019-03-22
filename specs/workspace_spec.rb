@@ -29,7 +29,7 @@ describe "Workspace" do
   describe "select_user" do
     it "returns the right selected user" do
       input = "sopheary.chiv"
-      expect(@workspace.select_user(input)).must_equal "sopheary.chiv"
+      expect(@workspace.select_user(input).name).must_equal "sopheary.chiv"
     end
 
     it "stores the right user in the selected variable" do
@@ -47,14 +47,14 @@ describe "Workspace" do
 
     it "handles the non-existing user" do
       non_exiting_user = @workspace.select_user("jennifer.chiv")
-      expect(non_exiting_user).must_equal "jennifer.chiv does not exist"
+      expect(non_exiting_user).must_equal false
     end
   end
 
   describe "select_channel" do
     it "returns the right selected channel" do
       input = "slack-api"
-      expect(@workspace.select_channel(input)).must_equal "slack-api"
+      expect(@workspace.select_channel(input).name).must_equal "slack-api"
     end
 
     it "stores the right channel in the selected variable" do
@@ -72,7 +72,7 @@ describe "Workspace" do
 
     it "handles the non-existing channel" do
       non_exiting_user = @workspace.select_channel("my-channel")
-      expect(non_exiting_user).must_equal "my-channel does not exist"
+      expect(non_exiting_user).must_equal false
     end
   end
 end

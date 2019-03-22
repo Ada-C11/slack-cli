@@ -30,18 +30,19 @@ def main
     when "select user"
       print "User ID or Username > "
       input = gets.chomp
-      puts workspace.select_user(input)
+      puts "#{input} does not exist".red unless workspace.select_user(input)
     when "select channel"
       print "Channel ID or Channel Name > "
       input = gets.chomp
-      puts workspace.select_channel(input)
+      puts "#{input} does not exist".red unless workspace.select_channel(input)
     when "details"
       puts "No recipient selected".red unless workspace.selected
-      tp workspace.selected, workspace.tp_details_options
+      tp workspace.selected, workspace.tp_details_options if workspace.selected
     when "send message"
-      puts "Message > "
+      print "Message > "
       input = gets.chomp
-      workspace.send_message(input)
+      puts "No message entered".red if input == ""
+      workspace.send_message(input) unless input == ""
     end
 
     break if user_input == "quit"

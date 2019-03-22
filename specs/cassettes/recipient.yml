@@ -209,4 +209,59 @@ http_interactions:
       string: '{"ok":false,"error":"invalid_auth"}'
     http_version: 
   recorded_at: Fri, 22 Mar 2019 17:22:18 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=This-is-wrong&channel=USLACKBOT&text=hi
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 Mar 2019 22:24:55 GMT
+      Server:
+      - Apache
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 937a1c33-d890-410b-9dc0-ebf9c951e38b
+      X-Xss-Protection:
+      - '0'
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-fvbn
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 5da5773a6acab8f3aabf385b38683f20.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - FPoN-I7YURWQbiGw7fgX5uHF56QbvgLjbJKbOSZhOXML_Q1vylrYrw==
+    body:
+      encoding: UTF-8
+      string: '{"ok":false,"error":"invalid_auth"}'
+    http_version: 
+  recorded_at: Fri, 22 Mar 2019 22:24:55 GMT
 recorded_with: VCR 4.0.0
