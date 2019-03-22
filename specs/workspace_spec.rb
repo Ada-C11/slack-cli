@@ -75,24 +75,4 @@ describe "Workspace" do
       expect(non_exiting_user).must_equal "my-channel does not exist"
     end
   end
-
-  # describe "show_details" do # don't know if this is the best way to test this
-  #   let(:user) { @workspace.users[0] }
-  #   let(:channel) { @workspace.channels[0] }
-  #   it "returns selected recipient if recipient is selected" do
-  #     @workspace.selected = user
-  #     method = @workspace.show_details(test: true) # test true stops it from printing anything
-  #     expect(method).must_equal @workspace.selected
-  #     expect(method).must_be_instance_of Slack::User
-  #   end
-  #   it "shows the details of the selected channel" do
-  #     @workspace.selected = channel
-  #     method = @workspace.show_details(test: true)
-  #     expect(method).must_equal @workspace.selected
-  #     expect(method).must_be_instance_of Slack::Channel
-  #   end
-  #   it "returns nil if no selected user" do
-  #     assert_nil(@workspace.show_details(test: true))
-  #   end
-  # end
 end
