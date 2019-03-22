@@ -31,7 +31,9 @@ module SlackAPI
     end
 
     def details
-      return { real_name: @real_name, slack_id: @slack_id, name: @name }
+      return "Name: #{name}
+     Slack ID: #{slack_id}
+     Real name: #{real_name}"
     end
 
     def self.list

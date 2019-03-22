@@ -2,6 +2,7 @@ require 'dotenv'
 require 'httparty'
 require 'pry'
 require 'table_print'
+require_relative 'recipient'
 Dotenv.load
 
 module SlackAPI
@@ -20,7 +21,10 @@ module SlackAPI
     end
 
     def details
-        return detail_hash = {slack_id: @slack_id, name: @name, topic: @topic, member_count: @member_count}
+    return "Channel name: #{name}
+     Slack ID: #{slack_id}
+     Topic: #{topic}
+     Member count: #{member_count}"
     end
 
     def self.list
