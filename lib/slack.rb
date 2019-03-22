@@ -24,25 +24,20 @@ def main
 
     case user_input.downcase
     when "list users"
-      tp workspace.users, :name, :real_name, :slack_id
+      tp workspace.users, workspace.tp_user_options
     when "list channels"
-      tp workspace.channels, :name, :topic, :member_count, :slack_id
+      tp workspace.channels, workspace.tp_channel_options
     when "select user"
       print "User ID or Username > "
       input = gets.chomp
-      puts "#{workspace.select_user(input)} selected".green
+      puts workspace.select_user(input)
     when "select channel"
       print "Channel ID or Channel Name > "
       input = gets.chomp
-      puts workspace.select_channel(input).green
+      puts workspace.select_channel(input)
     when "details"
       puts "No recipient selected".red unless workspace.selected
-
-      if workspace.selected.class == Slack::User
-        tp workspace.selected, :name, :real_name, :slack_id
-      elsif workspace.selected.class == Slack::Channel
-        tp workspace.selected, :name, :topic, :member_count, :slack_id
-      end
+      tp workspace.selected, workspace.tp_details_options
     when "send message"
       puts "Message > "
       input = gets.chomp

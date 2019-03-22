@@ -16,19 +16,21 @@ module Slack
       select(input, users)
     end
 
-    # def show_details(test: false) # This is the only method that prints anything.
-    #   puts "No recipient selected".red unless selected || test
+    def tp_details_options
+      if selected.class == Slack::User
+        return tp_user_options
+      elsif selected.class == Slack::Channel
+        return tp_channel_options
+      end
+    end
 
-    #   if selected.class == Slack::User
-    #     tp selected, :name, :real_name, :slack_id unless test
-    #     return selected
-    #   elsif selected.class == Slack::Channel
-    #     tp selected, :name, :topic, :member_count, :slack_id unless test
-    #     return selected
-    #   else
-    #     return nil
-    #   end
-    # end
+    def tp_user_options
+      return :name, :real_name, :slack_id
+    end
+
+    def tp_channel_options
+      return :name, :topic, :member_count, :slack_id
+    end
 
     def send_message(message)
       selected.send_message(message)
@@ -40,10 +42,10 @@ module Slack
       recipients.each do |recipient|
         if input == recipient.slack_id || input == recipient.name
           @selected = recipient
-          return input
+          return "#{input} selected".green
         end
       end
-      return "#{input} does not exist"
+      return "#{input} does not exist".red
     end
   end
 end
