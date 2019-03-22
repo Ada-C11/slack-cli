@@ -17,14 +17,14 @@ describe "Api Wrapper module" do
       end
     end
 
-    # it "raise an error if an invalid url is used" do
-    #   url_tail = "abc"
-    #   VCR.use_cassette("slack_api") do
-    #       expect {
-    #         Slack::ApiWrapper.get_json(url_tail: url_tail)
-    #       }.must_raise Slack::ApiWrapper::SlackError
-    #   end
-    # end
+    it "raise an error if an invalid url is used" do
+      url_tail = "abc"
+      VCR.use_cassette("slack_api") do
+          expect {
+            Slack::ApiWrapper.get_json(url_tail: url_tail)
+          }.must_raise Slack::ApiWrapper::SlackError
+      end
+    end
 
     it "raise an error when an invalid token is used" do
       VCR.use_cassette("slack_api") do
