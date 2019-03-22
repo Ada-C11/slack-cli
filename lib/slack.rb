@@ -9,13 +9,11 @@ def main
   puts "Number of users: #{workspace.users.length}"
   puts "Number of channels: #{workspace.channels.length}\n\n"
   options = ["List Users", "List Channels", "Select User", "Select Channel", "Details", "Send Message", "Quit"]
-
   while true
     puts "--------OPTIONS--------"
     puts options
     print "\nPlease enter your command: "
     input = gets.chomp.upcase
-
     case input
     when "LIST USERS"
       list_users workspace
