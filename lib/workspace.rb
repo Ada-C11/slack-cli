@@ -44,7 +44,11 @@ class Workspace
   end
 
   def show_details
-    tp @selected
+    if @selected == nil
+      raise ArgumentError
+    else
+      return @selected
+    end
   end
 
   def send_message(message)
