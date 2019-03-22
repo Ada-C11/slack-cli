@@ -73,7 +73,24 @@ describe "Workspace" do
       end
       @workspace.channels.pop
     end
-  
+    
+    it "will send a message to a channel" do
+      channel = @workspace.channels[0].name
+      @workspace.select_channel(id_or_name: channel)
+      VCR.use_cassette("send_message_to_channel") do
+        response = @workspace.send_message(text:"message to channel!")
+        expect(response).must_equal true
+      end
+    end
+
+    it "will send a message to a user" do
+      user = @workspace.users[0].name
+      @workspace.select_user(id_or_name: user)
+      VCR.use_cassette("send_message_to_user") do
+        response = @workspace.send_message(text:"message to user!")
+        expect(response).must_equal true
+      end
+    end
 
   end
 end

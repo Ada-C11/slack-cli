@@ -21,28 +21,29 @@ describe "User" do
   describe "self.list" do
     it "prints out a table of users" do
           expect(SlackAPI::User.list).must_be_kind_of Array
-         end
-      end
-
+    end
   end
 
   describe "send message" do
-
     it "sends a message to selected user" do
-      VCR.use_cassette("send_message") do
+      VCR.use_cassette("user_send_message") do
         user = SlackAPI::User.list[0]
         test = user.send_message(text: "hello")
         expect(test).must_equal true
        end
     end
 
-    it "sends a message to selected channel" do
-      VCR.use_cassette("send_message_to_channel") do
-        channel = SlackAPI::Channel.list[0]
-        test2 = channel.send_message(text: "hello")
-        expect(test2).must_equal true
-       end
-      end
+    # it "sends a message to selected channel" do
+    #   VCR.use_cassette("channel_send_message") do
+    #     puts channel.list
+    #     channel = SlackAPI::Channel.list[0]
+    #     test2 = channel.send_message(text: "hello")
+    #     expect(test2).must_equal true
+    #    end
+    # end
+
+
   end
+end
 
 
