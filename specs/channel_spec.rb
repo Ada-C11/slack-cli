@@ -1,4 +1,5 @@
 require_relative "test_helper.rb"
+
 require "pry"
 
 describe "Channel class" do
@@ -22,10 +23,10 @@ describe "list_all method" do
   it "gives a list of all user information from the API and returns a value of a 'general' channel name" do
     VCR.use_cassette("channel_find") do
       list_response = Slack::Channel.list_all
-
-      puts list_response
+      ap list_response
 
       expect(list_response.length).must_equal 3
+      expect(list_response[0].name).must_equal "general"
     end
   end
 end

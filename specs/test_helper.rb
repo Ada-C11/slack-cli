@@ -8,6 +8,7 @@ require "minitest/skip_dsl"
 require "vcr"
 require "httparty"
 require "dotenv"
+require "awesome_print"
 
 Dotenv.load
 

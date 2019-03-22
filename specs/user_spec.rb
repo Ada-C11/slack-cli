@@ -12,7 +12,6 @@ describe "get method" do
   it "Successfully GETs response from Slack API" do
     VCR.use_cassette("user_find") do
       response = Slack::User.get
-
       expect(response["ok"]).must_equal true
     end
   end
@@ -22,8 +21,9 @@ describe "list_all method" do
   it "gives a list of all user information from the API" do
     VCR.use_cassette("user_find") do
       list_response = Slack::User.list_all
-      puts list_response
+      ap list_response
       expect(list_response.length).must_equal 3
+      expect(list_response[0].name).must_equal "slackbot"
     end
   end
 end
