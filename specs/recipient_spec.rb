@@ -33,6 +33,7 @@ describe "Recipient" do
         expect(return_value["ok"]).must_equal true
       end
     end
+    # sopheary
 
     it "can get valid channel data from the API" do
       VCR.use_cassette("recipient") do
