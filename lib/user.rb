@@ -6,7 +6,7 @@ Dotenv.load
 module SlackApi
   class SlackError < StandardError; end
 
-  class User #< Recipient
+  class User
     url = "https://slack.com/api/users.list"
     key = ENV["SLACK_API_TOKEN"]
 

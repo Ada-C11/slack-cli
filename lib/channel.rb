@@ -6,10 +6,7 @@ Dotenv.load
 module SlackApi
   class SlackError < StandardError; end
 
-  class Channel #< Recipient
-    def initialize(raw_channel)
-    end
-
+  class Channel
     url = "https://slack.com/api/channels.list"
     key = ENV["SLACK_API_TOKEN"]
 
