@@ -10,6 +10,7 @@ require "webmock/minitest"
 require "dotenv"
 require "httparty"
 require "awesome_print"
+require "table_print"
 
 Dotenv.load
 

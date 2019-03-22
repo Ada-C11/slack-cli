@@ -31,11 +31,13 @@ def main
     when "select user"
       print "User ID or Username > "
       input = gets.chomp
-      puts workspace.select_user(input)
+      validate_input(input)
+      puts "#{workspace.select_user(input)} selected".green
     when "select channel"
       print "Channel ID or Channel Name > "
       input = gets.chomp
-      puts workspace.select_channel(input)
+      validate_input(input)
+      puts workspace.select_channel(input).green
     when "details"
       workspace.show_details # This is the only method that prints things within the method.
     end
@@ -44,6 +46,13 @@ def main
   end
 
   puts "Thank you for using the Ada Slack CLI"
+end
+
+def validate_input(input)
+  unless input != nil
+    puts "Please choose one option:"
+    puts "[list users] [list channels] [select user] [select channel] [details] [quit]"
+  end
 end
 
 main if __FILE__ == $PROGRAM_NAME
