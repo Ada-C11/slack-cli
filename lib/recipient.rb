@@ -13,40 +13,6 @@ class Recipient
     @name = name
   end
 
-  def send_msg_to_user(user, message)
-    x = select_user(user)
-    url = BASE_URL + "chat.postMessage"
-    params = {
-      token: KEY,
-      channel: x.slack_id,
-      text: message,
-    }
-
-    posted_message = HTTParty.post(url, query: params)
-    if posted_message["ok"] == false
-      raise SlackApiError, "API call failed with reason #{posted_message["error"]}"
-    end
-
-    return "You: #{posted_message["message"]["text"]}"
-  end
-
-  def send_msg_to_channel(channel, message)
-    x = select_channel(channel)
-    url = BASE_URL + "chat.postMessage"
-    params = {
-      token: KEY,
-      channel: x.slack_id,
-      text: message,
-    }
-
-    posted_message = HTTParty.post(url, query: params)
-    if posted_message["ok"] == false
-      raise SlackApiError, "API call failed with reason #{posted_message["error"]}"
-    end
-
-    return "You: #{posted_message["message"]["text"]}"
-  end
-
   def details
   end
 
