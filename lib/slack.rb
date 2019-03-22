@@ -37,12 +37,27 @@ def main
       user = workspace.find_user(input: input)
       if user
         workspace.select_recipient(recipient: user)
-        puts "Currently, selected recipient is #{user.name}.\n\n"
+        puts "Successfully upated selected user to #{user.name}.\n\n"
       else
         puts "#{input.capitalize} is not a valid user.\n\n"
       end
     when "SELECT CHANNEL"
+      print "Please enter channel's name or id: "
+      input = gets.chomp.upcase
+      channel = workspace.find_channel(input: input)
+      if channel
+        workspace.select_recipient(recipient: channel)
+        puts "Successfully upated selected channel to #{channel.name}.\n\n"
+      else
+        puts "#{input.capitalize} is not a valid channel.\n\n"
+      end
     when "DETAILS"
+      details = workspace.details_for_selected
+      if details.empty?
+        puts "Error: first select channel or user.\n\n"
+      else
+        puts "\n" + details + "\n\n"
+      end
     when "QUIT"
       break
     else
