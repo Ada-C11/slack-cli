@@ -41,8 +41,8 @@ module SlackAPI
         @selected.details
     end
 
-    def send_message(text:, recipient:)
-        @selected.send_message(text: text, recipient: recipient)
+    def send_message(text:)
+        @selected.send_message(text: text)
     end
   end
 end

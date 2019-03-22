@@ -31,8 +31,7 @@ describe "User" do
     it "sends a message to selected user" do
       VCR.use_cassette("send_message") do
         user = SlackAPI::User.list[0]
-        user2 = SlackAPI::User.list[1]
-        test = user.send_message(text: "hello", recipient: user2)
+        test = user.send_message(text: "hello")
         expect(test).must_equal true
        end
     end
@@ -41,7 +40,7 @@ describe "User" do
       VCR.use_cassette("send_message_to_channel") do
         user = SlackAPI::User.list[0]
         channel = SlackAPI::Channel.list[0]
-        test2 = user.send_message(text: "hello", recipient: channel)
+        test2 = user.send_message(text: "hello")
         expect(test2).must_equal true
        end
       end

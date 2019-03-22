@@ -76,7 +76,7 @@ def main
         if workspace.selected
           puts "Please type the message you want to send"
           user_text = gets.chomp
-          workspace.send_message(text: user_text, recipient: workspace.selected)
+          workspace.send_message(text: user_text)
         else
           puts "No recipient selected \n\n"
         end
