@@ -29,6 +29,17 @@ describe SlackCLI::Recipient do
         expect(response.code).wont_equal 401
       end
     end
+
+    it "raises an error when given bad params" do
+      VCR.use_cassette("recipient") do
+        url = "https://slack.com/api/users.list"
+        data = {
+          "token": "BAD TOKEN",
+        }
+        exception = expect { SlackCLI::Recipient.get(url, data) }.must_raise SlackCLI::Recipient::SlackApiError
+        expect(exception.message).must_equal "Error when getting response, error: invalid_auth"
+      end
+    end
   end
 
   describe "send message" do
@@ -47,7 +58,7 @@ describe SlackCLI::Recipient do
         exception = expect {
           bad_record.send_message("This post should not work")
         }.must_raise SlackCLI::Recipient::SlackApiError
-  
+
         expect(exception.message).must_equal "Error when posting This post should not work to invalid_id, error: channel_not_found"
       end
     end
