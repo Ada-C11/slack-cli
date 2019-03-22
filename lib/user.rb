@@ -1,14 +1,11 @@
-require "httparty"
 require "dotenv"
-require_relative "recipient"
-require "table_print"
 require "httparty"
-require "pry"
+require "table_print"
+require_relative "recipient"
 
 Dotenv.load
 
 module SlackAPI
-
   class SlackApiError < StandardError; end
 
   class User < Recipient
@@ -35,7 +32,6 @@ module SlackAPI
     def self.list
       return @@all
     end
-
     
     def self.load
       query_parameters = { token: TOKEN }
@@ -49,7 +45,5 @@ module SlackAPI
       end
       return @@all
     end
-
-
   end
 end
