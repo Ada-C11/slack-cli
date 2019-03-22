@@ -38,7 +38,7 @@ def main
       choice = gets.chomp.downcase
 
       if choice == "y"
-        selection.show_details
+        puts "#{workspace.show_details}"
         # call show_details method and puts ap it
       end
     when 4

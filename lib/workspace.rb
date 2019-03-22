@@ -32,7 +32,7 @@ module Slack
     
     def select_channel(name_or_id)
       channels.find do |channel|
-        if name_or_id == channel.name || name_or_id == channel.slack_id
+        if name_or_id == channel.name || name_or_id == channel.slack_id 
           @selection = channel
         end
       end
@@ -43,9 +43,10 @@ module Slack
     end
 
     def show_details
+      return @selection, @selection.details
       # if @selection == nil
       #   return false
-        ap @selection, @selection.details
+        # ap @selection, @selection.details
       # end
     end 
 
