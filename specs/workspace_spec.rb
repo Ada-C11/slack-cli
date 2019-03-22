@@ -92,4 +92,15 @@ describe "Workspace class" do
       expect(@workspace.details_for_selected).must_be_instance_of String
     end
   end
+
+  describe "Workspace#find_user" do
+    it "will return a user object, given a valid user's name, real_name or id" do
+      user_name = "elise.pham88"
+      real_name = "elise.pham88"
+      user_id = "UH2RH81RA"
+      expect(@workspace.find_user(user_name)).must_be_instance_of Slack::User
+      expect(@workspace.find_user(real_name)).must_be_instance_of Slack::User
+      expect(@workspace.find_user(user_id)).must_be_instance_of Slack::User
+    end
+  end
 end
