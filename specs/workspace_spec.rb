@@ -89,4 +89,31 @@ describe "Workspace" do
       expect(selected.id).must_equal "CH2SL5DEW"
     end
   end
+  describe "send message" do
+    before do
+      VCR.use_cassette("select") do
+        @workspace = SlackBot::Workspace.new
+      end
+    end
+
+    it "returns false if no user or channel is selected" do
+      expect(@workspace.send_message("Hi")).must_equal false
+    end
+
+    it "returns a slackapierror when given an empty message" do
+      VCR.use_cassette("send message with empty string") do
+        message = ""
+        expect {
+        @workspace.users.first.send_message(message)
+        }.must_raise SlackBot::SlackApiError
+      end
+    end
+
+    it "returns true if given a valid message and valid user/channel selected" do
+      VCR.use_cassette("send message with empty string") do
+        message = "Hello!"
+        expect(@workspace.users.first.send_message(message)).must_equal true
+      end
+    end
+  end
 end
