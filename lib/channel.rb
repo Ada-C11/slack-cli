@@ -35,4 +35,4 @@ class Channel < Recipient
   end
 end
 
-# puts Channel.list
+ puts Channel.list
