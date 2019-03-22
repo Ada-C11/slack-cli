@@ -8,9 +8,9 @@ module SlackCLI
   API_KEY = ENV["SLACK_API_TOKEN"]
 
   class User
-    attr_reader :name, :id, :real_name
+    attr_reader :name, :real_name, :id
 
-    def initialize(name, id, real_name)
+    def initialize(name, real_name, id)
       @name = name
       @id = id
       @real_name = real_name
@@ -25,24 +25,25 @@ module SlackCLI
     def self.list(url, param)
       response = self.get(url, param)
       members = response["members"]
-      @formatted_list = []
+      formatted_list = []
       members.each do |member|
         name = member["name"]
         real_name = member["real_name"]
         id = member["id"]
-        @formatted_list << self.new(name, id, real_name)
+        formatted_list << self.new(name, real_name, id)
       end
-      return @formatted_list
+      return formatted_list
     end
 
-    def self.details(parameter_to_find)
+    def self.details(user, url, param)
+      formatted_list = self.list(url, param)
       details_user = ""
-      @formatted_list.each do |member|
-        if member.name == parameter_to_find || member.id == parameter_to_find
-          details_user = "USER'S DETAILS:
+      formatted_list.each do |member|
+        if member.name == user || member.id == user
+          details_user = "\n\nUSER'S DETAILS:
             Name: #{member.name}
-            Id: #{member.id}
-            Real name: #{member.real_name}."
+            Real name: #{member.real_name}
+            Id: #{member.id}"
           return details_user
         end
       end

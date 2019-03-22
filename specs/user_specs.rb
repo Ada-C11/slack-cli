@@ -13,12 +13,20 @@ describe SlackCLI do
       end
     end
     let (:list_users) do
-      VCR.use_cassette("user_get") do
+      VCR.use_cassette("user_list") do
         user = USER_URL
         param = ENV["SLACK_API_TOKEN"]
         SlackCLI::User.list(user, param)
       end
     end
+    let (:details_user) do
+      VCR.use_cassette("user_details") do
+        user = USER_URL
+        param = ENV["SLACK_API_TOKEN"]
+        SlackCLI::User.details("UH2P4B8R1", user, param)
+      end
+    end
+
     describe "self.get" do
       it "imports list of users from slack" do
         VCR.use_cassette("user_get") do
@@ -47,13 +55,20 @@ describe SlackCLI do
       it "gives a description of the user" do
         get_users
         list_users
-        expect(SlackCLI::User.details("UH2P4B8R1")).must_be_kind_of String
-        ap SlackCLI::User.details("UH2P4B8R1")
+        # user = USER_URL
+        # param = ENV["SLACK_API_TOKEN"]
+        expect(details_user).must_be_kind_of String
+        # expect(SlackCLI::User.details("UH2P4B8R1", user, param)).must_be_kind_of String
+        # ap SlackCLI::User.details("UH2P4B8R1")
       end
       it "raises ArgumentError when the user does not exist" do
-        get_users
-        list_users
-        expect { SlackCLI::User.details("IMACATIMAKITTYCAT") }.must_raise ArgumentError
+        VCR.use_cassette("user_details") do
+          get_users
+          list_users
+          user = USER_URL
+          param = ENV["SLACK_API_TOKEN"]
+          expect { SlackCLI::User.details("IMACATIMAKITTYCAT", user, param) }.must_raise ArgumentError
+        end
       end
     end
 
