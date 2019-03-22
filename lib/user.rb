@@ -20,7 +20,6 @@ module SlackBot
       unless response.code == 200 && response.parsed_response["ok"]
         raise SlackApiError, "Error when listing users, error: #{response.parsed_response["error"]}"
       end
-
       users_array = response["members"].map do |user|
         SlackBot::User.new(real_name: user["real_name"], name: user["name"], id: user["id"])
       end
