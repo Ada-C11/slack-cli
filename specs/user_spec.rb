@@ -2,7 +2,7 @@ require_relative "test_helper"
 
 describe "User class" do
   describe "self.list" do
-    it "can return all channels" do
+    it "can return all users" do
       VCR.use_cassette("slack_user") do
         response = User.list
         user = response.first

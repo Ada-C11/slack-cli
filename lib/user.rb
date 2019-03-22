@@ -1,4 +1,3 @@
-
 require "httparty"
 require "pry"
 require_relative "recipient"
@@ -38,9 +37,4 @@ class User < Recipient
   end
 end
 
-#  puts User.list
-# puts User.list[0]
-# #puts User.list
-#  puts User.list["members"][0]["id"]
-#  puts User.list["members"][0]["real_name"]
-#  puts User.list["members"][0]["name"]
+# puts User.list
