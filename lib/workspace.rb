@@ -29,7 +29,6 @@ class Workspace
     if @selected == nil
       raise SlackCli::SlackError, "No user or channel selected!"
     else
-      # puts "Details for #{workspace.selected.name}..."
       @selected.details
     end
   end
@@ -42,8 +41,7 @@ class Workspace
       if message.length == 0
         raise SlackCli::SlackError, "Message must cannot be nil or blank..."
       else
-        @selected.post_message(@selected.slack_id, message)
-      end
+      @selected.post_message(@selected.slack_id, message)
     end
   end
 
