@@ -53,12 +53,11 @@ def main
       if choice == "y"
         puts "#{workspace.show_details}"
       end
-      # ap details
-      # call show_details method and puts ap it
+
     when 5
-      puts "What would you like to send to #{selection}?"
+      puts "What would you like to send to #{workspace.select_channel(name_or_id)}?"
       message = gets.chomp
-      recipient.send_message(recipient, message)
+      workspace.send_message(message)
       puts "Your message has been sent! Yay!"
     when 6
       break

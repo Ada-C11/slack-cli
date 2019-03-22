@@ -61,7 +61,7 @@ module Slack
         return nil
       end
 
-      return @selection.send_message(@selection.slack_id, text)
+      return @selection.send_message(@selection.slack_id, text )
     end  
   end
 end
