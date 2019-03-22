@@ -31,7 +31,7 @@ class Channel
     channel_info = Channel.get
     channel_list = channel_info["channels"]
     channels = channel_list.map do |channel|
-      Channel.new(channel["name"], channel["id"], channel["topic"], channel["members"])
+      Channel.new(channel["name"], channel["id"], channel["topic"]["value"], channel["members"])
     end
     return channels
   end
