@@ -27,7 +27,6 @@ class User < Recipient
   end
 
   def details #business logic
-    # check that this works
     puts "Username: #{self.name}"
     puts "ID: #{self.slack_id}"
     puts "Name: #{self.real_name}"

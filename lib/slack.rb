@@ -14,7 +14,7 @@ def display_options
   puts "\nMessage"
   puts "\nQuit"
   option = gets.chomp.downcase
-  return option
+  return verify_options(option)
 end
 
 def verify_options(option)
@@ -23,6 +23,7 @@ def verify_options(option)
     puts "Please input a valid option."
     option = display_options
   end
+  return option
 end
 
 def main
@@ -30,8 +31,6 @@ def main
   puts "\nWhat would you like to do?"
 
   option = display_options
-  verify_options(option)
-
   until option == "quit"
     case option
     when "select user"
@@ -48,7 +47,6 @@ def main
       puts "You have selected #{recipient.real_name}"
       puts "\nWhat would you like to do next?"
       option = display_options
-      verify_options(option)
     when "select channel"
       puts "You chose to select a channel. Please provide a channel name or Slack ID"
       selected = gets.chomp()
@@ -62,18 +60,15 @@ def main
       end
       puts "You have selected #{recipient.name}"
       option = display_options
-      verify_options(option)
     when "details"
       begin
         recipient.details
         puts "\nWhat would you like to do next?"
         option = display_options
-        verify_options(option)
       rescue
         puts "You must select a user or channel first."
         puts "\nWhat would you like to do next?"
         option = display_options
-        verify_options(option)
       end
     when "message"
       begin
@@ -84,13 +79,10 @@ def main
         puts "\nYou're message has been sent."
         puts "\nWhat would you like to do next?"
         option = display_options
-        verify_options(option)
       rescue
         puts "You must select a user or channel first."
-
         puts "\nWhat would you like to do next?"
         option = display_options
-        verify_options(option)
       end
     end
   end

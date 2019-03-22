@@ -9,17 +9,14 @@ class Workspace
   def initialize(selected:)
     @users = User.list
     @channels = Channel.list
-    @selected = selected # either user or channel
+    @selected = selected # either user or channel info
   end
 
-  # methods that initialize selected (either select_user or select_method)
   def select_user
     user_selected = users.detect do |user|
       user.slack_id == selected || user.name == selected
     end
     return user_selected
-    #find @selected within @users info
-
   end
 
   def select_channel
@@ -33,7 +30,6 @@ class Workspace
     params = {}
     params[:text] = message
     params[:channel] = recipient.slack_id
-    p recipient.slack_id
     # params[:as_user] = true
     recipient.send_message(params)
   end

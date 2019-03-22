@@ -26,7 +26,7 @@ describe "workspace class" do
 
     it "returns nil if username or slack id is not found" do
       VCR.use_cassette("check nil returned") do
-        selected = "chewy" #id of slackbot
+        selected = "chewy" #id of nonexistent slackbot
         @workspace2 = Workspace.new(selected: selected)
       end
       expect(@workspace2.select_user).must_be_nil
