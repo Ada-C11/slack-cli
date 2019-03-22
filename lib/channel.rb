@@ -29,6 +29,24 @@ module SlackAPI
       return @@channels
     end
 
+    def send_message(text:, recipient:)
+      body = {
+        text: text,
+        channel: recipient.slack_id,
+        token: ENV["TOKEN"],
+      }
+
+      response = HTTParty.post("https://slack.com/api/chat.postMessage",
+                               body: body,
+                               headers: { "Content-Type" => "application/x-www-form-urlencoded" })
+
+      unless response.code == 200 && response.parsed_response["ok"]
+        raise SlackApiError, "Error when posting #{text} to #{recipient}, error: #{response.parsed_response["error"]}"
+      end
+
+      return response.code == 200 && response.parsed_response["ok"]
+    end
+
     private
     def self.load
       query_parameters = {
