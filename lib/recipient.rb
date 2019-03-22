@@ -17,10 +17,10 @@ module Slack
     end
 
     # Helper method used by user and channel to send message
-    def self.send_message(text, channel)
+    def send_message(message)
       body = {
-        text: text,
-        channel: channel,
+        text: message,
+        channel: @slack_id,
         token: ENV["SLACK_API_TOKEN"],
       }
 

@@ -90,12 +90,8 @@ def main
         puts "Whoops! You must select a user or channel first"
       else
         puts "Here are some details on your selection:"
-        rows = []
-        workspace.selected.details.each do |key, val|
-          rows << [key, val]
-        end
-        table = Terminal::Table.new :rows => rows
-        puts table
+        details = workspace.show_details
+        puts details
       end
     elsif selection == "6"
       if workspace.selected.nil?
