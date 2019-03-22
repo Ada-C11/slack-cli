@@ -1,19 +1,53 @@
 require "httparty"
-require "dotenv"
 require "awesome_print"
-require "pry"
-require_relative "channel"
-require_relative "user"
+require "dotenv"
+Dotenv.load
 
 module Slack
+  class ResponseError < StandardError; end
   class Recipient
-    class SlackError < StandardError; end
-
+    BASE_URL = "https://slack.com/api/chat.postMessage"
+    
     attr_reader :slack_id, :name
 
     def initialize(slack_id, name)
       @slack_id = slack_id
       @name = name
-    end # initialize
+      # raise error here if name isn't a string
+    end
+  
+    def self.get(base_url, parameters)
+      response = HTTParty.get(base_url, query: parameters)
+      # unless response.code == 200 && response.parsed_response["ok"]
+      #   raise SlackError, response["error"]
+      # end
+
+      return response
+    end
+
+    def send_message(recipient, message)
+      message_request = HTTParty.post("#{BASE_URL}chat.postMessage",
+        headers: {"Content-Type" => "application/x-www0form-urlencoded"},
+        body: {
+          token: ENV["SLACK_API_TOKEN"],
+          text: message,
+          channel: recipient
+        })
+  
+  
+      if response["ok"] == false
+        raise SlackAPI::SlackError, "There was an error sending #{message} to #{recipient}. #{message_request["error"]}"
+      else 
+        return true
+      end
+    end
+
+    def self.list
+      raise NotImplementedError, "Implement me in a child class!"
+    end
+
+    def details
+      ["name", "slack_id"]
+    end
   end # class
 end # module

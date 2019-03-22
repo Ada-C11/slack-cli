@@ -1,75 +1,64 @@
 require "httparty"
-require "dotenv"
-require "awesome_print" 
-require_relative "channel"
 require_relative "user"
+require_relative "channel"
+require "awesome_print"
+require "dotenv"
 
-def main
-  puts "Welcome to the Ada Slack CLI!"
+Dotenv.load
 
-  # TODO project
+module Slack
+  class Workspace
+    BASE_URL = "https://slack.com/api/users.list"
+    attr_reader :users, :channels
+    attr_accessor :selection
 
-  puts "This workspace has #{Slack::Channel.list_channels.length} channels."
-  puts "This workspace has #{Slack::User.list_users.length} users."
-
-  loop do
-    puts "\n\t\t~ MENU ~
-   \t|1|::List Channels
-   \t|2|::List Users
-   \t|3|::Select User
-   \t|4|::Select Channel
-   \t|7|::Quit"
-    puts "\nPlease select from the Menu:"
-    answer = gets.chomp.to_i
-
-    # List Stuff
-    case answer
-
-    when 1
-      puts Slack::Channel.list_channels
-      puts "Anything else?"
-      answer = gets.chomp
-    when 2
-      puts Slack::User.list_users
-      puts "Anything else?"
-      answer = gets.chomp
-    when 3
-      puts "Please enter a username or real name:"
-      name_or_id = gets.chomp
-
-      chosen_user = Slack::User.select_user(name_or_id)
-      ap chosen_user
-
-      puts "Show additional details for #{name_or_id}? (Y/N)"
-      choice = gets.chomp.downcase
-
-      if choice == "y"
-        ap chosen_user.show_details(name_or_id)
-        # call show_details method and puts ap it
-      end
-    when 4
-      puts "Please enter a channel name or channel id:"
-      name_or_id = gets.chomp
-      chosen_channel = Slack::Channel.select_channel(name_or_id)
-
-      puts "Show additional details for #{name_or_id}? (Y/N)"
-      choice = gets.chomp.downcase
-
-      if choice == "y"
-        ap chosen_channel.show_details(name_or_id)
-      end
-      # ap details
-      # call show_details method and puts ap it
-
-    when 5
-    when 6
-    when 7
-      break
-    else
-      puts "Please select from Menu Items."
+    def initialize
+      @users = User.list
+      @channels = Channel.list
+      @selection = nil
     end
-  end
-  puts "Thank you for using the Ada Slack CLI"
-end
+ 
+    def select_user(name_or_id) 
+      users.each do |user|
+        if name_or_id == user.name || name_or_id == user.slack_id || name_or_id == user.real_name
+          @selection = user
+        end
+      end
+      return @selection
+      # if @selection == nil
+      #   return "Sorry, #{name_or_id} is not a valid user."
+      # end
+    end
+    
+    def select_channel(name_or_id)
+      channels.find do |channel|
+        if name_or_id == channel.name || name_or_id == channel.slack_id
+          @selection = channel
+        end
+      end
+      
+      if @selection == nil
+        return "Sorry, #{name_or_id} is not a valid channel."
+      end
+    end
 
-main if __FILE__ == $PROGRAM_NAME
+    def show_details
+      # if @selection == nil
+      #   return false
+        ap @selection, @selection.details
+      # end
+    end 
+
+    def send_message(text)
+      if @selection == nil
+        return false
+      end
+
+      if text == ""
+        return nil
+      end
+
+      return @selection.send_message(@selection.slack_id, text)
+    end  
+  end
+end
