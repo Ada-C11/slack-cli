@@ -37,15 +37,15 @@ module Slack
           @selection = channel
         end
       end
-      return @selection
-      
+
       if @selection == nil
         return "Sorry, #{name_or_id} is not a valid channel."
       end
+      return @selection
     end
 
     def show_details
-      return @selection, @selection.channel_details
+      return @selection, @selection.details
       # if @selection == nil
       #   return false
         # ap @selection, @selection.details

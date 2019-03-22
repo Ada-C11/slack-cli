@@ -19,7 +19,7 @@ module Slack
       channel_data = self.get(BASE_URL, PARAMETERS)
 
       channel_data["channels"].map do |channel|
-        self.new(channel["id"], channel["name"], channel["topic"]["value"], channel["members"].length)
+        self.new( channel["name"], channel["id"], channel["topic"]["value"], channel["members"].length)
       end
     end
 

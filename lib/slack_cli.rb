@@ -31,7 +31,7 @@ def main
       puts "Please enter a SlackID or full name:"
       name_or_id = gets.chomp
 
-      puts "#{workspace.select_user(name_or_id)}"
+      workspace.select_user(name_or_id)
       # selection = workspace.select_user(name_or_id)
 
       puts "Show additional details for #{name_or_id}? (Y/N)"
@@ -44,8 +44,9 @@ def main
     when 4
       puts "Please enter a channel name or channel id:"
       name_or_id = gets.chomp
-
       
+      workspace.select_channel(name_or_id)
+
       puts "Show additional details for #{name_or_id}? (Y/N)"
       choice = gets.chomp.downcase
 

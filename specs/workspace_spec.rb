@@ -84,7 +84,7 @@ describe "Workspace Class" do
   
           slack_ids.each_with_index do |slack_id, i|
             find_channel = workspace.select_channel(slack_id)
-            selected_channel = workspace.selected
+            selected_channel = workspace.selection
             expect(selected_channel).must_be_kind_of Slack::Channel
             expect(selected_channel.topic).must_equal "#{topics[i]}"
           end
