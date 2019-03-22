@@ -46,7 +46,7 @@ describe "instance methods" do
   it "returns a channel object from select_channel" do
     VCR.use_cassette("slack_workspace") do
       expect(@workspace.select_channel("random")).must_be_kind_of Channel
-      expect(@workspace.select_channel.first.must_be_kind_of Channel
+      expect(@workspace.select_channel.first).must_be_kind_of Channel
     end
   end
 
