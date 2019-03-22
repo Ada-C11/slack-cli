@@ -87,4 +87,13 @@ describe "Workspace" do
       expect(@workspace.tp_details_options).must_equal [:name, :topic, :member_count, :slack_id]
     end
   end
+
+  describe "send_message" do
+    it "sends a valid message" do
+      VCR.use_cassette("slack_message") do
+        select_user = @workspace.select_user("sopheary.chiv")
+        expect(select_user.send_message("test")).must_equal true
+      end
+    end
+  end
 end

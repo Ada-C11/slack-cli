@@ -282,4 +282,70 @@ http_interactions:
         - SophearyChiv - API Project","bot_id":"BH4A4C4EA"}}'
     http_version: 
   recorded_at: Fri, 22 Mar 2019 21:36:51 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<SLACK_API_TOKEN>&channel=UH0EG0QHE&text=test
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 Mar 2019 22:37:04 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - '09c03a68-6ec2-4462-9f6d-03a7d3075d6b'
+      X-Oauth-Scopes:
+      - identify,channels:read,users:read,chat:write:bot
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write:bot
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-glin
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 5971d213ff39e16c310a05523f08e121.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - W_SAGwqX5q57vFIVkLscmaBjQf6dty2v5WhZD9uIZ0I51rBo_-BKVQ==
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channel":"DH36UDYP7","ts":"1553294224.000700","message":{"type":"message","subtype":"bot_message","text":"test","ts":"1553294224.000700","username":"Ports
+        - SophearyChiv - API Project","bot_id":"BH4A4C4EA"}}'
+    http_version: 
+  recorded_at: Fri, 22 Mar 2019 22:37:04 GMT
 recorded_with: VCR 4.0.0
