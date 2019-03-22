@@ -44,5 +44,14 @@ module Slack
       return "" unless selected
       return selected.details
     end
+
+    def find_user(input:)
+      users.each do |user|
+        if input == user.name.upcase || input == user.real_name.upcase || input == user.id.upcase
+          return user
+        end
+      end
+      return nil
+    end
   end
 end

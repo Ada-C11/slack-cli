@@ -93,25 +93,42 @@ describe "Workspace class" do
     end
   end
 
-<<<<<<< HEAD
-  it "will return string details of selected object if valid" do
-    @workspace.select_channel(channel: @workspace.channels[1])
-    expect(@workspace.details_for_selected).must_equal "Name: general, \nID: CH2P3NB0T, \nTopic: Company-wide announcements and work-based matters, \nMember Count: 2"
-  end
-
-  it "will return empty string if selected object is nil" do
-    @workspace.select_channel(channel: @workspace.channels[1])
-    expect(@workspace.details_for_selected).must_equal ""
-=======
   describe "Workspace#find_user" do
     it "will return a user object, given a valid user's name, real_name or id" do
       user_name = "elise.pham88"
       real_name = "elise.pham88"
       user_id = "UH2RH81RA"
-      expect(@workspace.find_user(user_name)).must_be_instance_of Slack::User
-      expect(@workspace.find_user(real_name)).must_be_instance_of Slack::User
-      expect(@workspace.find_user(user_id)).must_be_instance_of Slack::User
+      user = @workspace.find_user(input: user_name.upcase)
+      expect(user).must_be_instance_of Slack::User
+      expect(user.name).must_equal "elise.pham88"
+      user = @workspace.find_user(input: real_name.upcase)
+      expect(user).must_be_instance_of Slack::User
+      expect(user.real_name).must_equal "elise.pham88"
+      user = @workspace.find_user(input: user_id.upcase)
+      expect(user).must_be_instance_of Slack::User
+      expect(user.id).must_equal "UH2RH81RA"
     end
->>>>>>> 3cd42306f5f82872d586a30606abdc1edf7f1765
+
+    it "will return nil if invalid users name, real_name or id" do
+      user_name = "elissdfsdfe.pham88"
+      real_name = "elisesdfsdf.pham88"
+      user_id = "UH2RHsdfsdf81RA"
+      expect(@workspace.find_user(input: user_name.upcase)).must_be_nil
+      expect(@workspace.find_user(input: real_name.upcase)).must_be_nil
+      expect(@workspace.find_user(input: user_id.upcase)).must_be_nil
+    end
+  end
+
+  describe "Workspace#find_channel" do
+    it "will return a user object, given a valid channel's name or id" do
+      channel_name = "random"
+      channel_id = "CH2RH8AMA"
+      channel = @workspace.find_channel(input: channel_name.upcase)
+      expect(channel).must_be_instance_of Slack::Channel
+      expect(channel.name).must_equal "random"
+      channel = @workspace.find_channel(input: channel_id.upcase)
+      expect(channel).must_be_instance_of Slack::Channel
+      expect(channel.id).must_equal "CH2RH8AMA"
+    end
   end
 end
