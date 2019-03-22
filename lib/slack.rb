@@ -30,7 +30,7 @@ def main
     when "select user"
       puts "Enter username or slack id:"
 
-      name_or_id = gets.chomp.downcase
+      name_or_id = gets.chomp
       user = workspace.select_user(name_or_id)
       puts "Options: \ndetails \nsend message \nreturn to main menu"
       input = gets.chomp.downcase
@@ -51,7 +51,7 @@ def main
       end
     when "select channel"
       puts "Enter channel name or id:"
-      name_or_id = gets.chomp.downcase
+      name_or_id = gets.chomp
       workspace.select_channel(name_or_id)
       puts "Options: \ndetails \nsend message \nreturn to main menu"
       input = gets.chomp.downcase
