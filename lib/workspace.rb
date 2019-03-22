@@ -1,7 +1,6 @@
 module Slack
   class Workspace
-    attr_reader :users, :channels
-    attr_accessor :selected # only needed here because of tests... that seems wrong?
+    attr_reader :users, :channels, :selected
 
     def initialize
       @users = User.list
@@ -17,21 +16,22 @@ module Slack
       select(input, users)
     end
 
-    def show_details(test: false) # This is the only method that prints anything.
-      puts "No recipient selected".red unless selected || test
+    # def show_details(test: false) # This is the only method that prints anything.
+    #   puts "No recipient selected".red unless selected || test
 
-      if selected.class == Slack::User
-        tp selected, :name, :real_name, :slack_id unless test
-        return selected
-      elsif selected.class == Slack::Channel
-        tp selected, :name, :topic, :member_count, :slack_id unless test
-        return selected
-      else
-        return nil
-      end
-    end
+    #   if selected.class == Slack::User
+    #     tp selected, :name, :real_name, :slack_id unless test
+    #     return selected
+    #   elsif selected.class == Slack::Channel
+    #     tp selected, :name, :topic, :member_count, :slack_id unless test
+    #     return selected
+    #   else
+    #     return nil
+    #   end
+    # end
 
-    def send_message
+    def send_message(message)
+      selected.send_message(message)
     end
 
     private

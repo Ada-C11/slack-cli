@@ -3,7 +3,6 @@ require_relative "workspace"
 require_relative "user"
 require_relative "channel"
 
-# require_relative "../specs/test_helper"
 require "colorize"
 require "table_print"
 require "httparty"
@@ -18,7 +17,7 @@ def main
   # TODO project
   loop do
     puts "What would you like to do next?"
-    puts "[list users] [list channels] [select user] [select channel] [details] [quit]"
+    puts "[list users] [list channels] [select user] [select channel] [details] [send message] [quit]"
     print "> "
 
     user_input = gets.chomp
@@ -37,7 +36,17 @@ def main
       input = gets.chomp
       puts workspace.select_channel(input).green
     when "details"
-      workspace.show_details # This is the only method that prints things within the method.
+      puts "No recipient selected".red unless workspace.selected
+
+      if workspace.selected.class == Slack::User
+        tp workspace.selected, :name, :real_name, :slack_id
+      elsif workspace.selected.class == Slack::Channel
+        tp workspace.selected, :name, :topic, :member_count, :slack_id
+      end
+    when "send message"
+      puts "Message > "
+      input = gets.chomp
+      workspace.send_message(input)
     end
 
     break if user_input == "quit"
