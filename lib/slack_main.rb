@@ -10,7 +10,6 @@ require_relative "channel"
 require_relative "user"
 require_relative "workspace"
 
-
 Dotenv.load
 
 CHANNEL_URL = "https://slack.com/api/channels.list"
@@ -55,7 +54,7 @@ def main
       puts "\nHere are the users:"
       rows = []
       workspace.users.each_with_index do |user, i|
-        rows << [i + 1, user.real_name]
+        rows << [i + 1, user.real_name, user.slack_id, user.name]
         # puts "#{i + 1}. name:#{user.real_name} --status:#{user.status_text} --emoji:#{user.status_emoji}--slack_id:#{user.slack_id}--username:#{user.name}"
       end
       table = Terminal::Table.new :rows => rows
