@@ -5,7 +5,7 @@ module SlackCLI
   class Recipient
 
     class SlackApiError < StandardError; end
-    
+
     attr_reader :slack_id, :name
 
     URL = "https://slack.com/api/chat.postMessage"
@@ -38,8 +38,7 @@ module SlackCLI
       response = HTTParty.post(URL, body: body, headers: headers)
 
       unless response.code == 200 && response.parsed_response["ok"]
-        # raise SlackApiError, "Error when posting #{message} to #{channel}, error: #{response.parsed_response["error"]}"
-        raise StandardError, "message could not be sent"
+        raise SlackApiError, "Error when posting #{message} to #{self.slack_id}, error: #{response.parsed_response["error"]}"
       end
   
       return true

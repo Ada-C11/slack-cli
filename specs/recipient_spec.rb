@@ -38,5 +38,18 @@ describe SlackCLI::Recipient do
         expect(response).must_equal true
       end
     end
+
+    it "will raise an error when given an invalid channel" do
+      VCR.use_cassette("workspace") do
+        slack_id = "invalid_id"
+        name = "invalid-channel"
+        bad_record = SlackCLI::Recipient.new(slack_id: slack_id, name: name)
+        exception = expect {
+          bad_record.send_message("This post should not work")
+        }.must_raise SlackCLI::Recipient::SlackApiError
+  
+        expect(exception.message).must_equal "Error when posting This post should not work to invalid_id, error: channel_not_found"
+      end
+    end
   end
 end
