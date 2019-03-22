@@ -33,6 +33,13 @@ describe "Recipient" do
         expect(return_value["ok"]).must_equal true
       end
     end
+
+    it "raises a SlackError if invalid queries are provided" do
+      VCR.use_cassette("recipient") do
+        url = "https://slack.com/api/channels.list"
+        expect { Slack::Recipient.get(url, token: "this_is_wrong") }.must_raise Slack::SlackError
+      end
+    end
   end
 
   describe "self.list" do

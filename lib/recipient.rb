@@ -1,6 +1,8 @@
 
 
 module Slack
+  TOKEN = ENV["SLACK_API_TOKEN"]
+
   class SlackError < StandardError; end
 
   class Recipient
@@ -15,11 +17,11 @@ module Slack
       # Implement here.
     end
 
-    def self.get(url)
+    def self.get(url, token: TOKEN)
       response = HTTParty.get(
         url,
         query: {
-          token: ENV["SLACK_API_TOKEN"],
+          token: token,
         },
       )
 
