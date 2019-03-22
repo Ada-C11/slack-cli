@@ -1,4 +1,5 @@
 module SlackBot
+  class SlackApiError < StandardError; end
   class Recipient
     BASE_URL = "https://slack.com/api/"
     TOKEN = ENV["TOKEN"]

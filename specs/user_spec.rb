@@ -1,4 +1,5 @@
 require_relative "test_helper"
+require "pry"
 
 describe "user" do
   describe "initialize" do
@@ -39,5 +40,38 @@ describe "user" do
     #     end
     #   end
 
+  end
+  describe "send message" do
+    before do 
+      VCR.use_cassette("send message") do
+        @user_list = SlackBot::User.list
+      end
+    end
+      
+     
+    it "returns true if given a valid message" do
+      VCR.use_cassette("send working message") do
+        message = "Hello!"
+        expect(@user_list.first.send_message(message)).must_equal true
+      end
+    end
+
+    it "returns a slackapierror when given an empty string" do
+      VCR.use_cassette("send message with empty string") do
+        message = ""
+        expect {
+        @user_list.first.send_message(message)
+        }.must_raise SlackBot::SlackApiError
+      end
+    end
+
+    # it "returns a slackapierror when given too many characters" do
+    #   VCR.use_cassette("send message with too many characters") do
+    #     message = "N" * 40010
+    #     expect {
+    #     @user_list.first.send_message(message)
+    #     }.must_raise SlackBot::SlackApiError
+    #   end
+    #end
   end
 end

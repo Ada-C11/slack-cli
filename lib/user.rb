@@ -1,7 +1,7 @@
 require "pry"
 
 module SlackBot
-  class SlackApiError < StandardError; end
+  # class SlackApiError < StandardError; end
 
   class User < Recipient
     USER_PATH_URL = "users.list?"
