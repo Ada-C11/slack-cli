@@ -93,6 +93,7 @@ describe "Workspace class" do
     end
   end
 
+<<<<<<< HEAD
   it "will return string details of selected object if valid" do
     @workspace.select_channel(channel: @workspace.channels[1])
     expect(@workspace.details_for_selected).must_equal "Name: general, \nID: CH2P3NB0T, \nTopic: Company-wide announcements and work-based matters, \nMember Count: 2"
@@ -101,5 +102,16 @@ describe "Workspace class" do
   it "will return empty string if selected object is nil" do
     @workspace.select_channel(channel: @workspace.channels[1])
     expect(@workspace.details_for_selected).must_equal ""
+=======
+  describe "Workspace#find_user" do
+    it "will return a user object, given a valid user's name, real_name or id" do
+      user_name = "elise.pham88"
+      real_name = "elise.pham88"
+      user_id = "UH2RH81RA"
+      expect(@workspace.find_user(user_name)).must_be_instance_of Slack::User
+      expect(@workspace.find_user(real_name)).must_be_instance_of Slack::User
+      expect(@workspace.find_user(user_id)).must_be_instance_of Slack::User
+    end
+>>>>>>> 3cd42306f5f82872d586a30606abdc1edf7f1765
   end
 end
