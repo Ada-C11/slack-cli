@@ -3,6 +3,7 @@ require_relative "user"
 require_relative "recipient"
 require "dotenv"
 require "httparty"
+require "pry"
 Dotenv.load
 
 module Slack
@@ -31,17 +32,10 @@ module Slack
       return find_channel
     end
 
-    def self.selected_channel_details(channel_identifier)
-      chosen_channel = self.select_channel(channel_identifier)
-
+    def self.selected_channel_details(chosen_channel)
       details = "Channel ID: #{chosen_channel.slack_id}\nChannel name: #{chosen_channel.name} \nMembers: #{chosen_channel.num_members} \nChannel Topic: #{chosen_channel.topic}"
 
       return details
-
-      # chosen_channel = self.select_channel(channel_identifier)
-
-      # details = chosen_channel.self.all_channels_details
-      # return details
     end
 
     def self.user_list_all
