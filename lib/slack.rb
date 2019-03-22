@@ -26,19 +26,22 @@ def main
       puts "Which user would you like to select?"
       user_identifier = gets.chomp.downcase.to_s
       selected_channel = Slack::Workspace.select_user(user_identifier)
-      puts "You have selected #{selected_channel.name}. Please type 'details' for more info!"
-      answer = gets.chomp.downcase
-      if answer == "details"
-        "#{selected_channel.name}'s detail: \nID - #{selected_channel.slack_id}\n'"
-        puts "Please type 'details' if you would like to see complete details."
-      end
+      # if selected_channel == nil
+      #   puts "This channel doesn't exist. Exiting to main menu"
+      # else
+      #   puts "You have selected #{selected_channel.name}. Please type 'details' for more info!"
+      #   answer = gets.chomp.downcase
+      #   if answer == "details"
+      #     puts selected_channel
+
+      # end
       # if answers
     when "list users"
       puts Slack::Workspace.all_users_details
-    when "select user"
-      puts "Which user would you like to select?"
-      user_identifier = gets.chomp.downcase.to_s
-      selected_user = Slack::Workspace.select_channel(user_identifier)
+      # when "select user"
+      #   puts "Which user would you like to select?"
+      #   user_identifier = gets.chomp.downcase.to_s
+      #   selected_user = Slack::Workspace.select_channel(user_identifier)
       # puts selected_channel
     when "quit"
     else
@@ -48,30 +51,43 @@ def main
     selection = gets.chomp.downcase
   end
 
-  #   if selection == "list channels"
-
-  #   elsif selection == "select channel"
-
-  #     puts "Please type 'details' if you would like to see complete details."
-  #     answer = gets.chomp.downcase
-  #   elsif selection == "list users"
-  #     puts Slack::Workspace.all_users_details
-  #   elsif selection == "select user"
-  #     puts "Which user would you like to select?"
-  #     channel_identifier = gets.chomp.to_s
-  #     selected_user = Slack::Workspace.select_user(channel_identifier)
-  #     puts "Please type 'details' if you would like to see complete details."
-  #     answer = gets.chomp.downcase
-  #   else
-
-  #   end
-  #   puts "What would you like to do next? (list users, select user, list channels, select channel, or quit)"
-  #   selection = gets.chomp.downcase
-  # end
-
   # Should we use a case statement here for the 3 options?
 
   puts "Thank you for using the Ada Slack CLI"
 end
 
 main if __FILE__ == $PROGRAM_NAME
+
+def send_message(user, message)
+  url = "https://slack.com/api/chat.postMessage"
+  params = {
+    token: ENV["KEY"],
+    channel: user_identifier,
+    text: message,
+  }
+
+  message_request = HTTParty.post(URL, query: params)
+    if message_request["ok"] == false
+      raise ArgumentError, "Request is unsuccessful"
+    else
+      return message_request
+    end
+  end
+end
+
+def send_message(channel, message)
+  url = "https://slack.com/api/chat.postMessage"
+  params = {
+    token: ENV["KEY"],
+    channel: channel_identifier,
+    text: message,
+  }
+
+  message_request = HTTParty.post(URL, query: params)
+    if message_request["ok"] == false
+      raise ArgumentError, "Request is unsuccessful"
+    else
+      return message_request
+    end
+  end
+end
