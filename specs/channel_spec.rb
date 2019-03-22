@@ -1,9 +1,9 @@
 require_relative "test_helper"
 
 describe SlackApi::Channel do
-  describe "list channels" do
+  describe "json channels" do
     it "returns valid channels" do
-      VCR.use_cassette("slack_channels_list") do
+      VCR.use_cassette("slack_channels_json") do
         channels_list = SlackApi::Channel.channel_api
 
         channels_list.each do |channel|
@@ -13,7 +13,7 @@ describe SlackApi::Channel do
     end
 
     it "return includes a specific channel" do
-      VCR.use_cassette("slack_channels_list") do
+      VCR.use_cassette("slack_channels_json") do
         channels_list = SlackApi::Channel.channel_api
 
         expect(channels_list.first["name"]).must_equal "general"
@@ -21,7 +21,7 @@ describe SlackApi::Channel do
     end
 
     it "channels list will only include existent channels " do
-      VCR.use_cassette("slack_channels_list") do
+      VCR.use_cassette("slack_channels_json") do
         channels_list = SlackApi::Channel.channel_api
 
         channels_list.each do |channel|
@@ -37,6 +37,14 @@ describe SlackApi::Channel do
     #     expect(channels_list["ok"]).must_equal true
     #   end
     # end
+  end
+  describe "list channels" do
+    it "returns an array" do
+      VCR.use_cassette("slack_channels_list") do
+        channels_list = SlackApi::Channel.channel_api
+        expect(SlackApi::Channel.list(channels_list)).must_be_instance_of Array
+      end
+    end
   end
 end
 

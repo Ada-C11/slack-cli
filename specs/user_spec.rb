@@ -1,9 +1,9 @@
 require_relative "test_helper"
 
 describe SlackApi::User do
-  describe "list users" do
+  describe "json users" do
     it "returns valid users" do
-      VCR.use_cassette("slack_users_list") do
+      VCR.use_cassette("slack_users_json") do
         users_list = SlackApi::User.user_api
 
         users_list.each do |user|
@@ -13,7 +13,7 @@ describe SlackApi::User do
     end
 
     it "includes a specific user" do
-      VCR.use_cassette("slack_user_list") do
+      VCR.use_cassette("slack_users_json") do
         users_list = SlackApi::User.user_api
 
         expect(users_list.first["name"]).must_equal "slackbot"
@@ -21,7 +21,7 @@ describe SlackApi::User do
     end
 
     it "users list will only include existent users" do
-      VCR.use_cassette("slack_users_list") do
+      VCR.use_cassette("slack_users_json") do
         users_list = SlackApi::User.user_api
 
         users_list.each do |user|
@@ -37,6 +37,26 @@ describe SlackApi::User do
     #     expect(users_list["ok"]).must_equal true
     #   end
     # end
+  end
+
+  describe "list users" do
+    it "contains slackbot as a user" do
+      skip
+      VCR.use_cassette("slack_users_list") do
+        users_list = SlackApi::User.user_api
+        # users_list.each do |user|
+
+        # end
+        expect(SlackApi::User.list(users_list)).must_include "slackbot"
+      end
+    end
+
+    it "returns an array" do
+      VCR.use_cassette("slack_users_list") do
+        users_list = SlackApi::User.user_api
+        expect(SlackApi::User.list(users_list)).must_be_instance_of Array
+      end
+    end
   end
 end
 
