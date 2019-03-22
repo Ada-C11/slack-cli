@@ -72,22 +72,25 @@ describe "Workspace class" do
     describe "send_message" do
       it "sends a message to a user" do
         VCR.use_cassette("send_message_to_user") do
-          # @workspace.users << Slack::User.new(
-          #   name: "Bogus",
-          #   real_name: "Bogus",
-          #   slack_id: "Bogus",
-          #   status_text: "Bogus",
-          #   status_emoji: "Bogus",
-          # )
           @workspace.selected = @workspace.users[2]
           response = @workspace.send_message("This goes to a user!")
           expect(response).must_equal true
         end
       end
 
-      it
-
       it "will raise an error when given an invalid user" do
+        VCR.use_cassette("send_message_to_bogus_user") do
+          @workspace.selected = Slack::User.new(
+            name: "Bogus",
+            real_name: "Bogus",
+            slack_id: "Bogus",
+            status_text: "Bogus",
+            status_emoji: "Bogus",
+          )
+
+          exception = expect { @workspace.send_message("This isn't gonna work!") }.must_raise Slack::SlackApiError
+          expect(exception.message).must_equal "channel_not_found"
+        end
       end
     end
   end
