@@ -73,12 +73,24 @@ describe "Workspace" do
       bad_channel = SlackAPI::Channel.new(slack_id: "123", name: "bad", topic: "bad", member_count: "1")
       @workspace.channels.push(bad_channel)
       @workspace.select_channel(id_or_name:"bad")
-      VCR.use_cassette("send_message_bad") do
+      VCR.use_cassette("send_message_bad_channel") do
         exception = expect {
           @workspace.send_message(text:"This post should not work")
         }.must_raise SlackAPI::SlackApiError
       end
       @workspace.channels.pop
+    end
+
+    it "will raise an error when given an invalid user" do
+      bad_user = SlackAPI::User.new(real_name: "baddie", slack_id: "123", name: "baddie")
+      @workspace.users.push(bad_user)
+      @workspace.select_user(id_or_name:"baddie")
+      VCR.use_cassette("send_message_bad_user") do
+        exception = expect {
+          @workspace.send_message(text:"This post should not work")
+        }.must_raise SlackAPI::SlackApiError
+      end
+      @workspace.users.pop
     end
     
     it "will send a message to a channel" do
@@ -95,6 +107,15 @@ describe "Workspace" do
       @workspace.select_user(id_or_name: user)
       VCR.use_cassette("send_message_to_user") do
         response = @workspace.send_message(text:"message to user!")
+        expect(response).must_equal true
+      end
+    end
+
+    it "will send with empty text" do
+      user = @workspace.users[0].name
+      @workspace.select_user(id_or_name: user)
+      VCR.use_cassette("send_message_to_user") do
+        response = @workspace.send_message(text:"")
         expect(response).must_equal true
       end
     end
