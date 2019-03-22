@@ -5,6 +5,19 @@ require_relative "channel"
 require_relative "workspace"
 require_relative "recipient"
 
+def display_options
+  options = ["1. List Users",
+             "2. List Channels",
+             "3. Select User",
+             "4. Select Channel",
+             "5. Details",
+             "6. Send Message",
+             "7. Quit"]
+  options.each do |one_option|
+    puts one_option
+  end
+end
+
 def main
   channel_name = Channel.list.map do |channel|
     channel[0]
@@ -16,17 +29,9 @@ def main
   puts "We currently have '#{User.list.length}' members and '#{Channel.list.length} channels.'"
   puts ""
   puts "Please choose one of the the following options"
-  puts "List Users"
-  puts "List Channels"
-  puts "Select User"
-  puts "Select Channel"
-  puts "Details"
-  puts "Send Message"
-  puts "Quit"
+  display_options
   selection = gets.chomp
   until selection == "Quit"
-
-    #TODO: add command list every time teh loop repeats
     case selection
     when "List Users"
       puts "Here is the list of users and their details:"
@@ -37,6 +42,7 @@ def main
         puts ""
       end
       puts "What would you like to do next? "
+      display_options
       selection = gets.chomp
     when "List Channels"
       puts "Here is the list of channels and their details: "
@@ -48,6 +54,7 @@ def main
         puts ""
       end
       puts "What would you like to do next? "
+      display_options
       selection = gets.chomp
     when "Select User"
       puts "Here are all the members' user names: #{user_name}"
@@ -56,6 +63,7 @@ def main
       details = workspace.select_user(chose)
       puts "You just selected #{details}"
       puts "What would you like to do next? "
+      display_options
       selection = gets.chomp
     when "Select Channel"
       puts "Here are all the channels' names: #{channel_name}"
@@ -64,9 +72,9 @@ def main
       details = workspace.select_channel(chose)
       puts "You just selected #{details}"
       puts "What would you like to do next? "
+      display_options
       selection = gets.chomp
     when "Details"
-      ###### JUST CHANGED
       puts workspace.show_details(details)
       puts "What would you like to do next? "
       selection = gets.chomp
@@ -76,6 +84,7 @@ def main
 
       SlackApi.send_message(message, chose)
       puts "What would you like to do next? "
+      display_options
       selection = gets.chomp
     end
   end
