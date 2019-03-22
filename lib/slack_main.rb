@@ -3,11 +3,13 @@
 require "dotenv"
 require "pry"
 require "httparty"
+require 'terminal-table'
 
 require_relative "recipient"
 require_relative "channel"
 require_relative "user"
 require_relative "workspace"
+
 
 Dotenv.load
 
@@ -51,14 +53,22 @@ def main
   until selection == "6"
     if selection == "1"
       puts "\nHere are the users:"
+      rows = []
       workspace.users.each_with_index do |user, i|
-        puts "#{i + 1}. name:#{user.real_name} --status:#{user.status_text} --emoji:#{user.status_emoji}--slack_id:#{user.slack_id}--username:#{user.name}"
+        rows << [i + 1, user.real_name]
+        # puts "#{i + 1}. name:#{user.real_name} --status:#{user.status_text} --emoji:#{user.status_emoji}--slack_id:#{user.slack_id}--username:#{user.name}"
       end
+      table = Terminal::Table.new :rows => rows
+      puts table
     elsif selection == "2"
       puts "\nHere are the channels:"
+      rows = []
       workspace.channels.each_with_index do |channel, i|
-        puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.slack_id}"
+        rows << [i + 1, channel.name.capitalize]
+        # puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.slack_id}"
       end
+      table = Terminal::Table.new :rows => rows
+      puts table
     elsif selection == "3" || selection == "4"
       clear_selected(workspace)
       case selection
