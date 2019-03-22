@@ -58,12 +58,11 @@ def main
         user_details = workspace.show_details
         tp user_details
       end
-      # ap details
-      # call show_details method and puts ap it
+
     when 5
-      puts "What would you like to send to #{selection}?"
+      puts "What would you like your message to say ?"
       message = gets.chomp
-      recipient.send_message(recipient, message)
+      workspace.send_message(message)
       puts "Your message has been sent! Yay!"
     when 6
       break

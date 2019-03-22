@@ -19,23 +19,27 @@ module Slack
 
     def self.get(base_url, parameters)
       response = HTTParty.get(base_url, query: parameters)
+      unless response.code == 200 && response.parsed_response["ok"]
+        raise ResponseError, response["error"]
+      end
 
       return response
     end
 
-    def send_message(recipient, message)
-      message_request = HTTParty.post("#{BASE_URL}chat.postMessage",
-                                      headers: { "Content-Type" => "application/x-www0form-urlencoded" },
+    def send_message(channel, text)
+      message_request = HTTParty.post(BASE_URL,
+                                      headers: { "Content-Type" => "application/x-www-form-urlencoded" },
                                       body: {
                                         token: ENV["SLACK_API_TOKEN"],
-                                        text: message,
-                                        channel: recipient,
+                                        channel: channel,
+                                        text: text,
+                                      # as_user: true,
                                       })
 
-      if response["ok"] == false
-        raise ResponseError, "There was an error sending your message"
-      else
+      if message_request["ok"]
         return true
+      else
+        raise ResponseError, "There was an error sending your message"
       end
     end
 
