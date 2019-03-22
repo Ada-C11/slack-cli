@@ -56,7 +56,6 @@ def main
       rows = []
       workspace.users.each_with_index do |user, i|
         rows << [i + 1, user.real_name, user.slack_id, user.name]
-        # puts "#{i + 1}. name:#{user.real_name} --status:#{user.status_text} --emoji:#{user.status_emoji}--slack_id:#{user.slack_id}--username:#{user.name}"
       end
       table = Terminal::Table.new :rows => rows
       puts table
@@ -65,7 +64,6 @@ def main
       rows = []
       workspace.channels.each_with_index do |channel, i|
         rows << [i + 1, channel.name, channel.topic, "#{channel.member_count} members", channel.slack_id]
-        # puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.slack_id}"
       end
       table = Terminal::Table.new :rows => rows
       puts table

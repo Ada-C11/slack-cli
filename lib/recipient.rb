@@ -11,12 +11,10 @@ module Slack
 
     BASE_URL = "https://slack.com/api/"
 
-    # Helper method used in channel and user classes
     def self.get(url, params)
       return HTTParty.get(url, query: params)
     end
 
-    # Helper method used by user and channel to send message
     def send_message(message)
       body = {
         text: message,

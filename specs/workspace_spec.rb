@@ -7,7 +7,6 @@ require_relative "../lib/workspace.rb"
 describe "Workspace class" do
   before do
     VCR.use_cassette("workspace_creation") do
-      #query_params = { token: ENV["SLACK_API_TOKEN"] }
       @workspace = Slack::Workspace.new
     end
   end
