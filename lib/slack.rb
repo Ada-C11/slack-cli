@@ -55,11 +55,8 @@ module SlackCLI
       channel_list = workspace.channels
       puts "\n\n----List of Slack Channels----\n\n"
       channel_list.each_with_index do |channel, index|
-        puts "Channel N.#{index + 1}"
-        puts "  Name: #{channel.name}"
-        puts "  ID: #{channel.id}"
-        puts "  Member Count: #{channel.members}"
-        puts "  Topic: #{channel.topic}\n\n"
+        print "Channel N.#{index + 1}"
+        puts channel.details + "\n\n"
       end
       puts "Press any key to continue...\n\n"
       gets.chomp
