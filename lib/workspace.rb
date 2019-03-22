@@ -54,12 +54,26 @@ module SlackApi
     end
 
     def send_message(message)
-      if @channels.include?(@selected)
-        SlackApi::Channel.send_message(message, @selected)
-      elsif (SlackApi::User.user_api).include?(@selected)
-        # SlackApi::user .method for sending message to user
+      url = "https://slack.com/api/chat.postMessage"
+      key = ENV["SLACK_API_TOKEN"]
+
+      if @channels.include?(@selected) || @users.include?(@selected)
+        response = HTTParty.post(
+          url,
+          headers: {"Content-Type" => "application/x-www-form-urlencoded"},
+          body: {
+            token: key,
+            text: message,
+            channel: @selected["id"],
+          },
+        )
+        if response["ok"]
+          return true
+        else
+          raise SlackApi::SlackError, "Error when posting message to #{@selected["name"]}, error: #{response["error"]}"
+        end
       else
-        error_message = "You have not selected a user or channel yet."
+        error_message = "\n~You have not selected a user or channel yet.~"
         return error_message
       end
     end

@@ -94,4 +94,35 @@ describe SlackApi::Workspace do
       end
     end
   end
+
+  describe "send_message" do
+    it "can send a valid message to a channel" do
+      VCR.use_cassette("slack_message") do
+        workspace = SlackApi::Workspace.new
+        workspace.select_channel("general")
+        return_value = workspace.send_message("This is a message!")
+
+        expect(return_value).must_equal true
+      end
+    end
+
+    it "returns error message if no recipient has been selected yet" do
+      VCR.use_cassette("slack_message") do
+        workspace = SlackApi::Workspace.new
+        return_value = workspace.send_message("This is a message!")
+
+        expect(return_value).must_include "You have not selected a user or channel yet."
+      end
+    end
+
+    it "will raise an error if given an empty message" do
+        VCR.use_cassette("slack_message") do
+            workspace = SlackApi::Workspace.new
+            workspace.select_channel("general")
+          expect {
+            workspace.send_message("")
+          }.must_raise SlackApi::SlackError
+        end
+      end
+  end
 end

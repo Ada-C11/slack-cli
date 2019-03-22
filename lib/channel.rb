@@ -7,6 +7,9 @@ module SlackApi
   class SlackError < StandardError; end
 
   class Channel #< Recipient
+    def initialize(raw_channel)
+    end
+
     def self.channel_api
       url = "https://slack.com/api/channels.list"
       key = ENV["SLACK_API_TOKEN"]
@@ -15,26 +18,9 @@ module SlackApi
       response = JSON.parse(response)
 
       return response["channels"]
-    end
-
-    def self.send_message(message, recipient)
-      url = "https://slack.com/api/"
-      key = ENV["SLACK_API_TOKEN"]
-
-      response = HTTParty.post(
-        "#{url}chat.postMessage",
-        headers: {"Content-Type" => "application/x-www-form-urlencoded"},
-        body: {
-          token: key,
-          text: message,
-          channel: recipient,
-        },
-      )
-      if response["ok"]
-        return true
-      else
-        raise SlackApi::SlackError, "Error when posting message to #{response[:body][:channel]}, error: #{response["error"]}"
-      end
+      # return response["channels"].map do |channel|
+      #   self.new(channel)
+      # end
     end
 
     def self.list(channels_list)
