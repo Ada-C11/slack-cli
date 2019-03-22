@@ -16,15 +16,15 @@ module Slack
       @selected = nil
     end
 
-    def select_channel(slack_id)
+    def select_channel(identifier)
       @selected = @channels.find do |channel|
-        channel.slack_id == slack_id
+        channel.slack_id == identifier
       end
     end
 
-    def select_user(slack_id)
+    def select_user(indentifier)
       @selected = @users.find do |user|
-        user.slack_id == slack_id
+        user.slack_id == indentifier
       end
     end
 

@@ -27,7 +27,7 @@ describe "Workspace class" do
   end
 
   describe "select_channel" do
-    it "can select a Channel" do
+    it "can select a Channel based on id" do
       @workspace.select_channel("CH0EE9NJC")
       expect(@workspace.selected).must_be_kind_of Slack::Channel
     end
@@ -39,7 +39,7 @@ describe "Workspace class" do
   end
 
   describe "select_user" do
-    it "can select a User" do
+    it "can select a User based on id" do
       @workspace.select_user("USLACKBOT")
       expect(@workspace.selected).must_be_kind_of Slack::User
     end
