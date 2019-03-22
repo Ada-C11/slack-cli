@@ -13,8 +13,8 @@ module SlackAPI
 
       channel_list = []
 
-      if response["ok"] != true # write a test for this
-        raise SlackAPI::SlackError, "There was an error. The code is #{response["error"]}."
+      if response["ok"] != true
+        raise SlackAPI::SlackError, "There was an error. The error message is #{response["error"]}"
       else
         response["channels"].each do |channel|
           channel_list << {"name" => channel["name"], "topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"]}
@@ -23,7 +23,7 @@ module SlackAPI
       return channel_list
     end
 
-    def select_channel(identifier) # maybe in parent class?
+    def select_channel(identifier)
       response = Recipient.get("channels.list")
 
       selected_channel = ""
@@ -43,16 +43,12 @@ module SlackAPI
     def see_details(identifier)
       response = Recipient.get("channels.list")
 
-      channel_details = {}
+      channel_details = []
 
-      if response["ok"] != true
-        raise SlackAPI::SlackError, "This channel is not valid."
-      else
-        response["channels"].each do |channel|
-          if channel["id"] == identifier || channel["name"] == identifier
-            channel_details[channel["name"]] = {"topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"]}
-            return channel_details
-          end
+      response["channels"].each do |channel|
+        if channel["id"] == identifier || channel["name"] == identifier
+          channel_details << {"name" => channel["name"], "topic" => channel["topic"]["value"], "member count" => channel["members"].length, "id" => channel["id"]}
+          return channel_details
         end
       end
     end

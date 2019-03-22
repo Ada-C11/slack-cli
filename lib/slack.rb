@@ -9,7 +9,7 @@ Dotenv.load
 def main
   puts "Welcome to the Ada Slack CLI!"
   puts "The workspace has #{SlackAPI::Channel.list_channels.length} channels and #{SlackAPI::User.list_users.length} users"
-  ask_again = "Would you like to 'list users', 'list channels', 'select user', 'select channel', 'details', 'send message', or 'quit'?"
+  ask_again = "Would you like to 'list users', 'list channels', 'select user', 'select channel', 'details' (select user or channel first), 'send message' (select user or channel first), or 'quit'?"
   puts ask_again
   response = gets.chomp
 
@@ -52,7 +52,11 @@ def main
         response = gets.chomp
       elsif select_response == "select channel"
         details = channel.see_details(selected_recipient)
-        puts details
+        tp details, "name", "topic", "member count", "id"
+        puts ask_again
+        response = gets.chomp
+      else
+        puts "Select a user or channel first"
         puts ask_again
         response = gets.chomp
       end

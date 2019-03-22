@@ -10,16 +10,19 @@ describe SlackAPI do
         expect(response.length).must_equal 3
       end
     end
-    # it "raises error if response 'ok' is false" do
-    #   real_token = ENV["SLACK_API_TOKEN"]
-    #   ENV["SLACK_API_TOKEN"] = "badtoken"
+    it "will raise an error if given an invalid key" do
+      real_token = ENV["SLACK_API_TOKEN"]
+      ENV["SLACK_API_TOKEN"] = "NOT_REAL_TOKEN"
 
-    #   VCR.use_cassette("list_users") do
-    #     return_value = SlackAPI::User.list_users
-    #     expect (return_value).must_equal true
-    #   end
-    #   ENV["SLACK_API_TOKEN"] = real_token
-    # end
+      VCR.use_cassette("list_users_2") do
+        error = expect {
+          SlackAPI::User.list_users
+        }.must_raise SlackAPI::SlackError
+        expect(error.message).must_equal "There was an error. The error message is invalid_auth"
+      end
+
+      ENV["SLACK_API_TOKEN"] = real_token
+    end
   end
 
   describe "select_user" do
@@ -81,8 +84,6 @@ describe SlackAPI do
           SlackAPI::User.new.send_msg("UH3UT3SJK",
                                       "")
         }.must_raise SlackAPI::SlackError
-
-        # expect(error.message).must_equal "Error when posting  to ports-api-testing, error: no_text"
       end
     end
   end

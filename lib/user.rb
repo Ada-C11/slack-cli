@@ -11,15 +11,14 @@ module SlackAPI
     def self.list_users
       response = Recipient.get("users.list")
 
-      user_list = [] #changed this to an array to use table print
+      user_list = []
 
       if response["ok"]
         response["members"].each do |member|
           user_list << {"name" => member["name"], "real name" => member["real_name"], "slack id" => member["id"]}
         end
-        # user_list is now an array of hashes
       else
-        raise SlackAPI::SlackError, "There was an error. The code is #{response.error}."
+        raise SlackAPI::SlackError, "There was an error. The error message is #{response["error"]}"
       end
       return user_list
     end
