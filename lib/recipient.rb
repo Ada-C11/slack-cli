@@ -5,9 +5,10 @@ Dotenv.load
 
 module Slack
   class ResponseError < StandardError; end
+
   class Recipient
     BASE_URL = "https://slack.com/api/chat.postMessage"
-    
+
     attr_reader :slack_id, :name
 
     def initialize(slack_id, name)
@@ -15,29 +16,25 @@ module Slack
       @name = name
       # raise error here if name isn't a string
     end
-  
+
     def self.get(base_url, parameters)
       response = HTTParty.get(base_url, query: parameters)
-      # unless response.code == 200 && response.parsed_response["ok"]
-      #   raise SlackError, response["error"]
-      # end
 
       return response
     end
 
     def send_message(recipient, message)
       message_request = HTTParty.post("#{BASE_URL}chat.postMessage",
-        headers: {"Content-Type" => "application/x-www0form-urlencoded"},
-        body: {
-          token: ENV["SLACK_API_TOKEN"],
-          text: message,
-          channel: recipient
-        })
-  
-  
+                                      headers: { "Content-Type" => "application/x-www0form-urlencoded" },
+                                      body: {
+                                        token: ENV["SLACK_API_TOKEN"],
+                                        text: message,
+                                        channel: recipient,
+                                      })
+
       if response["ok"] == false
         raise ResponseError, "There was an error sending your message"
-      else 
+      else
         return true
       end
     end

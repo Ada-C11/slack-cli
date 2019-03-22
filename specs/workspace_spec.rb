@@ -45,8 +45,52 @@ describe "Workspace Class" do
             expect(select_user.real_name).must_equal "#{all_real_names[i]}"
           end
         end
-
       end
+
+      it "returns error message if user input slackid or user name are invalid" do
+        VCR.use_cassette("workspace information") do
+          workspace = Slack::Workspace.new
+          user_search = workspace.select_user("steph steph")
+          selected_user = workspace.selection
+          assert_nil(selected_user, msg = nil)
+        end
+      end
+      
+    end
+
+    describe "select channel method" do
+      it "finds a channel by name and stores it in the selected variable" do
+        VCR.use_cassette("workspace_information_find") do
+          channel_names = ["bassguitar", "general", "random"]
+          topics = ["All bass no treble", "Company-wide announcements and work-based matters", "Non-work banter and water coolerconversation"]
+        workspace = Slack::Workspace.new
+      
+        channel_names.each_with_index do |channel_name, i|
+          search_channel = workspace.select_channel(channel_name)
+          selected_channel = workspace.selection
+        #   expect(selected_channel).must_be_kind_of Slack::Channel
+        #   expect(selected_channel.topic).must_equal "#{topics[i]}"
+        end
+       end
+    end
+
+    it "finds a channel by slack id and stores it in the selected variable" do
+        VCR.use_cassette("workspace_information_find") do
+          slack_ids = ["CH317B6EN", "CH408C1CP", "CH4AZQMJS"]
+          topics = ["All doggos all the time! :dog:",
+                    "Company-wide announcements and work-based matters",
+                    "Non-work banter and water cooler conversation"]
+          workspace = Slack::Workspace.new
+  
+          slack_ids.each_with_index do |slack_id, i|
+            find_channel = workspace.select_channel(slack_id)
+            selected_channel = workspace.selection
+            expect(selected_channel).must_be_kind_of Slack::Channel
+            expect(selected_channel.topic).must_equal "#{topics[i]}"
+          end
+        end
+      end
+
     end
     
 end

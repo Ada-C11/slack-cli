@@ -1,4 +1,5 @@
 require "awesome_print"
+require "table_print"
 require_relative "workspace"
 Dotenv.load
 
@@ -24,14 +25,17 @@ def main
     # List Stuff
     case answer
     when 1
-      ap Slack::Channel.list
+      channel_list = Slack::Channel.list
+      tp channel_list
     when 2
-      ap Slack::User.list
+      user_list = Slack::User.list
+      tp user_list
     when 3
       puts "Please enter a SlackID or full name:"
       name_or_id = gets.chomp
 
-      workspace.select_user(name_or_id)
+      channel_details = workspace.select_user(name_or_id)
+      tp channel_details
       # selection = workspace.select_user(name_or_id)
 
       puts "Show additional details for #{name_or_id}? (Y/N)"
@@ -51,7 +55,8 @@ def main
       choice = gets.chomp.downcase
 
       if choice == "y"
-        puts "#{workspace.show_details}"
+        user_details = workspace.show_details
+        tp user_details
       end
       # ap details
       # call show_details method and puts ap it
