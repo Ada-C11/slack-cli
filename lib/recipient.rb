@@ -1,6 +1,7 @@
 module SlackBot
   class Recipient
     BASE_URL = "https://slack.com/api/"
+    TOKEN = ENV["TOKEN"]
     def self.list
       raise NotImplementedError
     end

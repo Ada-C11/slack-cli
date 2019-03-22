@@ -5,7 +5,7 @@ module SlackBot
 
   class User < Recipient
     USER_PATH_URL = "users.list?"
-    TOKEN = ENV["TOKEN"]
+    # TOKEN = ENV["TOKEN"]
     attr_reader :real_name, :name, :id
 
     def initialize(real_name:, name:, id:)
