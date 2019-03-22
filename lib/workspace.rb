@@ -68,5 +68,3 @@ module Slack
     end
   end
 end
-
-# put Slack::Workspace.selected_channel_details("CH2NW42JF")

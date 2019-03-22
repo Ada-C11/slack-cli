@@ -27,7 +27,7 @@ module Slack
       return users
     end
 
-    def send_message(user, message)
+    def send_message(message)
       url = "https://slack.com/api/chat.postMessage"
       params = {
         token: ENV["KEY"],

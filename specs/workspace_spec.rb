@@ -93,3 +93,15 @@ describe "self.select_user" do
     end
   end
 end
+
+describe "self.selected_user_details" do
+  it "returns the details for the selected user" do
+    VCR.use_cassette("user_find") do
+      user = Slack::User.new("RS100", "Robot", "Robot Smith")
+      user_details = Slack::Workspace.selected_user_details(user)
+
+      expect(user_details).must_match "RS100"
+      expect(user_details).must_match "Robot Smith"
+    end
+  end
+end
