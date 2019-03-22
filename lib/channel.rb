@@ -31,5 +31,21 @@ module Slack
       end
       return all_channels
     end
+
+    def send_message(channel, message)
+      url = "https://slack.com/api/chat.postMessage"
+      params = {
+        token: ENV["KEY"],
+        channel: channel_identifier,
+        text: message,
+      }
+
+      message_request = HTTParty.post(URL, query: params)
+      if message_request["ok"] == false
+        raise ArgumentError, "Request is unsuccessful"
+      else
+        return message_request
+      end
+    end
   end
 end

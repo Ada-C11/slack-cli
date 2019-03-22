@@ -28,7 +28,7 @@ module Slack
         channel.name == channel_identifier ||
         channel.slack_id == channel_identifier
       }
-
+      # put some sort argument error here?
       return find_channel
     end
 
@@ -55,7 +55,7 @@ module Slack
 
     def self.all_users_details
       users = Slack::User.list_all.map do |user|
-        "User ID: #{user.slack_id}'s real name is #{user.real_name} and display name is #{user.name}."
+        "User ID: #{user.slack_id}: \nReal name: #{user.real_name} \nDisplay name: #{user.name}."
       end
       return users
     end

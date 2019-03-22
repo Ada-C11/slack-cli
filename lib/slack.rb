@@ -23,25 +23,24 @@ def main
     when "list channels"
       puts Slack::Workspace.all_channels_details
     when "select channel"
-      puts "Which user would you like to select?"
-      user_identifier = gets.chomp.downcase.to_s
-      selected_channel = Slack::Workspace.select_user(user_identifier)
-      # if selected_channel == nil
-      #   puts "This channel doesn't exist. Exiting to main menu"
-      # else
-      #   puts "You have selected #{selected_channel.name}. Please type 'details' for more info!"
-      #   answer = gets.chomp.downcase
-      #   if answer == "details"
-      #     puts selected_channel
-
-      # end
-      # if answers
+      puts "Which channel would you like to select?"
+      channel_identifier = gets.chomp.downcase.to_s
+      selected_channel = Slack::Workspace.select_channel(channel_identifier)
+      if selected_channel == nil
+        puts "This channel doesn't exist. Exiting to main menu"
+      else
+        puts "You have selected #{selected_channel.name}. Please type 'details' for more info!"
+        answer = gets.chomp.downcase
+        if answer == "details"
+          puts Slack::Workspace.selected_channel_details(selected_channel)
+        end
+      end
     when "list users"
       puts Slack::Workspace.all_users_details
-      # when "select user"
-      #   puts "Which user would you like to select?"
-      #   user_identifier = gets.chomp.downcase.to_s
-      #   selected_user = Slack::Workspace.select_channel(user_identifier)
+    when "select user"
+      puts "Which user would you like to select?"
+      user_identifier = gets.chomp.downcase.to_s
+      selected_user = Slack::Workspace.select_channel(user_identifier)
       # puts selected_channel
     when "quit"
     else
@@ -57,37 +56,3 @@ def main
 end
 
 main if __FILE__ == $PROGRAM_NAME
-
-def send_message(user, message)
-  url = "https://slack.com/api/chat.postMessage"
-  params = {
-    token: ENV["KEY"],
-    channel: user_identifier,
-    text: message,
-  }
-
-  message_request = HTTParty.post(URL, query: params)
-    if message_request["ok"] == false
-      raise ArgumentError, "Request is unsuccessful"
-    else
-      return message_request
-    end
-  end
-end
-
-def send_message(channel, message)
-  url = "https://slack.com/api/chat.postMessage"
-  params = {
-    token: ENV["KEY"],
-    channel: channel_identifier,
-    text: message,
-  }
-
-  message_request = HTTParty.post(URL, query: params)
-    if message_request["ok"] == false
-      raise ArgumentError, "Request is unsuccessful"
-    else
-      return message_request
-    end
-  end
-end
