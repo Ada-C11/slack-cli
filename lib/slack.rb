@@ -8,7 +8,7 @@ def main
   puts "\nWorkspace: Sav-Elise-API Project"
   puts "Number of users: #{workspace.users.length}"
   puts "Number of channels: #{workspace.channels.length}\n\n"
-  options = ["List Users", "List Channels", "Select User", "Select Channel", "Details", "Quit"]
+  options = ["List Users", "List Channels", "Select User", "Select Channel", "Details", "Send Message", "Quit"]
 
   while true
     puts "--------OPTIONS--------"
@@ -57,6 +57,20 @@ def main
         puts "Error: first select channel or user.\n\n"
       else
         puts "\n" + details + "\n\n"
+      end
+    when "SEND MESSAGE"
+      recipient = workspace.selected
+      if recipient
+        puts "Please enter the message you want to send:"
+        message = gets.chomp
+        if message.empty?
+          puts "Error: No message to send.\n\n"
+        else
+          workspace.send_message(text: message)
+          puts "Message was sent to #{recipient.name}.\n\n"
+        end
+      else
+        puts "Error: first select channel or user.\n\n"
       end
     when "QUIT"
       break
