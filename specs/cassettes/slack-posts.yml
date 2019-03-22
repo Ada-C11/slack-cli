@@ -149,4 +149,70 @@ http_interactions:
         you''d prefer to keep out of more focused work-related channels.","creator":"UH2SDUECA","last_set":1552952597},"previous_names":[],"num_members":2},{"id":"CH0EFH3CG","name":"slack-api-project","is_channel":true,"created":1552952598,"is_archived":false,"is_general":false,"unlinked":0,"creator":"UH2SDUECA","name_normalized":"slack-api-project","is_shared":false,"is_org_shared":false,"is_member":true,"is_private":false,"is_mpim":false,"members":["UH2SDUECA","UH4A0RV4N"],"topic":{"value":"","creator":"","last_set":0},"purpose":{"value":"","creator":"","last_set":0},"previous_names":[],"num_members":2}]}'
     http_version: 
   recorded_at: Fri, 22 Mar 2019 14:05:22 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<SLACK_TOKEN>&channel=CH0EFGWQ0&text=should%20work&as_user=true
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 Mar 2019 22:45:32 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - 8020e455-0052-42dd-b4c9-dfa8474db6bf
+      X-Oauth-Scopes:
+      - identify,read,post,client,apps,admin
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write:user,client
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-31hm
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 8ce0f76d2391b7bf264596884970edb3.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - ofiWgMAioI-P-ZvOu3giQG5eSlNveemG0huAtqug8jy2puvsJwgOLQ==
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channel":"CH0EFGWQ0","ts":"1553294732.000200","message":{"bot_id":"BH78ZSEUB","type":"message","text":"should
+        work","user":"UH2SDUECA","ts":"1553294732.000200"}}'
+    http_version: 
+  recorded_at: Fri, 22 Mar 2019 22:45:32 GMT
 recorded_with: VCR 4.0.0
