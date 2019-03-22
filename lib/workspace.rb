@@ -25,7 +25,7 @@ class Workspace
     @selected = selected.first
   end
 
-  # used to show details for one user or channel
+  # used to show details for selected user or channel
   def show_details
     return @selected.details
   end

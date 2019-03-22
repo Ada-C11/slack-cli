@@ -62,10 +62,10 @@ describe "instance methods" do
 
   it "returns user details from show_details" do
     VCR.use_cassette("slack_workspace") do
-      @workspace.select_user("test")
+      @workspace.select_user("grace.m.shea")
       expect(@workspace.show_details).must_be_kind_of String
 
-      @workspace.select_user("test")
+      @workspace.select_channel("random")
       expect(@workspace.show_details).must_be_kind_of String
     end
   end
