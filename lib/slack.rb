@@ -48,17 +48,27 @@ class Slack
   end
 
   def select_user(search)
-    raise SlackError, "please give valid search" if search == nil || search == ""
     user = @users.find { |x| x.user_name.downcase == search.downcase || x.user_id.downcase == search.downcase }
-    raise SlackError, "no user found" if user == nil
-    return user
   end
 
   def select_channel(search)
-    raise SlackError, "please give valid search" if search == nil || search == ""
     channel = @channels.find { |x| x.name.downcase == search.downcase || x.slack_id.downcase == search.downcase }
-    raise SlackError, "no channel found" if channel == nil
-    return channel
+  end
+
+  def self.send_msg(text, user)
+    url = "https://slack.com/api/chat.postMessage"
+    query_paramaters = {
+      token: SLACK_API_TOKEN,
+      channel: user,
+      text: text,
+    },
+    response = HTTParty.post(url, query: query_paramaters, headers: {"Content-Type" => "application/x-www-form-urlencoded"})
+    binding.pry
+    if response["ok"]
+      return true
+    else
+      raise SlackError, "Error when posting #{message} to #{channel}, error: #{response["error"]}"
+    end
   end
 end
 
@@ -68,6 +78,13 @@ def main
   slack = Slack.new
 
   puts "there are #{slack.channels.length} channels and #{slack.users.length} members"
+
+  def name_checker(who)
+    while who == ""
+      puts "please enter a valid name/id"
+      who = gets.chomp
+    end
+  end
 
   def options
     puts "What should we do next? (list channels/ list users/ select user/ select channel/ details/ quit):"
@@ -86,18 +103,17 @@ def main
       slack.lists_users
     when "select user"
       who = gets.chomp
+      name_checker(who)
       chosen_user = slack.select_user(who)
+      puts "user not found, please try another selection" if chosen_user == nil
     when "select channel"
       who = gets.chomp
+      name_checker(who)
       chosen_user = slack.select_channel(who)
+      puts "channel not found, please try another selection" if chosen_user == nil
     when "send message"
       slack.send_msg
     when "details"
-      # if chosen_user == ""
-      #   puts "there is no selected user"
-      #   options
-      # end
-      binding.pry
       chosen_user.details
     when "send message"
       slack.send_msg

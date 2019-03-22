@@ -1,6 +1,9 @@
 require_relative "test_helper"
 require "pry"
 
+#potential tests
+#make sure main method makes a new slack?
+
 describe "Slack" do
   describe "list users and channels" do
     it "show a list of users" do
@@ -49,26 +52,40 @@ describe "Slack" do
 
     #need a test for list channels
     #need a test for list users
+    describe "send_msg" do
+      it "can send a valid message" do
+        VCR.use_cassette("slack_query") do
+          slack = Slack.new
+          return_value = slack.send_msg("sup?",
+                                        "apiiiii")
 
-    it "raise an error if given a non-existant user or channel" do
-      VCR.use_cassette("slack_query") do
-        slack = Slack.new
-        expect do
-          slack.select_channel("Citris Fruit")
-        end.must_raise SlackError
-        expect do
-          slack.select_user("Pomolo")
-        end.must_raise SlackError
+          expect(return_value).must_equal true
+        end
       end
-    end
+      # it "generates an error if given an invalid channel" do
+      #   VCR.use_cassette("slack_query") do
+      #     slack = Slack.new
+      #     expect {
+      #       slack.send_msg("Test message",
+      #                      "bogus")
+      #     }.must_raise SlackError
+      #   end
+      # end
+      # it "will generate an error if given an invalid key" do
+      #   real_token = ENV["SLACK_TOKEN"]
+      #   ENV["SLACK_TOKEN"] = "NOT_REAL_TOKEN"
 
-    it "raise an error if no user is selected" do
-      VCR.use_cassette("slack_query") do
-        # TEST GOES HERE
-        slack = Slack.new
-        # expect(chosen_user).must_equal "" # <-- do we want this to be nil or ""?
-        expect { slack.select_user("") }.must_raise SlackError # <-- also, I think we need chosen_user to be an attr_reader, or break this part into a different method
-      end
+      #   VCR.use_cassette("slack_query") do
+      #     slack = Slack.new
+      #     error = expect {
+      #       User.send_msg("Test message with invalid key",
+      #                     "apiiiii")
+      #     }.must_raise SlackError
+      #     # expect(error.message).must_equal "you suck"
+      #   end
+
+      #   ENV["SLACK_TOKEN"] = real_token
+      # end
     end
   end
 
@@ -78,40 +95,10 @@ describe "Slack" do
   #   end
   # end
   #
+
 end
 
-#   describe "send_msg" do
-#     it "can send a valid message" do
-#       VCR.use_cassette("slack_query") do
-#         return_value = SlackApi.send_msg("Test message",
-#                                          "ports-api-testing")
-
-#         expect(return_value).must_equal true
-#       end
-#     end
-
-#     it "generates an error if given an invalid channel" do
-#       VCR.use_cassette("slack_query") do
-#         expect {
-#           SlackApi.send_msg("Test message",
-#                             "bogus")
-#         }.must_raise SlackApi::SlackError
-#       end
-#     end
-#     it "will generate an error if given an invalid key" do
-#       real_token = ENV["SLACK_TOKEN"]
-#       ENV["SLACK_TOKEN"] = "NOT_REAL_TOKEN"
-
-#       VCR.use_cassette("slack_query") do
-#         error = expect {
-#           SlackApi.send_msg("Test message with invalid key",
-#                             "ports-api-testing")
-#         }.must_raise SlackApi::SlackError
-#         expect(error.message).must_equal "Error when posting Test message with invalid key to ports-api-testing, error: invalid_auth"
-#       end
-
-#       ENV["SLACK_TOKEN"] = real_token
-#     end
+#
 
 #     it "will raise an error if given an empty message" do
 #       VCR.use_cassette("slack_query") do
@@ -127,49 +114,23 @@ end
 # end
 
 # ----------------------------------------------------------
-
-# describe "SlackAPI" do
-#   it "can send a valid message" do
-#     VCR.use_cassette("slack_query") do
-#       location = "Seattle"
-#       response = get_location(location)
-
-#       expect(response["Seattle"]).wont_be_nil
-#       expect(response["Seattle"][:lon]).must_equal "-122.3300624"
-#       expect(response["Seattle"][:lat]).must_equal "47.6038321"
-#     end
-#   end
-
-#   it "will raise an exception if the search fails" do
-#     VCR.use_cassette("location_find") do
-#       location = ""
-#       expect {
-#         response = get_location(location)
-#       }.must_raise SearchError
-#     end
+# it "raise an error if given a non-existant user or channel" do
+#   VCR.use_cassette("slack_query") do
+#     slack = Slack.new
+#     expect do
+#       slack.select_channel("Citris Fruit")
+#     end.must_raise SlackError
+#     expect do
+#       slack.select_user("Pomolo")
+#     end.must_raise SlackError
 #   end
 # end
 
-# ----------------------------------------------------------
-
-# describe "Listing Channels and Users" do
-#   it "list channels" do
-#     VCR.use_cassette("channels_find") do
-#       location = "Seattle"
-#       response = get_location(location)
-
-#       expect(response["Seattle"]).wont_be_nil
-#       expect(response["Seattle"][:lon]).must_equal "-122.3300624"
-#       expect(response["Seattle"][:lat]).must_equal "47.6038321"
-#     end
-#   end
-
-#   it "list users" do
-#     VCR.use_cassette("location_find") do
-#       user = "" # name parameter in slack api
-#       expect {
-#         response = get_location(location)
-#       }.must_raise SearchError
-#     end
+# it "raise an error if no user is selected" do
+#   VCR.use_cassette("slack_query") do
+#     # TEST GOES HERE
+#     slack = Slack.new
+#     # expect(chosen_user).must_equal "" # <-- do we want this to be nil or ""?
+#     expect { slack.select_user("") }.must_raise SlackError # <-- also, I think we need chosen_user to be an attr_reader, or break this part into a different method
 #   end
 # end
