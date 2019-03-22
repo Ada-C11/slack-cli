@@ -1,5 +1,6 @@
 require "dotenv"
 require "httparty"
+require "json"
 Dotenv.load
 
 class Recipient
@@ -29,12 +30,20 @@ class Recipient
   end
 
   def send_msg(message, recipient)
+    # settings = {}
+    file = File.read("lib/bot-settings.json")
+    settings = JSON.parse(file)
+
     params = {
       "token" => ENV["SLACK_API_TOKEN"],
       "channel" => recipient,
       "text" => message,
-      "as_user" => true,
+      "as_user" => false,
+      "username" => settings["username"],
+      "icon_emoji" => settings["icon_emoji"],
     }
+
+    puts params
 
     response = HTTParty.post(
       POST_URL,

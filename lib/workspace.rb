@@ -49,6 +49,10 @@ class Workspace
   def update_settings(name, emoji)
     json_hash = { "username" => name,
                   "icon_emoji" => emoji }
+
+    File.open("lib/bot-settings.json", "w") do |f|
+      f.write(json_hash.to_json)
+    end
   end
 
   def send_message(text)
