@@ -9,10 +9,6 @@ class Channel < Recipient
     @member_count = member_count
   end
 
-  def details
-    return "#{name} #{topic} member count: #{member_count} slack id: #{slack_id}"
-  end
-
   def self.list
     raw_data = self.get("channel")
 
@@ -32,6 +28,10 @@ class Channel < Recipient
       channel_list << new_channel
     end
     return channel_list
+  end
+
+  def details
+    return "#{name} #{topic} member count: #{member_count} slack id: #{slack_id}"
   end
 end
 
