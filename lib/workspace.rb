@@ -48,8 +48,6 @@ class Workspace
   end
 
   def send_message(text)
-    # binding.pry
     @selected.send_msg(text)
-    # binding.pry
   end
 end

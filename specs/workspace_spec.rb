@@ -86,12 +86,12 @@ describe "post message to slack" do
     end
   end
 
-  # it "raises an error for invalid channel" do
-  #   VCR.use_cassette("slack-posts") do
-  #     @workspace.select_channel.first
-  #     expect { @workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
-  #   end
-  # end
+  it "raises an error for invalid channel" do
+    VCR.use_cassette("slack-posts") do
+      @workspace.select_channel("imaginary")
+      expect { @workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
+    end
+  end
 
   # it "raises an error for invalid user" do
   #   VCR.use_cassette("slack-posts") do
