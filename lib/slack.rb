@@ -48,13 +48,17 @@ class Slack
   end
 
   def select_user(search)
-    @users.find { |x| x.user_name.downcase == search || x.user_id.downcase == search }
-    #add argument error if doesn't exist
+    raise SlackError, "please give valid search" if search == nil || search == ""
+    user = @users.find { |x| x.user_name.downcase == search.downcase || x.user_id.downcase == search.downcase }
+    raise SlackError, "no user found" if user == nil
+    return user
   end
 
   def select_channel(search)
-    @channels.find { |x| x.name.downcase == search || x.slack_id.downcase == search }
-    #add argument error if doesn't exist
+    raise SlackError, "please give valid search" if search == nil || search == ""
+    channel = @channels.find { |x| x.name.downcase == search.downcase || x.slack_id.downcase == search.downcase }
+    raise SlackError, "no channel found" if channel == nil
+    return channel
   end
 end
 
@@ -67,7 +71,7 @@ def main
 
   def options
     puts "What should we do next? (list channels/ list users/ select user/ select channel/ details/ quit):"
-    return gets.chomp.downcase
+    return gets.chomp
   end
 
   continue = true
@@ -81,11 +85,13 @@ def main
     when "list users"
       slack.lists_users
     when "select user"
-      who = gets.chomp.downcase
+      who = gets.chomp
       chosen_user = slack.select_user(who)
     when "select channel"
-      who = gets.chomp.downcase
+      who = gets.chomp
       chosen_user = slack.select_channel(who)
+    when "send message"
+      slack.send_msg
     when "details"
       # if chosen_user == ""
       #   puts "there is no selected user"

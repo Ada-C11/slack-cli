@@ -19,7 +19,7 @@ describe "Slack" do
         slack = Slack.new # <-- .yml filename
         user_a = slack.select_user("UH53ZCBBR") # <-- this is "id" value for "kaseea"
         user_b = slack.select_user("kaseea") # <-- this is "name" value for "kaseea"
-        binding.pry
+        # binding.pry
         expect(user_a.user_id).must_equal "UH53ZCBBR"
         expect(user_b.user_name).must_equal "kaseea"
       end
@@ -29,9 +29,9 @@ describe "Slack" do
       VCR.use_cassette("slack_query") do # <-- .yml filename
         slack = Slack.new
         channel_a = slack.select_channel("apiiiii")
-        # channel_b = slack.select_channel("CH4BCTLHK") # <-- this is the "id" value for the general channel
+        channel_b = slack.select_channel("CH4BCTLHK") # <-- this is the "id" value for the general channel
         expect(channel_a.name).must_equal "apiiiii"
-        # expect(channel_b.name).must_equal "random"
+        expect(channel_b.name).must_equal "random"
       end
     end
   end
@@ -52,24 +52,24 @@ describe "Slack" do
 
     it "raise an error if given a non-existant user or channel" do
       VCR.use_cassette("slack_query") do
-        # TEST GOES HERE
-        channel_y = Slack.select_channel("Citris Fruit")
-        user_y = Slack.select_user("Pomolo")
-
-        expect(channel_y).must_raise SlackError, "No match for this user"
-        expect(user_y).must_raise SlackError, "No match for this user"
+        slack = Slack.new
+        expect do
+          slack.select_channel("Citris Fruit")
+        end.must_raise SlackError
+        expect do
+          slack.select_user("Pomolo")
+        end.must_raise SlackError
       end
     end
 
     it "raise an error if no user is selected" do
       VCR.use_cassette("slack_query") do
         # TEST GOES HERE
-        new_slack_instance = Slack.new
-        expect(new_slack_instance.chosen_user).must_equal nil # <-- do we want this to be nil or ""?
-        expect(new_slack_instance.chosen_user).must_raise SlackError # <-- also, I think we need chosen_user to be an attr_reader, or break this part into a different method
+        slack = Slack.new
+        # expect(chosen_user).must_equal "" # <-- do we want this to be nil or ""?
+        expect { slack.select_user("") }.must_raise SlackError # <-- also, I think we need chosen_user to be an attr_reader, or break this part into a different method
       end
     end
-    #
   end
 
   # it "select a channel" do
