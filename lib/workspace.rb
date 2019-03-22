@@ -17,7 +17,7 @@ module Slack
 
     def self.all_channels_details
       channels = Slack::Channel.list_all.map do |channel|
-        "Channel ID #{channel.slack_id}'s name is #{channel.name}. \nIt has #{channel.num_members} members.  \nThe topic for this channel is: #{channel.topic}."
+        "Channel ID: #{channel.slack_id}\nChannel name: #{channel.name} \nMembers: #{channel.num_members} \nChannel Topic: #{channel.topic}"
       end
       return channels
     end
