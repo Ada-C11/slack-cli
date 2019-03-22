@@ -27,6 +27,7 @@ module SlackAPI
     end
 
     def self.load
+        
     end
     
     def details

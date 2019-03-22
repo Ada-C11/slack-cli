@@ -14,7 +14,7 @@ module SlackAPI
 
     #attr_accessor :status_text, :status_emoji
 
-    attr_reader :real_name, :slack_id, :name, :list
+    attr_reader :real_name, :list
 
     BASE_URL = "https://slack.com/api"
     USERS_LIST_PATH = "/users.list"
@@ -23,8 +23,7 @@ module SlackAPI
     @@list = []
 
     def initialize(real_name:, slack_id:, name:)
-      @slack_id = slack_id
-      @name = name
+      super(slack_id: slack_id, name: name)
       @real_name = real_name
     end
 

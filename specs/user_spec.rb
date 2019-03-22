@@ -44,8 +44,7 @@ describe "User" do
         test2 = user.send_message(text: "hello", recipient: channel)
         expect(test2).must_equal true
        end
-    end
-
+      end
   end
 
 

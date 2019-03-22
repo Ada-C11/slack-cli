@@ -7,16 +7,14 @@ Dotenv.load
 module SlackAPI
   class Channel < Recipient
         
-  attr_reader :slack_id, :name, :topic, :member_count
+  attr_reader :topic, :member_count
 
   BASE_URL = "https://slack.com/api/channels.list"
   TOKEN = ENV['TOKEN']
   @@channels = []
 
     def initialize(slack_id:, name:, topic:, member_count:)
-      # super(slack_id, name)
-      @slack_id = slack_id
-      @name = name
+      super(slack_id: slack_id, name: name)
       @topic = topic
       @member_count = member_count
     end
