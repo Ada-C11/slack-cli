@@ -89,7 +89,7 @@ describe "Workspace class" do
       end
     end
 
-    it "raises an error for invalid user" do
+    it "raises an error for invalid message" do
       VCR.use_cassette("slack-posts") do
         workspace = Workspace.new
         workspace.select_user("slackbot")
