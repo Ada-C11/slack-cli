@@ -25,6 +25,10 @@ describe "Workspace" do
   end
 
   describe "select_channel" do
+    it "returns nil if no user / channel is selected" do
+      expect(@workspace.selected).must_be_nil
+    end
+    
     it "selects a channel when id is provided" do
       @workspace.select_channel(id_or_name:"CH2SBU69Y")
       expect(@workspace.selected).must_be_kind_of SlackAPI::Channel
@@ -35,6 +39,11 @@ describe "Workspace" do
       @workspace.select_channel(id_or_name:"everyone")
       expect(@workspace.selected).must_be_kind_of SlackAPI::Channel
       expect(@workspace.selected.name).must_equal "everyone"
+    end
+
+    it "returns nil if channel is not found" do
+      @workspace.select_channel(id_or_name:"madeup_channel")
+      expect(@workspace.selected).must_be_nil
     end
   end
   
