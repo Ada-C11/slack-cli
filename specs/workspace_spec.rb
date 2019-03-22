@@ -89,7 +89,6 @@ describe "post message to slack" do
   it "raises an error for invalid channel" do
     VCR.use_cassette("slack-posts") do
       @workspace.select_channel("random")
-      @workspace.selected.slack_id = "abc"
       expect { @workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
     end
   end
@@ -97,7 +96,6 @@ describe "post message to slack" do
   it "raises an error for invalid user" do
     VCR.use_cassette("slack-posts") do
       @workspace.select_user("slackbot")
-      workspace.selected.slack_id = "abc"
       expect { workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
     end
   end
@@ -105,7 +103,6 @@ describe "post message to slack" do
   it "raises an error for invalid user" do
     VCR.use_cassette("slack-posts") do
       @workspace.select_user("slackbot")
-      @workspace.selected.slack_id = "abc"
       expect { @workspace.send_message("") }.must_raise Recipient::SlackApiError
     end
   end
