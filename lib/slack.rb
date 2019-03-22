@@ -17,7 +17,7 @@ def main
     \n 6. Send message 
     \n 7. Quit"
 
-    input = gets.chomp
+    input = gets.chomp.downcase
     case input
     when "list users"
       puts workspace.show_details("users")
