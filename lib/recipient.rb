@@ -13,10 +13,8 @@ class Recipient
     @name = name
   end
 
-  def details
-  end
-
   def self.list
+    raise NotImplementedError, "Implement me in a child class"
   end
 
   private
