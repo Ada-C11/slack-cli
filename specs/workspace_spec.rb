@@ -83,6 +83,11 @@ describe "Workspace class" do
       expect {
         workspace.show_details
       }.must_raise SlackCli::SlackError
+
+      workspace.select_user("")
+      expect {
+        workspace.show_details
+      }.must_raise SlackCli::SlackError
     end
   end
 
