@@ -16,6 +16,10 @@ module Slack
       select(input, users)
     end
 
+    def send_message(message)
+      selected.send_message(message)
+    end
+
     def tp_details_options
       if selected.class == Slack::User
         return tp_user_options
@@ -30,10 +34,6 @@ module Slack
 
     def tp_channel_options
       return :name, :topic, :member_count, :slack_id
-    end
-
-    def send_message(message)
-      selected.send_message(message)
     end
 
     private

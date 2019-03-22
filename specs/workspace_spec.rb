@@ -75,4 +75,16 @@ describe "Workspace" do
       expect(non_exiting_user).must_equal false
     end
   end
+
+  describe "tp_details_options, tp_user_options, tp_channel_options" do
+    it "returns user options if selected class is a user" do
+      @workspace.select_user("jessica.homet")
+      expect(@workspace.tp_details_options).must_equal [:name, :real_name, :slack_id]
+    end
+
+    it "returns channel options if selected class is a user" do
+      @workspace.select_channel("slack-api")
+      expect(@workspace.tp_details_options).must_equal [:name, :topic, :member_count, :slack_id]
+    end
+  end
 end
