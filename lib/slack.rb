@@ -38,12 +38,9 @@ def main
   when "3", "see details", "see", "details"
     see_details_menu
     main
-  when "4", "select channel", "channel"
-    puts "Enter the channel name or Slack_ID"
-    channel = gets.chomp
-    @current_session.select_channel(channel)
-    main
-  when "7", "quit"
+  when "4", "send message", "send"
+    send_message_menu
+  when "5", "quit"
     puts "Byeeeeeeeeeeeeeee"
     exit
   end
@@ -67,10 +64,32 @@ def see_details_menu
     puts @current_session.show_channel_details(selection_name)
   else
     puts "Recipient type not recognized, choose either a user or channel"
+    see_details_menu
   end
 end
 
 def send_message_menu
+  puts "Would you like to send a message to a user or channel?
+  \n1. user 
+  \n2. channel"
+  selection = gets.chomp.downcase
+  case selection
+  when "1", "user"
+    print "Enter the name of user: "
+    selection_name = gets.chomp.downcase
+    print "Enter your message: "
+    message = gets.chomp
+    puts @current_session.send_msg_to_user(selection_name, message)
+  when "2", "channel"
+    print "Enter the name of channel: "
+    selection_name = gets.chomp.downcase
+    print "Enter your message: "
+    message = gets.chomp
+    puts @current_session.send_msg_to_channel(selection_name, message)
+  else
+    puts "Recipient type not recognized, choose either a user or channel"
+    send_message_menu
+  end
 end
 
 def select_menu
