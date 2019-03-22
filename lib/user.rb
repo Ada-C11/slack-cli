@@ -1,11 +1,9 @@
 require "pry"
 
 module SlackBot
-  # class SlackApiError < StandardError; end
 
   class User < Recipient
     PATH_URL = "users.list?"
-    # TOKEN = ENV["TOKEN"]
     attr_reader :real_name, :name, :id
 
     def initialize(real_name:, name:, id:)
@@ -30,7 +28,7 @@ module SlackBot
       user_details = {
         real_name: @real_name,
         name: @name,
-        id: @id,
+        id: @id
       }
       return user_details
     end

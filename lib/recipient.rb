@@ -7,28 +7,15 @@ module SlackBot
       raise NotImplementedError
     end
 
-    # def Check_Error_Status(response)
-    #     binding.pry
-    #     if response.code != 200
-    #         raise SlackApiError, "#{reponse.code} Error: #{response.message}"
-    #     end
-    # end
-
     def details
       raise NotImplementedError
-    end
-
-    def self.get(path_url)
-      query_parameters = { token: TOKEN }
-      response = HTTParty.get("#{BASE_URL}#{path_url}", query: query_parameters)
-      return response
     end
 
     def send_message(message)
       body = {
         text: message,
         channel: id,
-        token: TOKEN,
+        token: TOKEN
       }
       response = HTTParty.post("#{BASE_URL}chat.postMessage", body: body, headers: { "Content-type" => "application/x-www-form-urlencoded" })
 
@@ -37,6 +24,13 @@ module SlackBot
       end
 
       return true
+    end
+
+    private
+    def self.get(path_url)
+      query_parameters = { token: TOKEN }
+      response = HTTParty.get("#{BASE_URL}#{path_url}", query: query_parameters)
+      return response
     end
   end
 end

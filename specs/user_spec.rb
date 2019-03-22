@@ -21,7 +21,7 @@ describe "user" do
         expect(user_list.last).must_be_kind_of SlackBot::User
       end
     end
-    it "Returns a real_name" do
+    it "Returns users real_name, id and name" do
       VCR.use_cassette("self.list") do
         user_list = SlackBot::User.list
 
@@ -30,19 +30,10 @@ describe "user" do
         expect(user_list.first.name).must_equal "slackbot"
       end
     end
-    # it "will raise an error when given an invalid token" do
-    #     VCR.use_cassette("self.list") do
-    #       exception = expect {
-    #        SlackBot::User.list()
-    #       }.must_raise SlackApi::SlackApiError
-
-    #       expect(exception.message).must_equal 'channel_not_found'
-    #     end
-    #   end
 
   end
   describe "send message" do
-    before do 
+    before do
       VCR.use_cassette("send message") do
         @user_list = SlackBot::User.list
       end
@@ -64,14 +55,5 @@ describe "user" do
         }.must_raise SlackBot::SlackApiError
       end
     end
-
-    # it "returns a slackapierror when given too many characters" do
-    #   VCR.use_cassette("send message with too many characters") do
-    #     message = "N" * 40010
-    #     expect {
-    #     @user_list.first.send_message(message)
-    #     }.must_raise SlackBot::SlackApiError
-    #   end
-    #end
   end
 end

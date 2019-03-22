@@ -8,4 +8,13 @@ describe "Recipient" do
       }.must_raise NotImplementedError
     end
   end
+
+  describe "details" do
+    it "Raise NotImplementedError if called directory on recipient" do
+      recipient = SlackBot::Recipient.new
+      expect {
+        recipient.details
+      }.must_raise NotImplementedError
+    end
+  end
 end

@@ -1,7 +1,6 @@
 module SlackBot
   class Channel < Recipient
     PATH_URL = "channels.list?"
-    #   TOKEN = ENV["TOKEN"]
     attr_reader :num_members, :name, :id
 
     def initialize(num_members:, name:, id:)
