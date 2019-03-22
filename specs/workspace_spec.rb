@@ -38,8 +38,8 @@ describe "Workspace class" do
       expect(@workspace.selected.name).must_equal "general"
     end
 
-    it "returns nil if given invalid id" do
-      @workspace.select_channel("INVALID_ID")
+    it "returns nil if given invalid identifier" do
+      @workspace.select_channel("INVALID_IDENTIFIER")
       expect(@workspace.selected).must_equal nil
     end
   end
@@ -57,8 +57,8 @@ describe "Workspace class" do
       expect(@workspace.selected.name).must_equal "v.jansen.martin"
     end
 
-    it "returns nil if given invalid id" do
-      @workspace.select_user("INVALID_ID")
+    it "returns nil if given invalid identifie" do
+      @workspace.select_user("INVALID_IDENTIFIER")
       expect(@workspace.selected).must_equal nil
     end
 
