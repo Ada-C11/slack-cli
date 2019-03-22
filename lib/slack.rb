@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require_relative "user"
 require_relative "channel"
+require_relative "workspace"
 require "httparty"
 require "table_print"
 require "dotenv"
@@ -26,7 +27,7 @@ def main
       select_response = "select user"
       puts "What is the user id or Slack name?"
       identifier = gets.chomp
-      user = SlackAPI::User.new
+      user = SlackAPI::Workspace.new
       selected_recipient = user.select_user(identifier)
       if selected_recipient == ""
         puts "There is no user with that identifier"
@@ -37,7 +38,7 @@ def main
       select_response = "select channel"
       puts "What is the user id or Slack name?"
       identifier = gets.chomp
-      channel = SlackAPI::Channel.new
+      channel = SlackAPI::Workspace.new
       selected_recipient = channel.select_channel(identifier)
       if selected_recipient == ""
         puts "There is no channel with that identifier"
@@ -46,12 +47,12 @@ def main
       response = gets.chomp
     elsif response == "details"
       if select_response == "select user"
-        details = user.see_details(selected_recipient)
+        details = user.see_user_details(selected_recipient)
         tp details, "name", "real name", "slack id"
         puts ask_again
         response = gets.chomp
       elsif select_response == "select channel"
-        details = channel.see_details(selected_recipient)
+        details = channel.see_channel_details(selected_recipient)
         tp details, "name", "topic", "member count", "id"
         puts ask_again
         response = gets.chomp

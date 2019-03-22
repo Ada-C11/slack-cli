@@ -22,40 +22,5 @@ module SlackAPI
       end
       return user_list
     end
-
-    def select_user(identifier)
-      response = Recipient.get("users.list")
-
-      selected_user = ""
-
-      response["members"].each do |member|
-        if member["id"] == identifier
-          selected_user = member["id"]
-        elsif member["name"] == identifier
-          selected_user = member["id"]
-        end
-      end
-      if selected_user == ""
-        raise SlackAPI::SlackError, "That is not a valid user"
-      end
-      return selected_user
-    end
-
-    def see_details(identifier)
-      response = Recipient.get("users.list")
-
-      user_details = []
-
-      response["members"].each do |member|
-        if member["id"] == identifier || member["name"] == identifier
-          user_details <<
-            {"name" => member["name"],
-             "real name" => member["real_name"],
-             "slack id" => member["id"]}
-
-          return user_details
-        end
-      end
-    end
   end # end of class
 end # end of module
