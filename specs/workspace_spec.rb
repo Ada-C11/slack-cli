@@ -18,11 +18,20 @@ describe "workspace" do
       end
     end
 
+    describe "users" do
+      it "must be instance of array" do
+        VCR.use_cassette("good users") do
+          users = @workspace.users
+          expect(users).must_be_kind_of Array
+        end
+      end
+
     it "must raise exception for bad response" do
       workspace = Workspace.new('badapitoken')
       VCR.use_cassette("bad channels") do
         expect{workspace.channels}.must_raise RuntimeError
       end
     end
+  end
   end
 end
