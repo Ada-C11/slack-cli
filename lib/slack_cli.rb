@@ -45,7 +45,7 @@ def main
       puts "Please enter a channel name or channel id:"
       name_or_id = gets.chomp
 
-
+      
       puts "Show additional details for #{name_or_id}? (Y/N)"
       choice = gets.chomp.downcase
 
