@@ -33,6 +33,10 @@ def menu
   return input
 end
 
+def clear_selected(workspace)
+  workspace.selected = nil
+end
+
 def main
   puts "Welcome to the Ada Slack CLI!"
 
@@ -56,15 +60,20 @@ def main
         puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.slack_id}"
       end
     elsif selection == "3" || selection == "4"
+      clear_selected(workspace)
       case selection
       when "3"
         identifier = ask("\nPlease enter an id or username")
         workspace.select_user(identifier)
-        puts "You've selected this user: #{workspace.selected.name}"
       when "4"
         identifier = ask("\nPlease enter an id or channel name")
         workspace.select_channel(identifier)
-        puts "You've selected this channel: #{workspace.selected.name}"
+      end
+
+      unless workspace.selected == nil
+        puts "You've selected: #{workspace.selected.name}"
+      else
+        puts "Whoops!  User or channel not found.  Please try again."
       end
     elsif selection == "5"
       workspace.show_details

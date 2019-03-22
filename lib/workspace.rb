@@ -8,7 +8,8 @@ require_relative "channel"
 
 module Slack
   class Workspace
-    attr_reader :users, :channels, :selected
+    attr_accessor :selected
+    attr_reader :users, :channels
 
     def initialize
       @users = Slack::User.list
