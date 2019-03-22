@@ -21,16 +21,18 @@ def main
   channels = SlackAPI::Channel.load
   workspace = SlackAPI::Workspace.new(users: users, channels: channels)
 
-  until input == "E" do
+  until input == "G" do
     puts "Welcome to the Ada Slack CLI!"
     puts "What would you like to do?"
     puts "[A] List users"
     puts "[B] List channels"
     puts "[C] Select user"
     puts "[D] Select channel"
-    puts "[E] Quit"
+    puts "[E] Show details of selected user / channel"
+    puts "[F] Send message"
+    puts "[G] Quit"
     input = gets.chomp.upcase
-    valid_input = ["A", "B", "C", "D", "E"]
+    valid_input = ["A", "B", "C", "D", "E", "F", "G"]
 
     until valid_input.include?(input)
       puts "Please try again"
@@ -46,40 +48,41 @@ def main
         puts "Please supply a slack ID or user name (case sensitive!)"  
         # Resets selected
         workspace.selected = nil
-        # Needs error checking
         user_id_or_name = gets.chomp
         selected = workspace.select_user(id_or_name: user_id_or_name)
-        if selected == nil
+        if selected 
+          puts "Selected user: #{user_id_or_name}"
+        else
           puts "User not found"
         end
-        puts "[A] show details for #{user_id_or_name}"
-        puts "[B] Go back to main menu"
-        # Needs error checking
-        user_details_input = gets.chomp.upcase
-        if user_details_input == "A"
-          puts workspace.show_details
-        # All other input goes back to main menu
-        end
       when "D"
-        puts "Please supply a slack ID or user name (case sensitive!)"
+        puts "Please supply a slack ID or channel name (case sensitive!)"
         workspace.selected = nil
         chan_id_or_name = gets.chomp.downcase
         workspace.select_channel(id_or_name: chan_id_or_name)
-        if selected == nil
-          puts "User not found"
+        if selected 
+          puts "Selected channel: #{chan_id_or_name}"
+        else
+          puts "Channel not found"
         end
-        puts "[A] show details for #{chan_id_or_name}"
-        puts "[B] Go back to main menu"
-        # Needs error checking
-        chan_details_input = gets.chomp.upcase
-        if chan_details_input == "A"
+        
+      when "E"
+        if workspace.selected
           puts workspace.show_details
-        # All other input goes back to main menu
+        else
+          puts "No recipient selected \n\n"
+        end
+      when "F"
+        if workspace.selected
+          puts "Please type the message you want to send"
+          user_text = gets.chomp
+          workspace.send_message(text: user_text, recipient: workspace.selected)
+        else
+          puts "No recipient selected \n\n"
         end
     end
-
-    puts "Thank you for using the Ada Slack CLI"
   end
+  puts "Thank you for using the Ada Slack CLI"
 end
 
 main if __FILE__ == $PROGRAM_NAME
