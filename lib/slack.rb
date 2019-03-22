@@ -13,7 +13,7 @@ def main
   There are #{workspace.channels.length} channels and #{workspace.users.length} users\n
   What would you like to do?"
 
-  commands = ["list users", "list channels", "quit", "select user", "select channel", "details"]
+  commands = ["list users", "list channels", "select user", "select channel", "details", "quit"]
 
   puts "Here are your options:\n"
   puts commands
@@ -61,7 +61,17 @@ def main
         input = gets.chomp
       end
     when "details"
-      break
+      if workspace.show_details == nil
+        puts "No user or channel is selected"
+        puts "What would you like to do next?"
+        puts commands
+        input = gets.chomp
+      else
+        puts workspace.show_details
+        puts "What would you like to do next?"
+        puts commands
+        input = gets.chomp
+      end
     else
       puts "Command not valid. Please type one of the following"
       puts commands

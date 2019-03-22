@@ -54,14 +54,26 @@ describe "Recipient" do
       }.must_raise NotImplementedError
     end
   end
+
+  describe "send_message" do
+    before do
+      VCR.use_cassette("send_message") do
+        query_params = {
+          token: KEY,
+        }
+        url = "https://slack.com/api/channels.list"
+        response = Slack::Recipient.get(url, query: query_params)
+        slack_id = response["channels"].first["id"]
+        name = response["channels"].first["name"]
+        @recipient = Slack::Recipient.new(slack_id: slack_id, name: name)
+      end
+    end
+
+    it "successfully sends a message" do
+      VCR.use_cassette("send_message") do
+        message = @recipient.send_message("HELLO WORLD!")
+        expect(message["ok"]).must_equal true
+      end
+    end
+  end
 end
-
-# name is correct
-
-# request is successful
-
-# raise error if there is bad url
-
-# raise error if api token is not authenticated
-
-# error invoked if not called in subclass

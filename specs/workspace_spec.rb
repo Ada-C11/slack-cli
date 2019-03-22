@@ -124,4 +124,55 @@ describe "Workspace class" do
       expect(@workspace.show_details).must_be_nil
     end
   end
+
+  describe "send_message" do
+    before do
+      VCR.use_cassette("workspace send message") do
+        query_params = {
+          token: KEY,
+        }
+        @workspace = Slack::Workspace.new
+      end
+    end
+
+    it "successfully sends a message to a user" do
+      VCR.use_cassette("workspace send message") do
+        selected_user = @workspace.select_user("evelynnkaplan")
+        response = @workspace.send_message("sup dog")
+
+        expect(response["ok"]).must_equal true
+      end
+    end
+
+    it "doesn't send a message to a user that doesn't exist" do
+      VCR.use_cassette("workspace send message") do
+        selected_user = @workspace.select_user("ricksteves")
+        response = @workspace.send_message("sup dog")
+
+        expect(response).must_be_nil
+      end
+    end
+
+    it "successfully sends a message to a channel" do
+      VCR.use_cassette("workspace send message") do
+        selected_channel = @workspace.select_channel("random")
+        response = @workspace.send_message("sup dog")
+
+        expect(response["ok"]).must_equal true
+      end
+    end
+
+    it "doesn't send a message to a channel that doesn't exist" do
+      VCR.use_cassette("workspace send message") do
+        selected_channel = @workspace.select_channel("Rick Steves' channel")
+        response = @workspace.send_message("sup dog")
+
+        expect(response).must_be_nil
+      end
+    end
+
+    it "returns nil if there's no selected user or channel" do
+      expect(@workspace.send_message("sup dog")).must_be_nil
+    end
+  end
 end

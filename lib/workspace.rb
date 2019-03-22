@@ -42,7 +42,12 @@ module Slack
       return selected.details if selected
     end
 
-    def send_message
+    def send_message(message)
+      if selected
+        selected.send_message(message)
+      else
+        return nil
+      end
     end
   end
 end

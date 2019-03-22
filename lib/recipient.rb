@@ -4,6 +4,7 @@ require "pry"
 
 Dotenv.load
 KEY = ENV["SLACK_TOKEN"]
+MESSAGE_URL = "https://slack.com/api/chat.postMessage"
 
 module Slack
   class SlackApiError < StandardError; end
@@ -18,6 +19,21 @@ module Slack
 
     def self.get(url, query:)
       response = HTTParty.get(url, query: query)
+      if response["ok"] == false
+        raise SlackApiError.new("Invalid request, error #{response.code}: #{response.message}")
+      end
+
+      return response
+    end
+
+    def send_message(message)
+      body = {
+        token: KEY,
+        channel: slack_id,
+        text: message,
+      }
+      response = HTTParty.post(MESSAGE_URL, body: body)
+
       if response["ok"] == false
         raise SlackApiError.new("Invalid request, error #{response.code}: #{response.message}")
       end
