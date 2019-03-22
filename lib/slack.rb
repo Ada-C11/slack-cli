@@ -34,7 +34,7 @@ def main
                                       :include => {:User_Name => {:display_method => "name"}}
     when "2", "list channels"
       tp workspace.channels, "name", "slack_id", "topic", "member_count"
-    when "3", "select_user"
+    when "3", "select user"
       print "Please enter in the user's USER_NAME or SLACK_ID: ".colorize(:blue)
       user_descriptor = gets.chomp
       puts "\n#{workspace.select_user(user_descriptor)}".colorize(:light_red)
