@@ -28,8 +28,6 @@ class Workspace
     return @selected.details
   end
 
-  # this method might be redundant
-
   def print_details(recipients)
     if recipients == "users"
       return_array = []

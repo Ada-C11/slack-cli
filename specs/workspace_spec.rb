@@ -60,50 +60,44 @@ describe "instance methods" do
     end
   end
 
-  # it "returns user details from show_details" do
-  #   VCR.use_cassette("slack_workspace") do
-  #     @workspace.select_user("slackbot")
-  #     expect(@workspace.show_details).must_be_kind_of String
-
-  #     @workspace.select_user("USLACKBOT")
-  #     expect(@workspace.show_details).must_be_kind_of String
-  #   end
-  # end
-end
-
-describe "post message to slack" do
-  before do
+  it "returns user details from show_details" do
     VCR.use_cassette("slack_workspace") do
-      @workspace = Workspace.new
-    end
-  end
-
-  it "creates sends a message to a recipient" do
-    VCR.use_cassette("slack-posts") do
-      @workspace.select_channel("random")
-      response = @workspace.send_message("should work")
-      expect(response["ok"]).must_equal true
-    end
-  end
-
-  it "raises an error for invalid channel" do
-    VCR.use_cassette("slack-posts") do
-      @workspace.select_channel("random")
-      expect { @workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
-    end
-  end
-
-  it "raises an error for invalid user" do
-    VCR.use_cassette("slack-posts") do
       @workspace.select_user("slackbot")
-      expect { workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
-    end
-  end
+      expect(@workspace.show_details).must_be_kind_of String
 
-  it "raises an error for invalid user" do
-    VCR.use_cassette("slack-posts") do
-      @workspace.select_user("slackbot")
-      expect { @workspace.send_message("") }.must_raise Recipient::SlackApiError
+      @workspace.select_user("USLACKBOT")
+      expect(@workspace.show_details).must_be_kind_of String
     end
   end
 end
+
+# describe "post message to slack" do
+#   before do
+#     VCR.use_cassette("slack_workspace") do
+#       @workspace = Workspace.new
+#     end
+#   end
+
+# it "creates sends a message to a recipient" do
+#   VCR.use_cassette("slack-posts") do
+#     @workspace.select_channel("random")
+#     response = @workspace.send_message("should work")
+#     expect(response["ok"]).must_equal true
+#   end
+# end
+
+# it "raises an error for invalid channel" do
+#   VCR.use_cassette("slack-posts") do
+#     @workspace.select_channel("random")
+#     expect { @workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
+#   end
+# end
+
+# it "raises an error for invalid user" do
+#   VCR.use_cassette("slack-posts") do
+#     @workspace.select_user("slackbot")
+#     expect { workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
+#   end
+# end
+
+# end
