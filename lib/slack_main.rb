@@ -57,7 +57,8 @@ def main
       workspace.users.each_with_index do |user, i|
         rows << [i + 1, user.real_name, user.slack_id, user.name]
       end
-      table = Terminal::Table.new :rows => rows
+      # :headings => ['Word', 'Number'], :rows => rows
+      table = Terminal::Table.new :headings => ["", "Real name", "slack id", "Name"], :rows => rows
       puts table
     elsif selection == "2"
       puts "\nHere are the channels:"
@@ -65,7 +66,7 @@ def main
       workspace.channels.each_with_index do |channel, i|
         rows << [i + 1, channel.name, channel.topic, "#{channel.member_count} members", channel.slack_id]
       end
-      table = Terminal::Table.new :rows => rows
+      table = Terminal::Table.new :headings => ["", "Name", "Topic", "Member Count", "Slack id"], :rows => rows
       puts table
     elsif selection == "3" || selection == "4"
       clear_selected(workspace)
@@ -95,11 +96,10 @@ def main
       if workspace.selected.nil?
         puts "Whoops! You must select a recipient first"
       else
-        
-
+        message = ask("Enter the message you want to send to #{workspace.selected.name}")
+        workspace.send_message(message)
       end
-    else puts "\nInvalid entry.  Please try again!"     
-    end
+    else puts "\nInvalid entry.  Please try again!"     end
 
     selection = menu
   end
