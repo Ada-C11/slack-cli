@@ -56,7 +56,6 @@ def main
         puts "#{i + 1}. name:#{channel.name.capitalize} --topic: #{channel.topic} --member count:#{channel.member_count} --channel id:#{channel.slack_id}"
       end
     elsif selection == "3" || selection == "4"
-      # slack_id = ask("\nPlease enter an id, channel name or username")
       case selection
       when "3"
         identifier = ask("\nPlease enter an id or username")
