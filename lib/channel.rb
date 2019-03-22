@@ -21,10 +21,10 @@ module Slack
 
     def details
       return {
-        name: @name,
-        slack_id: @slack_id,
-        topic: @topic,
-        member_count: @member_count
+        Name: @name.capitalize,
+        Slack_id: @slack_id,
+        Topic: @topic,
+        Member_count: @member_count
       }
     end
 

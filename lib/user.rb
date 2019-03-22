@@ -22,11 +22,11 @@ module Slack
 
     def details
       return {
-        name: @real_name,
-        status: @status_text,
-        emoji: @status_emoji,
-        slack_id: @slack_id,
-        username: @name
+        Name: @real_name,
+        Status: @status_text,
+        Emoji: @status_emoji,
+        Slack_id: @slack_id,
+        Username: @name
       }
     end
 
