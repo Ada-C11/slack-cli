@@ -5,7 +5,6 @@ require_relative "channel"
 require_relative "user"
 require "httparty"
 require "dotenv"
-require "table_print"
 Dotenv.load
 
 class SlackError < StandardError; end
@@ -38,23 +37,23 @@ class Slack
 
   def lists_channels
     @channels.each do |x|
-      x.print
+      x.details
     end
   end
 
   def lists_users
     @users.each do |x|
-      x.print
+      x.details
     end
   end
 
   def select_user(search)
-    user = @users.find { |x| x.user_name.downcase == search || x.user_id == search }
+    @users.find { |x| x.user_name.downcase == search || x.user_id.downcase == search }
     #add argument error if doesn't exist
   end
 
   def select_channel(search)
-    channel = @channels.find { |x| x.name.downcase == search || x.slack_id == search }
+    @channels.find { |x| x.name.downcase == search || x.slack_id.downcase == search }
     #add argument error if doesn't exist
   end
 end
@@ -84,11 +83,14 @@ def main
     when "select user"
       who = gets.chomp.downcase
       chosen_user = slack.select_user(who)
-      puts chosen_user
     when "select channel"
       who = gets.chomp.downcase
       chosen_user = slack.select_channel(who)
     when "details"
+      # if chosen_user == ""
+      #   puts "there is no selected user"
+      #   options
+      # end
       binding.pry
       chosen_user.details
     when "send message"

@@ -13,13 +13,9 @@ class User
     @real_name = real_name
   end
 
-  def print
+  def details
     puts "name: #{user_name}"
     puts "id: #{user_id}"
     puts "real name: #{real_name}"
-  end
-
-  def details
-    print
   end
 end

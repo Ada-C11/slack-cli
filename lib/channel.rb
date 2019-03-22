@@ -14,14 +14,10 @@ class Channel
     @slack_id = slack_id
   end
 
-  def print
+  def details
     puts "name: #{name}"
     puts "topic: #{topic}"
     puts "number of members: #{num_members}"
     puts "slack id: #{slack_id}"
-  end
-
-  def details
-    print
   end
 end
