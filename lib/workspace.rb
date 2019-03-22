@@ -32,7 +32,17 @@ module Slack
       return find_channel
     end
 
-    def self.selected_channel_details
+    def self.selected_channel_details(channel_identifier)
+      chosen_channel = self.select_channel(channel_identifier)
+
+      details = "Channel ID: #{chosen_channel.slack_id}\nChannel name: #{chosen_channel.name} \nMembers: #{chosen_channel.num_members} \nChannel Topic: #{chosen_channel.topic}"
+
+      return details
+
+      # chosen_channel = self.select_channel(channel_identifier)
+
+      # details = chosen_channel.self.all_channels_details
+      # return details
     end
 
     def self.user_list_all
@@ -62,4 +72,4 @@ module Slack
   end
 end
 
-# Slack::Workspace.selected_all_users
+# put Slack::Workspace.selected_channel_details("CH2NW42JF")

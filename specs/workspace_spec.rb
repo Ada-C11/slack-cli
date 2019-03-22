@@ -1,5 +1,27 @@
 require_relative "test_helper.rb"
 
+describe "self.channel_list_all" do
+  it "returns an array of channel names" do
+    VCR.use_cassette("channel_find") do
+      list = Slack::Workspace.channel_list_all
+
+      expect(list.length).must_equal 3
+      expect(list).must_include "random"
+      expect(list).wont_include "test"
+    end
+  end
+end
+
+describe "self.all_channels_details" do
+  it "returns an array of channel details" do
+    VCR.use_cassette("channel_find") do
+      details = Slack::Workspace.all_channels_details
+
+      expect(details.length).must_equal 3
+    end
+  end
+end
+
 describe "self.select_channel" do
   it "can select a channel and return it" do
     VCR.use_cassette("channel_find") do
@@ -12,6 +34,38 @@ describe "self.select_channel" do
 
       expect(selected_channel.name).must_equal "general"
       expect(selected_channel.slack_id).must_equal "CH2NW42JF"
+    end
+  end
+end
+
+describe "self.selected_channel_details" do
+  it "returns the details for the selected channel" do
+    VCR.use_cassette("channel_find") do
+      channel_details = Slack::Workspace.selected_channel_details("CH2NW42JF")
+      ap channel_details
+      # expect(channel_details.length).must_equal 1
+    end
+  end
+end
+
+describe "self.user_list_all" do
+  it "returns an array of user names" do
+    VCR.use_cassette("user_find") do
+      list = Slack::Workspace.user_list_all
+      ap list
+      expect(list.length).must_equal 3
+      expect(list).must_include "slackbot"
+      expect(list).wont_include "test"
+    end
+  end
+end
+
+describe "self.all_users_details" do
+  it "returns an array of users details" do
+    VCR.use_cassette("user_find") do
+      details = Slack::Workspace.all_users_details
+
+      expect(details.length).must_equal 3
     end
   end
 end
