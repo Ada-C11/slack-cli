@@ -12,11 +12,12 @@ module SlackCli
     TOKEN = ENV["SLACK_TOKEN"]
 
     attr_reader :send_message, :name, :slack_id, :error_helper, :details, :list
-
+    # :nocov:
     def initialize
       @slack_id = slack_id
       @name = name
     end
+    # :nocov:
 
     def self.list_url
       raise NotImplementedError, "TODO: implement me in a child class"
@@ -45,7 +46,8 @@ module SlackCli
       response = HTTParty.get(list_url, query: query_params)
       return error_helper(response)
     end
-
+    
+    # :nocov:
     def details
       raise NotImplementedError "TODO: implement me in a child class"
     end
@@ -53,6 +55,7 @@ module SlackCli
     def self.list
       raise NotImplementedError "TODO: implement me in a child class"
     end
+    # :nocov:
 
     def self.error_helper(response)
       unless response.code == 200 && response["ok"]

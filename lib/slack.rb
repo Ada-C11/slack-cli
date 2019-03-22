@@ -1,6 +1,7 @@
 require_relative "workspace"
 
-#driver code
+
+# :nocov:
 def main
   workspace = Workspace.new
   puts "TatiHana Slack Channels loaded #{SlackCli::Channel.list.length} channels"
@@ -60,3 +61,4 @@ def main
 end
 
 main if __FILE__ == $0
+# :nocov:
