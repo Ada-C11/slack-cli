@@ -22,9 +22,9 @@ module Slack
       end
     end
 
-    def select_user(indentifier)
+    def select_user(identifier)
       @selected = @users.find do |user|
-        user.slack_id == indentifier
+        user.slack_id == identifier || user.name == identifier
       end
     end
 

@@ -49,6 +49,11 @@ describe "Workspace class" do
       expect(@workspace.selected).must_be_kind_of Slack::User
     end
 
+    it "can select a User based on username" do
+      @workspace.select_user("v.jansen.martin")
+      expect(@workspace.selected).must_be_kind_of Slack::User
+    end
+
     it "returns nil if given invalid id" do
       @workspace.select_user("INVALID_ID")
       expect(@workspace.selected).must_equal nil
