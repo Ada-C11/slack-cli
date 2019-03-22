@@ -13,11 +13,9 @@ module SlackAPI
 
   class User < Recipient
 
-    #attr_accessor :status_text, :status_emoji
-
     attr_reader :real_name
 
-    attr_writer :list
+    attr_accessor :list
 
     BASE_URL = "https://slack.com/api"
     USERS_LIST_PATH = "/users.list"
@@ -54,6 +52,6 @@ module SlackAPI
       return @@list
     end
 
-    
+
   end
 end

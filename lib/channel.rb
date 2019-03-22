@@ -10,6 +10,8 @@ module SlackAPI
         
   attr_reader :topic, :member_count
 
+  attr_accessor :list
+
   BASE_URL = "https://slack.com/api/channels.list"
   TOKEN = ENV['TOKEN']
   @@list = []
