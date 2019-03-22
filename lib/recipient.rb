@@ -27,12 +27,13 @@ class Recipient
     end
 
     response = HTTParty.get(url, query: params)
+    return response
   end
 
-  def send_msg(message, deliver_to)
+  def send_msg(message)
     params = {
-      "token" => ENV["SLACK_API_TOKEN"],
-      "channel" => deliver_to,
+      "token" => ENV["SLACK_TOKEN"],
+      "channel" => @slack_id,
       "text" => message,
       "as_user" => true,
     }

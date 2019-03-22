@@ -263,4 +263,241 @@ http_interactions:
       string: '{"ok":false,"error":"not_authed"}'
     http_version: 
   recorded_at: Fri, 22 Mar 2019 21:31:20 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=&channel=%23%3CChannel%3A0x00007f8958479aa8%3E&text=this%20should%20post&as_user=true
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 Mar 2019 21:58:35 GMT
+      Server:
+      - Apache
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      X-Accepted-Oauth-Scopes:
+      - chat:write:user
+      Vary:
+      - Accept-Encoding
+      X-Slack-Req-Id:
+      - 862fb0c7-6981-4cef-9eaf-305839a8a0be
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-f4rs
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 a9587eaa1ec3f78d147d395dced29552.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - 3DhI7K-Tz7feFMZ-m6y8_sDkAGE16CPtUJDjIAnx5zO14WavhQ_hGw==
+    body:
+      encoding: UTF-8
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Fri, 22 Mar 2019 21:58:35 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=&channel=%23%3CChannel%3A0x00007fa87561b730%3E&text=this%20should%20post&as_user=true
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 Mar 2019 22:03:59 GMT
+      Server:
+      - Apache
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      X-Accepted-Oauth-Scopes:
+      - chat:write:user
+      Vary:
+      - Accept-Encoding
+      X-Slack-Req-Id:
+      - 07faf59f-4c86-4ad8-a6d5-b02aaa349fe0
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-wzdz
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 53332bd6d55cfd374862eac4265e274a.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - HRZ9iK1an_CDmipz6vK5qUBdqlGG_yrsdVBzi9nA7yAU5zN8arJW1w==
+    body:
+      encoding: UTF-8
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Fri, 22 Mar 2019 22:03:59 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=&channel=CH0EFGWQ0&text=this%20should%20post&as_user=true
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 Mar 2019 22:30:10 GMT
+      Server:
+      - Apache
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      X-Accepted-Oauth-Scopes:
+      - chat:write:user
+      Vary:
+      - Accept-Encoding
+      X-Slack-Req-Id:
+      - ddb2f83a-f0d8-4895-bd63-940a878eb7ca
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-qdfp
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 7fe3163daf2d65b2899c9b0772889524.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - xJtvRD-izQHnFMUT8nXYZdJMRfvwfXudj0BLTNGQg2OdBDVP6P4gDA==
+    body:
+      encoding: UTF-8
+      string: '{"ok":false,"error":"not_authed"}'
+    http_version: 
+  recorded_at: Fri, 22 Mar 2019 22:30:10 GMT
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: token=<SLACK_TOKEN>&channel=CH0EFGWQ0&text=this%20should%20post&as_user=true
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 22 Mar 2019 22:32:13 GMT
+      Server:
+      - Apache
+      X-Content-Type-Options:
+      - nosniff
+      X-Slack-Req-Id:
+      - bb321a31-b60a-4121-aab3-688329d9cf86
+      X-Oauth-Scopes:
+      - identify,read,post,client,apps,admin
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Expose-Headers:
+      - x-slack-req-id
+      X-Xss-Protection:
+      - '0'
+      X-Accepted-Oauth-Scopes:
+      - chat:write:user,client
+      Vary:
+      - Accept-Encoding
+      Pragma:
+      - no-cache
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Via:
+      - haproxy-www-shy
+      X-Cache:
+      - Miss from cloudfront
+      Via:
+      - 1.1 d714b057e8bc1fb7da10bf9e59df1987.cloudfront.net (CloudFront)
+      X-Amz-Cf-Id:
+      - DTSwfTckOXWlPONatysPNFHZrj6DV6imVt6dcmeTt8Y8nuiMqdbd0g==
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channel":"CH0EFGWQ0","ts":"1553293933.000100","message":{"bot_id":"BH78ZSEUB","type":"message","text":"this
+        should post","user":"UH2SDUECA","ts":"1553293933.000100"}}'
+    http_version: 
+  recorded_at: Fri, 22 Mar 2019 22:32:13 GMT
 recorded_with: VCR 4.0.0
