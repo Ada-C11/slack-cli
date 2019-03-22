@@ -15,7 +15,7 @@ def main
 
   print "\nUsers loaded: ", Slack::Workspace.user_list_all.length
 
-  puts "\nPlease select from the following options: \n list channels, select channel, list users, select user, or quit"
+  puts "\nPlease select from the following options: \n list channels, select channel, list users, select user, details, send message, or quit"
   selection = gets.chomp.downcase
 
   until selection == "quit"
@@ -76,11 +76,15 @@ def main
           puts "Please select a valid input. Returning to main!"
         end
       end
+    when "details" || "send message"
+      puts "You haven't selected a user or channel. Exiting to main prompt."
+    when "send message"
+      puts "You haven't selected a user or channel. Exiting to main prompt."
     when "quit"
     else
       puts "Please enter a valid selection."
     end
-    puts "What would you like to do next? (list users, select user, list channels, select channel, or quit)"
+    puts "What would you like to do next? (list users, select user, list channels, select channel, details, send message, or quit)"
     selection = gets.chomp.downcase
   end
 
