@@ -17,11 +17,22 @@ class Workspace
     @selected = @channels.find do |channel|
       channel.name == name || channel.slack_id == name
     end
+    if @selected == nil 
+      puts "That channel does not exist" 
+    else
+      return @selected
+    end
   end
 
   def select_user(name)
     @selected = @users.find do |user|
       user.name == name || user.slack_id == name
+    end
+
+    if @selected == nil 
+      puts "That user does not exist" 
+    else
+      return @selected
     end
   end
 

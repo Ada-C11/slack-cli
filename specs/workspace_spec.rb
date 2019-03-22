@@ -67,13 +67,13 @@ describe "Workspace class" do
     end
   end
 
-  describe "show details method" do 
-    it "returns details for a selected user" do 
+  describe "show details method" do
+    it "returns details for a selected user" do
       workspace.select_user("hanalways")
       expect(workspace.show_details).must_be_kind_of String
     end
 
-    it "returns details for a selected channel" do 
+    it "returns details for a selected channel" do
       workspace.select_channel("everyone")
       expect(workspace.show_details).must_be_kind_of String
     end
@@ -86,9 +86,15 @@ describe "Workspace class" do
     end
   end
 
-  describe "send_message method" do 
-    it "raise an exception when a user enters nil in send_message" do
-      message = ""
+  describe "send_message method" do
+    it "raise an exception when a trying to send a nil or blank message to a channel or user" do
+      workspace.select_user("tatsqui")
+      no_text = ""
+      expect { workspace.send_message(no_text) }.must_raise SlackCli::SlackError
+    end
+
+    it "will raise and exception with a nil message" do
+      message = nil
       expect { workspace.send_message(message) }.must_raise SlackCli::SlackError
     end
 
@@ -99,14 +105,14 @@ describe "Workspace class" do
     end
   end
 
-  describe "list_channels method" do 
-    it "returns details of a channel as nil" do 
+  describe "list_channels method" do
+    it "returns details of a channel as nil" do
       assert_nil(workspace.list_channels)
     end
   end
 
-  describe "list_users method" do 
-    it "returns details of a user as nil" do 
+  describe "list_users method" do
+    it "returns details of a user as nil" do
       assert_nil(workspace.list_users)
     end
   end

@@ -1,6 +1,5 @@
 require_relative "workspace"
 
-
 # :nocov:
 def main
   workspace = Workspace.new
@@ -43,13 +42,15 @@ def main
         puts "No user or channel selected, try again."
       end
     when "send message"
-      begin
-        puts "What would you like to send to #{workspace.selected.name}?"
+      if workspace.selected == nil
+        puts "No user or channel selected"
+      else
+        # begin
         message = gets.chomp
         workspace.send_message(message)
-        binding.pry
-      rescue SlackCli::SlackError
+        # rescue SlackCli::SlackError
         puts "No user or channel selected, try again"
+        # end
       end
     when "quit"
       puts "Thanks for checking out TatiHana! Bye bye..."
