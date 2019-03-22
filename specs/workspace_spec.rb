@@ -59,4 +59,14 @@ describe "Workspace class" do
       end
     end
   end
+
+  describe "show_details" do
+    it "shows details of the selected channel" do
+      VCR.use_cassette("Workspace") do
+        response = Workspace.new
+        response.select_channel("general")
+        expect(response.show_details).must_be_instance_of TablePrint::Returnable
+      end
+    end
+  end
 end

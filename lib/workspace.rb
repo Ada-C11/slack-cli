@@ -3,7 +3,9 @@ require_relative "channel"
 require_relative "slack"
 require "dotenv"
 require "httparty"
-require "pry"
+require "table_print"
+tp.set User, :username, :id
+tp.set Channel, :channel_name, :id, :members, :topic
 Dotenv.load
 
 class Workspace
@@ -45,8 +47,8 @@ class Workspace
     end
   end
 
-  def self.show_details
-    #format details for selected user/channel w/ table gem
+  def show_details
+    tp @selected
   end
 
   def self.send_message
