@@ -36,7 +36,7 @@ module Slack
   
   
       if response["ok"] == false
-        raise SlackAPI::SlackError, "There was an error sending #{message} to #{recipient}. #{message_request["error"]}"
+        raise ResponseError, "There was an error sending your message"
       else 
         return true
       end

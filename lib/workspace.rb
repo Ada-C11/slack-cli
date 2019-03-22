@@ -7,6 +7,7 @@ require "dotenv"
 Dotenv.load
 
 module Slack
+  class ResponseError < StandardError; end
   class Workspace
     BASE_URL = "https://slack.com/api/users.list"
     attr_reader :users, :channels
@@ -25,9 +26,9 @@ module Slack
         end
       end
       return @selection
-      # if @selection == nil
-      #   return "Sorry, #{name_or_id} is not a valid user."
-      # end
+      if @selection == nil
+        return "Sorry, #{name_or_id} is not a valid user."
+      end
     end
     
     def select_channel(name_or_id)
@@ -38,9 +39,9 @@ module Slack
       end
       return @selection
       
-      # if @selection == nil
-      #   return "Sorry, #{name_or_id} is not a valid channel."
-      # end
+      if @selection == nil
+        return "Sorry, #{name_or_id} is not a valid channel."
+      end
     end
 
     def show_details

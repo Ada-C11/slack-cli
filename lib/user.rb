@@ -24,7 +24,7 @@ module Slack
       user_data["members"].map do |user|
         self.new(user["id"], user["name"], user["profile"]["real_name"])
       end
-    
+
     end
 
     def details
