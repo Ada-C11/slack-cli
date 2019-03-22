@@ -28,7 +28,8 @@ def menu
   puts "3. Select user"
   puts "4. Select channel"
   puts "5. Details (on selected user/channel)"
-  puts "6. Quit"
+  puts "6. Send message"
+  puts "7. Quit"
 
   input = ask("What do you want to do?")
   return input
@@ -49,7 +50,7 @@ def main
 
   selection = menu
 
-  until selection == "6"
+  until selection == "7"
     if selection == "1"
       puts "\nHere are the users:"
       rows = []
@@ -96,7 +97,14 @@ def main
         table = Terminal::Table.new :rows => rows
         puts table
       end
-    else puts "\nInvalid entry.  Please try again!"     end
+    elsif selection == "6"
+      if workspace.selected.nil?
+        puts "Whoops! You must select a recipient first"
+      else
+
+      end
+    else puts "\nInvalid entry.  Please try again!"     
+    end
 
     selection = menu
   end
