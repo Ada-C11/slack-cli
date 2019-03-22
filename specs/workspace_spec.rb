@@ -41,7 +41,6 @@ describe "Workspace" do
   describe "show_details" do
     it "shows details for a selected user" do
       @workspace.select_user(id_or_name:"slackbot")
-      puts @workspace.show_details
       expect(@workspace.show_details).must_be_kind_of Hash
       expect(@workspace.show_details[:real_name]).must_equal @workspace.selected.real_name
       expect(@workspace.show_details[:slack_id]).must_equal @workspace.selected.slack_id
@@ -50,7 +49,6 @@ describe "Workspace" do
 
     it "shows details for a selected channel" do
       @workspace.select_channel(id_or_name:"everyone")
-      puts @workspace.show_details
       expect(@workspace.show_details).must_be_kind_of Hash
       expect(@workspace.show_details[:slack_id]).must_equal @workspace.selected.slack_id
       expect(@workspace.show_details[:name]).must_equal @workspace.selected.name
