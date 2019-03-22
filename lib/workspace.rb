@@ -17,14 +17,14 @@ module Slack
       select(input, users)
     end
 
-    def show_details # This is the only method that prints anything.
-      puts "No recipient selected".red unless selected
+    def show_details(test: false) # This is the only method that prints anything.
+      puts "No recipient selected".red unless selected || test
 
       if selected.class == Slack::User
-        tp selected, :name, :real_name, :slack_id
+        tp selected, :name, :real_name, :slack_id unless test
         return selected
       elsif selected.class == Slack::Channel
-        tp selected, :name, :topic, :member_count, :slack_id
+        tp selected, :name, :topic, :member_count, :slack_id unless test
         return selected
       else
         return nil
