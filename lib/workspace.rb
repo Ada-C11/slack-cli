@@ -24,12 +24,9 @@ module SlackCLI
     end
 
     def send_message(message)
-      if @selected != nil
-        @selected.send_message(message)
-        return true
-      else
-        return false
-      end
+      return false if @selected != nil
+      @selected.send_message(message)
+      return true
     end
 
     private
