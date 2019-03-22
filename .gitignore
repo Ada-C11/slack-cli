@@ -2,6 +2,7 @@
 *.rbc
 /.config
 /coverage/
+*/coverage/
 /InstalledFiles
 /pkg/
 /spec/reports/
@@ -11,7 +12,7 @@
 /tmp/
 
 # Used by dotenv library to load environment variables.
-# .env
+.env
 
 ## Specific to RubyMotion:
 .dat*
@@ -54,3 +55,5 @@ build-iPhoneSimulator/
 
 # Ignore cassette files
 /specs/cassettes/
+
+.vscode
