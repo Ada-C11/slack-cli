@@ -2,8 +2,7 @@
 require_relative "user"
 require_relative "channel"
 require "terminal-table"
-require 'pry'
-
+require "pry"
 
 class Workspace
   attr_reader :users, :channels, :selected, :list_users, :list_channels
@@ -11,21 +10,17 @@ class Workspace
   def initialize
     @users = SlackCli::User.list
     @channels = SlackCli::Channel.list
-    @selected = selected
-
-    unless selected == nil
-      raise SlackCli::SlackError, "No user or channel selected"
-    end
+    @selected = nil
   end
 
   def select_channel(name)
-    @selected = @channels.find do |channel| 
+    @selected = @channels.find do |channel|
       channel.name == name || channel.slack_id == name
     end
   end
 
   def select_user(name)
-    @selected = @users.find do |user| 
+    @selected = @users.find do |user|
       user.name == name || user.slack_id == name
     end
   end
@@ -40,11 +35,15 @@ class Workspace
   end
 
   def send_message(message)
-    message.strip!
-    if message.length == 0
-      raise SlackCli::SlackError, "Message must cannot be nil or blank..."
+    if @selected == nil
+      raise SlackCli::SlackError, "No user or channel selected!"
     else
-      @selected.post_message(@selected.slack_id, message)
+      message.strip!
+      if message.length == 0
+        raise SlackCli::SlackError, "Message must cannot be nil or blank..."
+      else
+        @selected.post_message(@selected.slack_id, message)
+      end
     end
   end
 
@@ -62,6 +61,6 @@ class Workspace
     @users.each do |user|
       puts "#{user.real_name} Slack ID: #{user.slack_id}"
     end
-    return nil 
+    return nil
   end
 end

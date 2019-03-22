@@ -4,9 +4,6 @@ require_relative "recipient"
 
 module SlackCli
   class User < Recipient
-    LIST_URL = "https://slack.com/api/users.list"
-    TOKEN = ENV["SLACK_TOKEN"]
-
     attr_reader :real_name, :status_text, :status_emoji
 
     def initialize(name, slack_id, real_name, status_text, status_emoji)
@@ -15,6 +12,10 @@ module SlackCli
       @real_name = real_name
       @status_text = status_text
       @status_emoji = status_emoji
+    end
+
+    def self.list_url
+      return "https://slack.com/api/users.list"
     end
 
     def self.list

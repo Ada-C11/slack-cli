@@ -3,8 +3,6 @@ require_relative "recipient"
 module SlackCli
   class Channel < SlackCli::Recipient
     attr_reader :topic, :member_count
-    LIST_URL = "https://slack.com/api/channels.list"
-
     def initialize(slack_id, name, topic, member_count)
       @slack_id = slack_id
       @name = name
@@ -12,9 +10,12 @@ module SlackCli
       @member_count = member_count
     end
 
+    def self.list_url
+      return "https://slack.com/api/channels.list"
+    end
+
     def self.list
       response = get
-  
       channels = response["channels"].map do |channel|
         slack_id = channel["id"]
         name = channel["name"]

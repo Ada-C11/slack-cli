@@ -57,45 +57,16 @@ describe "Workspace class" do
     end
   end
 
-  describe "cases when our program should raise an exception..." do
-    it "should raise an exception created by changes to API" do
-      class Dummy < SlackCli::Recipient
-        LIST_URL = "http://slack.com/api/users.list"
-        BADTOKEN = "123"
-        def self.get
-          query_params = {
-            token: BADTOKEN,
-          }
-          response = HTTParty.get(self::LIST_URL, query: query_params)
-          # error_helper(response)
-          return response
-        end
-      end
+  describe "send message" do
+    it "can post a message on the 'everyone' slack channel" do
+      workspace.select_channel("everyone")
+      text = "hello world"
+      pigeon = workspace.send_message(text)
 
-      test_dummy = Dummy.get
-      expect(test_dummy["ok"]).must_equal false
-      expect(test_dummy["error"]).must_equal "invalid_auth"
+      expect(pigeon["ok"]).must_equal true
     end
 
-    it "should raise an exception created by changes to API URI" do
-      class Dummy < SlackCli::Recipient
-        LIST_URL = "http://slack.com/api/users.lis"
-        def self.get
-          query_params = {
-            token: TOKEN,
-          }
-          response = HTTParty.get(self::LIST_URL, query: query_params)
-          # error_helper(response)
-          return response
-        end
-      end
-
-      test_dummy = Dummy.get
-      expect(test_dummy["ok"]).must_equal false
-      expect(test_dummy["req_method"]).must_equal "users.lis"
-    end
-
-    it "raise an exception when a user enters nil in send_message" do
+   it "raise an exception when a user enters nil in send_message" do
       message = ""
       expect { workspace.send_message(message) }.must_raise SlackCli::SlackError
     end

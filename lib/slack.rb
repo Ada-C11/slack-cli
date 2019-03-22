@@ -42,9 +42,14 @@ def main
         puts "No user or channel selected, try again."
       end
     when "send message"
-      puts "What would you like to send to #{@selected.name}?"
-      message = gets.chomp
-      workspace.send_message(message)
+      begin
+        puts "What would you like to send to #{workspace.selected.name}?"
+        message = gets.chomp
+        workspace.send_message(message)
+        binding.pry
+      rescue SlackCli::SlackError
+        puts "No user or channel selected, try again"
+      end
     when "quit"
       puts "Thanks for checking out TatiHana! Bye bye..."
       exit

@@ -9,7 +9,6 @@ module SlackCli
 
   class Recipient
     MSG_URL = "https://slack.com/api/chat.postMessage"
-    LIST_URL = nil
     TOKEN = ENV["SLACK_TOKEN"]
 
     attr_reader :send_message, :name, :slack_id, :error_helper, :details, :list
@@ -17,6 +16,10 @@ module SlackCli
     def initialize
       @slack_id = slack_id
       @name = name
+    end
+
+    def self.list_url
+      raise NotImplementedError, "TODO: implement me in a child class"
     end
 
     def post_message(name, message)
@@ -27,25 +30,28 @@ module SlackCli
         text: message,
       }
       response = HTTParty.post(MSG_URL, body: body_params)
-      return error_helper(response)
-      # return response
+
+      if response != 200 && !response["ok"]
+        raise SlackCli::SlackError "Error: #{response["error"]}"
+      else
+        return response
+      end
     end
 
     def self.get
       query_params = {
         token: TOKEN,
       }
-      response = HTTParty.get(self::LIST_URL, query: query_params)
+      response = HTTParty.get(list_url, query: query_params)
       return error_helper(response)
     end
 
-    #private
     def details
-      raise NotImplementedError
+      raise NotImplementedError "TODO: implement me in a child class"
     end
 
     def self.list
-      raise NotImplementedError
+      raise NotImplementedError "TODO: implement me in a child class"
     end
 
     def self.error_helper(response)
