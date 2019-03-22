@@ -4,7 +4,7 @@ require "pry"
 Dotenv.load
 
 class Channel
-  attr_reader :name, :topic, :member_count, :id
+  # attr_reader :name, :topic, :member_count, :id
   BASE_URL = "https://slack.com/api/channels.list"
   SLACK_TOKEN = ENV["SLACK_TOKEN"]
 

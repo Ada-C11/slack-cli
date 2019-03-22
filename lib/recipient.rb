@@ -53,7 +53,7 @@ module SlackApi
         },
       )
     else
-      raise ArgumentError, "The input #{user} is not included in our channels."
+      raise SlackApiError, "The input #{user} is not included in our channels."
     end
 
     if response["ok"]

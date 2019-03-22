@@ -17,7 +17,7 @@ describe SlackApi do
       expect {
         SlackApi.send_message("Test message",
                               "bogus")
-      }.must_raise ArgumentError
+      }.must_raise SlackApi::SlackApiError
     end
   end
 

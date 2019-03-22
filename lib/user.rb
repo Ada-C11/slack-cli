@@ -3,16 +3,8 @@ require "dotenv"
 Dotenv.load
 
 class User
-  attr_reader :user_name, :real_name, :slack_id
-
   BASE_URL = "https://slack.com/api/users.list"
   SLACK_TOKEN = ENV["SLACK_TOKEN"]
-
-  def initialize
-    @user_name = user_name
-    @real_name = real_name
-    @slack_id = slack_id
-  end
 
   def self.list
     query_param = {
