@@ -21,7 +21,13 @@ module Slack
     USER_URL = "https://slack.com/api/users.list"
 
     def details
-      return @real_name
+      return {
+        name: @real_name,
+        status: @status_text,
+        emoji: @status_emoji,
+        slack_id: @slack_id,
+        username: @name
+      }
     end
 
     def self.users_get

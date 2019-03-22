@@ -20,7 +20,12 @@ module Slack
     CHANNEL_URL = "https://slack.com/api/channels.list"
 
     def details
-      return @topic
+      return {
+        name: @name,
+        slack_id: @slack_id,
+        topic: @topic,
+        member_count: @member_count
+      }
     end
 
     def self.channels_get
