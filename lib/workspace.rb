@@ -1,7 +1,5 @@
 require_relative "user"
 require_relative "channel"
-require_relative "recipient"
-require "pry"
 
 class Workspace
   attr_reader :users, :channels, :selected
@@ -12,6 +10,7 @@ class Workspace
     @selected = nil
   end
 
+  # modify this
   def select_channel(user_input)
     selected = channels.select do |channel|
       channel.name == user_input || channel.slack_id == user_input

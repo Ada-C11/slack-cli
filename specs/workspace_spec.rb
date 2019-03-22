@@ -71,32 +71,32 @@ describe "instance methods" do
   end
 end
 
-describe "post message to slack" do
-  before do
-    VCR.use_cassette("slack_workspace") do
-      @workspace = Workspace.new
-    end
-  end
+# describe "post message to slack" do
+#   before do
+#     VCR.use_cassette("slack_workspace") do
+#       @workspace = Workspace.new
+#     end
+#   end
 
-  it "creates sends a message to a recipient" do
-    VCR.use_cassette("slack-posts") do
-      @workspace.select_channel("everyone")
-      response = @workspace.send_message("this should post")
-      expect(response["ok"]).must_equal true
-    end
-  end
+#   it "creates sends a message to a recipient" do
+#     VCR.use_cassette("slack-posts") do
+#       @workspace.select_channel.first
+#       response = @workspace.send_message("should work")
+#       expect(response["ok"]).must_equal true
+#     end
+#   end
 
-  it "raises an error for invalid channel" do
-    VCR.use_cassette("slack-posts") do
-      @workspace.select_channel("imaginary")
-      expect { @workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
-    end
+it "raises an error for invalid channel" do
+  VCR.use_cassette("slack-posts") do
+    @workspace.select_channel("imaginary")
+    expect { @workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
   end
-
-  # it "raises an error for invalid user" do
-  #   VCR.use_cassette("slack-posts") do
-  #     @workspace.select_user.first
-  #     expect { workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
-  #   end
-  # end
 end
+
+#   it "raises an error for invalid user" do
+#     VCR.use_cassette("slack-posts") do
+#       @workspace.select_user.first
+#       expect { workspace.send_message("shouldn't work") }.must_raise Recipient::SlackApiError
+#     end
+#   end
+# end
