@@ -57,4 +57,29 @@ describe "workspace class" do
       expect(@workspace_channel.select_channel).must_be_nil
     end
   end
+
+  describe "#send_message" do
+    it "connects to the api ok" do
+      VCR.use_cassette("") do
+        selected = "CH0ED08E4" #id for general channel
+        @workspace = Workspace.new(selected: selected)
+        channel_selected = @workspace.select_channel
+        message = "hello"
+        response = @workspace.send_message(message, channel_selected)
+        expect(response.code).must_equal 200
+        expect(response.parsed_response["ok"]).must_equal true
+      end
+    end
+
+    it "returns an error if the message is empty" do
+      VCR.use_cassette("") do
+        selected = "CH0ED08E4" #id for general channel
+        @workspace = Workspace.new(selected: selected)
+        channel_selected = @workspace.select_channel
+        message = ""
+        exception = expect { @workspace.send_message(message, channel_selected) }.must_raise SlackApiError
+        expect(exception.message).must_equal "no_text"
+      end
+    end
+  end
 end

@@ -17,6 +17,10 @@ class Recipient
     url = BASE_URL + endpoint
     params[:token] = ENV["SLACK_API_TOKEN"]
     response = HTTParty.post(url, body: params)
+    unless response.code == 200 && response.parsed_response["ok"]
+      raise SlackApiError, response["error"]
+    end
+    return response
   end
 
   private
