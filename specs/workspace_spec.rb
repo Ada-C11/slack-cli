@@ -29,7 +29,6 @@ describe "Workspace" do
   describe "select_user" do
     it "returns the right selected user" do
       input = "sopheary.chiv"
-      recipients = @workspace.users
       expect(@workspace.select_user(input)).must_equal "sopheary.chiv"
     end
 
@@ -55,7 +54,6 @@ describe "Workspace" do
   describe "select_channel" do
     it "returns the right selected channel" do
       input = "slack-api"
-      recipients = @workspace.users
       expect(@workspace.select_channel(input)).must_equal "slack-api"
     end
 
