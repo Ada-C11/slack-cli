@@ -33,16 +33,6 @@ describe "User" do
        end
     end
 
-    # it "sends a message to selected channel" do
-    #   VCR.use_cassette("channel_send_message") do
-    #     puts channel.list
-    #     channel = SlackAPI::Channel.list[0]
-    #     test2 = channel.send_message(text: "hello")
-    #     expect(test2).must_equal true
-    #    end
-    # end
-
-
   end
 end
 

@@ -7,11 +7,6 @@ require_relative 'user'
 require_relative 'workspace'
 Dotenv.load
 
-# BASE_URL = 'https://slack.com/api'
-# CHANNELS_LIST_PATH = '/channels.list'
-# USERS_LIST_PATH = '/users.list'
-# CHAT_POST_MESSAGE_PATH = '/chat.postMessage'
-
 token = ENV['TOKEN']
 
 def main
@@ -46,7 +41,6 @@ def main
         tp SlackAPI::Channel.list
       when "C"
         puts "Please supply a slack ID or user name (case sensitive!)"  
-        # Resets selected
         workspace.selected = nil
         user_id_or_name = gets.chomp
         selected = workspace.select_user(id_or_name: user_id_or_name)
