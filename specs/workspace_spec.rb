@@ -104,12 +104,13 @@ describe "Workspace" do
       end
     end
 
-    it "will send with empty text" do
+    it "will send rasie an error for empty text" do
       user = @workspace.users[0].name
       @workspace.select_user(id_or_name: user)
-      VCR.use_cassette("send_message_to_user") do
-        response = @workspace.send_message(text:"")
-        expect(response).must_equal true
+      VCR.use_cassette("send_empty_message_user") do
+        exception = expect {
+          @workspace.send_message(text:"")
+        }.must_raise SlackAPI::SlackApiError
       end
     end
 
