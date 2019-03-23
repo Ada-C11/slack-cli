@@ -1,6 +1,7 @@
 class User
+  attr_accessor :username, :real_name, :slack_id
   def initialize(user_map)
-    @username = user_map['display_name']
+    @username = user_map['name']
     @real_name = user_map['real_name']
     @slack_id = user_map['id']
     # @status_text = user_map['status_text']
@@ -14,4 +15,8 @@ class User
   # def self.list
   #   #code here
   # end
+
+  def to_s
+    "Username: #{@username}, Real name: #{@real_name}, Slack ID: #{@slack_id}"
+  end
 end

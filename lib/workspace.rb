@@ -33,20 +33,41 @@ class Workspace
     return users
   end
 
-  # def select_channel
-  #   #code
-  # end
-  #
-  # def select_user
-  #   #code
-  # end
-  #
-  # def show_details
-  #   #code
-  # end
-  #
-  # def send_message
+  #DRY this to do "or" statements
+    def select_channel(value)
+    @channels.each do |channel|
+      if channel.name == value
+        @selected = channel
+        return channel
+      elsif channel.slack_id == value
+        @selected = channel
+        return channel
+      end
+    end
+    return nil
+  end
+
+
+  #DRY this to do "or" statements
+  def select_user(value)
+    users.each do |user|
+       if user.username == value
+         @selected = user
+         return user
+       elsif user.slack_id == value
+         @selected = user
+         return user
+       end
+     end
+     return nil
+   end
+ end
+
+
+  # def show_details(details)
   #   #code
   # end
 
-end
+  # def send_message
+  #   #code
+  # end

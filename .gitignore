@@ -54,3 +54,4 @@ build-iPhoneSimulator/
 
 # Ignore cassette files
 /specs/cassettes/
+.DS_Store

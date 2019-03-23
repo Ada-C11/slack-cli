@@ -17,14 +17,15 @@ describe "workspace" do
         expect(channels).must_be_kind_of Array
       end
     end
+  end
 
-    describe "users" do
-      it "must be instance of array" do
-        VCR.use_cassette("good users") do
-          users = @workspace.users
-          expect(users).must_be_kind_of Array
-        end
+  describe "users" do
+    it "must be instance of array" do
+      VCR.use_cassette("good users") do
+        users = @workspace.users
+        expect(users).must_be_kind_of Array
       end
+    end
 
     it "must raise exception for bad response" do
       workspace = Workspace.new('badapitoken')
@@ -33,5 +34,25 @@ describe "workspace" do
       end
     end
   end
+
+  describe "select_user" do
+    it "finds a user by username" do
+      VCR.use_cassette("select user") do
+        # expect{workspace.select_user}.must_be
+        # arrange
+        user_name = "kateannnichols"
+        # act
+        selected_user = @workspace.select_user(user_name)
+        # assert
+        expect(selected_user.username).must_equal 'kateannnichols'
+      end
+    end
+    it "finds a user by id" do
+      VCR.use_cassette("select user") do
+        slack_id = "UH2SA7YJE"
+        selected_user = @workspace.select_user(slack_id)
+        expect(selected_user.slack_id).must_equal 'UH2SA7YJE'
+      end
+    end
   end
 end

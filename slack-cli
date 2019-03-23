@@ -1,43 +1,9 @@
 #! /usr/bin/env ruby
 #shebang line.
 require "dotenv"
-require_relative "./lib/slack"
+require_relative 'lib/slack-cli'
 
-$time_to_go = false
-
-Dotenv.load(".env")
-$slack = Slack.new(ENV['SLACK_API_TOKEN'])
-
-# puts slack.users
-
-def quit()
-  $time_to_go = true
-end
-
-def list_users
-  puts $slack.users
-end
-
-def list_channels
-  puts $slack.channels
-end
-
-commands = {
-  'list users' => method(:list_users),
-  'list channels' => method(:list_channels),
-  'exit' => method(:quit),
-  'quit' => method(:quit),
-}
-
-while !$time_to_go do
-  puts "Please enter one of the available commands: #{commands.keys}"
-  print 'Command: '
-  command = gets.chomp
-  if commands.key? command
-    commands[command].call
-  else
-    puts 'You silly goose! That is no command!'
-  end
-end
-
-puts 'Toodles!'
+Dotenv.load('.env')
+api_token = ENV['SLACK_API_TOKEN']
+cli = SlackCLI.new(api_token)
+cli.run()

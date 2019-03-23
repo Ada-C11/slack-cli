@@ -14,10 +14,10 @@ class Channel
   end
 
   # def details
-  #   #code here
+  #   return "slack id: #{@id} #{@topic} member count: #{@member_count}"
   # end
-  #
-  # def self.list
-  #   #code here
-  # end
+
+  def to_s
+    "Name:#{@name},Topic:#{@topic},Member count :#{@member_count},Slack ID: #{@id}"
+  end
 end
