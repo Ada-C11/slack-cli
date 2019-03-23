@@ -1,0 +1,9 @@
+#! /usr/bin/env ruby
+#shebang line.
+require "dotenv"
+require_relative 'lib/slack-cli'
+
+Dotenv.load('.env')
+api_token = ENV['SLACK_API_TOKEN']
+cli = SlackCLI.new(api_token)
+cli.run()
