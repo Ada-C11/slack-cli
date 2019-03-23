@@ -19,6 +19,27 @@ describe "workspace" do
     end
   end
 
+  describe "select_channel" do
+    it "finds a chanel by channel name" do
+      VCR.use_cassette("select channel by name") do
+        # expect{workspace.select_user}.must_be
+        # arrange
+        channel_name = "random"
+        # act
+        selected_channel = @workspace.select_channel(channel_name)
+        # assert
+        expect(selected_channel.name).must_equal 'random'
+      end
+    end
+
+    it "finds a channel by id" do
+      VCR.use_cassette("select channel by id") do
+        id = "CH36Q9YKX"
+        selected_channel = @workspace.select_channel(id)
+        expect(selected_channel.id).must_equal 'CH36Q9YKX'
+        end
+      end
+
   describe "users" do
     it "must be instance of array" do
       VCR.use_cassette("good users") do
@@ -38,7 +59,6 @@ describe "workspace" do
   describe "select_user" do
     it "finds a user by username" do
       VCR.use_cassette("select user") do
-        # expect{workspace.select_user}.must_be
         # arrange
         user_name = "kateannnichols"
         # act
@@ -49,9 +69,10 @@ describe "workspace" do
     end
     it "finds a user by id" do
       VCR.use_cassette("select user") do
-        slack_id = "UH2SA7YJE"
-        selected_user = @workspace.select_user(slack_id)
-        expect(selected_user.slack_id).must_equal 'UH2SA7YJE'
+        id = "UH2SA7YJE"
+        selected_user = @workspace.select_user(id)
+        expect(selected_user.id).must_equal 'UH2SA7YJE'
+        end
       end
     end
   end

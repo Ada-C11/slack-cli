@@ -3,6 +3,7 @@ require "httparty"
 require "dotenv"
 
 class Channel
+  attr_reader :name, :id, :topic, :member_count
   # @topic = topic
   # @member_count = member_count
 

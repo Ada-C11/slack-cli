@@ -35,11 +35,11 @@ class Workspace
 
   #DRY this to do "or" statements
     def select_channel(value)
-    @channels.each do |channel|
+      channels.each do |channel|
       if channel.name == value
         @selected = channel
         return channel
-      elsif channel.slack_id == value
+      elsif channel.id == value
         @selected = channel
         return channel
       end
@@ -54,7 +54,7 @@ class Workspace
        if user.username == value
          @selected = user
          return user
-       elsif user.slack_id == value
+       elsif user.id == value
          @selected = user
          return user
        end
