@@ -5,6 +5,8 @@ class SlackCLI
     @commands = {
       'list users' => self.method(:list_users),
       'list channels' => self.method(:list_channels),
+      'select user' => self.method(:select_user),
+    'select channel' => self.method(:select_channel),
       'exit' => self.method(:quit),
       'quit' => self.method(:quit),
     }
@@ -22,6 +24,24 @@ class SlackCLI
 
   def list_channels
     puts @workspace.channels
+  end
+
+  def select_user
+    print "which user? "
+    user = gets.chomp
+    selected_user = @workspace.select_user(user)
+    if selected_user.nil?
+      puts "thats not a user try again"
+    end
+  end
+
+  def select_channel
+    print "which channel? "
+    channel = gets.chomp
+    selected_channel = @workspace.select_channel(channel)
+    if selected_channel.nil?
+      puts "thats not a user try again"
+    end
   end
 
   def run
