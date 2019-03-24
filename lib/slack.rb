@@ -19,7 +19,7 @@ def main
       tp work_space.users, "username", "real_name", "id"
     elsif choice == "LIST CHANNELS"
       puts "\n"
-      tp work_space.channels, "channel_name", "id", "topic", :members => {:width => 60}
+      tp work_space.channels, "channel_name", "id", "topic"
     elsif choice == "SELECT USER"
       puts "Here is a list of users:".colorize(:color => :magenta)
       tp work_space.users, "username", "id"
