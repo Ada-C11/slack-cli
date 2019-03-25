@@ -55,19 +55,21 @@ class Slack
     channel = @channels.find { |x| x.name.downcase == search.downcase || x.slack_id.downcase == search.downcase }
   end
 
-  def self.send_msg(text, user)
+  def self.send_msg(channel, text)
     url = "https://slack.com/api/chat.postMessage"
-    query_paramaters = {
-      token: SLACK_API_TOKEN,
-      channel: user,
+    query_parameters = {
+      token: ENV["SLACK_API_TOKEN"],
+      channel: channel,
       text: text,
-    },
-    response = HTTParty.post(url, query: query_paramaters, headers: {"Content-Type" => "application/x-www-form-urlencoded"})
-    binding.pry
+    }
+
+    response = HTTParty.post(url,
+                             headers: {"Content-Type" => "application/x-www-form-urlencoded"},
+                             query: query_parameters)
     if response["ok"]
       return true
     else
-      raise SlackError, "Error when posting #{message} to #{channel}, error: #{response["error"]}"
+      raise SlackError, "Error when posting #{text} to #{channel}, error: #{response["error"]}"
     end
   end
 end
@@ -87,7 +89,7 @@ def main
   end
 
   def options
-    puts "What should we do next? (list channels/ list users/ select user/ select channel/ details/ quit):"
+    puts "What should we do next? (list channels/ list users/ select user/ select channel/ details/ send message/ quit):"
     return gets.chomp
   end
 
@@ -111,12 +113,10 @@ def main
       name_checker(who)
       chosen_user = slack.select_channel(who)
       puts "channel not found, please try another selection" if chosen_user == nil
-    when "send message"
-      slack.send_msg
     when "details"
       chosen_user.details
     when "send message"
-      slack.send_msg
+      Slack.send_msg(channel, text)
     when "quit"
       continue = false
     end

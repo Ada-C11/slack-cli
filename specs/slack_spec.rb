@@ -55,37 +55,31 @@ describe "Slack" do
     describe "send_msg" do
       it "can send a valid message" do
         VCR.use_cassette("slack_query") do
-          slack = Slack.new
-          return_value = slack.send_msg("sup?",
-                                        "apiiiii")
-
-          expect(return_value).must_equal true
+          to_send = Slack.send_msg("apiiiii", "sup?")
+          expect(to_send).must_equal true
         end
       end
-      # it "generates an error if given an invalid channel" do
-      #   VCR.use_cassette("slack_query") do
-      #     slack = Slack.new
-      #     expect {
-      #       slack.send_msg("Test message",
-      #                      "bogus")
-      #     }.must_raise SlackError
-      #   end
-      # end
-      # it "will generate an error if given an invalid key" do
-      #   real_token = ENV["SLACK_TOKEN"]
-      #   ENV["SLACK_TOKEN"] = "NOT_REAL_TOKEN"
+      it "generates an error if given an invalid channel" do
+        VCR.use_cassette("slack_query") do
+          expect {
+            Slack.send_msg("bogus", "Test message")
+          }.must_raise SlackError
+        end
+      end
+      it "will generate an error if given an invalid key" do
+        real_token = ENV["SLACK_TOKEN"]
+        ENV["SLACK_TOKEN"] = "NOT_REAL_TOKEN"
 
-      #   VCR.use_cassette("slack_query") do
-      #     slack = Slack.new
-      #     error = expect {
-      #       User.send_msg("Test message with invalid key",
-      #                     "apiiiii")
-      #     }.must_raise SlackError
-      #     # expect(error.message).must_equal "you suck"
-      #   end
+        VCR.use_cassette("slack_query") do
+          error = expect {
+            Slack.send_msg("Test message with invalid key",
+                           "apiiiii")
+          }.must_raise SlackError
+          # expect(error.message).must_equal "you suck"
+        end
 
-      #   ENV["SLACK_TOKEN"] = real_token
-      # end
+        ENV["SLACK_TOKEN"] = real_token
+      end
     end
   end
 
