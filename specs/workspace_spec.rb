@@ -46,7 +46,7 @@ describe "self.selected_channel_details" do
     VCR.use_cassette("channel_find") do
       channel = Slack::Channel.new("Pfeiffer_id", "Pfeiffer_name", 5, "Pfeiffer_topic")
       channel_details = Slack::Workspace.selected_channel_details(channel)
-      ap channel_details
+
       expect(channel_details).must_match "Pfeiffer_id"
       expect(channel_details).must_match "Pfeiffer_topic"
     end
@@ -57,7 +57,6 @@ describe "self.user_list_all" do
   it "returns an array of user names" do
     VCR.use_cassette("user_find") do
       list = Slack::Workspace.user_list_all
-      ap list
       expect(list.length).must_equal 3
       expect(list).must_include "slackbot"
       expect(list).wont_include "test"

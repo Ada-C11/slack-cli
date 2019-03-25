@@ -17,7 +17,10 @@ module Slack
     end
 
     def self.all_channels_details
-      return Slack::Channel.list_all.map { |channel| channel.convert_to_string }
+      channels = Slack::Channel.list_all.map do |channel|
+        "Channel ID: #{channel.slack_id}\nChannel name: #{channel.name} \nMembers: #{channel.num_members} \nChannel Topic: #{channel.topic}"
+      end
+      return channels
     end
 
     def self.select_channel(channel_identifier)
