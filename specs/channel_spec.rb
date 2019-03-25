@@ -5,10 +5,11 @@ describe "Channels" do
     it "returns a response from api for channels list" do
       VCR.use_cassette("connect to channel api") do
         url = "http://slack.com/api/channels.list"
-        query = {token: ENV["KEY"]}
+        query = { token: ENV["SLACK_API_TOKEN"] }
         request = Slack::Channel.get(url, query)
-
-        expect(request).must_equal(true)
+        puts "BBBBBREQUESTBBBBBBBBBB"
+        puts "#{request}"
+        expect(request["ok"]).must_equal true
       end
     end
   end
@@ -16,7 +17,7 @@ describe "Channels" do
   it "raises exception if get request fails" do
     VCR.use_cassette("connect to channel api") do
       url = "https://slack.com/api/channel.list"
-      query = {token: "idontworkidontworkkkkkk"}
+      query = { token: "idontworkidontworkkkkkk" }
 
       expect {
         Slack::Channel.get(url, query)
@@ -29,12 +30,12 @@ describe "Channels" do
       VCR.use_cassette("connect to channel api") do
         channels = Slack::Channel.list
         expect(channels).must_be_kind_of Array
-  
+
         (0..channels.length - 1).each do |i|
           expect(channels[i]).must_be_kind_of Slack::Channel
         end
       end
-  
+
       describe "channel details method" do
         it "returns an array that contains correct strings" do
           channel = Slack::Channel.new("i", "play", "electric", "bass")
