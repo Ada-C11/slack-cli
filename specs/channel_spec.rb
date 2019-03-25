@@ -7,9 +7,8 @@ describe "Channels" do
         url = "http://slack.com/api/channels.list"
         query = { token: ENV["SLACK_API_TOKEN"] }
         request = Slack::Channel.get(url, query)
-        # puts "BBBBBREQUESTBBBBBBBBBB"
-        # puts "#{request}"
-        expect(request["ok"]).must_equal true
+
+        expect(request["ok"]).must_equal(true)
       end
     end
   end

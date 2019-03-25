@@ -47,6 +47,10 @@ module Slack
 
     def show_details
       return @selection, @selection.details
+      # if @selection == nil
+      #   return false
+      # ap @selection, @selection.details
+      # end
     end
 
     def send_message(text)

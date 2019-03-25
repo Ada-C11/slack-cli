@@ -17,12 +17,13 @@ module Slack
 
     def self.list
       channel_data = self.get(BASE_URL, PARAMETERS)
+
       channel_data["channels"].map do |channel|
         self.new(channel["name"], channel["id"], channel["topic"]["value"], channel["members"].length)
       end
     end
 
-    def details
+    def channel_details
       super.push("topic", "member_count")
     end
   end

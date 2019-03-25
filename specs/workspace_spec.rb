@@ -80,7 +80,7 @@ describe "Workspace Class" do
 
     #     slack_ids.each_with_index do |slack_id, i|
     #       expect(workspace.selection).must_be_kind_of(String)
-    #       expect(workspace.select_channel(slack_id)).must_equal "#{i.topics[i]}"
+    #       expect(workspace.select_channel(slack_id)).must_equal "#{topics[i]}"
     #     end
     #   end
     # end

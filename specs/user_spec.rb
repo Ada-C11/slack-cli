@@ -5,7 +5,7 @@ describe "User Class" do
     it "successfully connects to API" do
       VCR.use_cassette("connect to user api") do
         url = "https://slack.com/api/users.list"
-        query = {token: ENV["SLACK_API_TOKEN"]}
+        query = { token: ENV["SLACK_API_TOKEN"] }
         request = Slack::User.get(url, query)
 
         expect(request["ok"]).must_equal(true)
@@ -16,11 +16,10 @@ describe "User Class" do
   it "raises and exception if API call fails" do
     VCR.use_cassette("api fail") do
       url = "https://slack.com/api/users.list"
-      query = {token: "i love cats"}
-      
-      expect{Slack::User.get(url, query)}.must_raise(Slack::ResponseError)
+      query = { token: "i love cats" }
+
+      expect { Slack::User.get(url, query) }.must_raise(Slack::ResponseError)
     end
-    
   end
 
   describe "self list method" do
@@ -52,6 +51,5 @@ describe "User Class" do
         expect(user.details[0]).must_equal "name"
       end
     end
-
   end
 end
