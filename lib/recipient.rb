@@ -22,7 +22,7 @@ module Slack
         },
       )
 
-      if response["ok"]
+      if response.code == 200 && response["ok"]
         return true
       else
         raise Slack::SlackError, "Error: #{response.parsed_response["error"]}"
