@@ -36,15 +36,19 @@ class Slack
   end
 
   def lists_channels
+    puts "\nHere are the channels:"
     @channels.each do |x|
-      puts x.name
+      puts "   - #{x.name}"
     end
+    puts "---\n"
   end
 
   def lists_users
+    puts "\nHere are the users:"
     @users.each do |x|
-      puts "#{x.user_name} / #{x.real_name}"
+      puts "   - #{x.user_name}"
     end
+    puts "---\n"
   end
 
   def select_user(search)
@@ -55,13 +59,27 @@ class Slack
     channel = @channels.find { |x| x.name.downcase == search.downcase || x.slack_id.downcase == search.downcase }
   end
 
-  def self.send_msg(channel, text)
+  def self.send_msg(recipient, text)
+    if recipient == nil
+      puts "Please select a channel or user first."
+      main
+    end
+
     url = "https://slack.com/api/chat.postMessage"
-    query_parameters = {
-      token: ENV["SLACK_API_TOKEN"],
-      channel: channel.slack_id, # <-- Elle changed this, added .slack_id
-      text: text,
-    }
+    if recipient.class == Channel
+      query_parameters = {
+        token: ENV["SLACK_API_TOKEN"],
+        channel: recipient.slack_id,
+        text: text,
+      }
+    elsif recipient.class == User
+      query_parameters = {
+        token: ENV["SLACK_API_TOKEN"],
+        channel: recipient.user_id,
+        text: text,
+      # as_user: true, <-- use this in the future for allowing to send as a user
+      }
+    end
 
     response = HTTParty.post(url,
                              headers: {"Content-Type" => "application/x-www-form-urlencoded"},
@@ -69,7 +87,7 @@ class Slack
     if response["ok"]
       return true
     else
-      raise SlackError, "Error when posting '#{text}' to #{channel}, error: #{response["error"]}"
+      raise SlackError, "Error when posting '#{text}' to #{recipient}, error: #{response["error"]}"
     end
   end
 end
@@ -116,20 +134,21 @@ There are #{slack.channels.length} channels and #{slack.users.length} members in
       chosen_user = slack.select_channel(who)
       puts "That channel was not found. Please try again." if chosen_user == nil
     when "show details"
-      if chosen_user == ""
+      if chosen_user == "" || chosen_user == nil
         puts "Please select a channel or user first."
       else
         chosen_user.details
       end
     when "send message"
-      text = gets.chomp # <-- Elle Added this and changed "chosen_user" on the next line; was "channel"
-      binding.pry
+      puts "What message would you like to send?"
+      text = gets.chomp
       Slack.send_msg(chosen_user, text)
     when "quit"
       continue = false
+    else
+      puts "Oops! That is not a valid option. Please try again."
     end
   end
-  # TODO project
 
   puts "Thank you for using the Kasey-Elle Slack CLI"
 end
