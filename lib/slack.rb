@@ -15,10 +15,10 @@ class Slack
   def initialize()
     @channels = []
     @users = []
-    get_list
+    get_lists
   end
 
-  def get_list()
+  def get_lists()
     query_parameters = {
       token: ENV["SLACK_API_TOKEN"],
       pretty: 1,
@@ -37,13 +37,13 @@ class Slack
 
   def lists_channels
     @channels.each do |x|
-      x.details
+      puts x.name
     end
   end
 
   def lists_users
     @users.each do |x|
-      x.details
+      puts "#{x.user_name} / #{x.real_name}"
     end
   end
 
@@ -59,7 +59,7 @@ class Slack
     url = "https://slack.com/api/chat.postMessage"
     query_parameters = {
       token: ENV["SLACK_API_TOKEN"],
-      channel: channel,
+      channel: channel.slack_id, # <-- Elle changed this, added .slack_id
       text: text,
     }
 
@@ -69,7 +69,7 @@ class Slack
     if response["ok"]
       return true
     else
-      raise SlackError, "Error when posting #{text} to #{channel}, error: #{response["error"]}"
+      raise SlackError, "Error when posting '#{text}' to #{channel}, error: #{response["error"]}"
     end
   end
 end
@@ -135,3 +135,5 @@ There are #{slack.channels.length} channels and #{slack.users.length} members in
 end
 
 main if __FILE__ == $PROGRAM_NAME
+
+# NOTE for Elle: Run ruby lib/slack.rb from slack-cli folder to run the CLI program.
