@@ -50,8 +50,6 @@ describe "Slack" do
       end
     end
 
-    #need a test for list channels
-    #need a test for list users
     describe "send_msg" do
       it "can send a valid message" do
         VCR.use_cassette("slack_query") do
@@ -75,56 +73,10 @@ describe "Slack" do
             Slack.send_msg("Test message with invalid key",
                            "apiiiii")
           }.must_raise SlackError
-          # expect(error.message).must_equal "you suck"
         end
 
         ENV["SLACK_TOKEN"] = real_token
       end
     end
   end
-
-  # it "select a channel" do
-  #   VCR.use_cassette("slack_query") do
-  #     # TEST GOES HERE
-  #   end
-  # end
-  #
-
 end
-
-#
-
-#     it "will raise an error if given an empty message" do
-#       VCR.use_cassette("slack_query") do
-#         error = expect {
-#           SlackApi.send_msg("",
-#                             "ports-api-testing")
-#         }.must_raise SlackApi::SlackError
-
-#         expect(error.message).must_equal "Error when posting  to ports-api-testing, error: no_text"
-#       end
-#     end
-#   end
-# end
-
-# ----------------------------------------------------------
-# it "raise an error if given a non-existant user or channel" do
-#   VCR.use_cassette("slack_query") do
-#     slack = Slack.new
-#     expect do
-#       slack.select_channel("Citris Fruit")
-#     end.must_raise SlackError
-#     expect do
-#       slack.select_user("Pomolo")
-#     end.must_raise SlackError
-#   end
-# end
-
-# it "raise an error if no user is selected" do
-#   VCR.use_cassette("slack_query") do
-#     # TEST GOES HERE
-#     slack = Slack.new
-#     # expect(chosen_user).must_equal "" # <-- do we want this to be nil or ""?
-#     expect { slack.select_user("") }.must_raise SlackError # <-- also, I think we need chosen_user to be an attr_reader, or break this part into a different method
-#   end
-# end
