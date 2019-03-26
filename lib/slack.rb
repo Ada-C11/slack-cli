@@ -15,10 +15,10 @@ class Slack
   def initialize()
     @channels = []
     @users = []
-    poop
+    get_list
   end
 
-  def poop()
+  def get_list()
     query_parameters = {
       token: ENV["SLACK_API_TOKEN"],
       pretty: 1,
@@ -75,21 +75,21 @@ class Slack
 end
 
 def main
-  puts "Welcome to the Kasey-Elle Slack CLI!"
-
   slack = Slack.new
 
-  puts "there are #{slack.channels.length} channels and #{slack.users.length} members"
+  puts "Welcome to the Kasey-Elle Slack CLI!
+There are #{slack.channels.length} channels and #{slack.users.length} members in this instance of Slack."
 
   def name_checker(who)
     while who == ""
-      puts "please enter a valid name/id"
+      puts "Please enter a valid name/ID."
       who = gets.chomp
     end
   end
 
   def options
-    puts "What should we do next? (list channels/ list users/ select user/ select channel/ details/ send message/ quit):"
+    puts "What should we do next? You can:
+    list channels / list users / select user / select channel / show details / send message / quit"
     return gets.chomp
   end
 
@@ -104,19 +104,27 @@ def main
     when "list users"
       slack.lists_users
     when "select user"
+      puts "Enter the name or ID of the user you wish to select."
       who = gets.chomp
       name_checker(who)
       chosen_user = slack.select_user(who)
-      puts "user not found, please try another selection" if chosen_user == nil
+      puts "That user was not found. Please check your spelling or try another selection." if chosen_user == nil
     when "select channel"
+      puts "Enter the name or ID of the channel you wish to select."
       who = gets.chomp
       name_checker(who)
       chosen_user = slack.select_channel(who)
-      puts "channel not found, please try another selection" if chosen_user == nil
-    when "details"
-      chosen_user.details
+      puts "That channel was not found. Please try again." if chosen_user == nil
+    when "show details"
+      if chosen_user == ""
+        puts "Please select a channel or user first."
+      else
+        chosen_user.details
+      end
     when "send message"
-      Slack.send_msg(channel, text)
+      text = gets.chomp # <-- Elle Added this and changed "chosen_user" on the next line; was "channel"
+      binding.pry
+      Slack.send_msg(chosen_user, text)
     when "quit"
       continue = false
     end

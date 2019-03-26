@@ -1,8 +1,8 @@
 require_relative "test_helper"
 require "pry"
 
-#potential tests
-#make sure main method makes a new slack?
+# potential tests:
+# make sure main method makes a new slack instance?
 
 describe "Slack" do
   describe "list users and channels" do

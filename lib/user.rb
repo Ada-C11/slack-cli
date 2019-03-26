@@ -14,8 +14,10 @@ class User
   end
 
   def details
-    puts "name: #{user_name}"
-    puts "id: #{user_id}"
-    puts "real name: #{real_name}"
+    puts "
+    Name: #{user_name}
+    ID: #{user_id}
+    Real Name: #{real_name}
+    ---"
   end
 end

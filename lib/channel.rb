@@ -15,9 +15,11 @@ class Channel
   end
 
   def details
-    puts "name: #{name}"
-    puts "topic: #{topic}"
-    puts "number of members: #{num_members}"
-    puts "slack id: #{slack_id}"
+    puts "
+    Name: #{name}
+    Topic: #{topic}
+    Number of members: #{num_members}
+    Slack ID: #{slack_id}
+    ---"
   end
 end
