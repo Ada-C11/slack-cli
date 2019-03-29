@@ -26,7 +26,7 @@ class Workspace
   end
 
   # used to show details for selected user or channel
-  def show_details
+  def show_details(selected)
     return @selected.details
   end
 

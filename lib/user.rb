@@ -5,13 +5,15 @@ require "dotenv"
 Dotenv.load
 
 class User < Recipient
-  attr_reader :real_name, :name, :slack_id
+  attr_reader :real_name, :name, :slack_id, :status_text, :status_imoji
 
-  def initialize(slack_id, name, real_name)
+  def initialize(slack_id, name, real_name, status_text, status_imoji)
     super(slack_id, name)
     @real_name = real_name
     @slack_id = slack_id
     @name = name
+    @status_text = status_text
+    @status_imoji = status_imoji
   end
 
   def self.list
