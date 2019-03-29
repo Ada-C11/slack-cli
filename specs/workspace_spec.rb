@@ -12,7 +12,7 @@ describe "Workspace" do
     end
 
     it "Initializes with selected equal to nil" do
-      expect(@workspace.selected).must_equal nil
+      assert_nil @workspace.selected
     end
     it "Creates a list of users" do
       expect(@workspace.users).must_be_kind_of Array
@@ -53,11 +53,11 @@ describe "Workspace" do
     end
     it "returns nil if no user found with id given" do
       selected = @workspace.select_user("USLACKNOT")
-      expect(selected).must_equal nil
+      assert_nil selected
     end
     it "returns nil if no user found with name given" do
       selected = @workspace.select_user("Devin")
-      expect(selected).must_equal nil
+      assert_nil selected
     end
     it "returns a User object if given a valid user id" do
       selected = @workspace.select_user("USLACKBOT")
@@ -72,11 +72,11 @@ describe "Workspace" do
 
     it "returns nil if no channel found with id given" do
       selected = @workspace.select_channel("CH2P99HT6")
-      expect(selected).must_equal nil
+      assert_nil selected
     end
     it "returns nil if no channel found with name given" do
       selected = @workspace.select_channel("slack-bpi-project")
-      expect(selected).must_equal nil
+      assert_nil selected
     end
     it "returns a Channel object if given a valid user id" do
       selected = @workspace.select_channel("CH2SL5C3C")
