@@ -51,6 +51,7 @@ build-iPhoneSimulator/
 
 # Ignore environemnt variables
 .env
+.DS_Store
 
 # Ignore cassette files
 /specs/cassettes/
