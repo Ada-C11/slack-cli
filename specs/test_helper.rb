@@ -1,8 +1,8 @@
-require 'simplecov'
+require "simplecov"
 SimpleCov.start
 
-require 'minitest'
-require 'minitest/skip_dsl'
+require "minitest"
+require "minitest/skip_dsl"
 
 require "minitest/autorun"
 require "minitest/reporters"
@@ -11,11 +11,10 @@ require "webmock/minitest"
 require "dotenv"
 Dotenv.load
 
-require_relative "../lib/location_search"
-require_relative '../lib/recipient'
-require_relative '../lib/channel'
-require_relative '../lib/user'
-require_relative '../lib/slack'
+require_relative "../lib/recipient"
+require_relative "../lib/channel"
+require_relative "../lib/user"
+require_relative "../lib/slack"
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
