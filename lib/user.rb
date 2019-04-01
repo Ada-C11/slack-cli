@@ -1,4 +1,5 @@
 require "awesome_print"
+require 'table_print'
 require_relative "recipient"
 
 module Slack

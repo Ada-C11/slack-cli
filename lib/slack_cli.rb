@@ -1,5 +1,7 @@
 require "awesome_print"
+require "table_print"
 require_relative "workspace"
+
 Dotenv.load
 
 def main
@@ -24,9 +26,12 @@ def main
     # List Stuff
     case answer
     when 1
-      ap Slack::Channel.list
+      # ap Slack::Channel.list => {:width => 12}
+      tp workspace.channels, "name", "slack_id", "topic", "member_count"
     when 2
-      ap Slack::User.list
+      # ap Slack::User.list => { :width => 12 }
+      tp workspace.users, "slack_id", :Name => { :display_method => "real_name" },
+                                      :include => { :User_Name => { :display_method => "name" } }
     when 3
       puts "Please enter a SlackID or full name:"
       name_or_id = gets.chomp
@@ -38,7 +43,9 @@ def main
       choice = gets.chomp.downcase
 
       if choice == "y"
-        puts "#{workspace.show_details}"
+        # puts "#{workspace.show_details}"
+        tp workspace.show_details, "slack_id", :Name => { :display_method => "real_name" },
+                                               :include => { :User_Name => { :display_method => "name" } }
         # call show_details method and puts ap it
       end
     when 4
@@ -51,7 +58,8 @@ def main
       choice = gets.chomp.downcase
 
       if choice == "y"
-        puts "#{workspace.show_details}"
+        # puts "#{workspace.show_details}"
+        tp workspace.show_details, "name", "slack_id", "topic", "member_count"
       end
     when 5
       puts "What would you like your message to say ?"

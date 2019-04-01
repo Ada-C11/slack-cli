@@ -1,8 +1,9 @@
+require "dotenv"
 require "httparty"
+require "table_print"
+require "awesome_print"
 require_relative "user"
 require_relative "channel"
-require "awesome_print"
-require "dotenv"
 
 Dotenv.load
 
@@ -51,6 +52,7 @@ module Slack
       #   return false
       # ap @selection, @selection.details
       # end
+      tp @selection, @selection.details
     end
 
     def send_message(text)
