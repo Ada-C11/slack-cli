@@ -1,6 +1,6 @@
-require 'httparty'
-require 'awesome_print'
-require 'dotenv'
+require "httparty"
+require "awesome_print"
+require "dotenv"
 Dotenv.load
 
 class Recipient
@@ -11,16 +11,16 @@ class Recipient
     @is_user = is_user
   end
 
-  def details(slack_id)
+  def self.details(slack_id)
     if @is_user
-      url = 'https://slack.com/api/users.list'
+      url = "https://slack.com/api/users.list"
       query_parameters = {
-        token: ENV['SLACK_API_TOKEN']
+        token: ENV["SLACK_API_TOKEN"],
       }
-    
+
       response = HTTParty.get(url, query: query_parameters).to_s
       response = JSON.parse(response)
-  
+
       users = response["members"]
 
       users.each do |user|
@@ -32,11 +32,11 @@ class Recipient
         end
       end
     else
-      url = 'https://slack.com/api/channels.list'
+      url = "https://slack.com/api/channels.list"
       query_parameters = {
-        token: ENV['SLACK_API_TOKEN']
+        token: ENV["SLACK_API_TOKEN"],
       }
-      
+
       response = HTTParty.get(url, query: query_parameters).to_s
       response = JSON.parse(response)
       channels = response["channels"]
