@@ -60,7 +60,7 @@ def main
       puts "Sorry, no user with that information" if selected == nil
     when "select channel"
       puts "Please enter a channel name channel ID"
-      input = get_user_input
+      input = get_user_input("Please enter an ID or name")
       selected = workspace.select_channel(input)
       puts "Sorry, no channel with that information" if selected == nil
     when "details"
